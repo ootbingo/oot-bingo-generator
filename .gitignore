@@ -1,3 +1,9 @@
+# TypeScript output
+/out
+
+# vs code
+.vscode
+
 # Logs
 logs
 *.log
