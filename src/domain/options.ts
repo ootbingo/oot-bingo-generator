@@ -1,9 +1,8 @@
-type Mode = 'normal' | 'blackout' | 'short';
-type GoalListMode = 'normal' | 'short';
+export type Mode = 'normal' | 'blackout' | 'short';
 
 type Language = 'name' | 'japanse';
 
-interface Options {
+export type Options = {
     language: Language;
     mode: Mode;
     seed: number;

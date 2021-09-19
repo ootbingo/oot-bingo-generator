@@ -1,5 +1,5 @@
 # TypeScript output
-/out
+/build
 
 # vs code
 .vscode

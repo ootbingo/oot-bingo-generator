@@ -21,7 +21,7 @@ function magicSquareNumber(pos: number, seed: number): number {
     // The idea is to begin with an array containing a single number, 0.
     // Each number 1 through 4 is added in a random spot in the array's current size.
     // The result - the numbers 0 to 4 are in the array in a random (and uniform) order.
-    let Table5 = [0];
+    const Table5 = [0];
     Table5.splice(Rem2, 0, 1);
     Table5.splice(Rem3, 0, 2);
     Table5.splice(Rem4, 0, 3);
@@ -37,15 +37,15 @@ function magicSquareNumber(pos: number, seed: number): number {
     Rem3 = Num3 % 3;
     RemT = RemT * 8 + Math.floor(Num3 / 120);   // This is between 0 and 64.
 
-    let Table1 = [0];
+    const Table1 = [0];
     Table1.splice(Rem2, 0, 1);
     Table1.splice(Rem3, 0, 2);
     Table1.splice(Rem4, 0, 3);
     Table1.splice(Rem5, 0, 4);
 
     RemT = RemT % 5;        //  Between 0 and 4, fairly uniformly.
-    let x = (pos + RemT) % 5;     //  RemT poss horizontal shift to put any diagonal on the main diagonal.
-    let y = Math.floor(pos / 5);
+    const x = (pos + RemT) % 5;     //  RemT poss horizontal shift to put any diagonal on the main diagonal.
+    const y = Math.floor(pos / 5);
 
     // The Tables are set into a single magic square template
     // Some are the same up to some rotation, reflection, or row permutation.
@@ -54,9 +54,7 @@ function magicSquareNumber(pos: number, seed: number): number {
     const e1 = Table1[(3 * x + y) % 5];
 
     // Table5 controls the 5* part and Table1 controls the 1* part.
-    let value = 5 * e5 + e1 + 1;
-
-    return value;
+    return 5 * e5 + e1 + 1;
 }
 
 export default generateMagicSquare;

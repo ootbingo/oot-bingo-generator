@@ -1,0 +1,26 @@
+{
+  "name": "bingo-generator-ts",
+  "version": "1.0.0",
+  "description": "Generator for OoT Bingo in TypeScript",
+  "main": "index.ts",
+  "scripts": {
+    "run": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xwmtp/oot-bingo-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xwmtp/oot-bingo-generator/issues"
+  },
+  "homepage": "https://github.com/xwmtp/oot-bingo-generator#readme",
+  "devDependencies": {
+    "@types/node": "^16.9.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}

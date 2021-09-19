@@ -1,3 +1,5 @@
+import { Mode } from "./options"
+
 export type Profile = {
     minimumSynergy: number;
     maximumSynergy: number;

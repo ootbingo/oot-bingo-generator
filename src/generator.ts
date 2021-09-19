@@ -1,7 +1,8 @@
 import { Square, squarePositions } from "./domain/board";
-import { CombinedGoalList, BingoList, GoalList, Goal } from "./domain/goalList";
+import { BingoList, GoalList, Goal } from "./domain/goalList";
 import { Synergies, Synfilters } from "./domain/synergies"
 import { Profile, profiles } from "./domain/profiles";
+import { Options, Mode } from "./domain/options";
 import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./domain/rows";
 import generateMagicSquare from "./magicSquare";
 import RNG from "./rng";
@@ -48,18 +49,20 @@ export default class BingoGenerator {
      * @param maxIterations The max amount of times the generator will try to generate a card.
      * @returns An array of squares if generation was successful, with metadata included
      */
-    generateCard(maxIterations: number) {
+    generateCard(maxIterations: number = 10) {
         let board = undefined;
-        let iterations = 0;
+        let iteration = 0;
 
-        while (!board && iterations < maxIterations) {
+        while (!board && iteration < maxIterations) {
+            iteration++;
+            console.log("generating... " + iteration)
             board = this.generateBoard();
         }
 
         return {
             ...board,
             meta: {
-                iterations: iterations,
+                iterations: iteration,
             }
         }
     }
@@ -106,6 +109,7 @@ export default class BingoGenerator {
             const goalsInTimeRange = this.#getGoalsInTimeRange(desiredTime - offset, desiredTime + offset);
 
             for (const goal of goalsInTimeRange) {
+
                 if (this.#hasGoalOnBoard(goal, bingoBoard)) {
                     continue;
                 }
@@ -129,7 +133,8 @@ export default class BingoGenerator {
     }
 
     #getGoalsInTimeRange(minimumTime: number, maximumTime: number): Goal[] {
-        return this.allGoals.filter(goal => goal.time >= minimumTime && goal.time <= maximumTime);
+        const goalsInTimeRange = this.allGoals.filter(goal => goal.time >= minimumTime && goal.time <= maximumTime);
+        return this.#shuffled(goalsInTimeRange);
     }
 
     #hasGoalOnBoard(goal: Goal, bingoBoard: Square[]): boolean {
@@ -152,17 +157,14 @@ export default class BingoGenerator {
     }
 
     #causesTooMuchSynergyOnBoard(potentialSquare: Square, positionOfSquare: number, bingoBoard: Square[]) {
-
         const minMaxSynergies = this.#minMaxSynergiesForRowsOfSquare(positionOfSquare, potentialSquare, bingoBoard);
-        // todo: maybe change into > and <
-        return minMaxSynergies.maximumSynergy >= this.profile.maximumSynergy ||
-            minMaxSynergies.minimumSynergy <= this.profile.minimumSynergy;
+
+        return minMaxSynergies.maximumSynergy > this.profile.maximumSynergy ||
+            minMaxSynergies.minimumSynergy < this.profile.minimumSynergy;
     }
 
     #minMaxSynergiesForRowsOfSquare(positionOfSquare: number, potentialSquare: Square, bingoBoard: Square[]) {
-
         const rowsOfSquare = ROWS_PER_INDEX[positionOfSquare];
-        const squareToFill = bingoBoard[positionOfSquare];
 
         let maximumSynergy = 0;
         let minimumSynergy = this.profile.tooMuchSynergy;
@@ -171,7 +173,6 @@ export default class BingoGenerator {
 
             const potentialRow = this.#getOtherSquares(row, positionOfSquare, bingoBoard);
             potentialRow.push(potentialSquare);
-
             const effectiveRowSynergy = this.synergyCalculator.synergyOfSquares(potentialRow);
 
             maximumSynergy = Math.max(maximumSynergy, effectiveRowSynergy);
@@ -236,7 +237,7 @@ export default class BingoGenerator {
         populationOrder.splice(0, 0, currentSquare);
     }
 
-    #shuffled(array: number[]): number[] {
+    #shuffled<T>(array: Array<T>): Array<T> {
         let toShuffle = array.slice();
         for (let i = 0; i < toShuffle.length; i++) {
             const randElement = Math.floor(this.rng.nextRandom() * (i + 1));
@@ -324,7 +325,7 @@ function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
 function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | undefined {
 
     if (bingoList.info.combined && bingoList.info.combined === "true") {
-        const combinedBingoList = bingoList as CombinedGoalList;
+        const combinedBingoList = bingoList;
         if (combinedBingoList[mode]) {
             return combinedBingoList[mode];
         }

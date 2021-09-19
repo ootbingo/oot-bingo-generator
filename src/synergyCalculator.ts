@@ -18,7 +18,7 @@ export default class SynergyCalculator {
     synergyOfSquares(squares: Square[]) {
         const squaresWithGoal = squares.filter(square => square.goal !== undefined);
 
-        if (this.#containsDuplicateGoals(squares)) {
+        if (this.#containsDuplicateGoals(squaresWithGoal)) {
             return this.profile.tooMuchSynergy;
         }
 
@@ -41,7 +41,8 @@ export default class SynergyCalculator {
      * @returns boolean
      */
     #containsDuplicateGoals(squares: Square[]) {
-        const goalIds = squares.map(square => square.goal.id);
+        const squaresWithGoal = squares.filter(square => square.goal);
+        const goalIds = squaresWithGoal.map(square => square.goal.id);
         return (new Set(goalIds)).size !== goalIds.length;
     }
 
@@ -49,18 +50,18 @@ export default class SynergyCalculator {
      * Takes all synergies of a certain type of all the squares in the array and combines them into one synergy object
      * Example: [{types: {'botw': -1, 'czl': 1}}, {types: {'botw': 2, 'saria' : 1.5}}] ->
      *          {'botw': [-1, 2], 'czl': [1], 'saria': [1.5]}
-     * @param squares Array of squares (that each have a goal)
+     * @param squaresWithGoal Array of squares (that each have a goal)
      * @param synergyType Name of the type ('type', 'rowtype' or 'subtype')
      * @returns object with synergies for all the squares
      */
-    #mergeSynergiesOfSquares(squares: Square[], synergyType: SynergyType): CombinedSynergies {
+    #mergeSynergiesOfSquares(squaresWithGoal: Square[], synergyType: SynergyType): CombinedSynergies {
         const mergedSynergies = {};
-        for (const square of squares) {
+        for (const square of squaresWithGoal) {
             for (const type in square.goal[synergyType]) {
                 if (!mergedSynergies[type]) {
                     mergedSynergies[type] = [];
                 }
-                mergedSynergies[type].push(square[synergyType][type])
+                mergedSynergies[type].push(square.goal[synergyType][type])
             }
         }
         return mergedSynergies;
@@ -130,7 +131,7 @@ export default class SynergyCalculator {
             }
 
             const filteredRowtypeSynergy = this.#filterForRowtype(rowtype, rowtypeSynergy);
-            if (filteredRowtypeSynergies !== undefined) {
+            if (filteredRowtypeSynergy !== undefined) {
                 filteredRowtypeSynergies[rowtype] = filteredRowtypeSynergy;
             }
         }
