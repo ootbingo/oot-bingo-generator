@@ -1,9 +1,8 @@
 import { BingoList } from "./domain/goalList";
 import { Options } from "./domain/options";
-import { Profile } from "./domain/profiles";
+import { profiles } from "./domain/profiles";
 import BingoGenerator from "./generator";
 import { bingoList } from "./goal-lists/example-goal-list";
-import seedrandom from "./legacy/seedrandom-min";
 import { BingoGenerator as OldBingoGenerator } from "./oldGenerator/generator"
 
 const goalList: BingoList = bingoList;
@@ -15,17 +14,7 @@ const options: Options = {
     language: 'name'
 }
 
-const profile: Profile = {
-    minimumSynergy: -3,
-    maximumSynergy: 7,
-    maximumIndividualSynergy: 3.75,
-    maximumSpill: 2,
-    initialOffset: 1,
-    maximumOffset: 2,
-    baselineTime: 27.75,
-    timePerDifficulty: 0.75,
-    tooMuchSynergy: 100
-}
+const profile = profiles.normal;
 
 
 const getGoalNames = (card) => {
@@ -60,9 +49,6 @@ console.log(getGoalNames(oldCard));
 console.log("\n#############\n TS")
 const bingoGenerator = new BingoGenerator(goalList['normal'], options);
 const card = bingoGenerator.generateCard(1);
-
-
-
 //console.log(card);
 console.log(getGoalNames(card));
 
