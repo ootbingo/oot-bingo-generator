@@ -1,6 +1,6 @@
-import seedrandom from "./legacy/seedrandom-min";
+import {seedrandom} from "./legacy/seedrandom-min";
 
-class RNG {
+export class RNG {
 
     constructor(seed: number) {
 
@@ -12,5 +12,3 @@ class RNG {
         return Math.random();
     }
 }
-
-export default RNG;

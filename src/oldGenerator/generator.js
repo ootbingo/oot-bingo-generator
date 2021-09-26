@@ -1,4 +1,4 @@
-import seedrandom from "../legacy/seedrandom-min";
+import { seedrandom } from "../legacy/seedrandom-min";
 
 //NOTICE: As of version 6, this script will only generate cards correctly for Ocarina of Time bingo
 //and as such should be saved alongside the regular bingo script.
@@ -205,7 +205,7 @@ export var BingoGenerator = function (bingoList, options) {
     else if (this.mode === 'blackout') {
         this.profile = BLACKOUT_PROFILE;
     }
-   
+
 
     this.baselineTime = options.baselineTime || this.profile.baselineTime;
     this.timePerDifficulty = options.timePerDifficulty || this.profile.timePerDifficulty;
@@ -549,7 +549,7 @@ BingoGenerator.prototype.checkLine = function (position, potentialGoal) {
         maxSynergy = Math.max(maxSynergy, effectiveRowSynergy);
         minSynergy = Math.min(minSynergy, effectiveRowSynergy);
     }
-    if(position === 20) {
+    if (position === 20) {
         console.log({
             minSynergy: minSynergy,
             maxSynergy: maxSynergy

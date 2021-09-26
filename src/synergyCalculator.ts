@@ -4,7 +4,7 @@ import { Profile } from "./domain/profiles";
 import { SQUARES_PER_ROW } from "./domain/rows";
 import { CombinedSynergies } from "./domain/synergies";
 
-export default class SynergyCalculator {
+export class SynergyCalculator {
     profile: Profile;
     rowtypeTimeSave: Synergies;
     synergyFilters: Synfilters;

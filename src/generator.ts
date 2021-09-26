@@ -4,9 +4,9 @@ import { Synergies, Synfilters } from "./domain/synergies"
 import { Profile, profiles } from "./domain/profiles";
 import { Options, Mode } from "./domain/options";
 import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./domain/rows";
-import generateMagicSquare from "./magicSquare";
-import RNG from "./rng";
-import SynergyCalculator from "./synergyCalculator";
+import { generateMagicSquare } from "./magicSquare";
+import { RNG } from "./rng";
+import { SynergyCalculator } from "./synergyCalculator";
 
 
 export default class BingoGenerator {

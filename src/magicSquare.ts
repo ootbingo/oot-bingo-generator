@@ -1,6 +1,6 @@
 import { squarePositions } from "./domain/board";
 
-function generateMagicSquare(seed: number): number[] {
+export function generateMagicSquare(seed: number): number[] {
     return squarePositions.map(i => magicSquareNumber(i, seed));
 }
 
@@ -56,5 +56,3 @@ function magicSquareNumber(pos: number, seed: number): number {
     // Table5 controls the 5* part and Table1 controls the 1* part.
     return 5 * e5 + e1 + 1;
 }
-
-export default generateMagicSquare;
