@@ -73,7 +73,7 @@ export default class BingoGenerator {
      */
     generateBoard(): Square[] | undefined {
         // set up the bingo board by filling in the difficulties based on a magic square
-        let bingoBoard = squarePositions.map((i) => this.#difficultyToSquare(this.magicSquare[i]));
+        const bingoBoard = squarePositions.map((i) => this.#difficultyToSquare(this.magicSquare[i]));
 
         // fill in the goals of the board in a random order
         const populationOrder = this.#generatePopulationOrder(bingoBoard);
@@ -141,7 +141,7 @@ export default class BingoGenerator {
         return bingoBoard.some(square => square.goal && (square.goal.id === goal.id));
     }
 
-    #hasConflictsOnBoard(potentialSquare: Square, bingoBoard: Square[]) {
+    #hasConflictsOnBoard(potentialSquare: Square, bingoBoard: Square[]): boolean {
 
         for (const square of bingoBoard) {
 
@@ -156,14 +156,14 @@ export default class BingoGenerator {
         return false;
     }
 
-    #causesTooMuchSynergyOnBoard(potentialSquare: Square, positionOfSquare: number, bingoBoard: Square[]) {
+    #causesTooMuchSynergyOnBoard(potentialSquare: Square, positionOfSquare: number, bingoBoard: Square[]): boolean {
         const minMaxSynergies = this.#minMaxSynergiesForRowsOfSquare(positionOfSquare, potentialSquare, bingoBoard);
 
         return minMaxSynergies.maximumSynergy > this.profile.maximumSynergy ||
             minMaxSynergies.minimumSynergy < this.profile.minimumSynergy;
     }
 
-    #minMaxSynergiesForRowsOfSquare(positionOfSquare: number, potentialSquare: Square, bingoBoard: Square[]) {
+    #minMaxSynergiesForRowsOfSquare(positionOfSquare: number, potentialSquare: Square, bingoBoard: Square[]): { maximumSynergy: number, minimumSynergy: number } {
         const rowsOfSquare = ROWS_PER_INDEX[positionOfSquare];
 
         let maximumSynergy = 0;

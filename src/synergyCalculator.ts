@@ -40,7 +40,7 @@ export class SynergyCalculator {
      * @param squares Array of squares (can be goal or empty)
      * @returns boolean
      */
-    #containsDuplicateGoals(squares: Square[]) {
+    #containsDuplicateGoals(squares: Square[]): boolean {
         const squaresWithGoal = squares.filter(square => square.goal);
         const goalIds = squaresWithGoal.map(square => square.goal.id);
         return (new Set(goalIds)).size !== goalIds.length;
@@ -69,7 +69,7 @@ export class SynergyCalculator {
 
 
     /**
-     * Unifies types and subtypes by taking all the types, and adding subtypes only if a matching type is present
+     * Unifies types and subtypes by taking all the types, and adding subtypes only if a matching subtype is present
      * Example: typeSynergies = {hearts: [1.5, -1], botw: [1]}   subtypeSynergies = {hearts: [2], saria: [3]} ->
      *          {hearts: [1.5, -1, 2], botw: [1]}
      * @param typeSynergies Combined type synergies of multiple squares
@@ -105,7 +105,7 @@ export class SynergyCalculator {
         return effectiveTypeSynergies;
     };
 
-    #filterForType(type: string, synergies: number[]) {
+    #filterForType(type: string, synergies: number[]): number[] {
         // in most cases, remove highest synergy
         if (!(type in this.synergyFilters)) {
             return removeHighestNumber(synergies);
