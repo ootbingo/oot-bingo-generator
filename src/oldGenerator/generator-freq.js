@@ -96,6 +96,13 @@ Array.prototype.shuffled = function () {
     return toShuffle;
 };
 
+function weightedShuffle(arr) {
+    console.log('weighted shuffling freq...')
+	return arr.map(el => ({ el, sortVal : (el.weight || 0) + Math.random() + Math.random() + Math.random() + Math.random() - 2 }))
+		.sort(({ sortVal: sv1 }, { sortVal: sv2 }) => sv2 - sv1)
+		.map(({ el }) => el);
+}
+
 function hasDuplicateStrings(array) {
     var seen = {};
 
@@ -451,14 +458,14 @@ BingoGenerator.prototype.getDifficultyIndex = function (difficulty) {
  * @param maxTime  the maximum acceptable time, inclusive
  * @returns {Array.<T>}  sorted array of goals within the range of times
  */
-
 BingoGenerator.prototype.getGoalsInTimeRange = function (minTime, maxTime) {
     // if linear scan ends up being too slow, we can optimize this by finding the min using binary search
     // and bailing out early after the first goal exceeds maxTime
     const goalsInTimeRange = this.goalsList.filter(function (goal) {
         return minTime <= goal.time && goal.time <= maxTime;
     });
-    return goalsInTimeRange.shuffled();
+    //return goalsInTimeRange.shuffled();
+    return weightedShuffle(goalsInTimeRange);
 };
 
 /**

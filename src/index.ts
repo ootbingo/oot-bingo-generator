@@ -1,9 +1,10 @@
 import { BingoList } from "./domain/goalList";
 import { Options } from "./domain/options";
 import { profiles } from "./domain/profiles";
-import BingoGenerator from "./generator";
+import { ootBingoGenerator } from "./generator";
 import { bingoList } from "./goal-lists/example-goal-list";
-import { BingoGenerator as OldBingoGenerator } from "./oldGenerator/generator"
+import { ootBingoGenerator as oldOotBingoGenerator } from "./oldGenerator/generator"
+import { ootBingoGenerator as oldFreqOotBingoGenerator } from "./oldGenerator/generator-freq"
 
 const goalList: BingoList = bingoList;
 
@@ -17,39 +18,22 @@ const options: Options = {
 const profile = profiles.normal;
 
 
-const getGoalNames = (card) => {
-    const goalNames = [];
-    for (const diff in card) {
-        const square = card[diff];
-        if (square.goal) {
-            goalNames.push(square.goal.name);
-        }
-    }
-    return goalNames;
-}
+console.log("\n#############\n JS (V9.2)")
+const oldCard = oldOotBingoGenerator(bingoList, {...profile, ...options}) as any
+//console.log(oldCard);
+console.log(oldCard.map(goal => goal && goal.name));
 
 
-console.log("\n#############\n JS")
-
-var oldBingoGenerator = new OldBingoGenerator(bingoList, {...profile, ...options});
-
-var oldCard = undefined;
-var iterations = 0;
-console.log(iterations);
-while (!oldCard && iterations < 1) {
-    oldCard = oldBingoGenerator.makeCard();
-    iterations++;
-}
-oldCard["meta"] = { iterations: iterations };
-
-console.log(getGoalNames(oldCard));
-
+console.log("\n#############\n JS FREQUENCY BALANCING (V10.1)")
+const oldFreqCard = oldFreqOotBingoGenerator(bingoList, {...profile, ...options}) as any
+//console.log(oldFreqCard);
+console.log(oldFreqCard.map(goal => goal && goal.name));
 
 
 console.log("\n#############\n TS")
-const bingoGenerator = new BingoGenerator(goalList['normal'], options);
-const card = bingoGenerator.generateCard(1);
+const card = ootBingoGenerator(goalList['normal'], options);
 //console.log(card);
-console.log(getGoalNames(card));
+console.log(card.map(goal => goal && goal.name));
+
 
 

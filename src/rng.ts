@@ -5,7 +5,7 @@ export class RNG {
     constructor(seed: number) {
 
         seedrandom();
-        (Math as any).seedrandom(seed);
+        (Math as any).seedrandom(seed.toString());
     }
 
     nextRandom() {

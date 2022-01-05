@@ -3,66 +3,132 @@ import BingoGenerator from "../generator";
 
 describe("generator", () => {
 
-    it("generates a card", () => {
-        const options: Options = {
-            seed: 142536,
-            mode: 'normal',
-            language: 'name'
-        }
+    describe("generating goals", () => {
 
-        const profile = {
-            minimumSynergy: -3,
-            maximumSynergy: 7,
-            maximumIndividualSynergy: 3.75,
-            initialOffset: 1,
-            maximumOffset: 2,
-            baselineTime: 27.75,
-            timePerDifficulty: 0.75,
-            tooMuchSynergy: 100
-        }
+        it("generates a normal card with correct goals", () => {
+            const options: Options = {
+                seed: 142536,
+                mode: 'normal',
+                language: 'name'
+            }
+            const goalList = require('./test-goal-lists/combined-goal-list-v10_1.json');
+            const bingoGenerator = new BingoGenerator(goalList['normal'], options);
+            
+            const card = bingoGenerator.generateCard();
 
-        const goalList = require('./test-goal-lists/combined-goal-list.json');
-        const bingoGenerator = new BingoGenerator(goalList['normal'], options);
-        const card = bingoGenerator.generateCard();
+            const goalNames = card.goals.map(goal => goal.name);
+            expect(goalNames).toEqual([
+                '4 Maps',
+                "Saria's Song",
+                'Free all 9 Gorons in Fire Temple',
+                'Open 3 Boss Key Doors',
+                'All 5 Skulltulas in Forest Temple',
+                '10 Songs',
+                'All 3 Skulltulas in Ice Cavern',
+                'Silver Scale',
+                "Farore's Wind",
+                '9 Hearts (no duping)',
+                '8 Different Unused Keys in Gerudo Training Grounds',
+                'Fire Medallion',
+                'Beat the Spirit Temple',
+                'Stone of Agony',
+                'Bomb Bag (30)',
+                "Beat Jabu-Jabu's Belly",
+                'Exactly 20 Deku Sticks',
+                '5 Unused Keys in Gerudo Training Grounds',
+                'Both HPs in Lost Woods',
+                '3 Swords, Tunics, Boots, and Shields',
+                'Beat the Fire Temple',
+                'All 3 Elemental Arrows',
+                '7 Magic Beans',
+                'Blue Potion',
+                '20 Different Skulltulas'
+              ]);
+        })
 
-        expect(getGoalNames(card)).toEqual([
-            "Ice Cavern HP",
-            "Defeat both Flare Dancers",
-            "Din's Fire",
-            "1 Unused Small Key in each Adult Dungeon",
-            "Forest Medallion",
-            "Both Rusty Switches in Spirit Temple",
-            "Golden Gauntlets",
-            "Map & Compass in Dodongo's Cavern",
-            "3 Shields",
-            "30 Different Skulltulas",
-            "4 Skulltulas in Shadow Temple",
-            "Both HPs in Lost Woods",
-            "Open All 6 Gold Rupee Chests",
-            "All 8 Kakariko area Skulltulas",
-            "Bolero of Fire",
-            "Open the Final Door of Light Trial",
-            "2 Skulltulas in Lon Lon Ranch",
-            "All 8 Death Mountain area Skulltulas",
-            "8 Hearts (no duping)",
-            "3 Swords, Tunics, Boots, and Shields",
-            "Goron Bracelet",
-            "Defeat Twinrova",
-            "37th Heart Piece (Child Fortress)",
-            "All 4 Adult Skulltulas in Zora's Domain Area",
-            "Fire Arrows"
-           ]);
+        it("generates a blackout card with correct goals", () => {
+            const options: Options = {
+                seed: 142536,
+                mode: 'blackout',
+                language: 'name'
+            }
+            const goalList = require('./test-goal-lists/combined-goal-list-v10_1.json');
+            const bingoGenerator = new BingoGenerator(goalList['normal'], options);
+
+            const card = bingoGenerator.generateCard();
+
+            const goalNames = card.goals.map(goal => goal.name);
+            expect(goalNames).toEqual([
+                'All 4 Skulltulas in Jabu-Jabu',
+                'All 5 Lake Hylia Skulltulas',
+                "Nayru's Love",
+                '30 Different Skulltulas',
+                '3 Unused Keys in Gerudo Training Grounds',
+                '10 Songs',
+                "Both Gerudo's Fortress area Skulltulas",
+                'All 3 Skulltulas in Bottom of the Well',
+                'Double Magic',
+                'All 3 Elemental Arrows',
+                '3 Swords & 3 Shields',
+                'Defeat Meg (purple Poe)',
+                'Open All 6 Gold Rupee Chests',
+                "All 4 Adult Skulltulas in Zora's Domain Area",
+                'Bomb Bag (30)',
+                'Longshot',
+                '5 Hearts',
+                'All 5 Skulltulas in Forest Temple',
+                'Open the Final Door of Spirit Trial',
+                '7 Compasses',
+                'Clear 8 Silver Rupee Rooms',
+                'Map & Compass in Spirit Temple',
+                'All 4 Gerudo Valley area Skulltulas',
+                "Ruto's Letter",
+                'Open the Final Door of Light Trial'
+              ]);
+        })
+
+        it("generates a short card with correct goals", () => {
+            const options: Options = {
+                seed: 142536,
+                mode: 'short',
+                language: 'name'
+            }
+            const goalList = require('./test-goal-lists/combined-goal-list-v10_1.json');
+            const bingoGenerator = new BingoGenerator(goalList['short'], options);
+
+            const card = bingoGenerator.generateCard();
+
+            const goalNames = card.goals.map(goal => goal.name);
+            expect(goalNames).toEqual([
+                'Map & Compass in Bottom of the Well',
+                '5 unused keys in Gerudo Training Grounds',
+                '7 Different Bottled Contents',
+                '6 Hearts',
+                'Golden Scale',
+                'Get Bombchu chest in Spirit Temple',
+                '2 Skulltulas in Lon Lon Ranch',
+                'Plant 3 Magic Beans',
+                'Both Hyrule Field area Skulltulas',
+                'Skull Mask',
+                "Epona's Song",
+                'Map & Compass in Jabu-Jabu',
+                'Double Magic',
+                'Map & Compass in Deku Tree',
+                '99 Rupees',
+                'Defeat a White Wolfos',
+                '20 Deku Sticks',
+                'Defeat Queen Gohma',
+                'Plant 6 Magic Beans',
+                '4 Maps',
+                "All 5 Skulltulas in Dodongo's Cavern",
+                'Plant 7 Magic Beans',
+                '3 unused keys in Gerudo Training Grounds',
+                'Bottled Fairy',
+                '30 Deku Sticks'
+              ]);
+        })
 
     })
-})
 
-const getGoalNames = (card) => {
-    const goalNames = [];
-    for (const diff in card) {
-        const square = card[diff];
-        if (square.goal) {
-            goalNames.push(square.goal.name);
-        }
-    }
-    return goalNames;
-}
+
+})

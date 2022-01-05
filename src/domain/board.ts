@@ -33,3 +33,12 @@ export type Square = {
     desiredTime: number,
     goal?: Goal;
 }
+
+export type Card = {
+    goals: Goal[],
+    meta: Meta,
+}
+
+type Meta = {
+    iterations: number;
+}

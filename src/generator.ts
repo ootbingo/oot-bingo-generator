@@ -1,4 +1,4 @@
-import { Square, squarePositions } from "./domain/board";
+import { Card, Square, squarePositions } from "./domain/board";
 import { BingoList, GoalList, Goal } from "./domain/goalList";
 import { Synergies, Synfilters } from "./domain/synergies"
 import { Profile, profiles } from "./domain/profiles";
@@ -7,6 +7,35 @@ import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./domain/rows";
 import { generateMagicSquare } from "./magicSquare";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";
+
+
+/**
+ * Function name has to be preserved for compatibility with bingosetup.js in the bingo repo
+ * Returns card in the right (legacy) format for the bingo setup
+ * @param goalList
+ * @param options
+ * @returns A bingo card
+ */
+export const ootBingoGenerator = (goalList: GoalList, options: Options) => {
+
+    const bingoGenerator = new BingoGenerator(goalList, options);
+    const {goals, meta} = bingoGenerator.generateCard();
+
+    // make goals start from position 1 in the list (expected by bingosetup.js)
+    const shiftedGoals = [];
+    goals.forEach((goal, index) => shiftedGoals[index+1] = goal);
+    
+    shiftedGoals['meta'] = meta;
+    return shiftedGoals;
+};
+
+
+/**
+ * Wrapper for BingoSync
+ */
+export const bingoGenerator = (goalList: GoalList, options: Options) => {
+    return ootBingoGenerator(goalList, options);
+}
 
 
 export default class BingoGenerator {
@@ -49,8 +78,8 @@ export default class BingoGenerator {
      * @param maxIterations The max amount of times the generator will try to generate a card.
      * @returns An array of squares if generation was successful, with metadata included
      */
-    generateCard(maxIterations: number = 10) {
-        let board = undefined;
+    generateCard(maxIterations: number = 10): Card {
+        let board: Square[] | undefined = undefined;
         let iteration = 0;
 
         while (!board && iteration < maxIterations) {
@@ -59,8 +88,11 @@ export default class BingoGenerator {
             board = this.generateBoard();
         }
 
+        // all squares should have been filled with a goal at this point
+        const goals = board.map(square => square.goal)
+
         return {
-            ...board,
+            goals: goals,
             meta: {
                 iterations: iteration,
             }
@@ -77,6 +109,7 @@ export default class BingoGenerator {
 
         // fill in the goals of the board in a random order
         const populationOrder = this.#generatePopulationOrder(bingoBoard);
+        
         for (const i of squarePositions) {
             const nextPosition = populationOrder[i];
 
@@ -134,7 +167,11 @@ export default class BingoGenerator {
 
     #getGoalsInTimeRange(minimumTime: number, maximumTime: number): Goal[] {
         const goalsInTimeRange = this.allGoals.filter(goal => goal.time >= minimumTime && goal.time <= maximumTime);
-        return this.#shuffled(goalsInTimeRange);
+        if (this.profile.useFrequencyBalancing) {
+            return this.#weightedShuffle(goalsInTimeRange);
+        } else {
+            return this.#shuffled(goalsInTimeRange)
+        }
     }
 
     #hasGoalOnBoard(goal: Goal, bingoBoard: Square[]): boolean {
@@ -246,6 +283,21 @@ export default class BingoGenerator {
             toShuffle[randElement] = temp;
         }
         return toShuffle;
+    }
+
+
+    /**
+     * Shuffles list of goals, but makes it more likely for goals with lower weights to appear earlier in the list (for frequency balancing).
+     * Goal weights should be numbers between -2 and 2.
+     * 
+     * @param a first goal
+     * @param b second goal
+     */
+    #weightedShuffle(goals: Goal[]): Goal[] {
+        return goals
+            .map(goal => ({ goal, sortVal: (goal.weight || 0) + this.rng.nextRandom() + this.rng.nextRandom() + this.rng.nextRandom() + this.rng.nextRandom() - 2 }))
+            .sort(({ sortVal: sv1 }, { sortVal: sv2 }) => sv2 - sv1)
+            .map(({ goal }) => goal);
     }
 }
 

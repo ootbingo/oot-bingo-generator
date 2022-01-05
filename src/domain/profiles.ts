@@ -9,6 +9,7 @@ export type Profile = {
     baselineTime: number;               // UNUSED in the generator, but used to analyze rows to calculate row durations. It's the base amount of time you'd need in any row to setup.
     timePerDifficulty: number;          // the ratio between time and difficulty
     tooMuchSynergy: number;             // high number that is returned in the generator whenever synergy is considered too high
+    useFrequencyBalancing: boolean;     // prioritize goals 
 }
 
 const defaultProfile: Profile = {
@@ -19,7 +20,8 @@ const defaultProfile: Profile = {
     maximumOffset: 2,
     baselineTime: 27.75,
     timePerDifficulty: 0.75,
-    tooMuchSynergy: 100
+    tooMuchSynergy: 100,
+    useFrequencyBalancing: true,
 }
 
 type Profiles = {
