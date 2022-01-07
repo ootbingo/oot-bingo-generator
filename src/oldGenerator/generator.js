@@ -788,5 +788,6 @@ export const ootBingoGenerator = function (bingoList, opts) {
 
     card["meta"] = { iterations: iterations };
 
+    console.log(iterations)
     return card;
 };

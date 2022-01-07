@@ -6,9 +6,6 @@ import { bingoList } from "./goal-lists/example-goal-list";
 import { ootBingoGenerator as oldOotBingoGenerator } from "./oldGenerator/generator"
 import { ootBingoGenerator as oldFreqOotBingoGenerator } from "./oldGenerator/generator-freq"
 
-const goalList: BingoList = bingoList;
-
-
 const options: Options = {
     seed: 142536,
     mode: 'normal',
@@ -31,7 +28,7 @@ console.log(oldFreqCard.map(goal => goal && goal.name));
 
 
 console.log("\n#############\n TS")
-const card = ootBingoGenerator(goalList['normal'], options);
+const card = ootBingoGenerator(bingoList, options);
 //console.log(card);
 console.log(card.map(goal => goal && goal.name));
 

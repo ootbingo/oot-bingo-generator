@@ -3,6 +3,8 @@ import BingoGenerator from "../generator";
 
 describe("generator", () => {
 
+    const bingoList = require('./test-bingo-lists/combined-bingo-list-v10_1.json');
+
     describe("generating goals", () => {
 
         it("generates a normal card with correct goals", () => {
@@ -11,9 +13,8 @@ describe("generator", () => {
                 mode: 'normal',
                 language: 'name'
             }
-            const goalList = require('./test-goal-lists/combined-goal-list-v10_1.json');
-            const bingoGenerator = new BingoGenerator(goalList['normal'], options);
-            
+            const bingoGenerator = new BingoGenerator(bingoList['normal'], options);
+
             const card = bingoGenerator.generateCard();
 
             const goalNames = card.goals.map(goal => goal.name);
@@ -43,7 +44,7 @@ describe("generator", () => {
                 '7 Magic Beans',
                 'Blue Potion',
                 '20 Different Skulltulas'
-              ]);
+            ]);
         })
 
         it("generates a blackout card with correct goals", () => {
@@ -52,8 +53,7 @@ describe("generator", () => {
                 mode: 'blackout',
                 language: 'name'
             }
-            const goalList = require('./test-goal-lists/combined-goal-list-v10_1.json');
-            const bingoGenerator = new BingoGenerator(goalList['normal'], options);
+            const bingoGenerator = new BingoGenerator(bingoList['normal'], options);
 
             const card = bingoGenerator.generateCard();
 
@@ -84,7 +84,7 @@ describe("generator", () => {
                 'All 4 Gerudo Valley area Skulltulas',
                 "Ruto's Letter",
                 'Open the Final Door of Light Trial'
-              ]);
+            ]);
         })
 
         it("generates a short card with correct goals", () => {
@@ -93,8 +93,7 @@ describe("generator", () => {
                 mode: 'short',
                 language: 'name'
             }
-            const goalList = require('./test-goal-lists/combined-goal-list-v10_1.json');
-            const bingoGenerator = new BingoGenerator(goalList['short'], options);
+            const bingoGenerator = new BingoGenerator(bingoList['short'], options);
 
             const card = bingoGenerator.generateCard();
 
@@ -125,10 +124,30 @@ describe("generator", () => {
                 '3 unused keys in Gerudo Training Grounds',
                 'Bottled Fairy',
                 '30 Deku Sticks'
-              ]);
+            ]);
         })
 
     })
 
+    describe('metdata', () => {
 
+        it.each([
+            [677302, 4],
+            [816607, 5],
+            [289166, 2],
+            [849242, 1],
+            [822884, 10]
+        ])('card with seed %s has correct metadata with %s iterations', (seed: number, expectedIterations: number) => {
+            const options: Options = {
+                seed: seed,
+                mode: 'normal',
+                language: 'name'
+            }
+            const bingoGenerator = new BingoGenerator(bingoList['normal'], options);
+
+            const card = bingoGenerator.generateCard();
+
+            expect(card.meta.iterations).toBe(expectedIterations);
+        })
+    })
 })

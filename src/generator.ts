@@ -10,14 +10,15 @@ import { SynergyCalculator } from "./synergyCalculator";
 
 
 /**
+ * Main function for generating boards
  * Function name has to be preserved for compatibility with bingosetup.js in the bingo repo
  * Returns card in the right (legacy) format for the bingo setup
  * @param goalList
  * @param options
  * @returns A bingo card
  */
-export const ootBingoGenerator = (goalList: GoalList, options: Options) => {
-
+export const ootBingoGenerator = (bingoList: BingoList, options: Options) => {
+    const goalList = extractGoalList(bingoList, options.mode);
     const bingoGenerator = new BingoGenerator(goalList, options);
     const {goals, meta} = bingoGenerator.generateCard();
 
@@ -33,8 +34,8 @@ export const ootBingoGenerator = (goalList: GoalList, options: Options) => {
 /**
  * Wrapper for BingoSync
  */
-export const bingoGenerator = (goalList: GoalList, options: Options) => {
-    return ootBingoGenerator(goalList, options);
+export const bingoGenerator = (bingoList: BingoList, options: Options) => {
+    return ootBingoGenerator(bingoList, options);
 }
 
 
@@ -52,14 +53,7 @@ export default class BingoGenerator {
 
     constructor(goalList: GoalList, options: Options) {
         this.options = options;
-
-        // todo move to outside of class
-        /*this.language = options.lang || 'name';
-        this.mode = options.mode || 'normal';
-        this.seed = options.seed || Math.ceil(999999 * Math.random()).toString();*/
-
-        // calc extractGoalList BEFORE creating an instance of this class
-
+        
         this.rng = new RNG(options.seed);
         this.magicSquare = generateMagicSquare(this.options.seed);
 
@@ -78,13 +72,12 @@ export default class BingoGenerator {
      * @param maxIterations The max amount of times the generator will try to generate a card.
      * @returns An array of squares if generation was successful, with metadata included
      */
-    generateCard(maxIterations: number = 10): Card {
+    generateCard(maxIterations: number = 100): Card {
         let board: Square[] | undefined = undefined;
         let iteration = 0;
 
         while (!board && iteration < maxIterations) {
             iteration++;
-            console.log("generating... " + iteration)
             board = this.generateBoard();
         }
 
@@ -385,7 +378,7 @@ function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | undefined
             return combinedBingoList["normal"];
         }
         else {
-            console.log(`Error: Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);
+            throw Error(`Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);
         }
     }
 }
