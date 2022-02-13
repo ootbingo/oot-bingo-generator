@@ -1,10 +1,5 @@
 import { Square } from "./types/board";
-import {
-  CombinedSynergies,
-  Synergies,
-  SynergyType,
-  Synfilters,
-} from "./types/synergies";
+import { CombinedSynergies, Synergies, SynergyType, Synfilters } from "./types/synergies";
 import { Profile } from "./types/profiles";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
 import { SQUARES_PER_ROW } from "./definitions";
@@ -14,20 +9,14 @@ export class SynergyCalculator {
   rowtypeTimeSave: Synergies;
   synergyFilters: Synfilters;
 
-  constructor(
-    profile: Profile,
-    rowtypeTimeSave: Synergies,
-    synergyFilters: Synfilters
-  ) {
+  constructor(profile: Profile, rowtypeTimeSave: Synergies, synergyFilters: Synfilters) {
     this.profile = profile;
     this.rowtypeTimeSave = rowtypeTimeSave;
     this.synergyFilters = synergyFilters;
   }
 
   synergyOfSquares(squares: Square[]) {
-    const squaresWithGoal = squares.filter(
-      (square) => square.goal !== undefined
-    );
+    const squaresWithGoal = squares.filter((square) => square.goal !== undefined);
 
     if (this.#containsDuplicateGoals(squaresWithGoal)) {
       return this.profile.tooMuchSynergy;
@@ -45,8 +34,7 @@ export class SynergyCalculator {
       typeSynergiesOfSquares,
       subtypeSynergiesOfSquares
     );
-    const filteredTypeSynergies =
-      this.#filterTypeSynergies(unifiedTypeSynergies);
+    const filteredTypeSynergies = this.#filterTypeSynergies(unifiedTypeSynergies);
 
     const rowtypeSynergiesOfSquares = this.#mergeSynergiesOfSquares(
       squaresWithGoal,
@@ -117,9 +105,7 @@ export class SynergyCalculator {
     const unifiedTypeSynergies = {};
     for (const type in typeSynergies) {
       if (type in subtypeSynergies) {
-        unifiedTypeSynergies[type] = typeSynergies[type].concat(
-          subtypeSynergies[type]
-        );
+        unifiedTypeSynergies[type] = typeSynergies[type].concat(subtypeSynergies[type]);
       } else {
         unifiedTypeSynergies[type] = typeSynergies[type];
       }
@@ -152,9 +138,7 @@ export class SynergyCalculator {
     const filter = this.synergyFilters[type];
 
     const sortedSynergies =
-      filter.minmax === "min"
-        ? sortAscending(synergies)
-        : sortDescending(synergies);
+      filter.minmax === "min" ? sortAscending(synergies) : sortDescending(synergies);
     return sortedSynergies.slice(0, filter.value);
   }
 
@@ -169,10 +153,7 @@ export class SynergyCalculator {
         return filteredRowtypeSynergies;
       }
 
-      const filteredRowtypeSynergy = this.#filterForRowtype(
-        rowtype,
-        rowtypeSynergy
-      );
+      const filteredRowtypeSynergy = this.#filterForRowtype(rowtype, rowtypeSynergy);
       if (filteredRowtypeSynergy !== undefined) {
         filteredRowtypeSynergies[rowtype] = filteredRowtypeSynergy;
       }

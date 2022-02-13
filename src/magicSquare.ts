@@ -1,7 +1,7 @@
-import { squarePositions } from "./types/board";
+import { SQUARE_POSITIONS } from "./definitions";
 
 export function generateMagicSquare(seed: number): number[] {
-  return squarePositions.map((i) => magicSquareNumber(i, seed));
+  return SQUARE_POSITIONS.map((i) => magicSquareNumber(i, seed));
 }
 
 // get the magic square number for a position on the magic square, for a given seed

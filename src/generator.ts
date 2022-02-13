@@ -88,9 +88,7 @@ export default class BingoGenerator {
 
     this.allGoals = flattenGoalList(goalList);
 
-    this.profile = profiles
-      ? profiles[options.mode]
-      : DEFAULT_PROFILES[options.mode];
+    this.profile = profiles ? profiles[options.mode] : DEFAULT_PROFILES[options.mode];
 
     this.synergyCalculator = new SynergyCalculator(
       this.profile,
@@ -159,10 +157,7 @@ export default class BingoGenerator {
    * @param bingoBoard List of squares
    * @returns The goal and its synergy or undefined, if no fitting goal was found
    */
-  #pickGoalForPosition(
-    position: number,
-    bingoBoard: Square[]
-  ): Goal | undefined {
+  #pickGoalForPosition(position: number, bingoBoard: Square[]): Goal | undefined {
     const squareToFill = bingoBoard[position];
     const desiredTime = squareToFill.desiredTime;
 
@@ -194,11 +189,7 @@ export default class BingoGenerator {
         }
 
         if (
-          !this.#causesTooMuchSynergyInRow(
-            squareWithPotentialGoal,
-            position,
-            bingoBoard
-          )
+          !this.#causesTooMuchSynergyInRow(squareWithPotentialGoal, position, bingoBoard)
         ) {
           return goal;
         }
@@ -208,10 +199,7 @@ export default class BingoGenerator {
     return undefined;
   }
 
-  #getShuffledGoalsInTimeRange(
-    minimumTime: number,
-    maximumTime: number
-  ): Goal[] {
+  #getShuffledGoalsInTimeRange(minimumTime: number, maximumTime: number): Goal[] {
     const goalsInTimeRange = this.allGoals.filter(
       (goal) => goal.time >= minimumTime && goal.time <= maximumTime
     );
@@ -223,24 +211,17 @@ export default class BingoGenerator {
   }
 
   #hasGoalOnBoard(goal: Goal, bingoBoard: Square[]): boolean {
-    return bingoBoard.some(
-      (square) => square.goal && square.goal.id === goal.id
-    );
+    return bingoBoard.some((square) => square.goal && square.goal.id === goal.id);
   }
 
-  #hasConflictsOnBoard(
-    squareWithPotentialGoal: Square,
-    bingoBoard: Square[]
-  ): boolean {
+  #hasConflictsOnBoard(squareWithPotentialGoal: Square, bingoBoard: Square[]): boolean {
     for (const square of bingoBoard) {
       if (!square.goal) {
         continue;
       }
       if (
-        this.synergyCalculator.synergyOfSquares([
-          squareWithPotentialGoal,
-          square,
-        ]) >= this.profile.tooMuchSynergy
+        this.synergyCalculator.synergyOfSquares([squareWithPotentialGoal, square]) >=
+        this.profile.tooMuchSynergy
       ) {
         return true;
       }
@@ -284,14 +265,9 @@ export default class BingoGenerator {
     let minimumSynergy = this.profile.tooMuchSynergy;
 
     for (const row of rowsOfSquare) {
-      const potentialRow = this.#getOtherSquares(
-        row,
-        positionOfSquare,
-        bingoBoard
-      );
+      const potentialRow = this.#getOtherSquares(row, positionOfSquare, bingoBoard);
       potentialRow.push(potentialSquare);
-      const effectiveRowSynergy =
-        this.synergyCalculator.synergyOfSquares(potentialRow);
+      const effectiveRowSynergy = this.synergyCalculator.synergyOfSquares(potentialRow);
 
       maximumSynergy = Math.max(maximumSynergy, effectiveRowSynergy);
       minimumSynergy = Math.min(minimumSynergy, effectiveRowSynergy);
@@ -341,11 +317,7 @@ export default class BingoGenerator {
     ]);
     populationOrder = populationOrder.concat(nonDiagonals);
 
-    this.#movePositionsWithHighestDifficultyToFront(
-      3,
-      populationOrder,
-      bingoBoard
-    );
+    this.#movePositionsWithHighestDifficultyToFront(3, populationOrder, bingoBoard);
 
     return populationOrder;
   }
@@ -371,16 +343,10 @@ export default class BingoGenerator {
     }
     const difficulties = bingoBoard.map((square) => square.difficulty);
     // highest n difficulties, from low to high
-    const highestDifficulties = sortAscending(
-      sortDescending(difficulties).slice(0, n)
-    );
+    const highestDifficulties = sortAscending(sortDescending(difficulties).slice(0, n));
 
     for (const difficulty of highestDifficulties) {
-      this.#movePositionWithDifficultyToFront(
-        difficulty,
-        populationOrder,
-        bingoBoard
-      );
+      this.#movePositionWithDifficultyToFront(difficulty, populationOrder, bingoBoard);
     }
   }
 

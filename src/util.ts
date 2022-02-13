@@ -50,9 +50,7 @@ export function flattenGoalList(goalList: GoalList): Goal[] {
  * @param filters Object with a synergy filter string for several types (e.g. {childchu : 'min 1', endon : 'max -1'})
  * @returns Object with the parsed Synfilters (e.g. {childchu: {minmax: 'min', value: 1}, endon: {'minmax': max}, value: -1})
  */
-export function parseSynergyFilters(filters: {
-  [key: string]: string;
-}): Synfilters {
+export function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
   const parsedFilters = {};
   for (const filterType in filters) {
     const splitFilter = filters[filterType].split(" ");
@@ -76,10 +74,7 @@ export function parseSynergyFilters(filters: {
  * @param bingoList The JavaScript object generated from the goal CSV.
  * @param mode The requested mode.
  */
-export function extractGoalList(
-  bingoList: BingoList,
-  mode: Mode
-): GoalList | undefined {
+export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | undefined {
   if (bingoList.info.combined && bingoList.info.combined === "true") {
     const combinedBingoList = bingoList;
     if (combinedBingoList[mode]) {
@@ -87,9 +82,7 @@ export function extractGoalList(
     } else if (combinedBingoList["normal"]) {
       return combinedBingoList["normal"];
     } else {
-      throw Error(
-        `Goal list doesn't contain a valid sub goal list for mode: "${mode}"`
-      );
+      throw Error(`Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);
     }
   }
 }
