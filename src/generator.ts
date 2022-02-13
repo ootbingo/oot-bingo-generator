@@ -1,13 +1,12 @@
-import {Card, Square, squarePositions} from "./domain/board";
-import {BingoList, GoalList, Goal} from "./domain/goalList";
-import {Synergies, Synfilters} from "./domain/synergies"
-import {Profile, profiles} from "./domain/profiles";
-import {Options, Mode} from "./domain/options";
-import {INDICES_PER_ROW, Row, ROWS_PER_INDEX} from "./domain/rows";
-import {generateMagicSquare} from "./magicSquare";
-import {RNG} from "./rng";
-import {SynergyCalculator} from "./synergyCalculator";
-
+import { Card, Square, squarePositions } from "./domain/board";
+import { BingoList, Goal, GoalList } from "./domain/goalList";
+import { Synergies, Synfilters } from "./domain/synergies";
+import { defaultProfiles, Profile, Profiles } from "./domain/profiles";
+import { Mode, Options } from "./domain/options";
+import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./domain/rows";
+import { generateMagicSquare } from "./magicSquare";
+import { RNG } from "./rng";
+import { SynergyCalculator } from "./synergyCalculator";
 
 /**
  * Main function for generating boards
@@ -15,313 +14,417 @@ import {SynergyCalculator} from "./synergyCalculator";
  * Returns card in the right (legacy) format for the bingo setup
  * @param bingoList
  * @param options
- * @returns A bingo card
+ * @returns A bingo card in the legacy format (list with goals and metadata, starting at index 1)
  */
 export const ootBingoGenerator = (bingoList: BingoList, options: Options) => {
-    const goalList = extractGoalList(bingoList, options.mode);
-    const bingoGenerator = new BingoGenerator(goalList, options);
-    const {goals, meta} = bingoGenerator.generateCard();
+  const goalList = extractGoalList(bingoList, options.mode);
+  const bingoGenerator = new BingoGenerator(goalList, options);
+  const { goals, meta } = bingoGenerator.generateCard();
 
-    // make goals start from position 1 in the list (expected by bingosetup.js)
-    const shiftedGoals = [];
-    goals.forEach((goal, index) => shiftedGoals[index + 1] = goal);
+  // make goals start from position 1 in the list (expected by bingosetup.js)
+  const shiftedGoals = [];
+  goals.forEach((goal, index) => (shiftedGoals[index + 1] = goal));
 
-    shiftedGoals['meta'] = meta;
-    return shiftedGoals;
+  shiftedGoals["meta"] = meta;
+  return shiftedGoals;
 };
-
 
 /**
  * Wrapper for BingoSync
  */
 export const bingoGenerator = (bingoList: BingoList, options: Options) => {
-    return ootBingoGenerator(bingoList, options);
-}
+  return ootBingoGenerator(bingoList, options);
+};
 
+/**
+ * Function for generating boards, for internal use
+ * @param bingoList
+ * @param options
+ * @param profiles Optional, maps each mode to a profile. Uses standard profiles if not provided. Note that in previous generators the profiles were always built in.
+ * @returns A bingo card
+ */
+export const generateCard = (
+  bingoList: BingoList,
+  options: Options,
+  profiles?: Profiles
+) => {
+  const goalList = extractGoalList(bingoList, options.mode);
+  const bingoGenerator = new BingoGenerator(goalList, options, profiles);
+  return bingoGenerator.generateCard();
+};
 
 export default class BingoGenerator {
-    readonly options: Options;
-    readonly profile: Profile;
-    readonly rng: RNG;
-    readonly magicSquare: number[];
+  readonly options: Options;
+  readonly profile: Profile;
+  readonly rng: RNG;
+  readonly magicSquare: number[];
 
-    readonly allGoals: Goal[];
-    readonly rowtypeTimeSave: Synergies;
-    readonly synergyFilters: Synfilters;
+  readonly allGoals: Goal[];
+  readonly rowtypeTimeSave: Synergies;
+  readonly synergyFilters: Synfilters;
 
-    readonly synergyCalculator: SynergyCalculator;
+  readonly synergyCalculator: SynergyCalculator;
 
-    constructor(goalList: GoalList, options: Options) {
-        this.options = options;
+  constructor(goalList: GoalList, options: Options, profiles?: Profiles) {
+    this.options = options;
 
-        this.rng = new RNG(options.seed);
-        this.magicSquare = generateMagicSquare(this.options.seed);
+    this.rng = new RNG(options.seed);
+    this.magicSquare = generateMagicSquare(this.options.seed);
 
-        this.rowtypeTimeSave = goalList.rowtypes;
-        this.synergyFilters = parseSynergyFilters(goalList.synfilters);
+    this.rowtypeTimeSave = goalList.rowtypes;
+    this.synergyFilters = parseSynergyFilters(goalList.synfilters);
 
-        this.allGoals = flattenGoalList(goalList);
+    this.allGoals = flattenGoalList(goalList);
 
-        this.profile = profiles[options.mode];
+    this.profile = profiles
+      ? profiles[options.mode]
+      : defaultProfiles[options.mode];
 
-        this.synergyCalculator = new SynergyCalculator(this.profile, this.rowtypeTimeSave, this.synergyFilters);
+    this.synergyCalculator = new SynergyCalculator(
+      this.profile,
+      this.rowtypeTimeSave,
+      this.synergyFilters
+    );
+  }
+
+  /**
+   * Generates a bingo card.
+   * @param maxIterations The max amount of times the generator will try to generate a card.
+   * @returns An array of squares if generation was successful, with metadata included
+   */
+  generateCard(maxIterations: number = 100): Card {
+    let board: Square[] | undefined = undefined;
+    let iteration = 0;
+
+    while (!board && iteration < maxIterations) {
+      iteration++;
+      board = this.generateBoard();
     }
 
-    /**
-     * Generates a bingo card.
-     * @param maxIterations The max amount of times the generator will try to generate a card.
-     * @returns An array of squares if generation was successful, with metadata included
-     */
-    generateCard(maxIterations: number = 100): Card {
-        let board: Square[] | undefined = undefined;
-        let iteration = 0;
+    // all squares should have been filled with a goal at this point
+    const goals = board.map((square) => square.goal);
 
-        while (!board && iteration < maxIterations) {
-            iteration++;
-            board = this.generateBoard();
-        }
-
-        // all squares should have been filled with a goal at this point
-        const goals = board.map(square => square.goal)
-
-        return {
-            goals: goals,
-            meta: {
-                iterations: iteration,
-            }
-        }
-    }
-
-    /**
-     * Attempts to generate a bingo board.
-     * @returns An array of squares if generation was successful, undefined otherwise
-     */
-    generateBoard(): Square[] | undefined {
-        // set up the bingo board by filling in the difficulties based on a magic square
-        const bingoBoard = squarePositions.map((i) => this.#mapDifficultyToSquare(this.magicSquare[i]));
-
-        // fill in the goals of the board in a random order
-        const populationOrder = this.#generatePopulationOrder(bingoBoard);
-
-        for (const i of squarePositions) {
-            const nextPosition = populationOrder[i];
-
-            const pickedGoal = this.#pickGoalForPosition(nextPosition, bingoBoard);
-
-            if (pickedGoal) {
-                bingoBoard[nextPosition].goal = pickedGoal;
-
-            } else {
-                return undefined;
-            }
-        }
-        return bingoBoard;
+    return {
+      goals: goals,
+      meta: {
+        iterations: iteration,
+      },
     };
+  }
 
-    /**
-     * Pick a goal to fill the specified square on the board. It may not cause too much (anti)synergy in any row.
-     * In case of a blackout, it may not cause too much synergy with any goal already on the board.
-     *
-     * @param position The position of the square to fill
-     * @param bingoBoard List of squares
-     * @returns The goal and its synergy or undefined, if no fitting goal was found
-     */
-    #pickGoalForPosition(position: number, bingoBoard: Square[]): Goal | undefined {
+  /**
+   * Attempts to generate a bingo board.
+   * @returns An array of squares if generation was successful, undefined otherwise
+   */
+  generateBoard(): Square[] | undefined {
+    // set up the bingo board by filling in the difficulties based on a magic square
+    const bingoBoard = squarePositions.map((i) =>
+      this.#mapDifficultyToSquare(this.magicSquare[i])
+    );
 
-        const squareToFill = bingoBoard[position];
-        const desiredTime = squareToFill.desiredTime;
+    // fill in the goals of the board in a random order
+    const populationOrder = this.#generatePopulationOrder(bingoBoard);
 
-        for (let offset = this.profile.initialOffset; offset <= this.profile.maximumOffset; offset++) {
+    for (const i of squarePositions) {
+      const nextPosition = populationOrder[i];
 
-            const goalsInTimeRange = this.#getShuffledGoalsInTimeRange(desiredTime - offset, desiredTime + offset);
+      const pickedGoal = this.#pickGoalForPosition(nextPosition, bingoBoard);
 
-            for (const goal of goalsInTimeRange) {
-
-                if (this.#hasGoalOnBoard(goal, bingoBoard)) {
-                    continue;
-                }
-
-                const squareWithPotentialGoal = {
-                    ...squareToFill,
-                    goal: goal
-                }
-
-                if (this.options.mode === "blackout" && this.#hasConflictsOnBoard(squareWithPotentialGoal, bingoBoard)) {
-                    continue;
-                }
-
-                if (!this.#causesTooMuchSynergyInRow(squareWithPotentialGoal, position, bingoBoard)) {
-                    return goal;
-                }
-            }
-        }
-
+      if (pickedGoal) {
+        bingoBoard[nextPosition].goal = pickedGoal;
+      } else {
         return undefined;
+      }
     }
+    return bingoBoard;
+  }
 
-    #getShuffledGoalsInTimeRange(minimumTime: number, maximumTime: number): Goal[] {
-        const goalsInTimeRange = this.allGoals.filter(goal => goal.time >= minimumTime && goal.time <= maximumTime);
-        if (this.profile.useFrequencyBalancing) {
-            return this.#weightedShuffle(goalsInTimeRange);
-        } else {
-            return this.#shuffled(goalsInTimeRange)
-        }
-    }
+  /**
+   * Pick a goal to fill the specified square on the board. It may not cause too much (anti)synergy in any row.
+   * In case of a blackout, it may not cause too much synergy with any goal already on the board.
+   *
+   * @param position The position of the square to fill
+   * @param bingoBoard List of squares
+   * @returns The goal and its synergy or undefined, if no fitting goal was found
+   */
+  #pickGoalForPosition(
+    position: number,
+    bingoBoard: Square[]
+  ): Goal | undefined {
+    const squareToFill = bingoBoard[position];
+    const desiredTime = squareToFill.desiredTime;
 
-    #hasGoalOnBoard(goal: Goal, bingoBoard: Square[]): boolean {
-        return bingoBoard.some(square => square.goal && (square.goal.id === goal.id));
-    }
+    for (
+      let offset = this.profile.initialOffset;
+      offset <= this.profile.maximumOffset;
+      offset++
+    ) {
+      const goalsInTimeRange = this.#getShuffledGoalsInTimeRange(
+        desiredTime - offset,
+        desiredTime + offset
+      );
 
-    #hasConflictsOnBoard(squareWithPotentialGoal: Square, bingoBoard: Square[]): boolean {
-        for (const square of bingoBoard) {
-            if (!square.goal) {
-                continue;
-            }
-            if (this.synergyCalculator.synergyOfSquares([squareWithPotentialGoal, square]) >= this.profile.tooMuchSynergy) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Check if a square with a potential goal would cause too much synergy in any row on the board.
-     *
-     * @param potentialSquareWithGoal Square with a potential goal
-     * @param positionOfSquare The position of the square with a potential goal
-     * @param bingoBoard List of squares
-     * @returns True if the potential goal causes too much synergy in any row, false otherwise
-     */
-    #causesTooMuchSynergyInRow(potentialSquareWithGoal: Square, positionOfSquare: number, bingoBoard: Square[]): boolean {
-        const minMaxSynergies = this.#minMaxSynergiesForRowsOfSquare(potentialSquareWithGoal, positionOfSquare, bingoBoard);
-
-        return minMaxSynergies.maximumSynergy > this.profile.maximumSynergy ||
-            minMaxSynergies.minimumSynergy < this.profile.minimumSynergy;
-    }
-
-    #minMaxSynergiesForRowsOfSquare(potentialSquare: Square, positionOfSquare: number, bingoBoard: Square[]): { maximumSynergy: number, minimumSynergy: number } {
-        const rowsOfSquare = ROWS_PER_INDEX[positionOfSquare];
-
-        let maximumSynergy = 0;
-        let minimumSynergy = this.profile.tooMuchSynergy;
-
-        for (const row of rowsOfSquare) {
-
-            const potentialRow = this.#getOtherSquares(row, positionOfSquare, bingoBoard);
-            potentialRow.push(potentialSquare);
-            const effectiveRowSynergy = this.synergyCalculator.synergyOfSquares(potentialRow);
-
-            maximumSynergy = Math.max(maximumSynergy, effectiveRowSynergy);
-            minimumSynergy = Math.min(minimumSynergy, effectiveRowSynergy);
+      for (const goal of goalsInTimeRange) {
+        if (this.#hasGoalOnBoard(goal, bingoBoard)) {
+          continue;
         }
 
-        return {
-            maximumSynergy: maximumSynergy,
-            minimumSynergy: minimumSynergy,
+        const squareWithPotentialGoal = {
+          ...squareToFill,
+          goal: goal,
         };
+
+        if (
+          this.options.mode === "blackout" &&
+          this.#hasConflictsOnBoard(squareWithPotentialGoal, bingoBoard)
+        ) {
+          continue;
+        }
+
+        if (
+          !this.#causesTooMuchSynergyInRow(
+            squareWithPotentialGoal,
+            position,
+            bingoBoard
+          )
+        ) {
+          return goal;
+        }
+      }
     }
 
-    #getOtherSquares(row: Row, positionOfSquare: number, bingoBoard: Square[]): Square[] {
-        return INDICES_PER_ROW[row]
-            .filter(index => index != positionOfSquare)
-            .map(index => bingoBoard[index]);
+    return undefined;
+  }
+
+  #getShuffledGoalsInTimeRange(
+    minimumTime: number,
+    maximumTime: number
+  ): Goal[] {
+    const goalsInTimeRange = this.allGoals.filter(
+      (goal) => goal.time >= minimumTime && goal.time <= maximumTime
+    );
+    if (this.profile.useFrequencyBalancing) {
+      return this.#weightedShuffle(goalsInTimeRange);
+    } else {
+      return this.#shuffled(goalsInTimeRange);
+    }
+  }
+
+  #hasGoalOnBoard(goal: Goal, bingoBoard: Square[]): boolean {
+    return bingoBoard.some(
+      (square) => square.goal && square.goal.id === goal.id
+    );
+  }
+
+  #hasConflictsOnBoard(
+    squareWithPotentialGoal: Square,
+    bingoBoard: Square[]
+  ): boolean {
+    for (const square of bingoBoard) {
+      if (!square.goal) {
+        continue;
+      }
+      if (
+        this.synergyCalculator.synergyOfSquares([
+          squareWithPotentialGoal,
+          square,
+        ]) >= this.profile.tooMuchSynergy
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Check if a square with a potential goal would cause too much synergy in any row on the board.
+   *
+   * @param potentialSquareWithGoal Square with a potential goal
+   * @param positionOfSquare The position of the square with a potential goal
+   * @param bingoBoard List of squares
+   * @returns True if the potential goal causes too much synergy in any row, false otherwise
+   */
+  #causesTooMuchSynergyInRow(
+    potentialSquareWithGoal: Square,
+    positionOfSquare: number,
+    bingoBoard: Square[]
+  ): boolean {
+    const minMaxSynergies = this.#minMaxSynergiesForRowsOfSquare(
+      potentialSquareWithGoal,
+      positionOfSquare,
+      bingoBoard
+    );
+
+    return (
+      minMaxSynergies.maximumSynergy > this.profile.maximumSynergy ||
+      minMaxSynergies.minimumSynergy < this.profile.minimumSynergy
+    );
+  }
+
+  #minMaxSynergiesForRowsOfSquare(
+    potentialSquare: Square,
+    positionOfSquare: number,
+    bingoBoard: Square[]
+  ): { maximumSynergy: number; minimumSynergy: number } {
+    const rowsOfSquare = ROWS_PER_INDEX[positionOfSquare];
+
+    let maximumSynergy = 0;
+    let minimumSynergy = this.profile.tooMuchSynergy;
+
+    for (const row of rowsOfSquare) {
+      const potentialRow = this.#getOtherSquares(
+        row,
+        positionOfSquare,
+        bingoBoard
+      );
+      potentialRow.push(potentialSquare);
+      const effectiveRowSynergy =
+        this.synergyCalculator.synergyOfSquares(potentialRow);
+
+      maximumSynergy = Math.max(maximumSynergy, effectiveRowSynergy);
+      minimumSynergy = Math.min(minimumSynergy, effectiveRowSynergy);
     }
 
-    #mapDifficultyToSquare(difficulty: number): Square {
-        return {
-            difficulty: difficulty,
-            desiredTime: difficulty * this.profile.timePerDifficulty,
-        };
-    }
-
-    /**
-     * Generates the order in which the squres should be filled by the generator.
-     *
-     * First the three squres with the highest difficulty, then the center, then the diagonals, then the rest.
-     *
-     * @param bingoBoard The bingo board
-     */
-    #generatePopulationOrder(bingoBoard: Square[]): number[] {
-
-        let populationOrder = [];
-
-        const centerSquare = 12;
-        populationOrder[0] = centerSquare;
-
-        const diagonals = this.#shuffled([0, 6, 18, 24, 4, 8, 16, 20]);
-        populationOrder = populationOrder.concat(diagonals);
-
-        const nondiagonals = this.#shuffled([1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23]);
-        populationOrder = populationOrder.concat(nondiagonals);
-
-        this.#movePositionsWithHighestDifficultyToFront(3, populationOrder, bingoBoard);
-
-        return populationOrder;
+    return {
+      maximumSynergy: maximumSynergy,
+      minimumSynergy: minimumSynergy,
     };
+  }
 
-    /**
-     * Takes the n board positions of the squares with the highest difficulties, and moves them to
-     * the front of the populationOrder list.
-     *
-     * Generally there are less goals with high difficulties (i.e. long goals) available, therefore
-     * the squares should be populated with goals first.
-     *
-     * @param n Number of positions to move to front
-     * @param populationOrder List of all board positions in population order
-     * @param bingoBoard List of squares
-     */
-    #movePositionsWithHighestDifficultyToFront(n: number, populationOrder: number[], bingoBoard: Square[]) {
-        if (n > bingoBoard.length) {
-            n = bingoBoard.length;
-        }
-        const difficulties = bingoBoard.map(square => square.difficulty);
-        const highestDifficulties = difficulties.sort((x, y) => y - x).slice(0, n);
-        const highestDifficultiesAscending = highestDifficulties.sort((x, y) => x - y);
+  #getOtherSquares(
+    row: Row,
+    positionOfSquare: number,
+    bingoBoard: Square[]
+  ): Square[] {
+    return INDICES_PER_ROW[row]
+      .filter((index) => index != positionOfSquare)
+      .map((index) => bingoBoard[index]);
+  }
 
-        for (const difficulty of highestDifficultiesAscending) {
-            this.#movePositionWithDifficultyToFront(difficulty, populationOrder, bingoBoard);
-        }
+  #mapDifficultyToSquare(difficulty: number): Square {
+    return {
+      difficulty: difficulty,
+      desiredTime: difficulty * this.profile.timePerDifficulty,
+    };
+  }
+
+  /**
+   * Generates the order in which the squres should be filled by the generator.
+   *
+   * First the three squres with the highest difficulty, then the center, then the diagonals, then the rest.
+   *
+   * @param bingoBoard The bingo board
+   */
+  #generatePopulationOrder(bingoBoard: Square[]): number[] {
+    let populationOrder = [];
+
+    const centerSquare = 12;
+    populationOrder[0] = centerSquare;
+
+    const diagonals = this.#shuffled([0, 6, 18, 24, 4, 8, 16, 20]);
+    populationOrder = populationOrder.concat(diagonals);
+
+    const nondiagonals = this.#shuffled([
+      1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23,
+    ]);
+    populationOrder = populationOrder.concat(nondiagonals);
+
+    this.#movePositionsWithHighestDifficultyToFront(
+      3,
+      populationOrder,
+      bingoBoard
+    );
+
+    return populationOrder;
+  }
+
+  /**
+   * Takes the n board positions of the squares with the highest difficulties, and moves them to
+   * the front of the populationOrder list.
+   *
+   * Generally there are less goals with high difficulties (i.e. long goals) available, therefore
+   * the squares should be populated with goals first.
+   *
+   * @param n Number of positions to move to front
+   * @param populationOrder List of all board positions in population order
+   * @param bingoBoard List of squares
+   */
+  #movePositionsWithHighestDifficultyToFront(
+    n: number,
+    populationOrder: number[],
+    bingoBoard: Square[]
+  ) {
+    if (n > bingoBoard.length) {
+      n = bingoBoard.length;
+    }
+    const difficulties = bingoBoard.map((square) => square.difficulty);
+    const highestDifficulties = difficulties.sort((x, y) => y - x).slice(0, n);
+    const highestDifficultiesAscending = highestDifficulties.sort(
+      (x, y) => x - y
+    );
+
+    for (const difficulty of highestDifficultiesAscending) {
+      this.#movePositionWithDifficultyToFront(
+        difficulty,
+        populationOrder,
+        bingoBoard
+      );
+    }
+  }
+
+  #movePositionWithDifficultyToFront(
+    difficulty: number,
+    populationOrder: number[],
+    bingoBoard: Square[]
+  ) {
+    const currentSquare = bingoBoard.findIndex(
+      (square) => square.difficulty == difficulty
+    );
+
+    if (currentSquare === -1) {
+      // This should never happen
+      throw new Error(`Can't find square with difficulty ${difficulty}`);
     }
 
-    #movePositionWithDifficultyToFront(difficulty: number, populationOrder: number[], bingoBoard: Square[]) {
-        const currentSquare = bingoBoard.findIndex(square => square.difficulty == difficulty);
+    populationOrder.splice(
+      populationOrder.findIndex((i) => i === currentSquare),
+      1
+    );
+    populationOrder.splice(0, 0, currentSquare);
+  }
 
-        if (currentSquare === -1) {
-            // This should never happen
-            throw new Error(`Can't find square with difficulty ${difficulty}`);
-        }
-
-        populationOrder.splice(populationOrder.findIndex(i => i === currentSquare), 1);
-        populationOrder.splice(0, 0, currentSquare);
+  #shuffled<T>(array: Array<T>): Array<T> {
+    const toShuffle = array.slice();
+    for (let i = 0; i < toShuffle.length; i++) {
+      const randElement = Math.floor(this.rng.nextRandom() * (i + 1));
+      const temp = toShuffle[i];
+      toShuffle[i] = toShuffle[randElement];
+      toShuffle[randElement] = temp;
     }
+    return toShuffle;
+  }
 
-    #shuffled<T>(array: Array<T>): Array<T> {
-        const toShuffle = array.slice();
-        for (let i = 0; i < toShuffle.length; i++) {
-            const randElement = Math.floor(this.rng.nextRandom() * (i + 1));
-            const temp = toShuffle[i];
-            toShuffle[i] = toShuffle[randElement];
-            toShuffle[randElement] = temp;
-        }
-        return toShuffle;
-    }
-
-
-    /**
-     * Shuffles list of goals, but makes it more likely for goals with lower weights to appear earlier in the list (for frequency balancing).
-     * Goal weights should be numbers between -2 and 2.
-     *
-     * @param goals list of goals
-     */
-    #weightedShuffle(goals: Goal[]): Goal[] {
-        return goals
-            .map(goal => ({
-                goal,
-                sortVal: (goal.weight || 0) + this.rng.nextRandom() + this.rng.nextRandom() + this.rng.nextRandom() + this.rng.nextRandom() - 2
-            }))
-            .sort(({sortVal: sv1}, {sortVal: sv2}) => sv2 - sv1)
-            .map(({goal}) => goal);
-    }
+  /**
+   * Shuffles list of goals, but makes it more likely for goals with higher weights to appear earlier in the list (for frequency balancing).
+   * Goal weights should be numbers between -2 and 2.
+   *
+   * @param goals list of goals
+   */
+  #weightedShuffle(goals: Goal[]): Goal[] {
+    return goals
+      .map((goal) => ({
+        goal,
+        sortVal:
+          (goal.weight || 0) +
+          this.rng.nextRandom() +
+          this.rng.nextRandom() +
+          this.rng.nextRandom() +
+          this.rng.nextRandom() -
+          2,
+      }))
+      .sort(({ sortVal: sv1 }, { sortVal: sv2 }) => sv2 - sv1)
+      .map(({ goal }) => goal);
+  }
 }
 
 /**
@@ -331,19 +434,19 @@ export default class BingoGenerator {
  * @param b second goal
  */
 function sortByTimeAndId(a: Goal, b: Goal): number {
-    const timeDiff = a.time - b.time;
+  const timeDiff = a.time - b.time;
 
-    if (timeDiff !== 0) {
-        return timeDiff;
-    }
+  if (timeDiff !== 0) {
+    return timeDiff;
+  }
 
-    if (a.id > b.id) {
-        return 1;
-    } else if (a.id < b.id) {
-        return -1;
-    } else {
-        return 0;
-    }
+  if (a.id > b.id) {
+    return 1;
+  } else if (a.id < b.id) {
+    return -1;
+  } else {
+    return 0;
+  }
 }
 
 /**
@@ -352,16 +455,15 @@ function sortByTimeAndId(a: Goal, b: Goal): number {
  * @param goalList The original goal list.
  */
 function flattenGoalList(goalList: GoalList): Goal[] {
+  let allGoals = [];
 
-    let allGoals = [];
+  for (let i = 1; i <= 25; i++) {
+    allGoals = allGoals.concat(goalList[i]) as Goal[];
+  }
 
-    for (let i = 1; i <= 25; i++) {
-        allGoals = allGoals.concat(goalList[i]) as Goal[];
-    }
+  allGoals.sort(sortByTimeAndId);
 
-    allGoals.sort(sortByTimeAndId);
-
-    return allGoals;
+  return allGoals;
 }
 
 /**
@@ -374,19 +476,21 @@ function flattenGoalList(goalList: GoalList): Goal[] {
  * @returns Object with the parsed Synfilters (e.g. {childchu: {minmax: 'min', value: 1}, endon: {'minmax': max}, value: -1})
  */
 function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
-    const parsedFilters = {};
-    for (const filterType in filters) {
-        const splitFilter = filters[filterType].split(' ');
-        if (splitFilter[0].toLowerCase() !== 'min' && splitFilter[0].toLowerCase() !== 'max') {
-            continue;
-        }
-        parsedFilters[filterType] = {
-            minmax: splitFilter[0],
-            value: parseInt(splitFilter[1], 10)
-        }
-
+  const parsedFilters = {};
+  for (const filterType in filters) {
+    const splitFilter = filters[filterType].split(" ");
+    if (
+      splitFilter[0].toLowerCase() !== "min" &&
+      splitFilter[0].toLowerCase() !== "max"
+    ) {
+      continue;
     }
-    return parsedFilters;
+    parsedFilters[filterType] = {
+      minmax: splitFilter[0],
+      value: parseInt(splitFilter[1], 10),
+    };
+  }
+  return parsedFilters;
 }
 
 /**
@@ -395,16 +499,20 @@ function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
  * @param bingoList The JavaScript object generated from the goal CSV.
  * @param mode The requested mode.
  */
-export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | undefined {
-
-    if (bingoList.info.combined && bingoList.info.combined === "true") {
-        const combinedBingoList = bingoList;
-        if (combinedBingoList[mode]) {
-            return combinedBingoList[mode];
-        } else if (combinedBingoList["normal"]) {
-            return combinedBingoList["normal"];
-        } else {
-            throw Error(`Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);
-        }
+function extractGoalList(
+  bingoList: BingoList,
+  mode: Mode
+): GoalList | undefined {
+  if (bingoList.info.combined && bingoList.info.combined === "true") {
+    const combinedBingoList = bingoList;
+    if (combinedBingoList[mode]) {
+      return combinedBingoList[mode];
+    } else if (combinedBingoList["normal"]) {
+      return combinedBingoList["normal"];
+    } else {
+      throw Error(
+        `Goal list doesn't contain a valid sub goal list for mode: "${mode}"`
+      );
     }
+  }
 }

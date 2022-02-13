@@ -1,8 +1,9 @@
-import { squarePositions } from "../domain/board";
-import { Options } from "../domain/options";
-import { ootBingoGenerator } from "../generator";
+import {Options} from "../domain/options";
+import {ootBingoGenerator} from "../generator";
 
 describe("ootBingoGenerator", () => {
+
+    const bingoList = require('./test-bingo-lists/combined-bingo-list-v10_1.json');
 
     it("generates a normal card with correct goals", () => {
         const options: Options = {
@@ -10,8 +11,6 @@ describe("ootBingoGenerator", () => {
             mode: 'normal',
             language: 'name'
         }
-        const bingoList = require('./test-bingo-lists/combined-bingo-list-v10_1.json');
-
         const card = ootBingoGenerator(bingoList, options);
 
         const goalNames = [];
@@ -53,8 +52,6 @@ describe("ootBingoGenerator", () => {
             mode: 'blackout',
             language: 'name'
         }
-        const bingoList = require('./test-bingo-lists/combined-bingo-list-v10_1.json');
-
         const card = ootBingoGenerator(bingoList, options);
 
         const goalNames = [];
@@ -96,8 +93,6 @@ describe("ootBingoGenerator", () => {
             mode: 'short',
             language: 'name'
         }
-        const bingoList = require('./test-bingo-lists/combined-bingo-list-v10_1.json');
-
         const card = ootBingoGenerator(bingoList, options);
 
         const goalNames = [];
