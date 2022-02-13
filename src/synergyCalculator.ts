@@ -1,12 +1,12 @@
-import { Square } from "./domain/board";
+import { Square } from "./types/board";
 import {
   CombinedSynergies,
   Synergies,
   SynergyType,
   Synfilters,
-} from "./domain/synergies";
-import { Profile } from "./domain/profiles";
-import { SQUARES_PER_ROW } from "./domain/rows";
+} from "./types/synergies";
+import { Profile } from "./types/profiles";
+import { SQUARES_PER_ROW } from "./types/rows";
 
 export class SynergyCalculator {
   profile: Profile;

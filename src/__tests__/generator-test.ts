@@ -1,4 +1,4 @@
-import { Options } from "../domain/options";
+import { Options } from "../types/options";
 import { generateCard } from "../generator";
 
 describe("generator", () => {

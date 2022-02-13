@@ -1,9 +1,9 @@
-import { Card, Square, squarePositions } from "./domain/board";
-import { BingoList, Goal, GoalList } from "./domain/goalList";
-import { Synergies, Synfilters } from "./domain/synergies";
-import { defaultProfiles, Profile, Profiles } from "./domain/profiles";
-import { Mode, Options } from "./domain/options";
-import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./domain/rows";
+import { Card, Square, squarePositions } from "./types/board";
+import { BingoList, Goal, GoalList } from "./types/goalList";
+import { Synergies, Synfilters } from "./types/synergies";
+import { defaultProfiles, Profile, Profiles } from "./types/profiles";
+import { Mode, Options } from "./types/options";
+import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./types/rows";
 import { generateMagicSquare } from "./magicSquare";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";

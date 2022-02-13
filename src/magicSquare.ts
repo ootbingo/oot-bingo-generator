@@ -1,4 +1,4 @@
-import { squarePositions } from "./domain/board";
+import { squarePositions } from "./types/board";
 
 export function generateMagicSquare(seed: number): number[] {
   return squarePositions.map((i) => magicSquareNumber(i, seed));

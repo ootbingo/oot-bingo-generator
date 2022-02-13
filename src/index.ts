@@ -1,4 +1,4 @@
-import { Mode, Options } from "./domain/options";
+import { Mode, Options } from "./types/options";
 import { generateCard } from "./generator";
 import { bingoList } from "./goal-lists/example-goal-list";
 
