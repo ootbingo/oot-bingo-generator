@@ -1,13 +1,12 @@
-import { BingoList } from "./domain/goalList";
-import { Options } from "./domain/options";
-import { profiles } from "./domain/profiles";
-import { ootBingoGenerator } from "./generator";
-import { bingoList } from "./goal-lists/example-goal-list";
-import { ootBingoGenerator as oldOotBingoGenerator } from "./oldGenerator/generator"
-import { ootBingoGenerator as oldFreqOotBingoGenerator } from "./oldGenerator/generator-freq"
+import {Options} from "./domain/options";
+import {profiles} from "./domain/profiles";
+import BingoGenerator, {extractGoalList, ootBingoGenerator} from "./generator";
+import {bingoList} from "./goal-lists/example-goal-list";
+import {ootBingoGenerator as oldOotBingoGenerator} from "./oldGenerator/generator"
+import {ootBingoGenerator as oldFreqOotBingoGenerator} from "./oldGenerator/generator-freq"
 
 const options: Options = {
-    seed: 142536,
+    seed: 718526,
     mode: 'normal',
     language: 'name'
 }
@@ -32,5 +31,37 @@ const card = ootBingoGenerator(bingoList, options);
 //console.log(card);
 console.log(card.map(goal => goal && goal.name));
 
+const frequencyAnalysis = (n: number) => {
+    const freqOptions: Options = {
+        seed: 0,
+        mode: 'blackout',
+        language: 'name'
+    }
 
+    const goalList = extractGoalList(bingoList, freqOptions.mode)
 
+    const frequencies = {};
+    const startSeed = 125000;
+    for (let i = startSeed; i < startSeed + n; i++) {
+        if (i % 100 === 0) {
+            console.log(i - startSeed);
+        }
+        const bingoGenerator = new BingoGenerator(goalList, {
+            ...freqOptions,
+            seed: i,
+        });
+        const card = bingoGenerator.generateCard();
+        for (const goal of card.goals) {
+            if (!Object.keys(frequencies).includes(goal.name)) {
+                frequencies[goal.name] = 0;
+            }
+            frequencies[goal.name] = frequencies[goal.name] += 1;
+        }
+    }
+    const sortedFrequencies = Object.entries(frequencies)
+        // @ts-ignore
+        .sort(([, a], [, b]) => b - a)
+        .reduce((r, [k, v]) => ({...r, [k]: v}), {});
+
+    console.log(JSON.stringify(sortedFrequencies, null, 1));
+}
