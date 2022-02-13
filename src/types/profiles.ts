@@ -12,36 +12,6 @@ export type Profile = {
   useFrequencyBalancing: boolean; // if true, makes it more likely for goals with higher weights to be picked. if false, ignores weights completely
 };
 
-const standardProfile: Profile = {
-  minimumSynergy: -3,
-  maximumSynergy: 7,
-  maximumIndividualSynergy: 3.75,
-  initialOffset: 1,
-  maximumOffset: 2,
-  baselineTime: 27.75,
-  timePerDifficulty: 0.75,
-  tooMuchSynergy: 100,
-  useFrequencyBalancing: true,
-};
-
 export type Profiles = {
   [key in Mode]: Profile;
-};
-
-export const defaultProfiles: Profiles = {
-  normal: standardProfile,
-  blackout: {
-    ...standardProfile,
-    minimumSynergy: -10,
-    maximumSynergy: 10,
-    maximumIndividualSynergy: 4.5,
-    initialOffset: 2,
-    maximumOffset: 6,
-  },
-  short: {
-    ...standardProfile,
-    maximumSynergy: 3,
-    baselineTime: 12,
-    timePerDifficulty: 0.5,
-  },
 };

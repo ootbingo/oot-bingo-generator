@@ -1,12 +1,24 @@
-import { Card, Square, squarePositions } from "./types/board";
+import { Card, RowName, Square } from "./types/board";
 import { BingoList, Goal, GoalList } from "./types/goalList";
 import { Synergies, Synfilters } from "./types/synergies";
-import { defaultProfiles, Profile, Profiles } from "./types/profiles";
-import { Mode, Options } from "./types/options";
-import { INDICES_PER_ROW, Row, ROWS_PER_INDEX } from "./types/rows";
+import { Profile, Profiles } from "./types/profiles";
+import { Options } from "./types/options";
 import { generateMagicSquare } from "./magicSquare";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";
+import {
+  extractGoalList,
+  flattenGoalList,
+  parseSynergyFilters,
+  sortAscending,
+  sortDescending,
+} from "./util";
+import {
+  DEFAULT_PROFILES,
+  INDICES_PER_ROW,
+  ROWS_PER_INDEX,
+  SQUARE_POSITIONS,
+} from "./definitions";
 
 /**
  * Main function for generating boards
@@ -78,7 +90,7 @@ export default class BingoGenerator {
 
     this.profile = profiles
       ? profiles[options.mode]
-      : defaultProfiles[options.mode];
+      : DEFAULT_PROFILES[options.mode];
 
     this.synergyCalculator = new SynergyCalculator(
       this.profile,
@@ -118,14 +130,14 @@ export default class BingoGenerator {
    */
   generateBoard(): Square[] | undefined {
     // set up the bingo board by filling in the difficulties based on a magic square
-    const bingoBoard = squarePositions.map((i) =>
+    const bingoBoard = SQUARE_POSITIONS.map((i) =>
       this.#mapDifficultyToSquare(this.magicSquare[i])
     );
 
     // fill in the goals of the board in a random order
     const populationOrder = this.#generatePopulationOrder(bingoBoard);
 
-    for (const i of squarePositions) {
+    for (const i of SQUARE_POSITIONS) {
       const nextPosition = populationOrder[i];
 
       const pickedGoal = this.#pickGoalForPosition(nextPosition, bingoBoard);
@@ -292,7 +304,7 @@ export default class BingoGenerator {
   }
 
   #getOtherSquares(
-    row: Row,
+    row: RowName,
     positionOfSquare: number,
     bingoBoard: Square[]
   ): Square[] {
@@ -324,10 +336,10 @@ export default class BingoGenerator {
     const diagonals = this.#shuffled([0, 6, 18, 24, 4, 8, 16, 20]);
     populationOrder = populationOrder.concat(diagonals);
 
-    const nondiagonals = this.#shuffled([
+    const nonDiagonals = this.#shuffled([
       1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23,
     ]);
-    populationOrder = populationOrder.concat(nondiagonals);
+    populationOrder = populationOrder.concat(nonDiagonals);
 
     this.#movePositionsWithHighestDifficultyToFront(
       3,
@@ -358,12 +370,12 @@ export default class BingoGenerator {
       n = bingoBoard.length;
     }
     const difficulties = bingoBoard.map((square) => square.difficulty);
-    const highestDifficulties = difficulties.sort((x, y) => y - x).slice(0, n);
-    const highestDifficultiesAscending = highestDifficulties.sort(
-      (x, y) => x - y
+    // highest n difficulties, from low to high
+    const highestDifficulties = sortAscending(
+      sortDescending(difficulties).slice(0, n)
     );
 
-    for (const difficulty of highestDifficultiesAscending) {
+    for (const difficulty of highestDifficulties) {
       this.#movePositionWithDifficultyToFront(
         difficulty,
         populationOrder,
@@ -424,95 +436,5 @@ export default class BingoGenerator {
       }))
       .sort(({ sortVal: sv1 }, { sortVal: sv2 }) => sv2 - sv1)
       .map(({ goal }) => goal);
-  }
-}
-
-/**
- * Can be used to sort an array of goals first by their time, then by their id ascending.
- *
- * @param a first goal
- * @param b second goal
- */
-function sortByTimeAndId(a: Goal, b: Goal): number {
-  const timeDiff = a.time - b.time;
-
-  if (timeDiff !== 0) {
-    return timeDiff;
-  }
-
-  if (a.id > b.id) {
-    return 1;
-  } else if (a.id < b.id) {
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
-/**
- * Generate a sorted array of goals from a complex goal list object.
- *
- * @param goalList The original goal list.
- */
-function flattenGoalList(goalList: GoalList): Goal[] {
-  let allGoals = [];
-
-  for (let i = 1; i <= 25; i++) {
-    allGoals = allGoals.concat(goalList[i]) as Goal[];
-  }
-
-  allGoals.sort(sortByTimeAndId);
-
-  return allGoals;
-}
-
-/**
- * Synergy filters are strings that start with 'max' or 'min' followed by a space and a number
- * Examples: 'max -1', 'min 2', 'min -2'
- *
- * Splits synergy filter strings into objects with 'max' or 'min' and the numeric value
- *
- * @param filters Object with a synergy filter string for several types (e.g. {childchu : 'min 1', endon : 'max -1'})
- * @returns Object with the parsed Synfilters (e.g. {childchu: {minmax: 'min', value: 1}, endon: {'minmax': max}, value: -1})
- */
-function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
-  const parsedFilters = {};
-  for (const filterType in filters) {
-    const splitFilter = filters[filterType].split(" ");
-    if (
-      splitFilter[0].toLowerCase() !== "min" &&
-      splitFilter[0].toLowerCase() !== "max"
-    ) {
-      continue;
-    }
-    parsedFilters[filterType] = {
-      minmax: splitFilter[0],
-      value: parseInt(splitFilter[1], 10),
-    };
-  }
-  return parsedFilters;
-}
-
-/**
- * Extracts the goal list for a given mode from the full definition of bingo goals.
- *
- * @param bingoList The JavaScript object generated from the goal CSV.
- * @param mode The requested mode.
- */
-function extractGoalList(
-  bingoList: BingoList,
-  mode: Mode
-): GoalList | undefined {
-  if (bingoList.info.combined && bingoList.info.combined === "true") {
-    const combinedBingoList = bingoList;
-    if (combinedBingoList[mode]) {
-      return combinedBingoList[mode];
-    } else if (combinedBingoList["normal"]) {
-      return combinedBingoList["normal"];
-    } else {
-      throw Error(
-        `Goal list doesn't contain a valid sub goal list for mode: "${mode}"`
-      );
-    }
   }
 }

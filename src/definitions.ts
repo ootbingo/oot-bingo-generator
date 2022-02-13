@@ -1,20 +1,14 @@
+import { Profile, Profiles } from "./types/profiles";
+import { RowName } from "./types/board";
+
 export const SQUARES_PER_ROW = 5;
 
-export type Row =
-  | "row1"
-  | "row2"
-  | "row3"
-  | "row4"
-  | "row5"
-  | "col1"
-  | "col2"
-  | "col3"
-  | "col4"
-  | "col5"
-  | "tlbr"
-  | "bltr";
+export const SQUARE_POSITIONS = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+  22, 23, 24,
+] as const;
 
-export const INDICES_PER_ROW: { [key in Row]: number[] } = {
+export const INDICES_PER_ROW: { [key in RowName]: number[] } = {
   row1: [0, 1, 2, 3, 4],
   row2: [5, 6, 7, 8, 9],
   row3: [10, 11, 12, 13, 14],
@@ -29,11 +23,7 @@ export const INDICES_PER_ROW: { [key in Row]: number[] } = {
   bltr: [4, 8, 12, 16, 20],
 };
 
-type RowsPerIndex = {
-  [key: number]: Row[];
-};
-
-export const ROWS_PER_INDEX: RowsPerIndex = {
+export const ROWS_PER_INDEX: { [key: number]: RowName[] } = {
   0: ["row1", "col1", "tlbr"],
   1: ["row1", "col2"],
   2: ["row1", "col3"],
@@ -60,3 +50,33 @@ export const ROWS_PER_INDEX: RowsPerIndex = {
   23: ["row5", "col4"],
   24: ["row5", "col5", "tlbr"],
 };
+
+const STANDARD_PROFILE: Profile = {
+  minimumSynergy: -3,
+  maximumSynergy: 7,
+  maximumIndividualSynergy: 3.75,
+  initialOffset: 1,
+  maximumOffset: 2,
+  baselineTime: 27.75,
+  timePerDifficulty: 0.75,
+  tooMuchSynergy: 100,
+  useFrequencyBalancing: true,
+} as const;
+
+export const DEFAULT_PROFILES: Profiles = {
+  normal: STANDARD_PROFILE,
+  blackout: {
+    ...STANDARD_PROFILE,
+    minimumSynergy: -10,
+    maximumSynergy: 10,
+    maximumIndividualSynergy: 4.5,
+    initialOffset: 2,
+    maximumOffset: 6,
+  },
+  short: {
+    ...STANDARD_PROFILE,
+    maximumSynergy: 3,
+    baselineTime: 12,
+    timePerDifficulty: 0.5,
+  },
+} as const;

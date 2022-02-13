@@ -6,7 +6,8 @@ import {
   Synfilters,
 } from "./types/synergies";
 import { Profile } from "./types/profiles";
-import { SQUARES_PER_ROW } from "./types/rows";
+import { removeHighestNumber, sortAscending, sortDescending } from "./util";
+import { SQUARES_PER_ROW } from "./definitions";
 
 export class SynergyCalculator {
   profile: Profile;
@@ -249,16 +250,4 @@ export class SynergyCalculator {
 
     return totalSynergyOfSquares;
   }
-}
-
-function removeHighestNumber(numbers: number[]): number[] {
-  return sortAscending(numbers).slice(0, -1);
-}
-
-function sortAscending(numbers: number[]): number[] {
-  return numbers.slice(0).sort((a, b) => a - b);
-}
-
-function sortDescending(numbers: number[]): number[] {
-  return numbers.slice(0).sort((a, b) => b - a);
 }
