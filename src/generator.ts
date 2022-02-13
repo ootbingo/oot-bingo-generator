@@ -297,9 +297,9 @@ export default class BingoGenerator {
   }
 
   /**
-   * Generates the order in which the squres should be filled by the generator.
+   * Generates the order in which the squares should be filled by the generator.
    *
-   * First the three squres with the highest difficulty, then the center, then the diagonals, then the rest.
+   * First the three squares with the highest difficulty, then the center, then the diagonals, then the rest.
    *
    * @param bingoBoard The bingo board
    */

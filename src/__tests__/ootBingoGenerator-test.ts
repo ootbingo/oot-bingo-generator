@@ -4,11 +4,11 @@ import { ootBingoGenerator } from "../generator";
 describe("ootBingoGenerator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
 
-  it("generates a normal card with correct goals", () => {
+  it("generates a normal v10.1 card with correct goals", () => {
     const options: Options = {
       seed: 142536,
       mode: "normal",
-      language: "name",
+      language: "english",
     };
     const card = ootBingoGenerator(bingoList, options);
 
@@ -45,11 +45,11 @@ describe("ootBingoGenerator", () => {
     ]);
   });
 
-  it("generates a blackout card with correct goals", () => {
+  it("generates a blackout v10.1 card with correct goals", () => {
     const options: Options = {
       seed: 142536,
       mode: "blackout",
-      language: "name",
+      language: "english",
     };
     const card = ootBingoGenerator(bingoList, options);
 
@@ -86,11 +86,11 @@ describe("ootBingoGenerator", () => {
     ]);
   });
 
-  it("generates a short card with correct goals", () => {
+  it("generates a short v10.1 card with correct goals", () => {
     const options: Options = {
       seed: 142536,
       mode: "short",
-      language: "name",
+      language: "english",
     };
     const card = ootBingoGenerator(bingoList, options);
 

@@ -51,6 +51,8 @@ export const ROWS_PER_INDEX: { [key: number]: RowName[] } = {
   24: ["row5", "col5", "tlbr"],
 };
 
+// default profiles for the generator settings
+// see src/types/profiles.ts for more details on what each setting does
 const STANDARD_PROFILE: Profile = {
   minimumSynergy: -3,
   maximumSynergy: 7,
@@ -79,4 +81,4 @@ export const DEFAULT_PROFILES: Profiles = {
     baselineTime: 12,
     timePerDifficulty: 0.5,
   },
-} as const;
+};

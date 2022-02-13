@@ -9,7 +9,7 @@ describe("generator", () => {
       const options: Options = {
         seed: 142536,
         mode: "normal",
-        language: "name",
+        language: "english",
       };
       const card = generateCard(bingoList, options);
 
@@ -47,7 +47,7 @@ describe("generator", () => {
       const options: Options = {
         seed: 142536,
         mode: "blackout",
-        language: "name",
+        language: "english",
       };
       const card = generateCard(bingoList, options);
 
@@ -85,7 +85,7 @@ describe("generator", () => {
       const options: Options = {
         seed: 142536,
         mode: "short",
-        language: "name",
+        language: "english",
       };
       const card = generateCard(bingoList, options);
 
@@ -133,7 +133,7 @@ describe("generator", () => {
         const options: Options = {
           seed: seed,
           mode: "normal",
-          language: "name",
+          language: "english",
         };
         const card = generateCard(bingoList, options);
 

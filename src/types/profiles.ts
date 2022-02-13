@@ -1,5 +1,6 @@
 import { Mode } from "./options";
 
+// profile with the settings for the generator
 export type Profile = {
   minimumSynergy: number; // the minimum synergy allowed in any row
   maximumSynergy: number; // the maximum synergy allowed in any row
