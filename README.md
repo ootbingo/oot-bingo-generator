@@ -6,6 +6,13 @@ same boards as the generator that is currently in use, but aims to be more reada
 !! This is a work in progress. The generator is done and works, but readability improvements and better documentation
 are still being worked on !!
 
+## Documentation
+
+### :books: [The generator](https://github.com/xwmtp/oot-bingo-generator-ts/blob/main/doc/GENERATOR.md)
+
+Elaborate explanation on how bingo boards get generated, with examples. Also points at the code a few times, but can be
+read without having any programming knowledge. *Strongly recommended* read if you're new to the bingo generator!
+
 ## Install
 
 ```bash
@@ -50,3 +57,5 @@ that in `src/sandbox/main.ts` (see 'Run').
 * A build script to convert and minify this to a js generator to possibly use in the future for bingo versions in
   productions
 * Maybe make it into a package? Who knows
+
+
