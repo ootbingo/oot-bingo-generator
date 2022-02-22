@@ -5,14 +5,26 @@
 ## Contents
 
 1. [Introduction](#introduction)
-1. [Magic Square](#magic-square)
-1. [Desired goal times](#desired-goal-times)
+2. [Magic Square](#magic-square)
+3. [Desired goal times](#desired-goal-times)
+4. [Population order](#population-order)
+5. [Picking goals](#picking-goals)
 
 ## Introduction
 
-The generator represents a 5x5 bingo board as an array of 25 squares, and aims to populate the positions 0 to 24 of the
-array with a goal. The first 5 elements of the array correspond to the squares of row 1, the next 5 to the squares of
-row 2, et cetera.
+This document explains in detail how an OoT bingo board gets generated. It includes all the steps the generator takes to
+generate a board from scratch, **apart from the synergy calculations**. Those will be explained in another document.
+
+You can use this document to help guide you through the code of the generator, but it was also written to be
+understood **without any prior programming knowledge**! So if you're not into coding but still want to know what steps
+the generator takes, you're in the right place.
+
+At the end of each section you will find an example illustrating what just has been explained with actual numbers. The
+examples are consistent between sections and are all based on the same seed.
+
+In the code of the generator, a 5x5 bingo board is represented as an array of 25 squares. The generator aims to populate
+the positions 0 to 24 of the array with a goal. The first 5 elements of the array correspond to the squares of row 1,
+the next 5 to the squares of row 2, et cetera.
 
 ## Magic Square
 
@@ -128,3 +140,25 @@ diagonal, but it already appeared earlier in the list because its square has dif
 The next indices belong to all the other squares, in random order.
 
 ## Picking goals
+
+To fill the board with goals, the generator first picks the first square from the population order, and tries to pick a
+goal for it. If it succeeds, it picks the next square from the population order, and continues until all square have a
+goal. If it fails to find any goal for a square that meets all the requirements, it gives up.
+
+The `iterations` parameter of the generator decides how many times it will retry to generate a board for a certain seed.
+Usually this is a high number, like **100**. Every iteration it starts 'from scratch' with an empty board, but the rng
+will be different, allowing for a new chance to possibly succeed.
+
+Every time the generator tries to fill a square, the `pickGoalForPosition()` function is called. This looks at the
+desired time of the square, and tries to pick a goal from the goal list that is close in length to that desired time.
+The `initialOffset` parameters determines how much (in minutes) the length of a goal on this square may from the desired
+time. Then the `getShuffledGoalsInTimeRange()` function collects and shuffles all goals from the goal list that fall in
+this range.
+
+One by one, the generator takes a goal from this list and tries to pick it for this square. If it's already on the
+board, or if it causes too much synergy in a row (or with any other goal when it's a blackout), it continues to the next
+square. If none of the goals fit, the time range gets widened, which means the generator will also accept goals for this
+square when they deviate a little more from the desired time. The `maximumOffset` parameter determines what the maximum
+allowed difference between desired time and actual goal length can be.
+
+### Example
