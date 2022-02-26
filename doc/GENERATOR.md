@@ -9,6 +9,7 @@
 3. [Desired goal times](#desired-goal-times)
 4. [Population order](#population-order)
 5. [Picking goals](#picking-goals)
+6. [Blackout boards](#blackout-boards)
 
 ## Introduction
 
@@ -17,7 +18,8 @@ generate a board from scratch, **apart from the synergy calculations**. Those wi
 
 You can use this document to help guide you through the code of the generator, but it was also written to be
 understood **without any prior programming knowledge**! So if you're not into coding but still want to know what steps
-the generator takes, you're in the right place.
+the generator takes, you're in the right place. Sometimes there's a reference to a function in the code, but you don't
+need to read along with the code to follow this document.
 
 At the end of each section you will find an example illustrating what just has been explained with actual numbers. The
 examples are consistent between sections and are all based on the same seed.
@@ -184,7 +186,20 @@ If somehow none of these goals would have been legal to pick (which is not the c
 increased to 16m45 - 20m45s. For normal bingo boards, this range (2 minutes away from desired time) is the maximum. If
 none of the goals within this increased range would fit, the generator would fail to generate.
 
-## Blackouts
+## Blackout boards
+
+Generating blackout boards is actually very similar to normal boards. Different parameters are being given to the
+generator, but it still uses a magic square and looks at synergies like a normal board. This way, the boards have a nice
+distribution of short and long goals. In addition, it makes the total duration of a blackout card not vary too much
+between seeds.
+
+The *only* difference in the generator itself, apart from these different parameters, is the `hasConflictsOnBoard()`
+check. This check requires that any goal that gets picked does not have too much synergy with any other goal already on
+the board, regardless of which row it is in. If a goal has more than the `maximumIndividualSynergy` with another goal,
+that is regarded as too much.
+
+The (current) biggest parameter differences are the higher amount of synergies allowed within rows, a higher maximum
+deviation of goal times from desired times (6 minutes), and a higher individual synergy (4.5 instead of 3.75).
 
 ### Todo
 
