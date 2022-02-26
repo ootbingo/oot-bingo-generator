@@ -161,4 +161,32 @@ square. If none of the goals fit, the time range gets widened, which means the g
 square when they deviate a little more from the desired time. The `maximumOffset` parameter determines what the maximum
 allowed difference between desired time and actual goal length can be.
 
+Apart from skipping over the complicated part, the *synergy calculations*, these were all the steps involved in
+generating a board.
+
 ### Example
+
+The first square to fill in the population order was the one with index **23** (next to last square of row5). As usual,
+this is the square with the highest desired time, 18m45s. The generator now looks at all the goals in the goal list
+which have durations that are at most one minute away from the desired time. In this case, that's all goals with a
+length between 17m45s and 19m45s:
+
+* Beat the Spirit Temple (18m25s)
+* 1 Skulltula from each Adult Dungeon (17m45s)
+* Open all 6 gold rupee chests (18m25s)
+* Both Rusty Switches in Spirit Temple (18m15s)
+* 3 Swords, Tunics, Boots and Shields (17m45s)
+
+Since the board is still completely empty, no restrictions stop the first goal of the list to be picked. So the square
+with index **23** gets populated with 'Beat the Spirit Temple'.
+
+If somehow none of these goals would have been legal to pick (which is not the case now), the time range would have been
+increased to 16m45 - 20m45s. For normal bingo boards, this range (2 minutes away from desired time) is the maximum. If
+none of the goals within this increased range would fit, the generator would fail to generate.
+
+## Blackouts
+
+### Todo
+
+* Mention frequency balancing
+* Mention skill?
