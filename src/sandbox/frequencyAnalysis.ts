@@ -1,7 +1,7 @@
 import { Mode, Options } from "../types/options";
-import { generateCard } from "../generator";
 import { BingoList } from "../types/goalList";
 import { Profiles } from "../types/profiles";
+import { generateCard } from "../index";
 
 export const frequencyAnalysis = (
   numberOfBoards: number,

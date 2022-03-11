@@ -29,7 +29,7 @@ npm run
 
 This will run `src/sandbox/main.ts`, where you can also add your own code to experiment with the generator.
 
-## Tests
+## Test
 
 To run the tests:
 
@@ -39,9 +39,20 @@ npm test
 
 The tests verify that the generator generates the exact same boards as the current v10.1 live version does.
 
+## Build
+
+To bundle the generator code into a single, minified JS file (to be used for bingo versions in productions):
+
+```bash
+npm build
+```
+
+The generated file can be found in `dist/generator.js`. After importing this script, the generator functions
+from `src/index.ts`can be accessed from the `BingoLibrary` (e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
+
 ## Generating cards
 
-The main functions to generate a card are located in `src/generator.ts`.
+The main functions to generate a card are located in `src/index.ts`.
 
 The `ootBingoGenerator()` function returns cards in the exact same legacy format that is expected by the current bingo
 versions that are live. The `bingoGenerator()` function is a wrapper and returns the same thing, but this is the name
@@ -55,7 +66,5 @@ that in `src/sandbox/main.ts` (see 'Run').
 * Elaborate documentation on how the generator works and what all the values in the goal list mean (such as types,
   subtypes, rowtypes, etc) is planned to be added here!
 * A build script to convert and minify this to a js generator to possibly use in the future for bingo versions in
-  productions
+  productions ✅
 * Maybe make it into a package? Who knows
-
-

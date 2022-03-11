@@ -1,13 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "allowJs": true,
-        "sourceMap": false,
-        "moduleResolution": "node",
-        "outDir": "build",
-        "rootDir": "src",
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-    },
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "allowJs": true,
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noImplicitUseStrict": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/__tests__",
+    "src/sandbox"
+  ]
 }

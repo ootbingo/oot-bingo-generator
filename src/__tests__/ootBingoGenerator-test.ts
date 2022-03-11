@@ -1,5 +1,5 @@
 import { Options } from "../types/options";
-import { ootBingoGenerator } from "../generator";
+import { ootBingoGenerator } from "../index";
 
 describe("ootBingoGenerator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");

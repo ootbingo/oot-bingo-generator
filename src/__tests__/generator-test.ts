@@ -1,5 +1,5 @@
 import { Options } from "../types/options";
-import { generateCard } from "../generator";
+import { generateCard } from "../index";
 
 describe("generator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");

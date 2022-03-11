@@ -1,8 +1,8 @@
 import { bingoList } from "./example-goal-list";
 import { frequencyAnalysis } from "./frequencyAnalysis";
-import { generateCard } from "../generator";
 import { Options } from "../types/options";
 import { DEFAULT_PROFILES } from "../definitions";
+import { generateCard } from "../index";
 
 // this file shows a few examples of how to use the generator (generate a card, run a frequency analysis)
 // run this file with `npm run`
@@ -10,7 +10,7 @@ import { DEFAULT_PROFILES } from "../definitions";
 
 // generate a card
 const options: Options = {
-  seed: 123,
+  seed: 112233,
   mode: "normal",
   language: "english",
 };
