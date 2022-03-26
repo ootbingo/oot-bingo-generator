@@ -8,10 +8,19 @@ are still being worked on !!
 
 ## Documentation
 
-### :books: [The generator](https://github.com/xwmtp/oot-bingo-generator-ts/blob/main/doc/GENERATOR.md)
+Click these links for in-depth explanations:
 
-Elaborate explanation on how bingo boards get generated, with examples. Also points at the code a few times, but can be
-read without having any programming knowledge. *Strongly recommended* read if you're new to the bingo generator!
+### :books: [The generator](/doc/GENERATOR.md)
+
+How bingo boards get generated, with examples. Also points at the code a few times, but can be read without having any
+programming knowledge. *Strongly recommended* read if you're new to the bingo generator!
+
+### :balance_scale: [Balancing (bingo sheet)](/doc/BALANCING.md)
+
+Everything about the numbers you see on
+the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247)
+. Explains the different synergy types there are and what the columns on the sheet mean. Recommended if you're
+interested in balancing!
 
 ## Install
 
