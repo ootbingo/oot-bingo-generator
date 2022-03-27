@@ -60,8 +60,7 @@ Formatted as an actual square:
 
 ### Difficulty
 
-The term **'difficulty''** is being used in a slightly confusing way in bingo lingo. Counterintuitively, the difficulty
-of a goal is related to its length, and has nothing to do with how hard or easy the goal is to complete. The latter is
+The term **'difficulty'** is being used in a slightly confusing way in bingo lingo. Counterintuitively, the difficulty
 of a goal is related to its length, and has nothing to do with how hard or easy the goal is to complete. The latter is
 being taken into account by the timings sheet, and is called the '**skill**' of a goal.
 
