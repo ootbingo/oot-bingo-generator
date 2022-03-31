@@ -112,6 +112,25 @@ if skipping loses too much time for just one of the goals, it's not worth anymor
 
 ## Synergy filters
 
+### Combining synergies in a row
+
+Before looking at the synergy filters, it's important to understand how synergy numbers of multiple goals get combined
+to a total synergy. Imagine we have a row containing three goals with a `hovers` synergy: *4 Compasses* with 2,
+*Shadow Temple Boss Key* with 1.5 and *Beat the Water Temple* with \*1. What is the total amount of `hovers` synergy in
+this row? By default, the **highest number always gets dropped**, and the rest gets summed. So in this example the row
+has a `hovers` synergy of `1.5+1=2.5`.
+
+This rule goes for any amount of goals: in the case of two goals, the higher number gets removed and only the lower
+number is counted. If there is only one goal in a row with a certain synergy, that gets ignored; you need at least two
+goals for a synergy to have effect.
+
+### Filters
+
+The synergies of almost all columns on the sheet get combined as just described. But there are a few ones that work
+differently. These are columns where the first row with **synergy filters** contains a filter. A filter starts with the
+word `min` or `max`, followed by a positive or negative number. If the word is `min`, you look at the lowest numbers,
+and if it's `max`, you look at the highest.
+
 ## Goal information
 
 The following columns on the sheet contain non-synergy information the generator needs:
