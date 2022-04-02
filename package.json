@@ -4,7 +4,7 @@
   "description": "Generator for OoT Bingo in TypeScript",
   "main": "index.ts",
   "scripts": {
-    "run": "ts-node src/sandbox/main.ts",
+    "start": "ts-node src/sandbox/main.ts",
     "test": "jest",
     "build": "npx webpack"
   },

@@ -33,7 +33,7 @@ npm install
 To run the sandbox code which generates cards with an example goal list (v10.1), run:
 
 ```bash
-npm run
+npm start
 ```
 
 This will run `src/sandbox/main.ts`, where you can also add your own code to experiment with the generator.
@@ -53,7 +53,7 @@ The tests verify that the generator generates the exact same boards as the curre
 To bundle the generator code into a single, minified JS file (to be used for bingo versions in productions):
 
 ```bash
-npm build
+npm run build
 ```
 
 The generated file can be found in `dist/generator.js`. After importing this script, the generator functions
