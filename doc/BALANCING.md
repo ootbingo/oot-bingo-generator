@@ -8,16 +8,29 @@
     1. [Type synergies](#type-synergies)
     2. [Subtype synergies](#subtype-synergies)
     3. [Rowtype synergies](#rowtype-synergies)
-4. [Goal information](#goal-information)
+4. [Synergy filters](#synergy-filters)
+    1. [Combining synergies in a row](#combining-synergies-in-a-row)
+    2. [Filters](#filters)
+    3. [Rowtype synergies](#rowtype-synergies)
+5. [Goal information](#goal-information)
+    1. [timey](#timey)
+    2. [skill](#skill)
+    3. [time](#time)
+    4. [difficulty](#difficulty)
+6. [Special synergy columns](#special-synergy-columns)
+    1. [selfsynergy](#selfsynergy)
+    2. [endon](#endon)
+7. [True goal duration](#true-goal-duration)
 
 ## Introduction
 
 This document explains the concepts that have to do with balancing OoT Bingo goals. The lengths and synergies of goals
 are determined completely separate from the generator, and can be found on
 the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit?usp=sharing).
-It gets updated before every bingo version release. A [script](https://bingosync.com/convert) exists to convert the
-bingo sheet to a goal list (in JSON format), which the generator uses to generate boards. Each bingo version has a
-unique goal list.
+It gets updated before every bingo version release. There is a [converter](https://bingosync.com/convert)
+(using [this script](https://github.com/kbuzsaki/bingosync/blob/master/bingosync-app/bingosync/goals_converter.py)) that
+transforms the bingo sheet into a goal list (in JSON format), which the generator uses to generate boards. Each bingo
+version has a unique goal list.
 
 There are a lot of different numbers on Bingo sheet linked above, and this document aims to explain what they all mean.
 Note that the synergy amounts mentioned in the examples may have been adjusted since.
@@ -145,7 +158,7 @@ the two highest synergies. Beat Shadow and Beat Spirit can appear together, or L
 In those cases, both synergies get removed. But if all three appear, one synergy of a 100 remains, which is always too
 high for the generator to allow.
 
-Another example are the `endon` synergies, with a `max -1` filter.
+Another example are the `endon` synergies, explained in the [endon](#endon) section.
 
 ## Goal information
 
@@ -174,8 +187,12 @@ required for a goal.
 
 ### time
 
-The goal times that the generator receives are present in the `time` column. They are currently the sum of the `timey`
-and the `skill` columns. Possible other adjustment columns could be added to it as well in the future.
+The goal times that the generator uses can be found in the `time` column. They are currently the sum of the `timey`
+and the `skill` columns. Potential new adjustment columns could be added to it in the future, but currently:
+
+```
+time = timey + skill
+```
 
 ### difficulty
 
@@ -196,12 +213,41 @@ duration of this goal is 12.25. The total amount of synergy in a row with this g
 row seem 3 minutes slower. This practically undoes the shortening of the raw time, but results in 3 minutes extra
 synergy that can now be added to this row. The result is that *5 Compasses* now has a better chance of appearing.
 
+In addition to collection goals, the `selfsynergy` column can also be used to slightly adjust the time of a goal to move
+it to a different [difficulty](#difficulty) bucket. For example, if there are no goals with difficulty 23, you could
+remove a little time from the `timey` of a 24 difficulty goal and turn it into `selfsynergy`. These small adjustments
+don't have a big impact on balancing, but help to get more variety in goals on the board.
+
 ### endon
 
-## The true timey
+Some goals are shorter when they are the final goal you complete, like when they are directly followed by a cutscene.
+The `timey` column only takes into account when the goal is complete, and ignores the fact that you might be stuck in a
+cutscene afterwards. Therefore, we have `endon` antisynergy for goals that are slower when you don't end on them.
+
+This `endon` synergy should apply for all the goals in the row that you don't end on. The `max -1` synergy takes all
+the `endon` values except for the lowest (most negative) value, assuming the player ends on the goal which would be
+followed by the most downtime.
+
+## True goal duration
+
+As mentioned earlier, `timey` is not always exactly equal to the raw goal duration. If there's selfsynergy, it should be
+subtracted from `timey`. The `endon` value should also be subtracted when you *do not end* on the goal.
+
+So in short, the true raw durations are as follows.
+
+When ending on a goal:
+
+```
+raw duration = timey - selfsynergy
+```
+
+When **not** ending on a goal:
+
+```
+raw duration = timey - selfsynergy - endon
+```
 
 ## Todo
 
-- Endon synergies
 - Difficulty
 - Explanation of generator variables?
