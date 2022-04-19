@@ -41,7 +41,7 @@ The term *synergy* is used to describe how combining goals can lead to shorter o
 Generally, when people speak of synergy between goals, they mean the goals have some overlap or that things you collect
 in one goal help complete the other faster. Negative synergy on the other hand means that it takes more time to do two
 goals together than individually. That can be the case when for one goal you'd remove something with RBA that you'd want
-to collect for theother goal.
+to collect for the other goal.
 
 There are 3 types of synergies:
 
@@ -95,7 +95,7 @@ take those cases into account. There are currently **four** different rowtypes:
 * hookshot (Collecting the hookshot)
 * gclw (Going to Goron City area and/or Lost Woods)
 
-It is assumed you do all of these every bingo, unless the synergies for one of these stays below the threshold. Rowtype
+It is assumed you do all of these every bingo, unless the synergies for one of these stay below the threshold. Rowtype
 column names start with a `*`, and have a number for this threshold that denotes how long it takes to do the thing. For
 example, the threshold for master sword cs is 9.5 minutes (going to temple of time, dot skip, watching the cs, leaving).
 The numbers in the rowtype columns show *how much longer* a goal would take if you would skip the thing.
@@ -117,19 +117,35 @@ if skipping loses too much time for just one of the goals, it's not worth anymor
 Before looking at the synergy filters, it's important to understand how synergy numbers of multiple goals get combined
 to a total synergy. Imagine we have a row containing three goals with a `hovers` synergy: *4 Compasses* with 2,
 *Shadow Temple Boss Key* with 1.5 and *Beat the Water Temple* with \*1. What is the total amount of `hovers` synergy in
-this row? By default, the **highest number always gets dropped**, and the rest gets summed. So in this example the row
+this row? By default, the **highest number always gets dropped**, and the rest gets summed. So in this example, the row
 has a `hovers` synergy of `1.5+1=2.5`.
 
 This rule goes for any amount of goals: in the case of two goals, the higher number gets removed and only the lower
 number is counted. If there is only one goal in a row with a certain synergy, that gets ignored; you need at least two
-goals for a synergy to have effect.
+goals for a synergy to have an effect.
 
 ### Filters
 
 The synergies of almost all columns on the sheet get combined as just described. But there are a few ones that work
 differently. These are columns where the first row with **synergy filters** contains a filter. A filter starts with the
 word `min` or `max`, followed by a positive or negative number. If the word is `min`, you look at the lowest numbers,
-and if it's `max`, you look at the highest.
+and if it's `max`, you look at the highest. The filter `min 2` means that you take the lowest 2 synergies. If the filter
+is `max 1`, you take the highest synergy. For negative numbers you take everything *except* for an amount at the end.
+So `min 2` means that you take all lowest synergies, but leave out the highest 2. And `max 1` means you take all the
+highest synergies and leave out the lowest value.
+
+Note that columns on the sheet without a stated synergy filter all implicitly get the filter `min -1`, since for those
+the highest value is always removed.
+
+So what's the point of these filters? Take the `legitlacs` column for example, which aims to prevent free light arrows.
+It has a synergy value of *100* for Beat Shadow, Beat Spirit and Light Arrow goals. If the standard filter of `min -1`
+would be applied, only one out of those three could appear in a row. But two out of these three would also be okay,
+since only all three results in Light Arrows being free. Therefore, this column has a filter of `min -2`, which removes
+the two highest synergies. Beat Shadow and Beat Spirit can appear together, or Light Arrow and Beat Shadow for example.
+In those cases, both synergies get removed. But if all three appear, one synergy of a 100 remains, which is always too
+high for the generator to allow.
+
+Another example are the `endon` synergies, with a `max -1` filter.
 
 ## Goal information
 
@@ -142,6 +158,9 @@ takes to complete optimally, assuming the general preparation (as discussed in
 the [Rowtype synergies](#rowtype-synergies) section) has already been done. These times are **not** actually used by the
 generator, but is used to calculate the `time` column. The `#` in front of the column name makes it so that it won't
 appear in the goal list.
+
+For goals that have `selfsynergy` or `endon` synergies, the `timey` value is actually not equal to the pure duration
+(see [Special synergy columns](#special-synergy-columns)).
 
 ### skill
 
@@ -160,7 +179,29 @@ and the `skill` columns. Possible other adjustment columns could be added to it 
 
 ### difficulty
 
+## Special synergy columns
+
+### selfsynergy
+
+Typically, collection goals (skulls, hearts, songs, maps, etc) have many synergies in common with other goals. There is
+a maximum amount of synergy a row can have, and these collection goals tend to eat up a lot of it. To mitigate this a
+little bit, the concept of **selfsynergy** was created. A small amount of time (usually between 1-3 minutes) was removed
+from the raw goal time `timey`, making these goals artificially shorter. The time was added back in the selfsynergy
+column as a **negative synergy**. Since negative synergies get added to the total expected time of the row, doing this
+does not directly make the row shorter. However, the total synergy limit of the row that the collection goal appears in
+practically gets increased.
+
+For example, *5 Compasses* has a `selfsynergy` value of -3 but a raw `timey` of 9.25. This means that the actual
+duration of this goal is 12.25. The total amount of synergy in a row with this goal is now 3 minutes lower, making the
+row seem 3 minutes slower. This practically undoes the shortening of the raw time, but results in 3 minutes extra
+synergy that can now be added to this row. The result is that *5 Compasses* now has a better chance of appearing.
+
+### endon
+
+## The true timey
+
 ## Todo
 
-- Meaning of column names on the sheet
-- SelfSynergy
+- Endon synergies
+- Difficulty
+- Explanation of generator variables?
