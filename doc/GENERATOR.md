@@ -62,7 +62,8 @@ Formatted as an actual square:
 
 The term **'difficulty'** is being used in a slightly confusing way in bingo lingo. Counterintuitively, the difficulty
 of a goal is related to its length, and has nothing to do with how hard or easy the goal is to complete. The latter is
-being taken into account by the timings sheet, and is called the '**skill**' of a goal.
+being taken into account by the timings sheet, and is called the '**skill**' of a goal (see
+the [Balancing doc](/doc/BALANCING.md) for more info on skill).
 
 The number on each tile of the generated magic square represents the difficulty of that tile. That means that the tile
 with a 1 should get the shortest goal, and the tile with 25 should get the longest. Because of the properties of the
@@ -203,4 +204,3 @@ deviation of goal times from desired times (6 minutes), and a higher individual 
 ### Todo
 
 * Mention frequency balancing
-* Mention skill?

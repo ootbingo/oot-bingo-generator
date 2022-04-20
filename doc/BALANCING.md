@@ -12,6 +12,7 @@
     1. [Combining synergies in a row](#combining-synergies-in-a-row)
     2. [Filters](#filters)
     3. [Rowtype synergies](#rowtype-synergies)
+    4. [Filter example](#filter-example)
 5. [Goal information](#goal-information)
     1. [timey](#timey)
     2. [skill](#skill)
@@ -70,13 +71,13 @@ goals, the time you spend should be two minutes shorter than doing each goal sep
 Boots* and *All 3 Skulltulas in Ice Cavern* have a synergy of 2, because doing one of these goals saves time for the
 other; you already spent time going to Ice Cavern for Iron Boots, so you save that time for the skulls.
 
-On the sheet, goals with a number in the same column share a type synergy. The lowest number of the two counts. For
+On the sheet, goals with a number in the same column share a type synergy. The lowest value of the two counts. For
 example, the goal *1 Skulltula from each Child Dungeon* has a `deku` synergy of 2. This roughly means that you'd spend
 two minutes going to and being in (the main part of) Deku for this goal. *Defeat Queen Gohma* has a synergy of 5, since
 it's a deep Deku goal. We take the lower of the two, so these goals have a `deku` synergy of 2.
 
-Note that although the synergy numbers are in minutes, they are a rough estimation. The actual overlap between goals
-depends heavily on the route and other factors. In addition, sometimes the numbers are exaggerated to prevent goals from
+Note that although the synergy values are in minutes, they are a rough estimation. The actual overlap between goals
+depends heavily on the route and other factors. In addition, sometimes the values are exaggerated to prevent goals from
 appearing together. The many columns at the end of the sheet that start with `inc` have synergies of a 100 to prevent
 'free' goals like *All 9 Gorons in Fire Temple* and *Fire Temple Boss Key*.
 
@@ -109,7 +110,7 @@ take those cases into account. There are currently **four** different rowtypes:
 * gclw (Going to Goron City area and/or Lost Woods)
 
 It is assumed you do all of these every bingo, unless the synergies for one of these stay below the threshold. Rowtype
-column names start with a `*`, and have a number for this threshold that denotes how long it takes to do the thing. For
+column names start with a `*`, and have a value for this threshold that denotes how long it takes to do the thing. For
 example, the threshold for master sword cs is 9.5 minutes (going to temple of time, dot skip, watching the cs, leaving).
 The numbers in the rowtype columns show *how much longer* a goal would take if you would skip the thing.
 
@@ -127,10 +128,10 @@ if skipping loses too much time for just one of the goals, it's not worth anymor
 
 ### Combining synergies in a row
 
-Before looking at the synergy filters, it's important to understand how synergy numbers of multiple goals get combined
-to a total synergy. Imagine we have a row containing three goals with a `hovers` synergy: *4 Compasses* with 2,
+Before looking at the synergy filters, it's important to understand how synergy values of multiple goals get combined to
+a total synergy. Imagine we have a row containing three goals with a `hovers` synergy: *4 Compasses* with 2,
 *Shadow Temple Boss Key* with 1.5 and *Beat the Water Temple* with \*1. What is the total amount of `hovers` synergy in
-this row? By default, the **highest number always gets dropped**, and the rest gets summed. So in this example, the row
+this row? By default, the **highest value always gets dropped**, and the rest gets summed. So in this example, the row
 has a `hovers` synergy of `1.5+1=2.5`.
 
 This rule goes for any amount of goals: in the case of two goals, the higher number gets removed and only the lower
@@ -160,6 +161,22 @@ high for the generator to allow.
 
 Another example are the `endon` synergies, explained in the [endon](#endon) section.
 
+### Filter example
+
+Imagine we have a row with five goals, and those goals have all have an `x` synergy: 0.5, 1, 2.5, 2 and -1 respectively.
+The following table shows which of those synergies would be added to the row total for different synergy filters.
+
+| filter / syn | -1 | 0.5 | 1   | 2   | 2.5 |
+|--------------|---|-----|-----|-----|-----|
+| min 1        | x |     |     |     |     |
+| min 2        | x | x   |     |     |     |
+| min -1       | x | x   | x   | x   |     |
+| min -2       | x | x   | x   |     |     |
+| max 1        |   |     |     |     | x   |
+| max 2        |   |     |     | x   | x   |
+| max -1       |   | x   | x   | x   | x   |
+| max -2       |   |     | x   | x   | x   |
+
 ## Goal information
 
 The following columns on the sheet contain non-synergy information the generator needs:
@@ -182,9 +199,6 @@ goals. The skill number of a goal is added to the `timey` duration to make it ar
 optimally, that means players should be able to save a little time because the goals take shorter than the generator
 thinks. The skill bonus goes up to 1 minute max.
 
-Confusingly enough, the `difficulty` column means something completely different and has nothing to do with the skill
-required for a goal.
-
 ### time
 
 The goal times that the generator uses can be found in the `time` column. They are currently the sum of the `timey`
@@ -196,16 +210,34 @@ time = timey + skill
 
 ### difficulty
 
+The term 'difficulty' in bingo lingo is pretty confusing. It has nothing to do with how difficult a goal is; that
+is [skill](#skill). Difficulty is solely linked to duration. There are 25 difficulty 'buckets', one for each square on a
+bingo board. The shortest goals go in bucket 1, and the longest in bucket 25. To convert regular goal durations to their
+difficulty, you divide the duration by the `timePerDifficulty` constant defined in
+[definitions.ts](/src/definitions.ts), and round the result. More information on how this all works can be found in
+the [Generator doc](/doc/GENERATOR.md).
+
+The difficulties defined on the sheet are not directly used by the generator; it actually converts the difficulties of
+the board to desired goal times and uses those (again, see the balancing doc for further explanation). However, when the
+script converts the bingo sheet to a goal list, the resulting JSON groups all the goals by their difficulty. This is for
+legacy/BingoSync format reasons, since the generator flattens the goal list before using it.
+
+In short:
+
+```
+difficulty = round(time / timePerDifficulty)
+```
+
 ## Special synergy columns
 
 ### selfsynergy
 
 Typically, collection goals (skulls, hearts, songs, maps, etc) have many synergies in common with other goals. There is
 a maximum amount of synergy a row can have, and these collection goals tend to eat up a lot of it. To mitigate this a
-little bit, the concept of **selfsynergy** was created. A small amount of time (usually between 1-3 minutes) was removed
-from the raw goal time `timey`, making these goals artificially shorter. The time was added back in the selfsynergy
-column as a **negative synergy**. Since negative synergies get added to the total expected time of the row, doing this
-does not directly make the row shorter. However, the total synergy limit of the row that the collection goal appears in
+bit, the concept of **selfsynergy** was created. A small amount of time (usually between 1-3 minutes) was removed from
+the raw goal time `timey`, making these goals artificially shorter. The time was added back in the selfsynergy column as
+a **negative synergy**. Since negative synergies get added to the total expected time of the row, doing this does not
+directly make the row shorter. However, the total synergy limit of the row that the collection goal appears in
 practically gets increased.
 
 For example, *5 Compasses* has a `selfsynergy` value of -3 but a raw `timey` of 9.25. This means that the actual
@@ -249,5 +281,5 @@ raw duration = timey - selfsynergy - endon
 
 ## Todo
 
-- Difficulty
+- Goal list
 - Explanation of generator variables?
