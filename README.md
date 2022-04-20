@@ -10,7 +10,7 @@ are still being worked on !!
 
 Click these links for in-depth explanations:
 
-### :books: [The generator](/doc/GENERATOR.md)
+### :gear: [The generator](/doc/GENERATOR.md)
 
 How bingo boards get generated, with examples. Also points at the code a few times, but can be read without having any
 programming knowledge. *Strongly recommended* read if you're new to the bingo generator!
