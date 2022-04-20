@@ -1,3 +1,4 @@
+// example goal list (v10.1)
 export var bingoList = {
   info: { combined: "true", version: "v10.1" },
   normal: {
