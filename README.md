@@ -36,7 +36,8 @@ To run the sandbox code which generates cards with an example goal list (v10.1),
 npm start
 ```
 
-This will run `src/sandbox/main.ts`, where you can also add your own code to experiment with the generator.
+This will run [src/sandbox/main.ts](/src/sandbox/main.ts), where you can also add your own code to experiment with the
+generator.
 
 ## Test
 
@@ -57,7 +58,8 @@ npm run build
 ```
 
 The generated file can be found in `dist/generator.js`. After importing this script, the generator functions
-from `src/index.ts`can be accessed from the `BingoLibrary` (e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
+in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
+e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
 
 ## Generating cards
 
@@ -68,12 +70,11 @@ versions that are live. The `bingoGenerator()` function is a wrapper and returns
 that is being used by [BingoSync](https://bingosync.com).
 
 It's recommended to use the `generateCard()` function to generate cards yourself. If you want to try it out, you can do
-that in `src/sandbox/main.ts` (see 'Run').
+that in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
 
 ## Coming soon (tm)
 
 * Elaborate documentation on how the generator works and what all the values in the goal list mean (such as types,
   subtypes, rowtypes, etc) is planned to be added here!
 * A build script to convert and minify this to a js generator to possibly use in the future for bingo versions in
-  productions ✅
-* Maybe make it into a package? Who knows
+  production ✅
