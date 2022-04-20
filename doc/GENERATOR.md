@@ -35,7 +35,7 @@ a magic square, the sum of the numbers in each row, column and diagonal is the s
 to **25** are used to fill each position of the square, all only appearing once. The sum of each possible row, column or
 diagonal is equal to **65**.
 
-The code to generate a magic square can be found in `magicSquare.ts`. Based on the seed, the
+The code to generate a magic square can be found in [magicSquare.ts](/src/magicSquare.ts). Based on the seed, the
 function `magicSquareNumber()` calculates what number should go in a given position of the square. It gets called
 by `generateMagicSquare()`, which loops over positions 1 to 24 to calculate each magic square number.
 
@@ -74,8 +74,8 @@ Note that from now on, the term 'square' will indicate one tile of the board.
 
 Now, to know what goals can go in what squares, we need to convert the difficulty of each square to an actual time in
 minutes. That is done by multiplying with the `timePerDifficulty` constant. All constants that the generator uses are
-defined in `definitions.ts`. There are profiles with different constants for each type of bingo card.
-In `types/profiles.ts` you can find a short explanation on each parameter.
+defined in [definitions.ts](/src/definitions.ts). There are profiles with different constants for each type of bingo
+card. In [types/profiles.ts](/src/types/profiles.ts) you can find a short explanation on each parameter.
 
 ### Desired time
 
