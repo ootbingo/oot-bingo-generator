@@ -22,6 +22,7 @@
     1. [selfsynergy](#selfsynergy)
     2. [endon](#endon)
 7. [True goal duration](#true-goal-duration)
+8. [The goal list](#the-goal-list)
 
 ## Introduction
 
@@ -29,9 +30,8 @@ This document explains the concepts that have to do with balancing OoT Bingo goa
 are determined completely separate from the generator, and can be found on
 the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit?usp=sharing).
 It gets updated before every bingo version release. There is a [converter](https://bingosync.com/convert)
-(using [this script](https://github.com/kbuzsaki/bingosync/blob/master/bingosync-app/bingosync/goals_converter.py)) that
-transforms the bingo sheet into a goal list (in JSON format), which the generator uses to generate boards. Each bingo
-version has a unique goal list.
+(which uses [this script](https://github.com/kbuzsaki/bingosync/blob/master/bingosync-app/bingosync/goals_converter.py))
+that transforms the bingo sheet into a [goal list](#the-goal-list). Each bingo version has a unique goal list.
 
 There are a lot of different numbers on Bingo sheet linked above, and this document aims to explain what they all mean.
 Note that the synergy amounts mentioned in the examples may have been adjusted since.
@@ -279,7 +279,76 @@ When **not** ending on a goal:
 raw duration = timey - selfsynergy - endon
 ```
 
+## The goal list
+
+Each bingo version has its own goal list. The script mentioned in the [introduction](#introduction) is used to convert
+the sheet to a javascript object. Here is a shortened example of a goal list that the converter outputs:
+
+```js
+var bingoList = {
+  0: [], // list of goals with difficulty 0
+  1: [], // list of goals with difficulty 1
+  //...
+  50: [], // list of goals with difficulty 50
+  info: { version: "v10" },
+  rowtypes: { // all the rowtype column threshold values
+    bottle: 2.0,
+    gclw: 1.0,
+    hookshot: 3.0,
+    ms: 11.0
+  },
+  synfilters: { // the synergy filters of all synergy columns that have one
+    childchu: "min 1",
+    endon: "max -1",
+    legitlacs: "min -2"
+  },
+}
+```
+
+The lists of some difficulties may be empty. Typically, for regular bingo, only difficulties 1 to 24 have goals. A goal
+looks like this for example:
+
+```js
+var goal = {
+  difficulty: 8,
+  id: "beat-dodongo-s-cavern", // 'name' from the sheet, with non alfanumerical characters converted to dashes
+  jp: "ドドンゴの洞窟クリア",
+  name: "Beat Dodongo's Cavern",
+  rowtypes: { bottle: 0.5, gclw: 0.5, hookshot: 0, ms: 1 }, // has the values this goal has for each rowtype
+  skill: 0.25,
+  subtypes: { compass: 2, hearts3: 3, hearts4: 1, map: 2, skulls: 0.5 }, // all subtype synergies of this goal (values that start with * on the sheet)
+  time: 5.75,
+  types: { dc: 3, fortress: 2, incdodongo: 100, kd: 2, selfsynergy: 0 }, // all type synergies of this goal (non-rowtype values without * on the sheet)
+}
+```
+
+Apart from the goal list for regular bingo, we also have one for short bingo. After using the converter for both goal
+lists, we combine them to one final list for the version. The info property contains `combined: "true"` to tell the
+generator both the regular and short bingo list is present:
+
+```js
+// the goal list as used by the generator
+export var bingoList = {
+  info: {
+    combined: "true", // true or false string
+    version: "v10",
+  },
+  normal: {}, // the regular bingo list object
+  short: {}, // the short bingo list object
+}
+```
+
+Take a look at the [example goal list](/src/sandbox/example-goal-list.js) to see what an actual list looks like. You'll
+see that each goal also has a `weight` property. The weights are for the **frequency balancing**, and get added with
+the [balancer script](https://github.com/srmcconomy/balanced-bingo/blob/master/auto-balancer.js) script. Read more on
+frequency balancing in the [generator doc](/src/generator.ts).
+
+Blackout bingo uses the same goal list as normal bingo, but has a different settings profile in the generator.
+Unfortunately, a bingo version is currently not solely defined by the goal list. The generator settings can vary between
+versions. These settings are defined in the generator code itself, so we bundle every bingo version with its own
+generator file. In the future we may move those settings to the goal list, making it easier to adjust generator settings
+between versions.
+
 ## Todo
 
-- Goal list
 - Explanation of generator variables?
