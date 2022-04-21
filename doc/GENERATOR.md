@@ -84,8 +84,8 @@ Each difficulty gets multiplied by the timePerDifficulty to get the **desired ti
 the ideal amount of time a goal on that square should take to complete. The generator is allowed to deviate from it a
 little; the `offset` constants define how much. More on that later.
 
-The function `mapDifficultyToSquare()` maps a difficulty to a `Square` object, which contains the
-calculated `desiredTime`, and the unchanged `difficulty` for reference.
+The function `mapDifficultyToSquare()` in [generator.ts](/src/generator.ts) maps a difficulty to a `Square` object,
+which contains the calculated `desiredTime`, and the unchanged `difficulty` for reference.
 
 ### Example
 
@@ -201,6 +201,17 @@ that is regarded as too much.
 The (current) biggest parameter differences are the higher amount of synergies allowed within rows, a higher maximum
 deviation of goal times from desired times (6 minutes), and a higher individual synergy (4.5 instead of 3.75).
 
-### Todo
+## Frequency balancing
 
-* Mention frequency balancing
+Some goals are a lot more likely to appear on boards than others. As mentioned earlier, there are many more short goals
+than long goals, resulting in the same long goals being picked often. In addition, some goals may also have specific
+synergies which can make it harder for them to appear. To compensate for this effect a little bit, the concept of
+**frequency balancing** was introduced. Each goal in the goal list had a weight between -2 and 2 assigned to it; the
+rarer the goal, the higher the weight (see
+the [balancer script](https://github.com/srmcconomy/balanced-bingo/blob/master/auto-balancer.js)).
+
+In the `getShuffledGoalsInTimeRange()` function in [generator.ts](/src/generator.ts), the generator shuffles the
+potential goals that can be picked for a specific square. If frequency balancing is enabled, it uses a
+`weightedShuffle`. This function pushes goals with a high weight towards the front of the list, so they get considered
+before goals with lower weights. There is still an element of randomness involved though, the list is not sorted solely
+based on the weights.
