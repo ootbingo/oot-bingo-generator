@@ -72,9 +72,12 @@ same thing, but this is the name that is being used by [BingoSync](https://bingo
 It's recommended to use the `generateCard()` function when generating cards yourself. If you want to try it out, you can
 easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
 
-## Coming soon (tm)
+## Help wanted
 
-* Elaborate documentation on how the generator works and what all the values in the goal list mean (such as types,
-  subtypes, rowtypes, etc.) is planned to be added here! ✅
-* A build script to convert and minify this to a js generator to possibly use in the future for bingo versions in
-  production ✅
+If anything is missing, wrong or incomplete, feel free to let someone of the Bingo community know! You could also open
+an issue or a pull request. A few things that would be nice to add to this project are:
+
+* [BALANCING.md](/doc/BALANCING.md): add explanations on what the less obvious synergy columns are for (`childchu`
+  , `chuczl`, `ganonchu`, `aganon`, `bganon`, `cganon`, `childreset`, `bosskey`, `bosskey2`, `inc`, maybe more)
+* Add a new doc about **timing goals**. What do we generally include and exclude in the timing of a goal? How would one
+  go about (re-)timing a goal?
