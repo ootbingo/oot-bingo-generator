@@ -8,19 +8,19 @@ are still being worked on !!
 
 ## Documentation
 
-Click these links for in-depth explanations:
+Click on these links for in-depth explanations:
 
 ### :gear: [The generator](/doc/GENERATOR.md)
 
-How bingo boards get generated, with examples. Also points at the code a few times, but can be read without having any
-programming knowledge. *Strongly recommended* read if you're new to the bingo generator!
+Explains how bingo boards are generated, with examples. The text points to the code a few times, but can be read without
+having any programming knowledge. It's a *strongly recommended* read if you're new to the bingo generator!
 
 ### :balance_scale: [Balancing (bingo sheet)](/doc/BALANCING.md)
 
-Everything about the numbers you see on
+Everything you need to know about
 the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247)
-. Explains the different synergy types there are and what the columns on the sheet mean. Recommended if you're
-interested in balancing!
+. Goes in detail over the different synergy types, the columns on the sheet, and the goal list format. Recommended if
+you're interested in balancing!
 
 ## Install
 
@@ -30,14 +30,14 @@ npm install
 
 ## Run
 
-To run the sandbox code which generates cards with an example goal list (v10.1), run:
+To run the sandbox code which generates cards using an example goal list (v10.1), run:
 
 ```bash
 npm start
 ```
 
-This will run [src/sandbox/main.ts](/src/sandbox/main.ts), where you can also add your own code to experiment with the
-generator.
+This will run [src/sandbox/main.ts](/src/sandbox/main.ts). You can edit this code or add your own code to experiment
+with the generator.
 
 ## Test
 
@@ -51,30 +51,30 @@ The tests verify that the generator generates the exact same boards as the curre
 
 ## Build
 
-To bundle the generator code into a single, minified JS file (to be used for bingo versions in productions):
+To bundle the generator code into a single, minified JS file (to be used for bingo versions in production):
 
 ```bash
 npm run build
 ```
 
-The generated file can be found in `dist/generator.js`. After importing this script, the generator functions
-in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
+The generated file can be found in `dist/generator.js`. After importing this script in javascript code, the main
+generator functions in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
 e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
 
 ## Generating cards
 
-The main functions to generate a card are located in `src/index.ts`.
+The main functions for generating a card are located in [src/index.ts](/src/index.ts).
 
 The `ootBingoGenerator()` function returns cards in the exact same legacy format that is expected by the current bingo
-versions that are live. The `bingoGenerator()` function is a wrapper and returns the same thing, but this is the name
-that is being used by [BingoSync](https://bingosync.com).
+versions on [Github](https://github.com/ootbingo/bingo). The `bingoGenerator()` function is a wrapper and returns the
+same thing, but this is the name that is being used by [BingoSync](https://bingosync.com).
 
-It's recommended to use the `generateCard()` function to generate cards yourself. If you want to try it out, you can do
-that in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
+It's recommended to use the `generateCard()` function when generating cards yourself. If you want to try it out, you can
+easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
 
 ## Coming soon (tm)
 
 * Elaborate documentation on how the generator works and what all the values in the goal list mean (such as types,
-  subtypes, rowtypes, etc) is planned to be added here!
+  subtypes, rowtypes, etc.) is planned to be added here! ✅
 * A build script to convert and minify this to a js generator to possibly use in the future for bingo versions in
   production ✅
