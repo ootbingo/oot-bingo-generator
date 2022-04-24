@@ -72,7 +72,7 @@ export class SynergyCalculator {
    *          {'botw': [-1, 2], 'czl': [1], 'saria': [1.5]}
    * @param squaresWithGoal Array of squares (that each have a goal)
    * @param synergyType Name of the type ('type', 'rowtype' or 'subtype')
-   * @returns object with synergies for all the squares
+   * @returns Object with synergies for all the squares
    */
   #mergeSynergiesOfSquares(
     squaresWithGoal: Square[],
@@ -96,7 +96,7 @@ export class SynergyCalculator {
    *          {hearts: [1.5, -1, 2], botw: [1]}
    * @param typeSynergies Combined type synergies of multiple squares
    * @param subtypeSynergies Combined subtype synergies of multiple squares
-   * @returns object with unified type and subtype synergies
+   * @returns Object with unified type and subtype synergies
    */
   #unifyTypeSynergies(
     typeSynergies: CombinedSynergies,
@@ -138,8 +138,8 @@ export class SynergyCalculator {
     const filter = this.synergyFilters[type];
 
     const sortedSynergies =
-      filter.minmax === "min" ? sortAscending(synergies) : sortDescending(synergies);
-    return sortedSynergies.slice(0, filter.value);
+      filter.filterType === "min" ? sortAscending(synergies) : sortDescending(synergies);
+    return sortedSynergies.slice(0, filter.filterValue);
   }
 
   #filterRowtypeSynergies(rowtypeSynergies: CombinedSynergies): Synergies {
@@ -162,15 +162,16 @@ export class SynergyCalculator {
   }
 
   /**
+   * Filters rowtypeSynergies to only include entries that stay under the threshold
+   *
    * Rowtypes (currently ms, hookshot, bottle, and gc lw) are things that are assumed to be done/gotten in every
    * bingo but might be skipped in some rows. The rowtype synergies of each goal state how much time extra time you need
-   * to skip doing the thing. If you add up that time of every goal and it stays under the time you save from skipping
+   * to skip doing the thing. If you add up that time of every goal, and it stays under the time you save from skipping
    * (rowtypeTimeSave), it's worth to skip the thing and the synergy is added.
    *
-   * Filters rowtypeSynergies to only include entries that stay under the threshold
    * @param rowtype String ('ms', 'hookshot', 'bottle' or 'gc lw')
    * @param synergies Array of rowtype synergies of different squares
-   * @returns amount of time you save by skipping doing 'rowtype', or undefined if not worth
+   * @returns Amount of time you save by skipping doing 'rowtype', or undefined if not worth
    */
   #filterForRowtype(rowtype: string, synergies: number[]): number | undefined {
     let rowtypeCost = 0;
@@ -192,13 +193,13 @@ export class SynergyCalculator {
   }
 
   /**
-   * The total synergy of a group of squares is calculated by adding up their total (filtered) type synergies, rowtype synergies,
+   * Calculates the total synergy of a group of squares by adding up their total (filtered) type synergies, rowtype synergies,
    * and time differences
    *
    * @param filteredTypeSynergies Arrays of type synergies per type, e.g. {botw: [1, -2], skulls: [3]}
    * @param filteredRowtypeSynergies Rowtype synergy per type, e.g. {ms: 5, hookshot: 1}
    * @param timeDifferences Array of differences between desired time and time of each goal, e.g. [1, -0.5, 0, 1, -1]. Positive value means goal is faster than desired.
-   * @returns total synergy
+   * @returns Total synergy
    */
   #calculateTotalSynergy(
     filteredTypeSynergies: CombinedSynergies,

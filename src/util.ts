@@ -3,21 +3,20 @@ import { Synfilters } from "./types/synergies";
 import { Mode } from "./types/options";
 
 /**
- * Can be used to sort an array of goals first by their time, then by their id ascending.
- *
- * @param a first goal
- * @param b second goal
+ * Sorts an array of goals first by time, then by id.
+ * @param goalA first goal
+ * @param goalB second goal
  */
-export function sortByTimeAndId(a: Goal, b: Goal): number {
-  const timeDiff = a.time - b.time;
+export function sortByTimeAndId(goalA: Goal, goalB: Goal): number {
+  const timeDiff = goalA.time - goalB.time;
 
   if (timeDiff !== 0) {
     return timeDiff;
   }
 
-  if (a.id > b.id) {
+  if (goalA.id > goalB.id) {
     return 1;
-  } else if (a.id < b.id) {
+  } else if (goalA.id < goalB.id) {
     return -1;
   } else {
     return 0;
@@ -25,9 +24,8 @@ export function sortByTimeAndId(a: Goal, b: Goal): number {
 }
 
 /**
- * Generate a sorted array of goals from a complex goal list object.
- *
- * @param goalList The original goal list.
+ * Converts a goal list object to a flat, sorted array of goals.
+ * @param goalList The original goal list object
  */
 export function flattenGoalList(goalList: GoalList): Goal[] {
   let allGoals = [];
@@ -37,18 +35,17 @@ export function flattenGoalList(goalList: GoalList): Goal[] {
   }
 
   allGoals.sort(sortByTimeAndId);
-
   return allGoals;
 }
 
 /**
- * Synergy filters are strings that start with 'max' or 'min' followed by a space and a number
+ * Splits synergy filter strings into objects with a filter type ('min' or 'max') and a numeric value
+ *
+ * Synergy filters are strings that start with 'min' or 'max' followed by a space and an integer
  * Examples: 'max -1', 'min 2', 'min -2'
  *
- * Splits synergy filter strings into objects with 'max' or 'min' and the numeric value
- *
- * @param filters Object with a synergy filter string for several types (e.g. {childchu : 'min 1', endon : 'max -1'})
- * @returns Object with the parsed Synfilters (e.g. {childchu: {minmax: 'min', value: 1}, endon: {'minmax': max}, value: -1})
+ * @param filters Object containing synergy filter strings for synergy types (e.g. {childchu : 'min 1', endon : 'max -1'})
+ * @returns Object with parsed Synfilters (e.g. {childchu: {minmax: 'min', value: 1}, endon: {'minmax': max}, value: -1})
  */
 export function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
   const parsedFilters = {};
@@ -61,18 +58,18 @@ export function parseSynergyFilters(filters: { [key: string]: string }): Synfilt
       continue;
     }
     parsedFilters[filterType] = {
-      minmax: splitFilter[0],
-      value: parseInt(splitFilter[1], 10),
+      filterType: splitFilter[0],
+      filterValue: parseInt(splitFilter[1], 10)
     };
   }
   return parsedFilters;
 }
 
 /**
- * Extracts the goal list for a given mode from the full definition of bingo goals.
+ * Takes the goal list object of a given mode from the full goal list object.
  *
- * @param bingoList The JavaScript object generated from the goal CSV.
- * @param mode The requested mode.
+ * @param bingoList The goal list object (generated from the Bingo sheet)
+ * @param mode The requested bingo mode
  */
 export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | undefined {
   if (bingoList.info.combined && bingoList.info.combined === "true") {

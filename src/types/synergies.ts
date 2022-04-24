@@ -10,7 +10,7 @@ export type CombinedSynergies = {
 
 export type Synfilters = {
   [key: string]: {
-    minmax: "min" | "max";
-    value: number;
+    filterType: "min" | "max";
+    filterValue: number;
   };
 };

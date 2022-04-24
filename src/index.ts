@@ -5,11 +5,11 @@ import { extractGoalList } from "./util";
 import { Profiles } from "./types/profiles";
 
 /**
- * Main function for generating boards
+ * Main function for generating bingo cards
  * Function name has to be preserved for compatibility with bingosetup.js in the bingo repo
  * Returns card in the right (legacy) format for the bingo setup
- * @param bingoList
- * @param options
+ * @param bingoList Object with the goal list
+ * @param options Object containing language, mode and seed
  * @returns A bingo card in the legacy format (list with goals and metadata, starting at index 1)
  */
 export const ootBingoGenerator = (bingoList: BingoList, options: Options) => {
@@ -33,10 +33,10 @@ export const bingoGenerator = (bingoList: BingoList, options: Options) => {
 };
 
 /**
- * Function for generating boards, for internal use
- * @param bingoList
- * @param options
- * @param profiles Optional, maps each mode to a profile. Uses standard profiles if not provided. Note that in previous generators the profiles were always built in.
+ * Function for generating cards, for internal use
+ * @param bingoList Object with the goal list
+ * @param options Object containing language, mode and seed
+ * @param profiles Optional, maps each mode to a profile. The generator uses standard profiles if not provided. Note that in previous generators the profiles were always built in.
  * @returns A bingo card
  */
 export const generateCard = (

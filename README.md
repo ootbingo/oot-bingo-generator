@@ -3,9 +3,6 @@
 Generator for OoT Bingo in TypeScript. Rewritten from the original generator by saltor et al. It generates the exact
 same boards as the generator that is currently in use, but aims to be more readable and more easily extensible.
 
-!! This is a work in progress. The generator is done and works, but readability improvements and better documentation
-are still being worked on !!
-
 ## Documentation
 
 Click on these links for in-depth explanations:

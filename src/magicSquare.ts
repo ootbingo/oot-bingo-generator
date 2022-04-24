@@ -1,11 +1,15 @@
 import { SQUARE_POSITIONS } from "./definitions";
 
+/**
+ * Calculate the magic square numbers of all positions on the board, given a seed
+ * @param seed
+ * @return Array of magic square numbers, one for each position on the board
+ */
 export function generateMagicSquare(seed: number): number[] {
-  return SQUARE_POSITIONS.map((i) => magicSquareNumber(i, seed));
+  return SQUARE_POSITIONS.map((position) => magicSquareNumber(position, seed));
 }
 
-// get the magic square number for a position on the magic square, for a given seed
-function magicSquareNumber(pos: number, seed: number): number {
+function magicSquareNumber(position: number, seed: number): number {
   // To create the magic square we need 2 random orderings of the numbers 0, 1, 2, 3, 4.
   // The following creates those orderings and calls them Table5 and Table1
 
@@ -44,8 +48,8 @@ function magicSquareNumber(pos: number, seed: number): number {
   Table1.splice(Rem5, 0, 4);
 
   RemT = RemT % 5; //  Between 0 and 4, fairly uniformly.
-  const x = (pos + RemT) % 5; //  RemT poss horizontal shift to put any diagonal on the main diagonal.
-  const y = Math.floor(pos / 5);
+  const x = (position + RemT) % 5; //  RemT poss horizontal shift to put any diagonal on the main diagonal.
+  const y = Math.floor(position / 5);
 
   // The Tables are set into a single magic square template
   // Some are the same up to some rotation, reflection, or row permutation.

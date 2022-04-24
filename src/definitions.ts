@@ -5,7 +5,7 @@ export const SQUARES_PER_ROW = 5;
 
 export const SQUARE_POSITIONS = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-  24,
+  24
 ] as const;
 
 export const INDICES_PER_ROW: { [key in RowName]: number[] } = {
@@ -20,7 +20,7 @@ export const INDICES_PER_ROW: { [key in RowName]: number[] } = {
   col4: [3, 8, 13, 18, 23],
   col5: [4, 9, 14, 19, 24],
   tlbr: [0, 6, 12, 18, 24],
-  bltr: [4, 8, 12, 16, 20],
+  bltr: [4, 8, 12, 16, 20]
 };
 
 export const ROWS_PER_INDEX: { [key: number]: RowName[] } = {
@@ -48,11 +48,11 @@ export const ROWS_PER_INDEX: { [key: number]: RowName[] } = {
   21: ["row5", "col2"],
   22: ["row5", "col3"],
   23: ["row5", "col4"],
-  24: ["row5", "col5", "tlbr"],
+  24: ["row5", "col5", "tlbr"]
 };
 
 // default profiles for the generator settings
-// see src/types/profiles.ts for more details on what each setting does
+// see the Profile type in src/types/profiles.ts for more details on what each setting does
 const STANDARD_PROFILE: Profile = {
   minimumSynergy: -3,
   maximumSynergy: 7,
@@ -62,7 +62,7 @@ const STANDARD_PROFILE: Profile = {
   baselineTime: 27.75,
   timePerDifficulty: 0.75,
   tooMuchSynergy: 100,
-  useFrequencyBalancing: true,
+  useFrequencyBalancing: true
 } as const;
 
 export const DEFAULT_PROFILES: Profiles = {
@@ -73,12 +73,12 @@ export const DEFAULT_PROFILES: Profiles = {
     maximumSynergy: 10,
     maximumIndividualSynergy: 4.5,
     initialOffset: 2,
-    maximumOffset: 6,
+    maximumOffset: 6
   },
   short: {
     ...STANDARD_PROFILE,
     maximumSynergy: 3,
     baselineTime: 12,
-    timePerDifficulty: 0.5,
-  },
+    timePerDifficulty: 0.5
+  }
 };
