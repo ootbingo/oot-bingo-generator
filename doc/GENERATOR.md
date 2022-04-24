@@ -1,6 +1,6 @@
 <!-- Inspiration for README's: https://github.com/matiassingers/awesome-readme  -->
 
-# Generator
+# The Generator
 
 ## Contents
 
@@ -10,6 +10,7 @@
 4. [Population order](#population-order)
 5. [Picking goals](#picking-goals)
 6. [Blackout boards](#blackout-boards)
+7. [Theoretical row length](#theoretical-row-length)
 
 ## Introduction
 
@@ -217,3 +218,26 @@ potential goals that can be picked for a specific square. If frequency balancing
 `weightedShuffle`. This function pushes goals with a high weight towards the front of the list, so they get considered
 before goals with lower weights. There is still an element of randomness involved though, the list is not sorted solely
 based on the weights.
+
+## Theoretical row length
+
+For a given generator, we can calculate the **theoretical row length**. This is how long the generator aims to make each
+row.
+
+```
+theoretical row length = baselineTime + timePerDifficulty * 65
+```
+
+The values of parameters can be found in [definitions.ts](/src/definitions.ts). The `baselineTime` defines how long the
+preparation setup of a row is expected to take. This includes things that are not included in the goal timings
+themselves, like watching the intro, collecting items to escape, watching master sword cutscene, grabbing hookshot, et
+cetera. The `baselineTime` is not actually used in the generator since it's the same for each row.
+
+The value `65` is the sum of the magic square numbers of a row. Multiplying by the `timePerDifficulty` gives the desired
+time of all the goals in the row.
+
+For bingo version `v10.1` the theoretical row length is equal to 1:16:30:
+
+```
+theoretical row length = 27.75 + 0.75 * 65 = 76.5
+```
