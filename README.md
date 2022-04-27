@@ -14,10 +14,14 @@ having any programming knowledge. It's a *strongly recommended* read if you're n
 
 ### :balance_scale: [Balancing (bingo sheet)](/doc/BALANCING.md)
 
-Everything you need to know about
-the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247)
-. Goes in detail over the different synergy types, the columns on the sheet, and the goal list format. Recommended if
+Everything you need to know about the
+[Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247).
+Goes in detail over the different synergy types, the columns on the sheet, and the goal list format. Recommended if
 you're interested in balancing!
+
+### :abacus: [Synergy Calculation](/doc/SYNERGY_CALCULATION.md)
+
+Work in progress!
 
 ## Install
 
