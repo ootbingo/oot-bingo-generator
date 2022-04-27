@@ -15,7 +15,7 @@ export class SynergyCalculator {
     this.synergyFilters = synergyFilters;
   }
 
-  synergyOfSquares(squares: Square[]) {
+  calculateSynergyOfSquares(squares: Square[]): number {
     const squaresWithGoal = squares.filter((square) => square.goal !== undefined);
 
     if (this.#containsDuplicateGoals(squaresWithGoal)) {
@@ -91,7 +91,9 @@ export class SynergyCalculator {
   }
 
   /**
-   * Unifies types and subtypes by taking all the types, and adding subtypes only if a matching subtype is present
+   * Unifies types and subtypes by taking all the types, and adding subtypes only if a matching type is present
+   *
+   * Subtype synergies only count when a corresponding type is present.
    * Example: typeSynergies = {hearts: [1.5, -1], botw: [1]}   subtypeSynergies = {hearts: [2], saria: [3]} ->
    *          {hearts: [1.5, -1, 2], botw: [1]}
    * @param typeSynergies Combined type synergies of multiple squares
@@ -113,7 +115,7 @@ export class SynergyCalculator {
     return unifiedTypeSynergies;
   }
 
-  #filterTypeSynergies(unifiedTypeSynergies: CombinedSynergies) {
+  #filterTypeSynergies(unifiedTypeSynergies: CombinedSynergies): CombinedSynergies {
     const effectiveTypeSynergies = {};
 
     for (const type in unifiedTypeSynergies) {

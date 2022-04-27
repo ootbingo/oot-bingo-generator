@@ -6,8 +6,18 @@ import { Options } from "./types/options";
 import { generateMagicSquare } from "./magicSquare";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";
-import { flattenGoalList, parseSynergyFilters, sortAscending, sortDescending } from "./util";
-import { DEFAULT_PROFILES, INDICES_PER_ROW, ROWS_PER_INDEX, SQUARE_POSITIONS } from "./definitions";
+import {
+  flattenGoalList,
+  parseSynergyFilters,
+  sortAscending,
+  sortDescending,
+} from "./util";
+import {
+  DEFAULT_PROFILES,
+  INDICES_PER_ROW,
+  ROWS_PER_INDEX,
+  SQUARE_POSITIONS,
+} from "./definitions";
 
 export default class BingoGenerator {
   readonly options: Options;
@@ -61,8 +71,8 @@ export default class BingoGenerator {
     return {
       goals: goals,
       meta: {
-        iterations: iteration
-      }
+        iterations: iteration,
+      },
     };
   }
 
@@ -122,7 +132,7 @@ export default class BingoGenerator {
 
         const squareWithPotentialGoal = {
           ...squareToFill,
-          goal: goal
+          goal: goal,
         };
 
         if (
@@ -163,8 +173,10 @@ export default class BingoGenerator {
         continue;
       }
       if (
-        this.synergyCalculator.synergyOfSquares([squareWithPotentialGoal, square]) >=
-        this.profile.tooMuchSynergy
+        this.synergyCalculator.calculateSynergyOfSquares([
+          squareWithPotentialGoal,
+          square,
+        ]) >= this.profile.tooMuchSynergy
       ) {
         return true;
       }
@@ -219,7 +231,8 @@ export default class BingoGenerator {
     for (const row of rowsOfSquare) {
       const potentialRow = this.#getOtherSquares(row, positionOfSquare, bingoBoard);
       potentialRow.push(potentialSquareWithGoal);
-      const effectiveRowSynergy = this.synergyCalculator.synergyOfSquares(potentialRow);
+      const effectiveRowSynergy =
+        this.synergyCalculator.calculateSynergyOfSquares(potentialRow);
 
       maximumSynergy = Math.max(maximumSynergy, effectiveRowSynergy);
       minimumSynergy = Math.min(minimumSynergy, effectiveRowSynergy);
@@ -227,7 +240,7 @@ export default class BingoGenerator {
 
     return {
       maximumSynergy: maximumSynergy,
-      minimumSynergy: minimumSynergy
+      minimumSynergy: minimumSynergy,
     };
   }
 
@@ -244,7 +257,7 @@ export default class BingoGenerator {
   #mapDifficultyToSquare(difficulty: number): Square {
     return {
       difficulty: difficulty,
-      desiredTime: difficulty * this.profile.timePerDifficulty
+      desiredTime: difficulty * this.profile.timePerDifficulty,
     };
   }
 
@@ -264,7 +277,7 @@ export default class BingoGenerator {
     populationOrder = populationOrder.concat(diagonals);
 
     const nonDiagonals = this.#shuffled([
-      1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23
+      1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23,
     ]);
     populationOrder = populationOrder.concat(nonDiagonals);
 
@@ -349,7 +362,7 @@ export default class BingoGenerator {
           this.rng.nextRandom() +
           this.rng.nextRandom() +
           this.rng.nextRandom() -
-          2
+          2,
       }))
       .sort(({ sortVal: sv1 }, { sortVal: sv2 }) => sv2 - sv1)
       .map(({ goal }) => goal);
