@@ -3,6 +3,13 @@
 ## Contents
 
 1. [Introduction](#introduction)
+2. [The row](#the-row)
+3. [Merging synergies](#merging-synergies)
+    1. [Merging type synergies](#merging-type-synergies)
+    2. [Merging rowtype synergies](#merging-subtype-synergies)
+    3. [Unifying (sub)type synergies](#unifying-subtype-synergies)
+    4. [Merging rowtype synergies](#merging-rowtype-synergies)
+4. [Filtering synergies](#filtering-synergies)
 
 ## Introduction
 
@@ -88,13 +95,13 @@ In this doc we're calculating the synergy for a complete row with five goals. Du
 the final goal is added to a row, so for our example you can imagine that one of the goals (e.g. *Defeat Meg*) is being
 considered here as the fifth goal while the others were already picked for the board.
 
-## Merging type synergies
+## Merging synergies
 
 First, the generator merges the synergies for each type with `mergeSynergiesOfSquares()`.
 
-### Type synergies
+### Merging type synergies
 
-For the **type synergies** this results in the following object. Basically for each kind of synergy (that appears in at
+For the **type synergies** this results in the following object. Basically for each synergy category (that appears in at
 least one of the five goals) it lists all the type synergies in the row.
 
 ```js
@@ -116,7 +123,7 @@ This shows that there is only one goal with `hovers` type synergy (*Defeat Meg*)
 synergy (*6 Gold Rupees* and *Bombchu Chest in Spirit*), and that all the goals have `selfsynergy`. Compare this to the
 goal list [from earlier](#the-row) to verify all the type synergies are here.
 
-### Subtype synergies
+### Merging subtype synergies
 
 The merged **subtype synergies** work similarly:
 
@@ -133,7 +140,7 @@ const subtypeSynergiesOfSquares = {
 The `hovers` subtypes come from *Bombchu Chest in Spirit* and *6 Gold Rupees* for example, and all of the goals
 have `skulls` subtype synergy.
 
-### Unified type synergies
+### Unifying (sub)type synergies
 
 Now it's time to merge the **types** and **subtypes** together to get the **unified type synergies**. As explained in
 the [balancing doc](/doc/BALANCING.md), subtype synergies only count when a corresponding type is present.
@@ -158,9 +165,9 @@ const unifiedTypeSynergies = {
 The only subtype synergies that ended up here are `hovers`; all the others were not present as types. So apart from
 adding the two `hovers` subtype values to the existing one, there were no changes compared to `typeSynergiesOfSquares.`
 
-# Filtering rowtype synergies
+### Merging rowtype synergies
 
-The **rowtype synergies** of the five goals are also collected together:
+The **rowtype synergies** of the five goals are also collected into one object:
 
 ```js
 const rowtypeSynergiesOfSquares = {
@@ -171,9 +178,21 @@ const rowtypeSynergiesOfSquares = {
 }
 ```
 
-Each goal has a value for every kind of rowtype synergy, so they all have five numbers here. The values for `bottle`
-show us that one of the goals would take half a minute longer if bottle is skipped in this row, but for the other goals
-it makes no difference. The two *100* values for `hookshot` mean that for two of the goals, it's never worth to skip
-hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goal it takes 2 minutes longer without (*Bombchu Chest in
-Spirit*). Rowtypes are explained in more detail in the [balancing doc](/doc/BALANCING.md).
+Each goal always has a value for every category of rowtype synergy, so they all have five numbers here. From the values
+for `bottle` it can be concluded that one of the goals would take half a minute longer if bottle is skipped in this row,
+but for the other goals it makes no difference. The two *100* values for `hookshot` mean that for two of the goals, it's
+never worth to skip hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goal it takes 2 minutes longer without
+(*Bombchu Chest in Spirit*). Rowtypes are explained in more detail in the [balancing doc](/doc/BALANCING.md).
+
+## Filtering synergies
+
+## Filtering unified type synergies
+
+Now it's time for the generator to apply the **synergy filters**. The [balancing doc](/doc/BALANCING.md) describes in
+detail what they do, but in short: each category of synergy has a filter which determines what synergy values are
+relevant. Almost all categories use the same standard filter which removes the highest value from the list (`min -1`),
+but some use other filters.
+
+The function `filterTypeSynergies()` takes the `unifiedTypeSynergies` and transforms each list based on the
+corresponding synergy filter (with the help of `filterFowTypes()`). As mentioned, for most 
 
