@@ -18,7 +18,7 @@
     2. [skill](#skill)
     3. [time](#time)
     4. [difficulty](#difficulty)
-6. [Special synergy columns](#special-synergy-columns)
+6. [Special synergy categories](#special-synergy-categories)
     1. [selfsynergy](#selfsynergy)
     2. [endon](#endon)
 7. [True goal duration](#true-goal-duration)
@@ -49,6 +49,8 @@ explained in detail later, but the structure of the sheet is as follows:
 * The first row (after the header) contains the **synergy filters**. These are modifiers that change the way synergies
   are applied. Note that only a few of the synergy columns actually have a filter applied.
 
+The columns with synergies in them will also be referred to as synergy 'categories' in this doc.
+
 ## Synergies
 
 The term *synergy* is used to describe how combining goals can lead to shorter or longer times needed to complete them.
@@ -57,7 +59,7 @@ in one goal help complete the other faster. Negative synergy, on the other hand,
 complete two goals together than individually. That can be the case when one goal would force you to delete something
 with RBA that you'd want to collect for the other goal.
 
-There are three types of synergies:
+There are three kinds of synergies:
 
 * Type synergies
 * Subtype synergies
@@ -65,7 +67,7 @@ There are three types of synergies:
 
 ### Type synergies
 
-Type synergies are the 'standard' synergies. On the sheet, these are numbers that are not in a rowtype column and do
+**Type synergies** are the 'standard' synergies. On the sheet, these are numbers that are not in a rowtype column and do
 **not** have a `*` in front. If goal A and goal B have a *type synergy* of 2, that means that if you complete both these
 goals, the time you spend should be two minutes shorter than if you did each goal separately. For example, the goals *
 Iron Boots* and *All 3 Skulltulas in Ice Cavern* have a synergy of 2, because doing one of these goals saves time for
@@ -83,8 +85,8 @@ appearing together. The many columns at the end of the sheet that start with `in
 
 ### Subtype synergies
 
-Subtype synergies work roughly the same as type synergies, but have a twist: they synergize with type synergies, but not
-with each other. On the sheet, these are numbers that start with a `*` (and are not in the rowtype columns). You can
+**Subtype synergies** work roughly the same as type synergies, but have a twist: they synergize with type synergies, but
+not with each other. On the sheet, these are numbers that start with a `*` (and are not in the rowtype columns). You can
 regard them as 'indirect' synergies, and you will often see them appear on collection goals.
 
 For example, take *All 3 Skulltulas in Bottom of the Well*. It has a `skulls` subtype synergy of 1.5. The reason that
@@ -102,8 +104,8 @@ between
 
 The durations of the goals that we determined do *not* include preparation stuff that you would need to do in any row.
 Think about watching the intro, collecting items to escape, watching master sword cutscene, grabbing hookshot, et
-cetera. For specific rows, however, it may be possible and faster to skip some of these things. Rowtype synergies were
-created to take those cases into account. There are currently **four** different rowtypes:
+cetera. For specific rows, however, it may be possible and faster to skip some of these things. **Rowtype synergies**
+were created to take those cases into account. There are currently **four** different rowtypes:
 
 * ms (watching master sword cutscene)
 * bottle (collecting a bottle)
@@ -111,15 +113,15 @@ created to take those cases into account. There are currently **four** different
 * gclw (going to Goron City area and/or Lost Woods)
 
 It is assumed you do all of these every bingo, unless the synergies for at least one of these remain below the threshold
-value. Rowtype column names start with a `*` and have a value for this threshold that denotes how long it takes to do
+value. Rowtype category names start with a `*` and have a value for this threshold that denotes how long it takes to do
 the thing. For example, the threshold for master sword cs is 9.5 minutes (going to temple of time, dot skip, watching
 the cs, leaving). The numbers in the rowtype columns show *how much longer* a goal would take if you skipped the thing.
 
-For example, looking at the `ms` column, you see that *Defeat Barinade* takes 2 minutes longer as child, and *Fairy Bow*
-takes 4 minutes longer. If the other three goals in the row would not take any longer as child, it's worth it to skip
-master sword cutscene. So the generator would give a rowtype synergy of 3.5 to the row (`9.5 - 2 - 4`), because you can
-save that amount of time by not going adult. Note that there are goals with a `ms` synergy of 100; these are impossible
-to do as child.
+For example, looking at the `ms` category, you see that *Defeat Barinade* takes 2 minutes longer as child, and *Fairy
+Bow* takes 4 minutes longer. If the other three goals in the row would not take any longer as child, it's worth it to
+skip master sword cutscene. So the generator would give a rowtype synergy of 3.5 to the row (`9.5 - 2 - 4`), because you
+can save that amount of time by not going adult. Note that there are goals with a `ms` synergy of 100; these are
+impossible to do as child.
 
 This type of synergy is called 'rowtype' because you can only determine it for a whole row, not for two individual
 goals. Only once you know all the goals of a row can you determine if it's worth skipping one of these preparation
@@ -142,21 +144,21 @@ goals for a synergy to have an effect.
 
 ### Filters
 
-The synergies of almost all the columns on the sheet get combined as just described. But there are a few that work
-differently. These are columns where the first row with **synergy filters** contains a filter. A filter starts with the
-word `min` or `max`, followed by a positive or negative number. If the word is `min`, you look at the lowest numbers,
-and if it's `max`, you look at the highest. The filter `min 2` means that you take the lowest 2 synergies. If the filter
-is `max 1`, you take the highest synergy. For negative numbers, you take everything *except* for an amount at the end.
-So `min 2` means that you take all the lowest synergies, but leave out the highest 2. And `max 1` means you take all the
-highest synergies and leave out the lowest value. Take a look at the example in the table before.
+Almost all synergy categories get combined as just described. But there are a few that work differently. These are the
+categories where the first cell of the column contains a filter. A filter starts with the word `min` or `max`, followed
+by a positive or negative number. If the word is `min`, you look at the lowest numbers, and if it's `max`, you look at
+the highest. The filter `min 2` means that you take the lowest 2 synergies. If the filter is `max 1`, you take the
+highest synergy. For negative numbers, you take everything *except* for an amount at the end. So `min 2` means that you
+take all the lowest synergies, but leave out the highest 2. And `max 1` means you take all the highest synergies and
+leave out the lowest value. Take a look at the example in the table before.
 
-Note that columns on the sheet without a synergy filter all implicitly use the filter `min -1`, since the standard way
-of combining synergies is removing the highest value.
+Note that categories on the sheet without a synergy filter all implicitly use the filter `min -1`, since the standard
+way of combining synergies is removing the highest value.
 
-So what's the point of these custom filters? Take the `legitlacs` column for example, which aims to prevent free light
+So what's the point of these custom filters? Take the `legitlacs` category for example, which aims to prevent free light
 arrows. It has a synergy value of *100* for Beat Shadow, Beat Spirit and Light Arrow goals. If the standard filter
 of `min -1` were applied, only one out of those three could appear in a row. But two out of these three would also be
-okay, since only all three together result in Light Arrows being free. Therefore, this column has a filter of `min -2`,
+okay, since only all three together result in Light Arrows being free. Therefore, `legitlacs` has a filter of `min -2`,
 which removes the two highest synergies. Beat Shadow and Beat Spirit can appear together, or Light Arrow and Beat Shadow
 for example. In those cases, both synergies are removed. But if all three appear, one synergy of 100 remains, which is
 always too high for the generator to allow.
@@ -191,7 +193,7 @@ section) has already been done. This time is **not** actually used by the genera
 column. The `#` in front of the column name makes it so that it won't appear in the goal list.
 
 For goals that have `selfsynergy` or `endon` synergies, the `timey` value is actually not equal to the pure duration
-(see [Special synergy columns](#special-synergy-columns)).
+(see [Special synergy categories](#special-synergy-categories)).
 
 ### skill
 
@@ -229,7 +231,7 @@ In short:
 difficulty = round(time / timePerDifficulty)
 ```
 
-## Special synergy columns
+## Special synergy categories
 
 ### selfsynergy
 
@@ -246,8 +248,8 @@ duration of this goal is 12.25. The total amount of synergy in a row with this g
 row seem 3 minutes slower. This practically undoes the shortening of the raw time, but results in 3 minutes of extra
 synergy that can now be added to this row. The result is that *5 Compasses* now has a better chance of appearing.
 
-In addition to collection goals, the `selfsynergy` column can also be used to slightly adjust the time of a goal to move
-it to a different [difficulty](#difficulty) bucket. For example, if there are no goals with a difficulty of 23, you
+In addition to collection goals, the `selfsynergy` category can also be used to slightly adjust the time of a goal to
+move it to a different [difficulty](#difficulty) bucket. For example, if there are no goals with a difficulty of 23, you
 could remove a little time from a goal with difficulty 24 and turn it into `selfsynergy`. These small adjustments don't
 have a big impact on the balance, but they help to get more variety in goals on the board.
 
@@ -292,13 +294,13 @@ var bingoList = {
   //...
   50: [], // list of goals with difficulty 50
   info: { version: "v10" },
-  rowtypes: { // all the rowtype column threshold values
+  rowtypes: { // all the rowtype categories with their threshold values
     bottle: 2.0,
     gclw: 1.0,
     hookshot: 3.0,
     ms: 11.0
   },
-  synfilters: { // the synergy filters of all synergy columns that have one
+  synfilters: { // all the synergy categories that have a none-default synergy filter
     childchu: "min 1",
     endon: "max -1",
     legitlacs: "min -2"
@@ -342,7 +344,7 @@ export var bingoList = {
 Take a look at the [example goal list](/src/sandbox/example-goal-list.js) to see what an actual list looks like. You'll
 see that each goal also has a `weight` property. The weights are for the **frequency balancing**, and they are added by
 the [balancer script](https://github.com/srmcconomy/balanced-bingo/blob/master/auto-balancer.js). Read more on frequency
-balancing in the [generator doc](/src/generator.ts).
+balancing in the [generator doc](/doc/GENERATOR.md).
 
 Blackout bingo uses the same goal list as normal bingo, but has a different settings profile in the generator.
 Unfortunately, a bingo version is currently not solely defined by the goal list. The generator settings can vary between

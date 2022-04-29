@@ -67,11 +67,13 @@ export class SynergyCalculator {
   }
 
   /**
-   * Takes all synergies of a certain type of all the squares in the array and combines them into one synergy object
-   * Example: [{types: {'botw': -1, 'czl': 1}}, {types: {'botw': 2, 'saria' : 1.5}}] ->
-   *          {'botw': [-1, 2], 'czl': [1], 'saria': [1.5]}
+   * Takes the synergies of a specified synergy type ('type', 'subtype', or 'rowtype') from all the supplied squares, and combines them into one synergy object
+   *
+   * Simplified example (in case of synergyType = 'types'):
+   *    squaresWithGoal = [{types: {'botw': -1, 'czl': 1}}, {types: {'botw': 2, 'saria' : 1.5}}]
+   *    returns:          {'botw': [-1, 2], 'czl': [1], 'saria': [1.5]}
    * @param squaresWithGoal Array of squares (that each have a goal)
-   * @param synergyType Name of the type ('type', 'rowtype' or 'subtype')
+   * @param synergyType Name of the synergy type ('type', 'rowtype' or 'subtype')
    * @returns Object with synergies for all the squares
    */
   #mergeSynergiesOfSquares(
@@ -80,11 +82,11 @@ export class SynergyCalculator {
   ): CombinedSynergies {
     const mergedSynergies = {};
     for (const square of squaresWithGoal) {
-      for (const type in square.goal[synergyType]) {
-        if (!mergedSynergies[type]) {
-          mergedSynergies[type] = [];
+      for (const category in square.goal[synergyType]) {
+        if (!mergedSynergies[category]) {
+          mergedSynergies[category] = [];
         }
-        mergedSynergies[type].push(square.goal[synergyType][type]);
+        mergedSynergies[category].push(square.goal[synergyType][category]);
       }
     }
     return mergedSynergies;
@@ -92,10 +94,11 @@ export class SynergyCalculator {
 
   /**
    * Unifies types and subtypes by taking all the types, and adding subtypes only if a matching type is present
-   *
    * Subtype synergies only count when a corresponding type is present.
-   * Example: typeSynergies = {hearts: [1.5, -1], botw: [1]}   subtypeSynergies = {hearts: [2], saria: [3]} ->
-   *          {hearts: [1.5, -1, 2], botw: [1]}
+   *
+   * Example: typeSynergies    = {hearts: [1.5, -1], botw: [1]}
+   *          subtypeSynergies = {hearts: [2], saria: [3]}
+   *          returns:           {hearts: [1.5, -1, 2], botw: [1]}
    * @param typeSynergies Combined type synergies of multiple squares
    * @param subtypeSynergies Combined subtype synergies of multiple squares
    * @returns Object with unified type and subtype synergies
@@ -105,11 +108,13 @@ export class SynergyCalculator {
     subtypeSynergies: CombinedSynergies
   ): CombinedSynergies {
     const unifiedTypeSynergies = {};
-    for (const type in typeSynergies) {
-      if (type in subtypeSynergies) {
-        unifiedTypeSynergies[type] = typeSynergies[type].concat(subtypeSynergies[type]);
+    for (const typeCategory in typeSynergies) {
+      if (typeCategory in subtypeSynergies) {
+        unifiedTypeSynergies[typeCategory] = typeSynergies[typeCategory].concat(
+          subtypeSynergies[typeCategory]
+        );
       } else {
-        unifiedTypeSynergies[type] = typeSynergies[type];
+        unifiedTypeSynergies[typeCategory] = typeSynergies[typeCategory];
       }
     }
     return unifiedTypeSynergies;
@@ -118,26 +123,26 @@ export class SynergyCalculator {
   #filterTypeSynergies(unifiedTypeSynergies: CombinedSynergies): CombinedSynergies {
     const effectiveTypeSynergies = {};
 
-    for (const type in unifiedTypeSynergies) {
-      const synergies = unifiedTypeSynergies[type];
+    for (const typeCategory in unifiedTypeSynergies) {
+      const synergies = unifiedTypeSynergies[typeCategory];
 
-      const effectiveSynergies = this.#filterForType(type, synergies);
+      const effectiveSynergies = this.#filterForTypeCategory(typeCategory, synergies);
 
       if (effectiveSynergies.length > 0) {
-        effectiveTypeSynergies[type] = effectiveSynergies;
+        effectiveTypeSynergies[typeCategory] = effectiveSynergies;
       }
     }
 
     return effectiveTypeSynergies;
   }
 
-  #filterForType(type: string, synergies: number[]): number[] {
-    // in most cases, remove highest synergy
-    if (!(type in this.synergyFilters)) {
+  #filterForTypeCategory(typeCategory: string, synergies: number[]): number[] {
+    // in most cases, remove the highest value
+    if (!(typeCategory in this.synergyFilters)) {
       return removeHighestNumber(synergies);
     }
 
-    const filter = this.synergyFilters[type];
+    const filter = this.synergyFilters[typeCategory];
 
     const sortedSynergies =
       filter.filterType === "min" ? sortAscending(synergies) : sortDescending(synergies);
@@ -147,17 +152,20 @@ export class SynergyCalculator {
   #filterRowtypeSynergies(rowtypeSynergies: CombinedSynergies): Synergies {
     const filteredRowtypeSynergies = {};
 
-    for (const rowtype in rowtypeSynergies) {
-      const rowtypeSynergy = rowtypeSynergies[rowtype];
+    for (const rowtypeCategory in rowtypeSynergies) {
+      const rowtypeSynergy = rowtypeSynergies[rowtypeCategory];
 
       // don't consider rowtype synergies until we've filled up the entire row
       if (rowtypeSynergy.length < SQUARES_PER_ROW) {
         return filteredRowtypeSynergies;
       }
 
-      const filteredRowtypeSynergy = this.#filterForRowtype(rowtype, rowtypeSynergy);
+      const filteredRowtypeSynergy = this.#filterForRowtypeCategory(
+        rowtypeCategory,
+        rowtypeSynergy
+      );
       if (filteredRowtypeSynergy !== undefined) {
-        filteredRowtypeSynergies[rowtype] = filteredRowtypeSynergy;
+        filteredRowtypeSynergies[rowtypeCategory] = filteredRowtypeSynergy;
       }
     }
     return filteredRowtypeSynergies;
@@ -171,18 +179,21 @@ export class SynergyCalculator {
    * to skip doing the thing. If you add up that time of every goal, and it stays under the time you save from skipping
    * (rowtypeTimeSave), it's worth to skip the thing and the synergy is added.
    *
-   * @param rowtype String ('ms', 'hookshot', 'bottle' or 'gc lw')
+   * @param rowtypeCategory String ('ms', 'hookshot', 'bottle' or 'gc lw')
    * @param synergies Array of rowtype synergies of different squares
    * @returns Amount of time you save by skipping doing 'rowtype', or undefined if not worth
    */
-  #filterForRowtype(rowtype: string, synergies: number[]): number | undefined {
+  #filterForRowtypeCategory(
+    rowtypeCategory: string,
+    synergies: number[]
+  ): number | undefined {
     let rowtypeCost = 0;
     for (const synergy of synergies) {
       rowtypeCost += synergy;
     }
 
     // amount of time you save from skipping this in a row
-    const rowtypeThreshold = this.rowtypeTimeSave[rowtype];
+    const rowtypeThreshold = this.rowtypeTimeSave[rowtypeCategory];
 
     // "regular" row type synergy
     if (rowtypeThreshold > 0 && rowtypeThreshold > rowtypeCost) {
@@ -198,8 +209,8 @@ export class SynergyCalculator {
    * Calculates the total synergy of a group of squares by adding up their total (filtered) type synergies, rowtype synergies,
    * and time differences
    *
-   * @param filteredTypeSynergies Arrays of type synergies per type, e.g. {botw: [1, -2], skulls: [3]}
-   * @param filteredRowtypeSynergies Rowtype synergy per type, e.g. {ms: 5, hookshot: 1}
+   * @param filteredTypeSynergies Arrays of type synergies per type category, e.g. {botw: [1, -2], skulls: [3]}
+   * @param filteredRowtypeSynergies Rowtype synergy per rowtype category, e.g. {ms: 5, hookshot: 1}
    * @param timeDifferences Array of differences between desired time and time of each goal, e.g. [1, -0.5, 0, 1, -1]. Positive value means goal is faster than desired.
    * @returns Total synergy
    */
@@ -211,8 +222,8 @@ export class SynergyCalculator {
     let totalSynergyOfSquares = 0;
 
     // add type synergies to total sum
-    for (const type in filteredTypeSynergies) {
-      const synergies = filteredTypeSynergies[type];
+    for (const typeCategory in filteredTypeSynergies) {
+      const synergies = filteredTypeSynergies[typeCategory];
 
       for (const synergy of synergies) {
         if (synergy > this.profile.maximumIndividualSynergy) {
@@ -223,8 +234,8 @@ export class SynergyCalculator {
     }
 
     // add row type synergies to total sum
-    for (const rowtype in filteredRowtypeSynergies) {
-      totalSynergyOfSquares += filteredRowtypeSynergies[rowtype];
+    for (const rowtypeCategory in filteredRowtypeSynergies) {
+      totalSynergyOfSquares += filteredRowtypeSynergies[rowtypeCategory];
     }
 
     // add time differences to total sum

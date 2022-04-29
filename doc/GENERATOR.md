@@ -200,16 +200,15 @@ the board, regardless of which row it is in. If a goal has more than the `maximu
 that is regarded as too much.
 
 The current biggest parameter changes that were made for blackouts are the higher total amount of synergy allowed per
-row, an increased maximum deviation of goal times from desired times (6 minutes), and an increased maximum individual
-synergy (
-4.5 instead of 3.75).
+row, an increased maximum deviation of goal times from desired times (*6* minutes), and an increased maximum individual
+synergy (*4.5* instead of *3.75*).
 
 ## Frequency balancing
 
 Some goals are a lot more likely to appear on boards than others. As mentioned earlier, there are many more short goals
 than long goals, resulting in the same long goals being picked often. In addition, some goals may also have specific
 synergies that can make it harder for them to appear. To compensate for this effect a little bit, the concept of
-**frequency balancing** was introduced. Each goal in the goal list had a weight between -2 and 2 assigned to it; the
+**frequency balancing** was introduced. Each goal in the goal list had a weight between *-2* and *2* assigned to it; the
 rarer the goal, the higher the weight (see
 the [balancer script](https://github.com/srmcconomy/balanced-bingo/blob/master/auto-balancer.js)).
 
