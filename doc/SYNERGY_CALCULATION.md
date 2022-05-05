@@ -6,7 +6,7 @@
 2. [The row](#the-row)
 3. [Merging synergies](#merging-synergies)
     1. [Merging type synergies](#merging-type-synergies)
-    2. [Merging rowtype synergies](#merging-subtype-synergies)
+    2. [Merging subtype synergies](#merging-subtype-synergies)
     3. [Unifying (sub)type synergies](#unifying-subtype-synergies)
     4. [Merging rowtype synergies](#merging-rowtype-synergies)
 4. [Filtering synergies](#filtering-synergies)
@@ -73,6 +73,7 @@ const goals = [
       fire: 5,
       fortress: 2.5,
       gtg: 3,
+      botw: 0,
     }
   },
   {
@@ -116,6 +117,7 @@ const typeSynergiesOfSquares = {
   dmc: [1],
   fire: [5],
   gtg: [3],
+  botw: [0],
 }
 ```
 
@@ -159,6 +161,7 @@ const unifiedTypeSynergies = {
   dmc: [1],
   fire: [5],
   gtg: [3],
+  botw: [0],
 }
 ```
 
@@ -171,10 +174,10 @@ The **rowtype synergies** of the five goals are also collected into one object:
 
 ```js
 const rowtypeSynergiesOfSquares = {
-  "bottle": [0.5, 0, 0, 0, 0],
-  "gclw": [1, 0, 1, 0, 0],
-  "hookshot": [100, 2, 100, 0, 0],
-  "ms": [6, 1, 100, 0, 0]
+  bottle: [0.5, 0, 0, 0, 0],
+  gclw: [1, 0, 1, 0, 0],
+  hookshot: [100, 2, 100, 0, 0],
+  ms: [6, 1, 100, 0, 0]
 }
 ```
 
@@ -189,10 +192,45 @@ never worth to skip hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goa
 ## Filtering unified type synergies
 
 Now it's time for the generator to apply the **synergy filters**. The [balancing doc](/doc/BALANCING.md) describes in
-detail what they do, but in short: each category of synergy has a filter which determines what synergy values are
-relevant. Almost all categories use the same standard filter which removes the highest value from the list (`min -1`),
-but some use other filters.
+detail what they do, but in short: each synergy category has a filter which determines what synergy values are relevant.
+Almost all categories use the same standard filter which removes the highest value from the list (`min -1`), but some
+use other filters.
 
 The function `filterTypeSynergies()` takes the `unifiedTypeSynergies` and transforms each list based on the
-corresponding synergy filter (with the help of `filterFowTypes()`). As mentioned, for most 
+corresponding synergy filter. The property `synergyFilters` of the `SynergyCalculator` class contains all the synergy
+categories that have a non-standard filter:
+
+```ts
+ const synergyFilters = {
+  botw: { filterType: 'min', filterValue: 1 },
+  childchu: { filterType: 'min', filterValue: 1 },
+  endon: { filterType: 'max', filterValue: -1 },
+  ganonchu: { filterType: 'min', filterValue: 1 },
+  legitlacs: { filterType: 'min', filterValue: -2 }
+}
+```
+
+So for each category in `unifiedTypeSynergies` the generator looks if it appears in `synergyFilters`, and if so, applies
+that filter. If it does not appear there, it applies the standard filter of `min -1` by removing the highest number from
+the synergies. In `filterForTypeCategory()` you see that for 'max' filters the values get sorted ascending, and
+for `min` filters descending. Then for filters with `filterValue` *n* it takes the first *n* values. For filters with
+*-n* it removes *n* values from the end.
+
+The only category from the example that appears in `synergyFilters` is `botw`, so the `min 1` filter is applied to its
+values. All the other categories (`forest`, `hovers`, etc) just have their highest value removed, resulting in
+the `filteredTypeSynergies` below. A few categories like `forest`, `meg` and `gtg` have disappeared, because they only
+had one synergy value. One goal with a synergy generally doesn't do anything, you need two for a synergy to be relevant.
+
+```ts
+const filteredTypeSynergies = {
+  hovers: [2, 1, 1],
+  selfsynergy: [0, 0, -2, 0, 0],
+  fortress: [2.5, 2.5, 2.5],
+  spirit: [5, 3],
+}
+```
+
+## Filtering row type synergies
+
+
 
