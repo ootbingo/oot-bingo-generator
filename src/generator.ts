@@ -1,6 +1,6 @@
 import { Card, RowName, Square } from "./types/board";
 import { Goal, GoalList } from "./types/goalList";
-import { Synergies, Synfilters } from "./types/synergies";
+import { Synergies, SynergyFilters } from "./types/synergies";
 import { Profile, Profiles } from "./types/profiles";
 import { Options } from "./types/options";
 import { generateMagicSquare } from "./magicSquare";
@@ -27,7 +27,7 @@ export default class BingoGenerator {
 
   readonly allGoals: Goal[];
   readonly rowtypeTimeSave: Synergies;
-  readonly synergyFilters: Synfilters;
+  readonly synergyFilters: SynergyFilters;
 
   readonly synergyCalculator: SynergyCalculator;
 

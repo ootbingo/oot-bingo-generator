@@ -1,5 +1,5 @@
 import { Square } from "./types/board";
-import { CombinedSynergies, Synergies, SynergyType, Synfilters } from "./types/synergies";
+import { CombinedSynergies, Synergies, SynergyFilters, SynergyType } from "./types/synergies";
 import { Profile } from "./types/profiles";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
 import { SQUARES_PER_ROW } from "./definitions";
@@ -7,9 +7,9 @@ import { SQUARES_PER_ROW } from "./definitions";
 export class SynergyCalculator {
   profile: Profile;
   rowtypeTimeSave: Synergies;
-  synergyFilters: Synfilters;
+  synergyFilters: SynergyFilters;
 
-  constructor(profile: Profile, rowtypeTimeSave: Synergies, synergyFilters: Synfilters) {
+  constructor(profile: Profile, rowtypeTimeSave: Synergies, synergyFilters: SynergyFilters) {
     this.profile = profile;
     this.rowtypeTimeSave = rowtypeTimeSave;
     this.synergyFilters = synergyFilters;

@@ -8,9 +8,11 @@ export type CombinedSynergies = {
   [key in string]: number[];
 };
 
-export type Synfilters = {
-  [key: string]: {
-    filterType: "min" | "max";
-    filterValue: number;
-  };
+export type SynergyFilters = {
+  [key: string]: SynergyFilter;
+};
+
+export type SynergyFilter = {
+  filterType: "min" | "max";
+  filterValue: number;
 };

@@ -1,5 +1,5 @@
 import { BingoList, Goal, GoalList } from "./types/goalList";
-import { Synfilters } from "./types/synergies";
+import { SynergyFilters } from "./types/synergies";
 import { Mode } from "./types/options";
 
 /**
@@ -44,25 +44,46 @@ export function flattenGoalList(goalList: GoalList): Goal[] {
  * Synergy filters are strings that start with 'min' or 'max' followed by a space and an integer
  * Examples: 'max -1', 'min 2', 'min -2'
  *
- * @param filters Object containing synergy filter strings for synergy types (e.g. {childchu : 'min 1', endon : 'max -1'})
- * @returns Object with parsed Synfilters (e.g. {childchu: {minmax: 'min', value: 1}, endon: {'minmax': max}, value: -1})
+ * @param rawFilters Object containing raw synergy filter strings for synergy types (e.g. {childchu : 'min 1', endon : 'max -1'})
+ * @returns Object with parsed SynergyFilters (e.g. {childchu: {filterType: 'min', filterValue: 1}, endon: {'filterType': max}, filterValue: -1})
  */
-export function parseSynergyFilters(filters: { [key: string]: string }): Synfilters {
-  const parsedFilters = {};
-  for (const filterType in filters) {
-    const splitFilter = filters[filterType].split(" ");
-    if (
-      splitFilter[0].toLowerCase() !== "min" &&
-      splitFilter[0].toLowerCase() !== "max"
-    ) {
-      continue;
+export function parseSynergyFilters(rawFilters: {
+  [key: string]: string;
+}): SynergyFilters {
+  const parsedFilters: SynergyFilters = {};
+  for (const filterType in rawFilters) {
+    const rawFilterString = rawFilters[filterType];
+    const parsedFilterType = toSynergyFilterType(rawFilterString);
+    const parsedFilterValue = toSynergyFilterValue(rawFilterString);
+
+    if (parsedFilterType !== undefined && parsedFilterValue !== undefined) {
+      parsedFilters[filterType] = {
+        filterType: parsedFilterType,
+        filterValue: parsedFilterValue,
+      };
     }
-    parsedFilters[filterType] = {
-      filterType: splitFilter[0],
-      filterValue: parseInt(splitFilter[1], 10)
-    };
   }
   return parsedFilters;
+}
+
+function toSynergyFilterType(rawFilterString: string): "min" | "max" | undefined {
+  const filterTypeString = rawFilterString.split(" ")[0];
+  switch (filterTypeString?.toLowerCase()) {
+    case "min":
+      return "min";
+    case "max":
+      return "max";
+    default:
+      return undefined;
+  }
+}
+
+function toSynergyFilterValue(rawFilterString: string): number | undefined {
+  const filterTypeString = rawFilterString.split(" ")[1];
+  const parsedValue = parseInt(filterTypeString, 10);
+  if (!isNaN(parsedValue)) {
+    return parsedValue;
+  }
 }
 
 /**
