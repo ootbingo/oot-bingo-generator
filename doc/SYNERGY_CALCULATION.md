@@ -10,6 +10,9 @@
     3. [Unifying (sub)type synergies](#unifying-subtype-synergies)
     4. [Merging rowtype synergies](#merging-rowtype-synergies)
 4. [Filtering synergies](#filtering-synergies)
+    1. [Filtering unified type synergies](#filtering-unified-type-synergies)
+    2. [Filtering rowtype synergies](#filtering-rowtype-synergies)
+5. [Time differences](#time-differences)
 
 ## Introduction
 
@@ -146,8 +149,9 @@ have `skulls` subtype synergy.
 
 Now it's time to merge the **types** and **subtypes** together to get the **unified type synergies**. As explained in
 the [balancing doc](/doc/BALANCING.md), subtype synergies only count when a corresponding type is present.
-So `unifyTypeSynergies()` looks at the types of `typeSynergiesOfSquares` and adds the corresponding subtypes
-from `subtypeSynergiesOfSquares`; the remaining subtypes are dropped.
+So `unifyTypeSynergies()` looks at the types of [`typeSynergiesOfSquares`](#merging-type-synergies) and adds the
+corresponding subtypes from [`subtypeSynergiesOfSquares`](#merging-subtype-synergies); the remaining subtypes are
+dropped.
 
 ```js
 const unifiedTypeSynergies = {
@@ -166,7 +170,8 @@ const unifiedTypeSynergies = {
 ```
 
 The only subtype synergies that ended up here are `hovers`; all the others were not present as types. So apart from
-adding the two `hovers` subtype values to the existing one, there were no changes compared to `typeSynergiesOfSquares.`
+adding the two `hovers` subtype values to the existing one, there were no changes compared
+to [`typeSynergiesOfSquares`](#merging-type-synergies).
 
 ### Merging rowtype synergies
 
@@ -189,16 +194,16 @@ never worth to skip hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goa
 
 ## Filtering synergies
 
-## Filtering unified type synergies
+### Filtering unified type synergies
 
-Now it's time for the generator to apply the **synergy filters**. The [balancing doc](/doc/BALANCING.md) describes in
-detail what they do, but in short: each synergy category has a filter which determines what synergy values are relevant.
-Almost all categories use the same standard filter which removes the highest value from the list (`min -1`), but some
-use other filters.
+Now it's time for the generator to decide which of the synergy values are relevant to keep, by applying the **synergy
+filters**. The [balancing doc](/doc/BALANCING.md) describes in detail what they do, but in short: each synergy category
+has a filter which determines what synergy values are relevant. Almost all categories use the same standard filter which
+removes the highest value from the list (`min -1`), but some use other filters.
 
-The function `filterTypeSynergies()` takes the `unifiedTypeSynergies` and transforms each list based on the
-corresponding synergy filter. The property `synergyFilters` of the `SynergyCalculator` class contains all the synergy
-categories that have a non-standard filter:
+The function `filterTypeSynergies()` takes the [`unifiedTypeSynergies`](#unifying-subtype-synergies) and transforms each
+list based on the corresponding synergy filter. The property `synergyFilters` class contains all the synergy categories
+that have a non-standard filter:
 
 ```ts
  const synergyFilters = {
@@ -210,10 +215,11 @@ categories that have a non-standard filter:
 }
 ```
 
-So for each category in `unifiedTypeSynergies` the generator looks if it appears in `synergyFilters`, and if so, applies
-that filter. If it does not appear there, it applies the standard filter of `min -1` by removing the highest number from
-the synergies. In `filterForTypeCategory()` you see that for 'max' filters the values get sorted ascending, and
-for `min` filters descending. Then for filters with `filterValue` *n* it takes the first *n* values. For filters with
+So for each category in [`unifiedTypeSynergies`](#unifying-subtype-synergies) the generator looks if it appears
+in `synergyFilters`, and if so, applies that filter. If it does not appear there, it applies the standard filter
+of `min -1` by removing the highest number from the synergies. In `filterForTypeCategory()` you see that for 'max'
+filters the values get sorted ascending, and for `min` filters descending. Then for filters with `filterValue` *n* it
+takes the first *n* values. For filters with
 *-n* it removes *n* values from the end.
 
 The only category from the example that appears in `synergyFilters` is `botw`, so the `min 1` filter is applied to its
@@ -230,7 +236,30 @@ const filteredTypeSynergies = {
 }
 ```
 
-## Filtering row type synergies
+### Filtering rowtype synergies
 
+To figure out which rowtype synergies are relevant to keep, the generator adds up the rowtype synergies for each rowtype
+category. That is the amount of extra time needed in this row to skip the thing associated with the rowtype category (
+e.g. hookshot). If it stays under the time gained from skipping (the threshold defined in the `rowtypeTimeSave` property
+of the class), the difference between the two will be kept as the final rowtype synergy.
 
+```ts
+const rowtypeTimeSave = { bottle: 2, gclw: 1, hookshot: 2.75, ms: 9.5 }
 
+```
+
+Looking back at [`rowtypeSynergiesOfSquares`](#merging-rowtype-synergies), the only rowtype where the sum stays under
+the threshold is `bottle` with 0.5 minutes lost. That is less than the 2-minute time save, so a total of `2 - 0.5 = 1.5`
+minutes can be saved by skipping bottle in this row. The `gclw` values sum up to 2 which is higher than the threshold of
+1, and the other rowtypes have 100 values making them impossible to do.
+
+```ts
+const filteredRowtypeSynergies = {
+  bottle: 1.5,
+}
+```
+
+Note that the code also allows for 'reverse' rowtype synergy. This would apply to rowtypes with a negative treshhold,
+but there are currently none.
+
+## Time differences
