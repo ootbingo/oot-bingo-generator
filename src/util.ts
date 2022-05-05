@@ -105,14 +105,14 @@ export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | un
   }
 }
 
-export const removeHighestNumber = (numbers: number[]): number[] => {
+export function removeHighestNumber(numbers: number[]): number[] {
   return sortAscending(numbers).slice(0, -1);
-};
+}
 
-export const sortAscending = (numbers: number[]): number[] => {
+export function sortAscending(numbers: number[]): number[] {
   return [...numbers].sort((a, b) => a - b);
-};
+}
 
-export const sortDescending = (numbers: number[]): number[] => {
+export function sortDescending(numbers: number[]): number[] {
   return [...numbers].slice(0).sort((a, b) => b - a);
-};
+}

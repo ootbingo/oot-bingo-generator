@@ -3,13 +3,13 @@ import { BingoList } from "../types/goalList";
 import { Profiles } from "../types/profiles";
 import { generateCard } from "../index";
 
-export const frequencyAnalysis = (
+export function frequencyAnalysis(
   numberOfBoards: number,
   mode: Mode,
   bingoList: BingoList,
   profiles?: Profiles,
   startSeed?: number
-) => {
+) {
   startSeed = startSeed || 0;
   const freqOptions: Options = {
     seed: 0,
@@ -45,4 +45,4 @@ export const frequencyAnalysis = (
     .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
 
   return sortedFrequencies;
-};
+}
