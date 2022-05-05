@@ -1,5 +1,10 @@
 import { Square } from "./types/board";
-import { CombinedSynergies, Synergies, SynergyFilters, SynergyType } from "./types/synergies";
+import {
+  CombinedSynergies,
+  Synergies,
+  SynergyFilters,
+  SynergyType,
+} from "./types/synergies";
 import { Profile } from "./types/profiles";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
 import { SQUARES_PER_ROW } from "./definitions";
@@ -9,7 +14,11 @@ export class SynergyCalculator {
   rowtypeTimeSave: Synergies;
   synergyFilters: SynergyFilters;
 
-  constructor(profile: Profile, rowtypeTimeSave: Synergies, synergyFilters: SynergyFilters) {
+  constructor(
+    profile: Profile,
+    rowtypeTimeSave: Synergies,
+    synergyFilters: SynergyFilters
+  ) {
     this.profile = profile;
     this.rowtypeTimeSave = rowtypeTimeSave;
     this.synergyFilters = synergyFilters;
@@ -80,7 +89,7 @@ export class SynergyCalculator {
     squaresWithGoal: Square[],
     synergyType: SynergyType
   ): CombinedSynergies {
-    const mergedSynergies = {};
+    const mergedSynergies: CombinedSynergies = {};
     for (const square of squaresWithGoal) {
       for (const category in square.goal[synergyType]) {
         if (!mergedSynergies[category]) {
@@ -107,7 +116,7 @@ export class SynergyCalculator {
     typeSynergies: CombinedSynergies,
     subtypeSynergies: CombinedSynergies
   ): CombinedSynergies {
-    const unifiedTypeSynergies = {};
+    const unifiedTypeSynergies: CombinedSynergies = {};
     for (const typeCategory in typeSynergies) {
       if (typeCategory in subtypeSynergies) {
         unifiedTypeSynergies[typeCategory] = typeSynergies[typeCategory].concat(
@@ -121,7 +130,7 @@ export class SynergyCalculator {
   }
 
   #filterTypeSynergies(unifiedTypeSynergies: CombinedSynergies): CombinedSynergies {
-    const effectiveTypeSynergies = {};
+    const effectiveTypeSynergies: CombinedSynergies = {};
 
     for (const typeCategory in unifiedTypeSynergies) {
       const synergies = unifiedTypeSynergies[typeCategory];
@@ -150,7 +159,7 @@ export class SynergyCalculator {
   }
 
   #filterRowtypeSynergies(rowtypeSynergies: CombinedSynergies): Synergies {
-    const filteredRowtypeSynergies = {};
+    const filteredRowtypeSynergies: Synergies = {};
 
     for (const rowtypeCategory in rowtypeSynergies) {
       const rowtypeSynergy = rowtypeSynergies[rowtypeCategory];
