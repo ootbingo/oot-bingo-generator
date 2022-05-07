@@ -101,7 +101,7 @@ const goals = [
 
 When the generator considers a new goal for a square, it calculates the synergy of all rows it will be in. For example,
 if it tries to put a goal on the top-left square, it calculates the synergy of `row 1`
-, `column 1` and `tlbr`. For each of these, the function `calculateSynergyOfSquares()`
+, `col 1` and `tlbr`. For each of these, the function `calculateSynergyOfSquares()`
 in [synergyCalculator.ts](/src/synergyCalculator.ts) is called with the potential square and any other squares that were
 already put in that row.
 
@@ -202,8 +202,9 @@ const rowtypeSynergiesOfSquares = {
 
 Each goal always has a value for every category of rowtype synergy, so they all have five numbers here. From the values
 for `bottle` it can be concluded that one of the goals would take half a minute longer if bottle is skipped in this row,
-but for the other goals it makes no difference. The two *100* values for `hookshot` mean that for two of the goals, it's
-never worth to skip hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goal it takes 2 minutes longer without
+but for the other goals it makes no difference. The two **100** values for `hookshot` mean that for two of the goals,
+it's never worth to skip hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goal it takes **2** minutes longer
+without
 (*Bombchu Chest in Spirit*). Rowtypes are explained in more detail in the [balancing doc](/doc/BALANCING.md).
 
 ## Filtering synergies
@@ -232,9 +233,8 @@ that have a non-standard filter:
 So for each category in [`unifiedTypeSynergies`](#unifying-subtype-synergies) the generator looks if it appears
 in `synergyFilters`, and if so, applies that filter. If it does not appear there, it applies the standard filter
 of `min -1` by removing the highest number from the synergies. In `filterForTypeCategory()` you see that for 'max'
-filters the values get sorted ascending, and for `min` filters descending. Then for filters with `filterValue` *n* it
-takes the first *n* values. For filters with
-*-n* it removes *n* values from the end.
+filters the values get sorted ascending, and for `min` filters descending. Then for filters with `filterValue` **n** it
+takes the first **n** values. For filters with **-n** it removes **n** values from the end.
 
 The only category from the example that appears in `synergyFilters` is `botw`, so the `min 1` filter is applied to its
 values. All the other categories (`forest`, `hovers`, etc) just have their highest value removed, resulting in
@@ -263,9 +263,9 @@ const rowtypeTimeSave = { bottle: 2, gclw: 1, hookshot: 2.75, ms: 9.5 }
 ```
 
 Looking back at [`rowtypeSynergiesOfSquares`](#merging-rowtype-synergies), the only rowtype where the sum stays under
-the threshold is `bottle` with 0.5 minutes lost. That is less than the 2-minute time save, so a total of `2 - 0.5 = 1.5`
-minutes can be saved by skipping bottle in this row. The `gclw` values sum up to 2 which is higher than the threshold of
-1, and the other rowtypes have 100 values making them impossible to do.
+the threshold is `bottle` with **0.5** minutes lost. That is less than the **2**-minute time save, so a total
+of `2 - 0.5 = 1.5` minutes can be saved by skipping bottle in this row. The `gclw` values sum up to **2** which is
+higher than the threshold of **1**, and the other rowtypes have **100** values making them impossible to do.
 
 ```ts
 const filteredRowtypeSynergies = {
@@ -285,21 +285,21 @@ about the concept of desired time in more detail.
 In short, each square on the board has a **desired time**. This is the ideal length for a goal on that square in order
 to have a balanced board. The goals that get picked may be a little longer or shorter than the desired time. To
 compensate for that, the **time difference** gets added to the total synergy of the row. So if a row has goals that are
-all 1 minute too short, the row gets 5 minutes of time difference synergy and is already close to having the maximum
-synergy allowed. If a row has goals that are too long, the time difference gets subtracted from the total amount,
-meaning that the row has more room for additional synergies.
+all **1** minute too short, the row gets **5** minutes of time difference synergy and is already close to having the
+maximum synergy allowed. If a row has goals that are too long, the time difference gets subtracted from the total
+amount, meaning that the row has more room for additional synergies.
 
 The time differences are computed by simply subtracting the goal duration from the desired time. The goal durations can
 be found in the [goal list](#the-row), and the desired time is defined by the row on the board (again, see the generator
 doc for more info). For the example row those look like this:
 
 |                               | desired time of square | goal duration | time difference |
-|-------------------------------|------------------------|---------------|-----------------|
-| *Silver Scale*                | 2.25                   | 3             | *-0.75*         |
-| *Defeat Meg*                  | 12.75                  | 14.25         | *-1.5*          |
-| *Get Bombchu Chest in Spirit* | 7.5                    | 7             | *0.5*           |
-| *6 Gold Rupees*               | 18                     | 18.25         | *-0.25*         |
-| *Desert Colossus HP*          | 2.25                   | 3             | *-0.75*         |
+|-------------------------------|------------------------|---------------|----------------|
+| *Silver Scale*                | 2.25                   | 3             | **-0.75**      |
+| *Defeat Meg*                  | 12.75                  | 14.25         | **-1.5**      |
+| *Get Bombchu Chest in Spirit* | 7.5                    | 7             | **0.5**       |
+| *6 Gold Rupees*               | 18                     | 18.25         | **-0.25**      |
+| *Desert Colossus HP*          | 2.25                   | 3             | **-0.75**      |
 
 Yielding the following time differences array:
 
@@ -313,12 +313,13 @@ To finally compute the total amount of synergy in the row, the generator simply 
 the [`filteredTypeSynergies`](#filtering-unified-type-synergies)
 , [`filteredRowtypeSynergies`](#filtering-rowtype-synergies) and the [`timeDifferences`](#time-differences). However, if
 any of the values is higher than the `maximumIndividualSynergy` parameter, the generator returns `tooMuchSynergy` for
-this row. This is a really high number, currently equal to a 100. The `maximumIndividualSynergy` is currently equal to
-3.75.
+this row. This is a really high number, currently equal to a **100**. The `maximumIndividualSynergy` is currently equal
+to
+**3.75**.
 
 None of the values are higher than 3.75, so the generator won't return `tooMuchSynergy`. Adding up all
-the `filteredTypeSynergies` values results into a total of *
-8* (`1 + 1 - 2 + 2.5 + 2.5 + 3`). The `filteredRowtypeSynergies` only have the `bottle` synergy of *1.5*, so adding that
-to the total makes *9.5*. Note that the current `maximumSynergy` parameter is set to 7, so this row would be rejected if
-we wouldn't have so many negative time differences. But those add up to *-2.75*, resulting in a legal row with a final
-synergy amount of **6.75**, barely below the maximum!
+the `filteredTypeSynergies` values results into a total of **8** (`1 + 1 - 2 + 2.5 + 2.5 + 3`).
+The `filteredRowtypeSynergies` only have the `bottle` synergy of **1.5**, so adding that to the total makes **9.5**.
+Note that the current `maximumSynergy` parameter is set to 7, so this row would be rejected if we wouldn't have so many
+negative time differences. But those add up to **-2.75**, resulting in a legal row with a final synergy amount of
+**6.75**, barely below the maximum!

@@ -1,5 +1,3 @@
-<!-- Inspiration for README's: https://github.com/matiassingers/awesome-readme  -->
-
 # The Generator
 
 ## Contents
@@ -186,8 +184,8 @@ Since the board is still completely empty, no restrictions prevent the first goa
 square with index **23** gets filled with 'Beat the Spirit Temple'.
 
 If somehow none of these goals would have been legal to pick (which is not the case now), the time range would have been
-increased to **16m45** - **20m45s**. For normal bingo boards, this 2-minute range in either direction is the maximum. If
-none of the goals within this increased range fits, the generator would fail to generate.
+increased to **16m45** - **20m45s**. For normal bingo boards, this **2**-minute range in either direction is the
+maximum. If none of the goals within this increased range fits, the generator would fail to generate.
 
 ## Blackout boards
 
@@ -243,13 +241,12 @@ For normal cards of the bingo version `v10.1` the theoretical row length is equa
 theoretical row length = 24.75 + 0.75 * 65 = 73.5
 ```
 
-This is assuming the row has no synergies. The maximum amount of row synergy allowed in `v10.1` is 7, and the minimum is
--3. So theoretically, the shortest possible row would take **1:06:30** while the longest possible row would take
+This is assuming the row has no synergies. The maximum amount of row synergy allowed in `v10.1` is **7**, and the
+minimum is **-3**. So theoretically, the shortest possible row would take **1:06:30** while the longest possible row
+would take
 **1:16:30**:
 
 ```
 theoretical shortest row length = 24.75 + 0.75 * 65 - 7 = 66.5
 theoretical longest row length  = 24.75 + 0.75 * 65 + 3 = 76.5
 ```
-
-###
