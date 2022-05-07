@@ -17,7 +17,7 @@
 ## Introduction
 
 This document dives into the calculation of the total synergy of a row. It follows along the code
-in [synergyCalculator.ts]([src/synergyCalculator.ts), so it's handy to have that open while reading. However, it's not
+in [synergyCalculator.ts](/src/synergyCalculator.ts), so it's handy to have that open while reading. However, it's not
 very difficult to understand the steps without having programming knowledge.
 
 It's recommended to read the [Generator documentation](/doc/GENERATOR.md) before this one, so that you have a general
@@ -289,23 +289,36 @@ all 1 minute too short, the row gets 5 minutes of time difference synergy and is
 synergy allowed. If a row has goals that are too long, the time difference gets subtracted from the total amount,
 meaning that the row has more room for additional synergies.
 
+The time differences are computed by simply subtracting the goal duration from the desired time. The goal durations can
+be found in the [goal list](#the-row), and the desired time is defined by the row on the board (again, see the generator
+doc for more info). For the example row those look like this:
+
+|                               | desired time of square | goal duration | time difference |
+|-------------------------------|------------------------|---------------|-----------------|
+| *Silver Scale*                | 2.25                   | 3             | *-0.75*         |
+| *Defeat Meg*                  | 12.75                  | 14.25         | *-1.5*          |
+| *Get Bombchu Chest in Spirit* | 7.5                    | 7             | *0.5*           |
+| *6 Gold Rupees*               | 18                     | 18.25         | *-0.25*         |
+| *Desert Colossus HP*          | 2.25                   | 3             | *-0.75*         |
+
+Yielding the following time differences array:
+
+```ts
+const timeDifferences = [-0.75, -1.5, 0.5, -0.25, -0.75]
+```
+
 ## Total row synergy
 
 To finally compute the total amount of synergy in the row, the generator simply adds up all the values from
 the [`filteredTypeSynergies`](#filtering-unified-type-synergies)
 , [`filteredRowtypeSynergies`](#filtering-rowtype-synergies) and the [`timeDifferences`](#time-differences). However, if
 any of the values is higher than the `maximumIndividualSynergy` parameter, the generator returns `tooMuchSynergy` for
-this row. This is a really high number, currently equal too a *100*. The `maximumIndividualSynergy` is currently equal
-to 3.75.
+this row. This is a really high number, currently equal to a 100. The `maximumIndividualSynergy` is currently equal to
+3.75.
 
-Adding up all the `filteredTypeSynergies` values results into a total of *8* (`1 + 1 - 2 + 2.5 + 2.5 + 3`).
-The `filteredRowtypeSynergies` only have the `bottle` synergy of *1.5*, so adding that to the total makes *9.5*.
-
-```ts
-const filteredTypeSynergies = {
-  hovers: [1, 1],
-  selfsynergy: [0, -2, 0, 0],
-  fortress: [2.5, 2.5],
-  spirit: [3],
-}
-```
+None of the values are higher than 3.75, so the generator won't return `tooMuchSynergy`. Adding up all
+the `filteredTypeSynergies` values results into a total of *
+8* (`1 + 1 - 2 + 2.5 + 2.5 + 3`). The `filteredRowtypeSynergies` only have the `bottle` synergy of *1.5*, so adding that
+to the total makes *9.5*. Note that the current `maximumSynergy` parameter is set to 7, so this row would be rejected if
+we wouldn't have so many negative time differences. But those add up to *-2.75*, resulting in a legal row with a final
+synergy amount of **6.75**, barely below the maximum!

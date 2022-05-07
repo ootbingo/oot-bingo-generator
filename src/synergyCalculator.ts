@@ -214,11 +214,11 @@ export class SynergyCalculator {
     // amount of time you save from skipping this in a row
     const rowtypeThreshold = this.rowtypeTimeSave[rowtypeCategory];
 
-    // "regular" row type synergy
+    // "regular" rowtype synergy
     if (rowtypeThreshold > 0 && rowtypeThreshold > rowtypeCost) {
       return rowtypeThreshold - rowtypeCost;
     }
-    // "reverse" row type synergy
+    // "reverse" rowtype synergy
     else if (rowtypeThreshold < 0 && rowtypeThreshold > rowtypeCost) {
       return rowtypeCost - rowtypeThreshold;
     }
@@ -252,7 +252,7 @@ export class SynergyCalculator {
       }
     }
 
-    // add row type synergies to total sum
+    // add rowtype synergies to total sum
     for (const rowtypeCategory in filteredRowtypeSynergies) {
       totalSynergyOfSquares += filteredRowtypeSynergies[rowtypeCategory];
     }
