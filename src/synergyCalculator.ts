@@ -31,6 +31,8 @@ export class SynergyCalculator {
       return this.profile.tooMuchSynergy;
     }
 
+    // merging (sub)type and rowtype synergies
+
     const typeSynergiesOfSquares = this.#mergeSynergiesOfSquares(
       squaresWithGoal,
       "types"
@@ -43,19 +45,27 @@ export class SynergyCalculator {
       typeSynergiesOfSquares,
       subtypeSynergiesOfSquares
     );
-    const filteredTypeSynergies = this.#filterTypeSynergies(unifiedTypeSynergies);
 
     const rowtypeSynergiesOfSquares = this.#mergeSynergiesOfSquares(
       squaresWithGoal,
       "rowtypes"
     );
+
+    // filtering (sub)type and rowtype synergies
+
+    const filteredTypeSynergies = this.#filterTypeSynergies(unifiedTypeSynergies);
+
     const filteredRowtypeSynergies = this.#filterRowtypeSynergies(
       rowtypeSynergiesOfSquares
     );
 
+    // calculating time differences
+
     const timeDifferences = squaresWithGoal.map(
       (square) => square.desiredTime - square.goal.time
     );
+
+    // total synergy
 
     return this.#calculateTotalSynergy(
       filteredTypeSynergies,

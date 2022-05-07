@@ -16,9 +16,19 @@
 
 ## Introduction
 
+This document dives into the calculation of the total synergy of a row. It follows along the code
+in [synergyCalculator.ts]([src/synergyCalculator.ts), so it's handy to have that open while reading. However, it's not
+very difficult to understand the steps without having programming knowledge.
+
+It's recommended to read the [Generator documentation](/doc/GENERATOR.md) before this one, so that you have a general
+idea what the generator does. The synergy calculation is one specific part of the generator that this doc zooms further
+into. Additionally, it's a good idea to read through the [Balancing documentation](/doc/BALANCING.md), since it explains
+a lot of concepts that are also used in the synergy calculator. Whenever that is the case, this doc will refer back to
+the Balancing documentation.
+
 ## The row
 
-In all the examples in this doc we're going to be looking at a row with the following five goals:
+Imagine we have a row with the following five goals:
 
 * *Silver Scale*
 * *Defeat Meg*
@@ -26,10 +36,10 @@ In all the examples in this doc we're going to be looking at a row with the foll
 * *6 Gold Rupees*
 * *Desert Colossus HP*
 
-We're going to calculate the total amount of synergy in this row. To do this we need to know all the individual
-synergies of the goals. We can find those in the goal list; shown below is a simplified version of these five goals. A
-few synergies and properties have been removed to keep the example from getting to complicated, but these values are
-realistic:
+We're going to calculate the total amount of synergy of this row. To do this we need to know all the individual synergy
+values of the goals in it. We can find those in the goal list; shown below is a simplified version of the list with just
+these five goals. A few synergies and properties have been removed to keep the example from becoming too complex, but
+the values are realistic:
 
 ```js
 const goals = [
@@ -95,9 +105,13 @@ if it tries to put a goal on the top-left square, it calculates the synergy of `
 in [synergyCalculator.ts](/src/synergyCalculator.ts) is called with the potential square and any other squares that were
 already put in that row.
 
-In this doc we're calculating the synergy for a complete row with five goals. During generation that would happen when
-the final goal is added to a row, so for our example you can imagine that one of the goals (e.g. *Defeat Meg*) is being
-considered here as the fifth goal while the others were already picked for the board.
+In this doc we're calculating the synergy for a complete row with five goals. During generation of a board that would
+happen when the final goal is added to a row, so for the example row you can imagine that one of the goals (e.g. *Defeat
+Meg*) is being considered as the potential final goal while the others were already picked.
+
+The function `calculateSynergyOfSquares()` is the only public function of the synergy calculator class. The following
+sections go over the steps this function takes in detail, and show what the helper functions that are being called
+return.
 
 ## Merging synergies
 
@@ -229,10 +243,10 @@ had one synergy value. One goal with a synergy generally doesn't do anything, yo
 
 ```ts
 const filteredTypeSynergies = {
-  hovers: [2, 1, 1],
-  selfsynergy: [0, 0, -2, 0, 0],
-  fortress: [2.5, 2.5, 2.5],
-  spirit: [5, 3],
+  hovers: [1, 1],
+  selfsynergy: [0, -2, 0, 0],
+  fortress: [2.5, 2.5],
+  spirit: [3],
 }
 ```
 
@@ -263,3 +277,35 @@ Note that the code also allows for 'reverse' rowtype synergy. This would apply t
 but there are currently none.
 
 ## Time differences
+
+The final thing that needs to be calculated before the total synergy of the row can be computed is the time difference
+between the picked goals and the desired times for the squares they're on. The [generator doc](/doc/GENERATOR.md) talks
+about the concept of desired time in more detail.
+
+In short, each square on the board has a **desired time**. This is the ideal length for a goal on that square in order
+to have a balanced board. The goals that get picked may be a little longer or shorter than the desired time. To
+compensate for that, the **time difference** gets added to the total synergy of the row. So if a row has goals that are
+all 1 minute too short, the row gets 5 minutes of time difference synergy and is already close to having the maximum
+synergy allowed. If a row has goals that are too long, the time difference gets subtracted from the total amount,
+meaning that the row has more room for additional synergies.
+
+## Total row synergy
+
+To finally compute the total amount of synergy in the row, the generator simply adds up all the values from
+the [`filteredTypeSynergies`](#filtering-unified-type-synergies)
+, [`filteredRowtypeSynergies`](#filtering-rowtype-synergies) and the [`timeDifferences`](#time-differences). However, if
+any of the values is higher than the `maximumIndividualSynergy` parameter, the generator returns `tooMuchSynergy` for
+this row. This is a really high number, currently equal too a *100*. The `maximumIndividualSynergy` is currently equal
+to 3.75.
+
+Adding up all the `filteredTypeSynergies` values results into a total of *8* (`1 + 1 - 2 + 2.5 + 2.5 + 3`).
+The `filteredRowtypeSynergies` only have the `bottle` synergy of *1.5*, so adding that to the total makes *9.5*.
+
+```ts
+const filteredTypeSynergies = {
+  hovers: [1, 1],
+  selfsynergy: [0, -2, 0, 0],
+  fortress: [2.5, 2.5],
+  spirit: [3],
+}
+```
