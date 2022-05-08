@@ -106,10 +106,10 @@ Think about watching the intro, collecting items to escape, watching master swor
 cetera. For specific rows, however, it may be possible and faster to skip some of these things. **Rowtype synergies**
 were created to take those cases into account. There are currently **four** different rowtypes:
 
-* ms (watching master sword cutscene)
-* bottle (collecting a bottle)
-* hookshot (collecting the hookshot)
-* gclw (going to Goron City area and/or Lost Woods)
+* `ms` (watching master sword cutscene)
+* `bottle` (collecting a bottle)
+* `hookshot` (collecting the hookshot)
+* `gclw` (going to Goron City area and/or Lost Woods)
 
 It is assumed you do all of these every bingo, unless the synergies for at least one of these remain below the threshold
 value. Rowtype category names start with a `*` and have a value for this threshold that denotes how long it takes to do
