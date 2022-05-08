@@ -102,6 +102,50 @@ describe("generator", () => {
         "30 Deku Sticks",
       ]);
     });
+
+    it("generates a normal v10.1 card with correct goals, using a custom profile", () => {
+      const customProfile = {
+        minimumSynergy: -4,
+        maximumSynergy: 9,
+        maximumIndividualSynergy: 4,
+        initialOffset: 1,
+        maximumOffset: 3,
+        baselineTime: 24.75,
+        timePerDifficulty: 0.75,
+        tooMuchSynergy: 100,
+        useFrequencyBalancing: false,
+      };
+      const card = generateCard(bingoList, "normal", 142536, customProfile);
+
+      const goalNames = card.goals.map((goal) => goal.name);
+      expect(goalNames).toEqual([
+        "Ganon's Castle Boss Key",
+        "Farore's Wind",
+        "All 5 Skulltulas in Spirit Temple",
+        "30 Different Skulltulas",
+        "All 4 Lost Woods area Skulltulas",
+        "All 3 Elemental Arrows",
+        "Defeat Phantom Ganon",
+        "All 3 Skulltulas in Bottom of the Well",
+        "All 4 Wasteland/ Colossus area Skulltulas",
+        "All 5 Skulltulas in Water Temple",
+        "4 Skulltulas in Shadow Temple",
+        "Open 3 Boss Key Doors",
+        "3 Swords, Tunics, Boots, and Shields",
+        "6 Songs",
+        "Exactly 30 Deku Sticks",
+        "Open the Final Door of Fire Trial",
+        "Both HPs in Death Mountain Crater",
+        "8 Songs",
+        "Free all 9 Gorons in Fire Temple",
+        "Clear 10 Silver Rupee Rooms",
+        "Din's Fire",
+        "Both Rusty Switches in Spirit Temple",
+        "7 Magic Beans",
+        "All 3 Skulltulas in Ice Cavern",
+        "Silver Gauntlets",
+      ]);
+    });
   });
 
   describe("metadata", () => {

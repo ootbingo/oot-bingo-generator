@@ -1,4 +1,4 @@
-import { Profile, Profiles } from "./types/profiles";
+import { Profile, Profiles } from "./types/settings";
 import { RowName } from "./types/board";
 
 export const SQUARES_PER_ROW = 5;
@@ -52,7 +52,7 @@ export const ROWS_PER_INDEX: { [key: number]: RowName[] } = {
 };
 
 // default profiles for the generator settings
-// see the Profile type in src/types/profiles.ts for more details on what each setting does
+// see the Profile type in src/types/settings.ts for more details on what each setting does
 const STANDARD_PROFILE: Profile = {
   minimumSynergy: -3,
   maximumSynergy: 7,

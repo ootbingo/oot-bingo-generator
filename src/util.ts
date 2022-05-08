@@ -1,6 +1,6 @@
 import { BingoList, Goal, GoalList } from "./types/goalList";
 import { SynergyFilters } from "./types/synergies";
-import { Mode } from "./types/profiles";
+import { Mode } from "./types/settings";
 
 /**
  * Sorts an array of goals first by time, then by id.

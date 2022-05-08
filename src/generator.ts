@@ -1,7 +1,7 @@
 import { Card, RowName, Square } from "./types/board";
 import { Goal, GoalList } from "./types/goalList";
 import { Synergies, SynergyFilters } from "./types/synergies";
-import { Mode, Profile, Profiles } from "./types/profiles";
+import { Mode, Profile } from "./types/settings";
 import { generateMagicSquare } from "./magicSquare";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";
@@ -11,12 +11,7 @@ import {
   sortAscending,
   sortDescending,
 } from "./util";
-import {
-  DEFAULT_PROFILES,
-  INDICES_PER_ROW,
-  ROWS_PER_INDEX,
-  SQUARE_POSITIONS,
-} from "./definitions";
+import { INDICES_PER_ROW, ROWS_PER_INDEX, SQUARE_POSITIONS } from "./definitions";
 
 export default class BingoGenerator {
   readonly isBlackout: boolean;
@@ -30,18 +25,15 @@ export default class BingoGenerator {
 
   readonly synergyCalculator: SynergyCalculator;
 
-  constructor(goalList: GoalList, seed: number, mode: Mode, profiles?: Profiles) {
+  constructor(goalList: GoalList, seed: number, mode: Mode, profile: Profile) {
     this.isBlackout = mode === "blackout" || mode === "shortBlackout";
-
+    this.profile = profile;
     this.rng = new RNG(seed);
     this.magicSquare = generateMagicSquare(seed);
 
+    this.allGoals = flattenGoalList(goalList);
     this.rowtypeTimeSave = goalList.rowtypes;
     this.synergyFilters = parseSynergyFilters(goalList.synfilters);
-
-    this.allGoals = flattenGoalList(goalList);
-
-    this.profile = profiles ? profiles[mode] : DEFAULT_PROFILES[mode];
 
     this.synergyCalculator = new SynergyCalculator(
       this.profile,
@@ -356,7 +348,7 @@ export default class BingoGenerator {
       .map((goal) => ({
         goal,
         sortVal:
-          (goal.weight || 0) +
+          (goal.weight ?? 0) +
           this.rng.nextRandom() +
           this.rng.nextRandom() +
           this.rng.nextRandom() +

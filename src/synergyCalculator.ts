@@ -5,7 +5,7 @@ import {
   SynergyFilters,
   SynergyType,
 } from "./types/synergies";
-import { Profile } from "./types/profiles";
+import { Profile } from "./types/settings";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
 import { SQUARES_PER_ROW } from "./definitions";
 

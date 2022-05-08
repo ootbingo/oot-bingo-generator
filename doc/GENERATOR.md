@@ -76,7 +76,7 @@ Note that from now on, the term 'square' will indicate one tile of the board.
 Now, to know what goals can go in what squares, we need to convert the difficulty of each square to an actual time in
 minutes. That is accomplished by multiplying by the `timePerDifficulty` constant. All constants that the generator uses
 are defined in [definitions.ts](/src/definitions.ts). There are profiles with different constants for each type of bingo
-card. In [types/profiles.ts](/src/types/profiles.ts) you can find a short explanation on each parameter.
+card. In [types/settings.ts](/src/types/settings.ts) you can find a short explanation on each parameter.
 
 ### Desired time
 

@@ -15,21 +15,19 @@ console.log(`Generated after ${card.meta.iterations} iteration(s):`);
 console.log(card.goals.map((goal) => goal.name));
 
 // overwrite some of the generator settings of the default normal profile and generate another card
-const customProfiles = {
-  ...DEFAULT_PROFILES,
-  normal: {
-    ...DEFAULT_PROFILES.normal,
-    minimumSynergy: -5,
-    maximumSynergy: 9,
-    maximumIndividualSynergy: 4,
-    useFrequencyBalancing: false,
-  },
+const customProfile = {
+  ...DEFAULT_PROFILES.normal,
+  minimumSynergy: -5,
+  maximumSynergy: 9,
+  maximumIndividualSynergy: 4,
+  useFrequencyBalancing: false,
 };
-const cardCustomProfile = generateCard(bingoList, mode, seed, customProfiles);
+
+const cardCustomProfile = generateCard(bingoList, mode, seed, customProfile);
 console.log(`Generated after ${card.meta.iterations} iteration(s):`);
 console.log(cardCustomProfile.goals.map((goal) => goal.name));
 
 // run a goal frequency analysis on 100 boards (uncomment next 3 lines)
 // import { frequencyAnalysis } from "./frequencyAnalysis";
-// const frequencies = frequencyAnalysis(200, "normal", bingoList);
+// const frequencies = frequencyAnalysis(200, bingoList, "normal");
 // console.log(frequencies);
