@@ -16,15 +16,15 @@
 
 ## Introduction
 
-This document dives into the calculation of the total synergy of a row. It follows along the code
-in [synergyCalculator.ts](/src/synergyCalculator.ts), so it's handy to have that open while reading. However, it's not
-very difficult to understand the steps without having programming knowledge.
+This document dives into the calculation of the total synergy of a row. It follows the code
+in [synergyCalculator.ts](/src/synergyCalculator.ts) step-by-step, so it's handy to have that open while reading.
+However, it's not very difficult to understand the steps without having programming knowledge.
 
 It's recommended to read the [Generator documentation](/doc/GENERATOR.md) before this one, so that you have a general
-idea what the generator does. The synergy calculation is one specific part of the generator that this doc zooms further
-into. Additionally, it's a good idea to read through the [Balancing documentation](/doc/BALANCING.md), since it explains
-a lot of concepts that are also used in the synergy calculator. Whenever that is the case, this doc will refer back to
-the Balancing documentation.
+idea of what the generator does. The synergy calculation is one specific part of the generator that this doc zooms
+further into. Additionally, it's a good idea to read through the [Balancing documentation](/doc/BALANCING.md), since it
+explains a lot of concepts that are also used in the synergy calculator. Whenever that is the case, this doc will refer
+back to the Balancing documentation.
 
 ## The row
 
@@ -36,12 +36,12 @@ Imagine we have a row with the following five goals:
 * *6 Gold Rupees*
 * *Desert Colossus HP*
 
-We're going to calculate the total amount of synergy of this row. To do this we need to know all the individual synergy
+We're going to calculate the total amount of synergy in this row. To do this, we need to know all the individual synergy
 values of the goals in it. We can find those in the goal list; shown below is a simplified version of the list with just
 these five goals. A few synergies and properties have been removed to keep the example from becoming too complex, but
 the values are realistic:
 
-```js
+```ts
 const goals = [
   {
     goal: "Silver Scale",
@@ -99,19 +99,18 @@ const goals = [
 ]
 ```
 
-When the generator considers a new goal for a square, it calculates the synergy of all rows it will be in. For example,
-if it tries to put a goal on the top-left square, it calculates the synergy of `row 1`
+When the generator considers a new goal for a square, it calculates the synergy of all the rows it will be in. For
+example, if it tries to put a goal on the top-left square, it calculates the synergy of `row 1`
 , `col 1` and `tlbr`. For each of these, the function `calculateSynergyOfSquares()`
 in [synergyCalculator.ts](/src/synergyCalculator.ts) is called with the potential square and any other squares that were
 already put in that row.
 
-In this doc we're calculating the synergy for a complete row with five goals. During generation of a board that would
-happen when the final goal is added to a row, so for the example row you can imagine that one of the goals (e.g. *Defeat
-Meg*) is being considered as the potential final goal while the others were already picked.
+In this doc we're calculating the synergy for a complete row with five goals. During generation, that would happen when
+the final goal is added to a row. So for the example row you can imagine that one of the goals (e.g. *Defeat Meg*) is
+being considered as the potential final goal while the others have already been picked.
 
-The function `calculateSynergyOfSquares()` is the only public function of the synergy calculator class. The following
-sections go over the steps this function takes in detail, and show what the helper functions that are being called
-return.
+The only public function of the synergy calculator class is `calculateSynergyOfSquares()`. The following sections go
+over the steps this function takes in detail and show what the helper functions that are being called return.
 
 ## Merging synergies
 
@@ -119,10 +118,10 @@ First, the generator merges the synergies for each type with `mergeSynergiesOfSq
 
 ### Merging type synergies
 
-For the **type synergies** this results in the following object. Basically for each synergy category (that appears in at
-least one of the five goals) it lists all the type synergies in the row.
+For the **type synergies** this results in the following object. Basically, for each synergy category (that appears in
+at least one of the five goals), it lists all the type synergies in the row.
 
-```js
+```ts
 const typeSynergiesOfSquares = {
   forest: [3],
   hovers: [2],
@@ -138,15 +137,15 @@ const typeSynergiesOfSquares = {
 }
 ```
 
-This shows that there is only one goal with `hovers` type synergy (*Defeat Meg*), two goals with `spirit` type
-synergy (*6 Gold Rupees* and *Bombchu Chest in Spirit*), and that all the goals have `selfsynergy`. Compare this to the
-goal list [from earlier](#the-row) to verify all the type synergies are here.
+Only one of the five goals has `hovers` type synergy (*Defeat Meg*), two goals have `spirit` type synergy (*6 Gold
+Rupees* and *Bombchu Chest in Spirit*), and all the goals have `selfsynergy`. Compare this to the goal
+list [from earlier](#the-row) to verify all the type synergies are here.
 
 ### Merging subtype synergies
 
 The merged **subtype synergies** work similarly:
 
-```js
+```ts
 const subtypeSynergiesOfSquares = {
   compass: [4, 1, 2, 1],
   map: [2.5, 2, 6, 3],
@@ -163,11 +162,11 @@ have `skulls` subtype synergy.
 
 Now it's time to merge the **types** and **subtypes** together to get the **unified type synergies**. As explained in
 the [balancing doc](/doc/BALANCING.md), subtype synergies only count when a corresponding type is present.
-So `unifyTypeSynergies()` looks at the types of [`typeSynergiesOfSquares`](#merging-type-synergies) and adds the
+So `unifyTypeSynergies()` takes the types of [`typeSynergiesOfSquares`](#merging-type-synergies) and adds the
 corresponding subtypes from [`subtypeSynergiesOfSquares`](#merging-subtype-synergies); the remaining subtypes are
 dropped.
 
-```js
+```ts
 const unifiedTypeSynergies = {
   forest: [3],
   hovers: [2, 1, 1],
@@ -191,7 +190,7 @@ to [`typeSynergiesOfSquares`](#merging-type-synergies).
 
 The **rowtype synergies** of the five goals are also collected into one object:
 
-```js
+```ts
 const rowtypeSynergiesOfSquares = {
   bottle: [0.5, 0, 0, 0, 0],
   gclw: [1, 0, 1, 0, 0],
@@ -201,9 +200,9 @@ const rowtypeSynergiesOfSquares = {
 ```
 
 Each goal always has a value for every category of rowtype synergy, so they all have five numbers here. From the values
-for `bottle` it can be concluded that one of the goals would take half a minute longer if bottle is skipped in this row,
-but for the other goals it makes no difference. The two **100** values for `hookshot` mean that for two of the goals,
-it's never worth to skip hookshot (*Defeat Meg* and *6 Gold Rupees*). For another goal it takes **2** minutes longer
+for `bottle`, it can be concluded that one of the goals would take half a minute longer if bottle is skipped in this
+row, but for the other goals it makes no difference. Because `hookshot` has two **100** values, it is never worth
+skipping hookshot for two of the goals (*Defeat Meg* and *6 Gold Rupees*). Another goal takes **2** minutes longer
 without
 (*Bombchu Chest in Spirit*). Rowtypes are explained in more detail in the [balancing doc](/doc/BALANCING.md).
 
@@ -211,9 +210,9 @@ without
 
 ### Filtering unified type synergies
 
-Now it's time for the generator to decide which of the synergy values are relevant to keep, by applying the **synergy
+Now it's time for the generator to decide which of the synergy values are relevant to keep by applying the **synergy
 filters**. The [balancing doc](/doc/BALANCING.md) describes in detail what they do, but in short: each synergy category
-has a filter which determines what synergy values are relevant. Almost all categories use the same standard filter which
+has a filter which determines what synergy values are relevant. Almost all categories use the same standard filter that
 removes the highest value from the list (`min -1`), but some use other filters.
 
 The function `filterTypeSynergies()` takes the [`unifiedTypeSynergies`](#unifying-subtype-synergies) and transforms each
@@ -230,15 +229,15 @@ that have a non-standard filter:
 }
 ```
 
-So for each category in [`unifiedTypeSynergies`](#unifying-subtype-synergies) the generator looks if it appears
-in `synergyFilters`, and if so, applies that filter. If it does not appear there, it applies the standard filter
-of `min -1` by removing the highest number from the synergies. In `filterForTypeCategory()` you see that for 'max'
-filters the values get sorted ascending, and for `min` filters descending. Then for filters with `filterValue` **n** it
-takes the first **n** values. For filters with **-n** it removes **n** values from the end.
+If any of the [`unifiedTypeSynergies`](#unifying-subtype-synergies) appear in `synergyFilters`, the generator applies
+that filter to its synergy values. The standard filter `min -1`, which removes the highest number from the synergies, is
+applied to categories that don't appear in `synergyFilters`. In `filterForTypeCategory()` you see that for 'max' filters
+the values get sorted ascending, and for `min` filters descending. Then it takes the first **n** values for filters
+with `filterValue` **n**. It removes **n** values from the end for filters with `filterValue` **-n**.
 
 The only category from the example that appears in `synergyFilters` is `botw`, so the `min 1` filter is applied to its
-values. All the other categories (`forest`, `hovers`, etc) just have their highest value removed, resulting in
-the `filteredTypeSynergies` below. A few categories like `forest`, `meg` and `gtg` have disappeared, because they only
+values. All the other categories (`forest`, `hovers`, etc.) just have their highest value removed, resulting in
+the `filteredTypeSynergies` below. A few categories, like `forest`, `meg` and `gtg` have disappeared, because they only
 had one synergy value. One goal with a synergy generally doesn't do anything, you need two for a synergy to be relevant.
 
 ```ts
@@ -262,10 +261,10 @@ const rowtypeTimeSave = { bottle: 2, gclw: 1, hookshot: 2.75, ms: 9.5 }
 
 ```
 
-Looking back at [`rowtypeSynergiesOfSquares`](#merging-rowtype-synergies), the only rowtype where the sum stays under
-the threshold is `bottle` with **0.5** minutes lost. That is less than the **2**-minute time save, so a total
-of `2 - 0.5 = 1.5` minutes can be saved by skipping bottle in this row. The `gclw` values sum up to **2** which is
-higher than the threshold of **1**, and the other rowtypes have **100** values making them impossible to do.
+Looking back at [`rowtypeSynergiesOfSquares`](#merging-rowtype-synergies), the only rowtype with a sum that is less than
+the threshold is `bottle`, with **0.5** minutes lost. That is less than the **2**-minute time save, so skipping bottle
+in this row saves a total of `2 - 0.5 = 1.5` minutes. The `gclw` values sum up to **2** which is higher than the
+threshold of **1**, and the other rowtypes have **100** values, making them impossible to do.
 
 ```ts
 const filteredRowtypeSynergies = {
@@ -273,7 +272,7 @@ const filteredRowtypeSynergies = {
 }
 ```
 
-Note that the code also allows for 'reverse' rowtype synergy. This would apply to rowtypes with a negative treshhold,
+Note that the code also allows for 'reverse' rowtype synergy. This would apply to rowtypes with a negative threshold,
 but there are currently none.
 
 ## Time differences
@@ -284,14 +283,14 @@ about the concept of desired time in more detail.
 
 In short, each square on the board has a **desired time**. This is the ideal length for a goal on that square in order
 to have a balanced board. The goals that get picked may be a little longer or shorter than the desired time. To
-compensate for that, the **time difference** gets added to the total synergy of the row. So if a row has goals that are
-all **1** minute too short, the row gets **5** minutes of time difference synergy and is already close to having the
-maximum synergy allowed. If a row has goals that are too long, the time difference gets subtracted from the total
-amount, meaning that the row has more room for additional synergies.
+compensate for that, the **time difference** gets added to the total synergy of the row. So, if a row's goals are all
+**1** minute too short, the row receives **5** minutes of time difference synergy and is already close to the maximum
+synergy allowed. If a row has goals that are too long, the time difference gets subtracted from the total amount,
+meaning that the row has more room for additional synergies.
 
 The time differences are computed by simply subtracting the goal duration from the desired time. The goal durations can
 be found in the [goal list](#the-row), and the desired time is defined by the row on the board (again, see the generator
-doc for more info). For the example row those look like this:
+doc for more info). For the example row, those look like this:
 
 |                               | desired time of square | goal duration | time difference |
 |-------------------------------|------------------------|---------------|----------------|
@@ -320,6 +319,6 @@ to
 None of the values are higher than 3.75, so the generator won't return `tooMuchSynergy`. Adding up all
 the `filteredTypeSynergies` values results into a total of **8** (`1 + 1 - 2 + 2.5 + 2.5 + 3`).
 The `filteredRowtypeSynergies` only have the `bottle` synergy of **1.5**, so adding that to the total makes **9.5**.
-Note that the current `maximumSynergy` parameter is set to 7, so this row would be rejected if we wouldn't have so many
+Note that the current `maximumSynergy` parameter is set to 7, so this row would be rejected if we didn't have so many
 negative time differences. But those add up to **-2.75**, resulting in a legal row with a final synergy amount of
 **6.75**, barely below the maximum!
