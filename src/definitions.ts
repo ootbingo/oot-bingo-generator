@@ -81,4 +81,13 @@ export const DEFAULT_PROFILES: Profiles = {
     baselineTime: 12,
     timePerDifficulty: 0.5,
   },
+  shortBlackout: {
+    ...STANDARD_PROFILE,
+    minimumSynergy: -4,
+    maximumSynergy: 4,
+    initialOffset: 2,
+    maximumOffset: 6,
+    baselineTime: 12,
+    timePerDifficulty: 0.5,
+  },
 };

@@ -97,7 +97,14 @@ export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | un
     const combinedBingoList = bingoList;
     if (combinedBingoList[mode]) {
       return combinedBingoList[mode];
-    } else if (combinedBingoList["normal"]) {
+    }
+    if (mode === "shortBlackout" && combinedBingoList["short"]) {
+      return combinedBingoList["short"];
+    }
+    if (combinedBingoList["normal"]) {
+      console.warn(
+        `Could not extract goal list for mode "${mode}", using the "normal" goal list instead.`
+      );
       return combinedBingoList["normal"];
     } else {
       throw Error(`Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);

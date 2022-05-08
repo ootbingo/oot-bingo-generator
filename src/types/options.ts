@@ -1,4 +1,4 @@
-export type Mode = "normal" | "blackout" | "short";
+export type Mode = "normal" | "blackout" | "short" | "shortBlackout";
 
 // 'name' is a legacy type, identical to 'english'
 type Language = "english" | "name" | "japanese";

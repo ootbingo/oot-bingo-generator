@@ -20,7 +20,7 @@ import {
 } from "./definitions";
 
 export default class BingoGenerator {
-  readonly options: Options;
+  readonly isBlackout: boolean;
   readonly profile: Profile;
   readonly rng: RNG;
   readonly magicSquare: number[];
@@ -32,10 +32,10 @@ export default class BingoGenerator {
   readonly synergyCalculator: SynergyCalculator;
 
   constructor(goalList: GoalList, options: Options, profiles?: Profiles) {
-    this.options = options;
+    this.isBlackout = options.mode === "blackout" || options.mode === "shortBlackout";
 
     this.rng = new RNG(options.seed);
-    this.magicSquare = generateMagicSquare(this.options.seed);
+    this.magicSquare = generateMagicSquare(options.seed);
 
     this.rowtypeTimeSave = goalList.rowtypes;
     this.synergyFilters = parseSynergyFilters(goalList.synfilters);
@@ -136,7 +136,7 @@ export default class BingoGenerator {
         };
 
         if (
-          this.options.mode === "blackout" &&
+          this.isBlackout &&
           this.#hasConflictsOnBoard(squareWithPotentialGoal, bingoBoard)
         ) {
           continue;
