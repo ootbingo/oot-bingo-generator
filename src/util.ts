@@ -1,6 +1,6 @@
 import { BingoList, Goal, GoalList } from "./types/goalList";
 import { SynergyFilters } from "./types/synergies";
-import { Mode } from "./types/options";
+import { Mode } from "./types/profiles";
 
 /**
  * Sorts an array of goals first by time, then by id.
@@ -102,9 +102,6 @@ export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | un
       return combinedBingoList["short"];
     }
     if (combinedBingoList["normal"]) {
-      console.warn(
-        `Could not extract goal list for mode "${mode}", using the "normal" goal list instead.`
-      );
       return combinedBingoList["normal"];
     } else {
       throw Error(`Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);

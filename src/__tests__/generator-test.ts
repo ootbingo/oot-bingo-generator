@@ -1,4 +1,3 @@
-import { Options } from "../types/options";
 import { generateCard } from "../index";
 
 describe("generator", () => {
@@ -6,12 +5,7 @@ describe("generator", () => {
 
   describe("generating goals", () => {
     it("generates a normal v10.1 card with correct goals", () => {
-      const options: Options = {
-        seed: 142536,
-        mode: "normal",
-        language: "english",
-      };
-      const card = generateCard(bingoList, options);
+      const card = generateCard(bingoList, "normal", 142536);
 
       const goalNames = card.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
@@ -44,12 +38,7 @@ describe("generator", () => {
     });
 
     it("generates a blackout v10.1 card with correct goals", () => {
-      const options: Options = {
-        seed: 142536,
-        mode: "blackout",
-        language: "english",
-      };
-      const card = generateCard(bingoList, options);
+      const card = generateCard(bingoList, "blackout", 142536);
 
       const goalNames = card.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
@@ -82,12 +71,7 @@ describe("generator", () => {
     });
 
     it("generates a short v10.1 card with correct goals", () => {
-      const options: Options = {
-        seed: 142536,
-        mode: "short",
-        language: "english",
-      };
-      const card = generateCard(bingoList, options);
+      const card = generateCard(bingoList, "short", 142536);
 
       const goalNames = card.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
@@ -130,12 +114,7 @@ describe("generator", () => {
     ])(
       "v10.1 card with seed %s has correct metadata with %s iterations",
       (seed: number, expectedIterations: number) => {
-        const options: Options = {
-          seed: seed,
-          mode: "normal",
-          language: "english",
-        };
-        const card = generateCard(bingoList, options);
+        const card = generateCard(bingoList, "normal", seed);
 
         expect(card.meta.iterations).toBe(expectedIterations);
       }

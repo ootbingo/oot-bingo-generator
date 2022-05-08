@@ -1,4 +1,4 @@
-import { Mode } from "./options";
+export type Mode = "normal" | "blackout" | "short" | "shortBlackout";
 
 // profile with the settings for the generator
 export type Profile = {

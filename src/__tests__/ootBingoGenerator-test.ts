@@ -1,16 +1,10 @@
-import { Options } from "../types/options";
 import { ootBingoGenerator } from "../index";
 
 describe("ootBingoGenerator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
 
   it("generates a normal v10.1 card with correct goals", () => {
-    const options: Options = {
-      seed: 142536,
-      mode: "normal",
-      language: "english",
-    };
-    const card = ootBingoGenerator(bingoList, options);
+    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "normal" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
@@ -46,12 +40,7 @@ describe("ootBingoGenerator", () => {
   });
 
   it("generates a blackout v10.1 card with correct goals", () => {
-    const options: Options = {
-      seed: 142536,
-      mode: "blackout",
-      language: "english",
-    };
-    const card = ootBingoGenerator(bingoList, options);
+    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "blackout" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
@@ -87,12 +76,7 @@ describe("ootBingoGenerator", () => {
   });
 
   it("generates a short v10.1 card with correct goals", () => {
-    const options: Options = {
-      seed: 142536,
-      mode: "short",
-      language: "english",
-    };
-    const card = ootBingoGenerator(bingoList, options);
+    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "short" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {

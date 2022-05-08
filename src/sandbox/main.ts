@@ -1,6 +1,4 @@
 import { bingoList } from "./example-goal-list";
-import { frequencyAnalysis } from "./frequencyAnalysis";
-import { Options } from "../types/options";
 import { DEFAULT_PROFILES } from "../definitions";
 import { generateCard } from "../index";
 
@@ -9,12 +7,10 @@ import { generateCard } from "../index";
 // edit this code or add your own to experiment with the generator!
 
 // generate a card
-const options: Options = {
-  seed: 112233,
-  mode: "normal",
-  language: "english",
-};
-const card = generateCard(bingoList, options);
+const mode = "normal";
+const seed = 112233;
+
+const card = generateCard(bingoList, mode, seed);
 console.log(`Generated after ${card.meta.iterations} iteration(s):`);
 console.log(card.goals.map((goal) => goal.name));
 
@@ -29,10 +25,11 @@ const customProfiles = {
     useFrequencyBalancing: false,
   },
 };
-const cardCustomProfile = generateCard(bingoList, options, customProfiles);
+const cardCustomProfile = generateCard(bingoList, mode, seed, customProfiles);
 console.log(`Generated after ${card.meta.iterations} iteration(s):`);
 console.log(cardCustomProfile.goals.map((goal) => goal.name));
 
-// run a goal frequency analysis on 100 boards (uncomment next two lines)
+// run a goal frequency analysis on 100 boards (uncomment next 3 lines)
+// import { frequencyAnalysis } from "./frequencyAnalysis";
 // const frequencies = frequencyAnalysis(200, "normal", bingoList);
 // console.log(frequencies);

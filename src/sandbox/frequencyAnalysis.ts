@@ -1,6 +1,5 @@
-import { Mode, Options } from "../types/options";
 import { BingoList } from "../types/goalList";
-import { Profiles } from "../types/profiles";
+import { Mode, Profiles } from "../types/profiles";
 import { generateCard } from "../index";
 
 export function frequencyAnalysis(
@@ -11,11 +10,6 @@ export function frequencyAnalysis(
   startSeed?: number
 ) {
   startSeed = startSeed || 0;
-  const freqOptions: Options = {
-    seed: 0,
-    mode: mode,
-    language: "english",
-  };
 
   const frequencies: { [key: string]: number } = {};
 
@@ -25,14 +19,7 @@ export function frequencyAnalysis(
       console.log(`Processed ${seed - startSeed} boards... (seed ${seed})`);
     }
 
-    const card = generateCard(
-      bingoList,
-      {
-        ...freqOptions,
-        seed: seed,
-      },
-      profiles
-    );
+    const card = generateCard(bingoList, mode, seed, profiles);
     for (const goal of card.goals) {
       if (!Object.keys(frequencies).includes(goal.name)) {
         frequencies[goal.name] = 0;
