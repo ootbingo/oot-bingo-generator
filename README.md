@@ -1,27 +1,30 @@
 # oot-bingo-generator-ts
 
 Generator for OoT Bingo in TypeScript. Rewritten from the original generator by saltor et al. It generates the exact
-same boards as the generator that is currently in use, but aims to be more readable and more easily extensible.
+same boards as the previous generator did, but should be easier to read and extend.
 
 ## Documentation
 
 Click on these links for in-depth explanations:
 
-### :gear: [The generator](/doc/GENERATOR.md)
+### :gear: [The Generator](/doc/GENERATOR.md)
 
 Explains how bingo boards are generated, with examples. The text points to the code a few times, but can be read without
-having any programming knowledge. It's a *strongly recommended* read if you're new to the bingo generator!
+having any programming knowledge. It's a *strongly recommended* read if you're new to the bingo generator! Includes
+topics like the *magic square*, *desired goal times*, *difficulty* and *picking goals*.
 
 ### :balance_scale: [Balancing (bingo sheet)](/doc/BALANCING.md)
 
 Everything you need to know about the
 [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247).
-Goes in detail over the different synergy types, the columns on the sheet, and the goal list format. Recommended if
-you're interested in balancing!
+Goes in detail over the different synergy types, synergy filters, the columns on the sheet, and the goal list format.
+Recommended if you're interested in balancing!
 
 ### :abacus: [Synergy Calculation](/doc/SYNERGY_CALCULATION.md)
 
-Work in progress!
+How to calculate the total synergy of a row. Follows the code of the synergy calculator step-by-step with examples.
+Having coding knowledge helps, but it shouldn't be too hard to follow without either. Recommended read after the
+generator document.
 
 ## Install
 
@@ -48,7 +51,7 @@ To run the tests:
 npm test
 ```
 
-The tests verify that the generator generates the exact same boards as the current v10.1 live version does.
+The tests verify that the generator generates the exact same boards as the current `v10.1` live version does.
 
 ## Build
 
@@ -75,7 +78,7 @@ easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
 
 ## Help wanted
 
-If anything is missing, wrong or incomplete, feel free to let someone of the Bingo community know! You could also open
+If anything is missing, wrong, or incomplete, feel free to let someone in the Bingo community know! You could also open
 an issue or a pull request. A few things that would be nice to add to this project are:
 
 * [BALANCING.md](/doc/BALANCING.md): add explanations on what the less obvious synergy columns are for (`childchu`
