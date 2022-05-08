@@ -103,6 +103,39 @@ describe("generator", () => {
       ]);
     });
 
+    it("generates a short blackout v10.1 card with correct goals", () => {
+      const card = generateCard(bingoList, "shortBlackout", 142536);
+
+      const goalNames = card.goals.map((goal) => goal.name);
+      expect(goalNames).toEqual([
+        "All 3 Skulltulas in Bottom of the Well",
+        "Defeat a White Wolfos",
+        "Both Hyrule Field area Skulltulas",
+        "1 Skulltula from each Child Dungeon",
+        "Plant bean in Death Mountain Crater",
+        "Skull Mask",
+        "Defeat Queen Gohma",
+        "Bottled Fairy",
+        "Both Child Wasteland/ Colossus area Skulltulas",
+        "Get Bombchu chest in Spirit Temple",
+        "All 5 Skulltulas in Dodongo's Cavern",
+        "Gerudo's Card",
+        "6 Hearts",
+        "Ruto's Letter",
+        "Lost Dog HP",
+        "Defeat all Lizalfos in Dodongo's Cavern",
+        "Map & Compass in Bottom of the Well",
+        "Epona's Song",
+        "15 Different Skulltulas",
+        "8 Magic Beans",
+        "All 4 Lon Lon Ranch area Skulltulas",
+        "Zora's Sapphire",
+        "Both Child Gerudo Valley area Skulltulas",
+        "Open 3 gold rupee chests",
+        "30 Deku Sticks",
+      ]);
+    });
+
     it("generates a normal v10.1 card with correct goals, using a custom profile", () => {
       const customProfile = {
         minimumSynergy: -4,
