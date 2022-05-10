@@ -53,16 +53,16 @@ npm test
 
 The tests verify that the generator generates the exact same boards as the current `v10.1` live version does.
 
-## Build
+## Bundle
 
 To bundle the generator code into a single, minified JS file (to be used for bingo versions in production):
 
 ```bash
-npm run build
+npm run bundle
 ```
 
-The generated file can be found in `dist/generator.js`. After importing this script in javascript code, the main
-generator functions in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
+The generated file can be found in `dist/generator.js`. After putting this script in the html, the main generator
+functions in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
 e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
 
 ## Generating cards
