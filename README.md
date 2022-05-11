@@ -1,7 +1,7 @@
-# oot-bingo-generator-ts
+# oot-bingo-generator
 
-Generator for OoT Bingo in TypeScript. Rewritten from the original generator by saltor et al. It generates the exact
-same boards as the previous generator did, but should be easier to read and extend.
+Generator for OoT Bingo, written in TypeScript. Based on the original bingo generator by saltor et al. It generates the
+exact same boards as the previous generator did, but should be easier to read and extend.
 
 ## Documentation
 

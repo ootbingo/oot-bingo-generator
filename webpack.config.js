@@ -5,7 +5,7 @@ module.exports = {
   entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "generator.js", // <--- Will be compiled to this single file
+    filename: "generator.js",
     clean: true,
     library: "BingoLibrary",
   },

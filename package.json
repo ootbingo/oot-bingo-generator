@@ -1,9 +1,12 @@
 {
-  "name": "bingo-generator-ts",
-  "version": "1.0.0",
-  "description": "Generator for OoT Bingo in TypeScript",
+  "name": "oot-bingo-generator",
+  "version": "1.0.1",
+  "description": "Generator for OoT Bingo",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
   "scripts": {
     "start": "ts-node src/sandbox/main.ts",
     "test": "jest",
@@ -11,15 +14,11 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xwmtp/oot-bingo-generator.git"
+    "url": "git+https://github.com/ootbingo/oot-bingo-generator.git"
   },
   "keywords": [
     "oot",
@@ -28,14 +27,11 @@
     "speedrun"
   ],
   "author": "",
-  "license": "GPL3",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/xwmtp/oot-bingo-generator/issues"
   },
   "homepage": "https://github.com/xwmtp/oot-bingo-generator#readme",
-  "files": [
-    "lib/**/*"
-  ],
   "devDependencies": {
     "@babel/preset-env": "^7.15.6",
     "@types/eslint": "^8.4.2",
