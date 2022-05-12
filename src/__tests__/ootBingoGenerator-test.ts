@@ -3,12 +3,12 @@ import { ootBingoGenerator } from "../index";
 describe("ootBingoGenerator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
 
-  it("generates a normal v10.1 card with correct goals", () => {
-    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "normal" });
+  it("generates a normal v10.1 board with correct goals", () => {
+    const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "normal" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
-      goalNames.push(card[position].name);
+      goalNames.push(board[position].name);
     }
     expect(goalNames).toEqual([
       "4 Maps",
@@ -35,16 +35,16 @@ describe("ootBingoGenerator", () => {
       "All 3 Elemental Arrows",
       "7 Magic Beans",
       "Blue Potion",
-      "20 Different Skulltulas",
+      "20 Different Skulltulas"
     ]);
   });
 
-  it("generates a blackout v10.1 card with correct goals", () => {
-    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "blackout" });
+  it("generates a blackout v10.1 board with correct goals", () => {
+    const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "blackout" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
-      goalNames.push(card[position].name);
+      goalNames.push(board[position].name);
     }
     expect(goalNames).toEqual([
       "All 4 Skulltulas in Jabu-Jabu",
@@ -71,16 +71,16 @@ describe("ootBingoGenerator", () => {
       "Map & Compass in Spirit Temple",
       "All 4 Gerudo Valley area Skulltulas",
       "Ruto's Letter",
-      "Open the Final Door of Light Trial",
+      "Open the Final Door of Light Trial"
     ]);
   });
 
-  it("generates a short v10.1 card with correct goals", () => {
-    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "short" });
+  it("generates a short v10.1 board with correct goals", () => {
+    const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "short" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
-      goalNames.push(card[position].name);
+      goalNames.push(board[position].name);
     }
     expect(goalNames).toEqual([
       "Map & Compass in Bottom of the Well",
@@ -107,16 +107,16 @@ describe("ootBingoGenerator", () => {
       "Plant 7 Magic Beans",
       "3 unused keys in Gerudo Training Grounds",
       "Bottled Fairy",
-      "30 Deku Sticks",
+      "30 Deku Sticks"
     ]);
   });
 
-  it("generates a short blackout v10.1 card with correct goals", () => {
-    const card = ootBingoGenerator(bingoList, { seed: 142536, mode: "shortBlackout" });
+  it("generates a short blackout v10.1 board with correct goals", () => {
+    const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "shortBlackout" });
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
-      goalNames.push(card[position].name);
+      goalNames.push(board[position].name);
     }
     expect(goalNames).toEqual([
       "All 3 Skulltulas in Bottom of the Well",
@@ -143,7 +143,7 @@ describe("ootBingoGenerator", () => {
       "Zora's Sapphire",
       "Both Child Gerudo Valley area Skulltulas",
       "Open 3 gold rupee chests",
-      "30 Deku Sticks",
+      "30 Deku Sticks"
     ]);
   });
 });

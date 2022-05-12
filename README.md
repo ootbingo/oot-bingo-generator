@@ -34,7 +34,7 @@ npm install
 
 ## Run
 
-To run the sandbox code which generates cards using an example goal list (v10.1), run:
+To run the sandbox code which generates boards using an example goal list (v10.1), run:
 
 ```bash
 npm start
@@ -65,16 +65,16 @@ The generated file can be found in `dist/generator.js`. After putting this scrip
 functions in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
 e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
 
-## Generating cards
+## Generating boards
 
-The main functions for generating a card are located in [src/index.ts](/src/index.ts).
+The main functions for generating a board are located in [src/index.ts](/src/index.ts).
 
-The `ootBingoGenerator()` function returns cards in the exact same legacy format that is expected by the current bingo
+The `ootBingoGenerator()` function returns boards in the exact same legacy format that is expected by the current bingo
 versions on [Github](https://github.com/ootbingo/bingo). The `bingoGenerator()` function is a wrapper and returns the
 same thing, but this is the name that is being used by [BingoSync](https://bingosync.com).
 
-It's recommended to use the `generateCard()` function when generating cards yourself. If you want to try it out, you can
-easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
+It's recommended to use the `generateBoard()` function when generating boards yourself. If you want to try it out, you
+can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
 
 ## Help wanted
 

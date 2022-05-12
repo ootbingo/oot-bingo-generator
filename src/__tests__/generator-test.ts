@@ -1,13 +1,13 @@
-import { generateCard } from "../index";
+import { generateBoard } from "../index";
 
 describe("generator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
 
   describe("generating goals", () => {
-    it("generates a normal v10.1 card with correct goals", () => {
-      const card = generateCard(bingoList, "normal", 142536);
+    it("generates a normal v10.1 board with correct goals", () => {
+      const board = generateBoard(bingoList, "normal", 142536);
 
-      const goalNames = card.goals.map((goal) => goal.name);
+      const goalNames = board.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
         "4 Maps",
         "Saria's Song",
@@ -33,14 +33,14 @@ describe("generator", () => {
         "All 3 Elemental Arrows",
         "7 Magic Beans",
         "Blue Potion",
-        "20 Different Skulltulas",
+        "20 Different Skulltulas"
       ]);
     });
 
-    it("generates a blackout v10.1 card with correct goals", () => {
-      const card = generateCard(bingoList, "blackout", 142536);
+    it("generates a blackout v10.1 board with correct goals", () => {
+      const board = generateBoard(bingoList, "blackout", 142536);
 
-      const goalNames = card.goals.map((goal) => goal.name);
+      const goalNames = board.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
         "All 4 Skulltulas in Jabu-Jabu",
         "All 5 Lake Hylia Skulltulas",
@@ -66,14 +66,14 @@ describe("generator", () => {
         "Map & Compass in Spirit Temple",
         "All 4 Gerudo Valley area Skulltulas",
         "Ruto's Letter",
-        "Open the Final Door of Light Trial",
+        "Open the Final Door of Light Trial"
       ]);
     });
 
-    it("generates a short v10.1 card with correct goals", () => {
-      const card = generateCard(bingoList, "short", 142536);
+    it("generates a short v10.1 board with correct goals", () => {
+      const board = generateBoard(bingoList, "short", 142536);
 
-      const goalNames = card.goals.map((goal) => goal.name);
+      const goalNames = board.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
         "Map & Compass in Bottom of the Well",
         "5 unused keys in Gerudo Training Grounds",
@@ -99,14 +99,14 @@ describe("generator", () => {
         "Plant 7 Magic Beans",
         "3 unused keys in Gerudo Training Grounds",
         "Bottled Fairy",
-        "30 Deku Sticks",
+        "30 Deku Sticks"
       ]);
     });
 
-    it("generates a short blackout v10.1 card with correct goals", () => {
-      const card = generateCard(bingoList, "shortBlackout", 142536);
+    it("generates a short blackout v10.1 board with correct goals", () => {
+      const board = generateBoard(bingoList, "shortBlackout", 142536);
 
-      const goalNames = card.goals.map((goal) => goal.name);
+      const goalNames = board.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
         "All 3 Skulltulas in Bottom of the Well",
         "Defeat a White Wolfos",
@@ -132,11 +132,11 @@ describe("generator", () => {
         "Zora's Sapphire",
         "Both Child Gerudo Valley area Skulltulas",
         "Open 3 gold rupee chests",
-        "30 Deku Sticks",
+        "30 Deku Sticks"
       ]);
     });
 
-    it("generates a normal v10.1 card with correct goals, using a custom profile", () => {
+    it("generates a normal v10.1 board with correct goals, using a custom profile", () => {
       const customProfile = {
         minimumSynergy: -4,
         maximumSynergy: 9,
@@ -146,11 +146,11 @@ describe("generator", () => {
         baselineTime: 24.75,
         timePerDifficulty: 0.75,
         tooMuchSynergy: 100,
-        useFrequencyBalancing: false,
+        useFrequencyBalancing: false
       };
-      const card = generateCard(bingoList, "normal", 142536, customProfile);
+      const board = generateBoard(bingoList, "normal", 142536, customProfile);
 
-      const goalNames = card.goals.map((goal) => goal.name);
+      const goalNames = board.goals.map((goal) => goal.name);
       expect(goalNames).toEqual([
         "Ganon's Castle Boss Key",
         "Farore's Wind",
@@ -176,7 +176,7 @@ describe("generator", () => {
         "Both Rusty Switches in Spirit Temple",
         "7 Magic Beans",
         "All 3 Skulltulas in Ice Cavern",
-        "Silver Gauntlets",
+        "Silver Gauntlets"
       ]);
     });
   });
@@ -187,13 +187,13 @@ describe("generator", () => {
       [816607, 5],
       [289166, 2],
       [849242, 1],
-      [822884, 10],
+      [822884, 10]
     ])(
-      "v10.1 card with seed %s has correct metadata with %s iterations",
+      "v10.1 board with seed %s has correct metadata with %s iterations",
       (seed: number, expectedIterations: number) => {
-        const card = generateCard(bingoList, "normal", seed);
+        const board = generateBoard(bingoList, "normal", seed);
 
-        expect(card.meta.iterations).toBe(expectedIterations);
+        expect(board.meta.iterations).toBe(expectedIterations);
       }
     );
   });

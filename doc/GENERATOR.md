@@ -30,8 +30,8 @@ squares of `row 1`, the next **5** to the squares of `row 2`, et cetera.
 
 ## Magic Square
 
-The first step to generating a card is calculating a **5x5** [magic square](https://en.wikipedia.org/wiki/Magic_square).
-In a magic square, the sum of the numbers in each row, column, and diagonal is the same. For bingo cards, the numbers
+The first step to generating a board is calculating a **5x5** [magic square](https://en.wikipedia.org/wiki/Magic_square)
+. In a magic square, the sum of the numbers in each row, column, and diagonal is the same. For bingo boards, the numbers
 **1** to **25** are used to fill each position of the square, all only appearing once. The sum of each possible row,
 column, or diagonal is equal to **65**.
 
@@ -76,7 +76,7 @@ Note that from now on, the term 'square' will indicate one tile of the board.
 Now, to know what goals can go in what squares, we need to convert the difficulty of each square to an actual time in
 minutes. That is accomplished by multiplying by the `timePerDifficulty` constant. All constants that the generator uses
 are defined in [definitions.ts](/src/definitions.ts). There are profiles with different constants for each type of bingo
-card. In [types/settings.ts](/src/types/settings.ts) you can find a short explanation on each parameter.
+board. In [types/settings.ts](/src/types/settings.ts) you can find a short explanation on each parameter.
 
 ### Desired time
 
@@ -89,7 +89,7 @@ containing the calculated `desiredTime` and the unchanged `difficulty` for refer
 
 ### Example
 
-For normal bingo cards, the `timePerDifficulty` is equal to **0.75**. Continuing the earlier example, the first square,
+For normal bingo boards, the `timePerDifficulty` is equal to **0.75**. Continuing the earlier example, the first square,
 with the number **21**, gets a **desired time** of  **15.75** (`21 * 0.75`), i.e. **15m45s**. The second square gets a
 desired time of **11.25** (`15 * 0.75`). Doing this for all squares results in the following
 **desired times** (in minutes):
@@ -191,8 +191,8 @@ maximum. If none of the goals within this increased range fits, the generator wo
 
 Generating blackout boards is actually very similar to generating normal boards. Different parameters are being given to
 the generator, but it still uses a magic square and looks at synergies like a normal board. This way, the boards have a
-nice distribution of short and long goals. In addition, it makes the total duration of a blackout card not vary too much
-between seeds.
+nice distribution of short and long goals. In addition, it makes the total duration of a blackout board not vary too
+much between seeds.
 
 The *only* difference in the generator itself, apart from these different parameters, is the `hasConflictsOnBoard()`
 check. This check requires that any goal that gets picked does not have too much synergy with any other goal already on
@@ -235,7 +235,7 @@ cetera. The `baselineTime` is not actually used in the generator since it's the 
 The value **65** is the sum of the magic square numbers of a row. Multiplying by the `timePerDifficulty` gives the
 desired time of all the goals in the row.
 
-For normal cards of the bingo version `v10.1` the theoretical row length is equal to **1:13:30**:
+For normal boards of the bingo version `v10.1` the theoretical row length is equal to **1:13:30**:
 
 ```
 theoretical row length = 24.75 + 0.75 * 65 = 73.5

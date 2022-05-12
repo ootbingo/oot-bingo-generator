@@ -6,7 +6,7 @@ export type Square = {
   goal?: Goal;
 };
 
-export type Card = {
+export type Board = {
   goals: Goal[];
   meta: Meta;
 };
