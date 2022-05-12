@@ -3,12 +3,12 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: ["./src/index.ts", "./src/types/*", "./src/analysis/frequencyAnalysis.ts"],
+  entry: ["./src/index.ts"],
   output: {
-    path: path.resolve(__dirname, "./bundle"),
-    filename: "ootBingoGenerator.js",
+    path: path.resolve(__dirname, "./dist"),
+    filename: "generator.js",
     clean: true,
-    library: "OotBingoGenerator",
+    library: "BingoLibrary",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],

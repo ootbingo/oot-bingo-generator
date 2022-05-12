@@ -10,7 +10,7 @@
   "scripts": {
     "start": "ts-node src/sandbox/main.ts",
     "test": "jest",
-    "bundle": "npx webpack",
+    "bundle": "npx webpack --config webpack.config.bundle.js",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint tsconfig.json",

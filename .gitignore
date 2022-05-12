@@ -1,6 +1,7 @@
 # TypeScript output
 /build
 /dist
+/bundle
 
 # vs code
 .vscode
