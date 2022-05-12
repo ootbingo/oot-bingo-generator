@@ -1,5 +1,5 @@
 // example goal list (v10.1)
-export var bingoList = {
+export const exampleBingoList = {
   info: { combined: "true", version: "v10.1" },
   normal: {
     0: [],
@@ -14,7 +14,7 @@ export var bingoList = {
         subtypes: { bulletbag: -3 },
         time: 1,
         types: { incsword: 100, selfsynergy: 0, swords: 3 },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 1,
@@ -26,7 +26,7 @@ export var bingoList = {
         subtypes: { bbprize: 100, botw: -1, childchu: -2.5, quiver: -0.5 },
         time: 0,
         types: { bombbag: 100, selfsynergy: 0 },
-        weight: 0.20000000000000004,
+        weight: 0.20000000000000004
       },
       {
         difficulty: 1,
@@ -37,7 +37,7 @@ export var bingoList = {
         skill: 0,
         time: 0.75,
         types: { selfsynergy: 0, sticks: 100 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 1,
@@ -48,7 +48,7 @@ export var bingoList = {
         skill: 0,
         time: 0.75,
         types: { forest: 0.25, selfsynergy: 0 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 1,
@@ -59,7 +59,7 @@ export var bingoList = {
         skill: 0,
         time: 0.5,
         types: { selfsynergy: 0 },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 1,
@@ -71,7 +71,7 @@ export var bingoList = {
         subtypes: { hearts4: 1, strength: -1 },
         time: 0.5,
         types: { bulletbag: 100, selfsynergy: 0 },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 1,
@@ -83,7 +83,7 @@ export var bingoList = {
         subtypes: { songs5: 0.5 },
         time: 1,
         types: { forest: 0.5, selfsynergy: 0 },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 1,
@@ -95,7 +95,7 @@ export var bingoList = {
         subtypes: { ganonchu: -0.5 },
         time: 0.25,
         types: { botw: 0, selfsynergy: 0 },
-        weight: 0.05000000000000002,
+        weight: 0.05000000000000002
       },
       {
         difficulty: 1,
@@ -107,8 +107,8 @@ export var bingoList = {
         subtypes: { compass: 1, ganonchu: -1.5, map: 1 },
         time: 1,
         types: { childchu: 0, selfsynergy: 0 },
-        weight: -0.10000000000000002,
-      },
+        weight: -0.10000000000000002
+      }
     ],
     2: [
       {
@@ -121,7 +121,7 @@ export var bingoList = {
         subtypes: { bosskey: 0.5, songs5: 0.25 },
         time: 1.25,
         types: { gtunic: 1, inctunic: 100, selfsynergy: 0 },
-        weight: 0.05000000000000002,
+        weight: 0.05000000000000002
       },
       {
         difficulty: 2,
@@ -133,7 +133,7 @@ export var bingoList = {
         subtypes: { compass: 1.5, hearts3: 0.5, map: 1.5, skulls: 0.25 },
         time: 1.25,
         types: { fountain: 1.5, inctunic: 100, selfsynergy: 0 },
-        weight: 1.3877787807814457e-17,
+        weight: 1.3877787807814457e-17
       },
       {
         difficulty: 2,
@@ -145,7 +145,7 @@ export var bingoList = {
         subtypes: { bulletbag: 100, childchu: -0.5 },
         time: 1.5,
         types: { selfsynergy: 0, sticks: 100 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 2,
@@ -157,7 +157,7 @@ export var bingoList = {
         subtypes: { botw: -1, childchu: -2.5, quiver: 0.25 },
         time: 1.5,
         types: { bombbag: 100, selfsynergy: 0 },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 2,
@@ -171,11 +171,11 @@ export var bingoList = {
           hovers: 0.25,
           lightarrow: -1.5,
           skulls: 0.5,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 1.75,
         types: { forest: 1.5, incforest: 100, incminuet: 100, selfsynergy: 0 },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 2,
@@ -187,8 +187,8 @@ export var bingoList = {
         subtypes: { bosskey: 1.5, gtunic: 0.25, hearts3: 0.5, songs5: 1.25 },
         time: 1.5,
         types: { dmc: 0.75, selfsynergy: 0 },
-        weight: -0.10000000000000002,
-      },
+        weight: -0.10000000000000002
+      }
     ],
     3: [
       {
@@ -204,11 +204,11 @@ export var bingoList = {
           dmc: 0.25,
           hearts3: 0.5,
           map: 1.5,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 2.5,
         types: { fountain: 1.5, gtunic: 1, inctunic: 100, selfsynergy: 0 },
-        weight: 0.15000000000000002,
+        weight: 0.15000000000000002
       },
       {
         difficulty: 3,
@@ -219,7 +219,7 @@ export var bingoList = {
         skill: 0,
         time: 2.5,
         types: { hearts3: 4, inchearts: 100, selfsynergy: -1 },
-        weight: 0.40000000000000013,
+        weight: 0.40000000000000013
       },
       {
         difficulty: 3,
@@ -231,7 +231,7 @@ export var bingoList = {
         subtypes: { hearts4: 0.25, skulls: 1 },
         time: 2,
         types: { incranchskulls: 100, lonlon: 1, selfsynergy: 0 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 3,
@@ -243,7 +243,7 @@ export var bingoList = {
         subtypes: { hearts3: 0.75, hearts4: 0.25 },
         time: 2.25,
         types: { lonlon: 1.75, selfsynergy: 0 },
-        weight: -0.25,
+        weight: -0.25
       },
       {
         difficulty: 3,
@@ -255,7 +255,7 @@ export var bingoList = {
         subtypes: { child2: 3, skulls: 0.25 },
         time: 2.25,
         types: { beans: 4.75, childreset: 0.5, incbeans: 100, selfsynergy: 0 },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 3,
@@ -267,7 +267,7 @@ export var bingoList = {
         subtypes: { compass: 1.75, map: 1 },
         time: 2,
         types: { dc: 1, selfsynergy: 0 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 3,
@@ -281,12 +281,12 @@ export var bingoList = {
           dmcchild: 0.25,
           hearts3: 1.5,
           hovers: 0.25,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 2,
         types: { dmc: 0.5, selfsynergy: 0 },
-        weight: -0.05,
-      },
+        weight: -0.05
+      }
     ],
     4: [
       {
@@ -299,7 +299,7 @@ export var bingoList = {
         subtypes: { child2: 0.5, ganonchu: -0.5, songs5: 1 },
         time: 3,
         types: { botw: 0, goldrupee: 15, incgolds: 100, selfsynergy: 0 },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 4,
@@ -311,7 +311,7 @@ export var bingoList = {
         subtypes: { bottleslot: 4, skulls: 100, strength: 100 },
         time: 3,
         types: { inclhskull: 2, selfsynergy: 0 },
-        weight: 0.10000000000000002,
+        weight: 0.10000000000000002
       },
       {
         difficulty: 4,
@@ -323,7 +323,7 @@ export var bingoList = {
         subtypes: { ganonchu: -1.5, skulls: 1.5 },
         time: 3,
         types: { childchu: 0, selfsynergy: 0 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 4,
@@ -337,11 +337,11 @@ export var bingoList = {
           firearrow: 2.5,
           gtunic: 0.25,
           hearts3: 0.5,
-          songs5: 1,
+          songs5: 1
         },
         time: 3,
         types: { dmc: 1, fire: 0.25, incfirebk: 100, selfsynergy: 0 },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 4,
@@ -357,10 +357,10 @@ export var bingoList = {
           bganon: -2.75,
           cganon: 2.75,
           endon: -0.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0,
-      },
+        weight: 0
+      }
     ],
     5: [
       {
@@ -377,9 +377,9 @@ export var bingoList = {
           poachers: 3.5,
           selfsynergy: 0,
           songs4: 3,
-          songs5: 2,
+          songs5: 2
         },
-        weight: 0.35,
+        weight: 0.35
       },
       {
         difficulty: 5,
@@ -394,7 +394,7 @@ export var bingoList = {
           childchu: -2.5,
           czl: 1,
           hearts3: 1,
-          saria: 1.75,
+          saria: 1.75
         },
         time: 4,
         types: {
@@ -402,9 +402,9 @@ export var bingoList = {
           poachers: 3.5,
           selfsynergy: 0,
           songs4: 3,
-          songs5: 2,
+          songs5: 2
         },
-        weight: 0.3,
+        weight: 0.3
       },
       {
         difficulty: 5,
@@ -416,7 +416,7 @@ export var bingoList = {
         subtypes: { botw: -1, bulletbag: 100, childchu: -2.5 },
         time: 3.75,
         types: { incbeans: 100, selfsynergy: -3, skulls: 100 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 5,
@@ -432,7 +432,7 @@ export var bingoList = {
           compass: 1,
           dmc: 0.25,
           hearts3: 0.5,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 3.75,
         types: {
@@ -441,9 +441,9 @@ export var bingoList = {
           incsword: 100,
           inctunic: 100,
           selfsynergy: 0,
-          swords: 3,
+          swords: 3
         },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 5,
@@ -455,7 +455,7 @@ export var bingoList = {
         subtypes: { bosskey2: 2, compass: 6, hearts4: 1 },
         time: 3.5,
         types: { childchu: 0, hovers: 2, incmc: 100, map: 6, selfsynergy: -3 },
-        weight: 1.5000000000000004,
+        weight: 1.5000000000000004
       },
       {
         difficulty: 5,
@@ -467,7 +467,7 @@ export var bingoList = {
         subtypes: { aganon: 0.25, botw: -1, childchu: -2.5, hearts3: 1 },
         time: 4,
         types: { poachers: 3.5, selfsynergy: 0 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 5,
@@ -481,7 +481,7 @@ export var bingoList = {
           compass: 3,
           hearts3: 1,
           map: 3,
-          skulls: 0.75,
+          skulls: 0.75
         },
         time: 3.5,
         types: {
@@ -490,9 +490,9 @@ export var bingoList = {
           cganon: 2.25,
           fountain: 2,
           ice: 1.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 5,
@@ -510,9 +510,9 @@ export var bingoList = {
           cganon: 2.75,
           endon: -0.5,
           ice: 0.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 5,
@@ -523,7 +523,7 @@ export var bingoList = {
         skill: 0,
         time: 4,
         types: { selfsynergy: 0 },
-        weight: -0.45000000000000007,
+        weight: -0.45000000000000007
       },
       {
         difficulty: 5,
@@ -535,7 +535,7 @@ export var bingoList = {
         subtypes: { bottleslot: 4.5, child2: 3, jabu: 1.5, skulls: 0.5 },
         time: 4,
         types: { inclhskull: 2, selfsynergy: 0 },
-        weight: -0.3,
+        weight: -0.3
       },
       {
         difficulty: 5,
@@ -547,7 +547,7 @@ export var bingoList = {
         subtypes: { compass: 2, hearts3: 1, map: 2, skulls: 2 },
         time: 4,
         types: { fountain: 2, inczoraskull: 100, selfsynergy: 0 },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 5,
@@ -562,11 +562,11 @@ export var bingoList = {
           hearts4: 0.5,
           hovers: 0.5,
           map: 1,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 3.5,
         types: { fortress: 1.5, selfsynergy: 0 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 5,
@@ -578,7 +578,7 @@ export var bingoList = {
         subtypes: { compass: 3, hearts3: 1.5, map: 3, skulls: 1 },
         time: 3.5,
         types: { fountain: 2, ice: 1.5, selfsynergy: 0 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 5,
@@ -593,11 +593,11 @@ export var bingoList = {
           czl: 3,
           hearts4: 1,
           hovers: 0.5,
-          map: 2,
+          map: 2
         },
         time: 3.5,
         types: { deku: 2.5, selfsynergy: 0 },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 5,
@@ -612,11 +612,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 0.5,
           map: 3,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 3.75,
         types: { deku: 3, selfsynergy: 0 },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 5,
@@ -628,7 +628,7 @@ export var bingoList = {
         subtypes: { compass: 2, hearts4: 1, map: 2, skulls: 0.5 },
         time: 4,
         types: { dc: 2, selfsynergy: 0 },
-        weight: -0.35000000000000003,
+        weight: -0.35000000000000003
       },
       {
         difficulty: 5,
@@ -640,8 +640,8 @@ export var bingoList = {
         subtypes: { compass: 2, hearts3: 3, hearts4: 1, map: 2, skulls: 0.5 },
         time: 4,
         types: { dc: 3, incdodongo: 100, kd: 2, selfsynergy: 0 },
-        weight: -0.25,
-      },
+        weight: -0.25
+      }
     ],
     6: [
       {
@@ -656,11 +656,11 @@ export var bingoList = {
           botw: -1,
           childchu: -2.5,
           hearts3: 1.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 4.75,
         types: { incsongs: 100, poachers: 3.5, selfsynergy: 0, songs5: 1.25 },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 6,
@@ -677,9 +677,9 @@ export var bingoList = {
           bosskey: 6.75,
           cganon: 2.75,
           incbk: 100,
-          selfsynergy: -2,
+          selfsynergy: -2
         },
-        weight: 1.35,
+        weight: 1.35
       },
       {
         difficulty: 6,
@@ -702,9 +702,9 @@ export var bingoList = {
           selfsynergy: -3,
           shadow: 1,
           silverrupee: 4.25,
-          spirit: 2,
+          spirit: 2
         },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 6,
@@ -716,7 +716,7 @@ export var bingoList = {
         subtypes: { child2: 3, jabu: 1.5 },
         time: 4.75,
         types: { bottleslot: 4.5, selfsynergy: 0 },
-        weight: -0.35,
+        weight: -0.35
       },
       {
         difficulty: 6,
@@ -728,7 +728,7 @@ export var bingoList = {
         subtypes: { hearts4: 0.5, skulls: 1 },
         time: 4.25,
         types: { fortress: 1, selfsynergy: 0 },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 6,
@@ -740,7 +740,7 @@ export var bingoList = {
         subtypes: { child2: 1, skulls: 1.5 },
         time: 4.5,
         types: { childreset: 1.25, deku: 0.25, selfsynergy: 0 },
-        weight: -0.35,
+        weight: -0.35
       },
       {
         difficulty: 6,
@@ -752,7 +752,7 @@ export var bingoList = {
         subtypes: { czl: 3, hearts4: 1, strength: -1 },
         time: 4.5,
         types: { bulletbag: 100, childreset: 1.25, deku: 3, selfsynergy: 0 },
-        weight: -0.15000000000000002,
+        weight: -0.15000000000000002
       },
       {
         difficulty: 6,
@@ -766,11 +766,11 @@ export var bingoList = {
           childreset: 1,
           czl: 2,
           skulls: 0.5,
-          songs4: 0.5,
+          songs4: 0.5
         },
         time: 4.5,
         types: { lonlon: 3.5, selfsynergy: 0 },
-        weight: -0.25,
+        weight: -0.25
       },
       {
         difficulty: 6,
@@ -782,7 +782,7 @@ export var bingoList = {
         subtypes: { hearts4: 0.5, hovers: 0.5, map: 2, skulls: 1.25 },
         time: 4.5,
         types: { fortress: 2.5, selfsynergy: 0 },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 6,
@@ -800,11 +800,11 @@ export var bingoList = {
           kd: 2,
           map: 3,
           quiver: 4.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 4.75,
         types: { fortress: 3, gtg: 1, selfsynergy: 0 },
-        weight: 0.25,
+        weight: 0.25
       },
       {
         difficulty: 6,
@@ -816,7 +816,7 @@ export var bingoList = {
         subtypes: { compass: 3, hearts3: 1, hovers: 0.5, map: 3, skulls: 1.5 },
         time: 4.25,
         types: { fountain: 2, ice: 1.5, irons: 0.5, selfsynergy: 0 },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 6,
@@ -828,7 +828,7 @@ export var bingoList = {
         subtypes: { compass: 3, hearts3: 1.5, map: 3, skulls: 1 },
         time: 4.75,
         types: { fountain: 2, ice: 2, selfsynergy: 0 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 6,
@@ -844,7 +844,7 @@ export var bingoList = {
           hovers: 0.25,
           map: 3,
           skulls: 1,
-          songs4: 1.5,
+          songs4: 1.5
         },
         time: 4.75,
         types: {
@@ -854,9 +854,9 @@ export var bingoList = {
           incboot: 100,
           incirons: 100,
           irons: 2,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 6,
@@ -870,7 +870,7 @@ export var bingoList = {
           hearts3: 0.5,
           hovers: 0.5,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 4.75,
         types: {
@@ -879,9 +879,9 @@ export var bingoList = {
           gtg: 1.5,
           ice: 1.5,
           irons: 1.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.39999999999999997,
+        weight: 0.39999999999999997
       },
       {
         difficulty: 6,
@@ -898,11 +898,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 0.5,
           map: 2,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 4.25,
         types: { deku: 5, endon: -0.25, incgohma: 100, selfsynergy: 0 },
-        weight: -0.15000000000000002,
+        weight: -0.15000000000000002
       },
       {
         difficulty: 6,
@@ -919,11 +919,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 0.5,
           map: 2,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 4.75,
         types: { deku: 5, endon: -2, incgohma: 100, selfsynergy: 0 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 6,
@@ -935,7 +935,7 @@ export var bingoList = {
         subtypes: { compass: 1.5, hearts3: 0.5, skulls: 2 },
         time: 4.5,
         types: { fountain: 2, jabu: 2, selfsynergy: 0 },
-        weight: -0.20000000000000004,
+        weight: -0.20000000000000004
       },
       {
         difficulty: 6,
@@ -953,7 +953,7 @@ export var bingoList = {
           incminuet: 100,
           map: 2,
           skulls: 0.75,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 4.75,
         types: {
@@ -962,9 +962,9 @@ export var bingoList = {
           forest: 3,
           incfboss: 100,
           pg: 1.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 6,
@@ -978,11 +978,11 @@ export var bingoList = {
           child2: 2,
           childreset: 1.25,
           hearts3: 0.5,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 4.5,
         types: { childchu: 0, dmcchild: 1.25, selfsynergy: 0 },
-        weight: -0.44999999999999996,
+        weight: -0.44999999999999996
       },
       {
         difficulty: 6,
@@ -994,7 +994,7 @@ export var bingoList = {
         subtypes: { bosskey2: 3, compass: 3, map: 3, poachers: 0.25 },
         time: 4.75,
         types: { hovers: 2.5, selfsynergy: 0, shadow: 1 },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 6,
@@ -1008,7 +1008,7 @@ export var bingoList = {
           hearts3: 3,
           hearts4: 1,
           poachers: 0.25,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 4.75,
         types: {
@@ -1017,10 +1017,10 @@ export var bingoList = {
           incshboss: 100,
           legitlacs: 100,
           selfsynergy: 0,
-          shadow: 5,
+          shadow: 5
         },
-        weight: 0.1,
-      },
+        weight: 0.1
+      }
     ],
     7: [
       {
@@ -1033,7 +1033,7 @@ export var bingoList = {
         subtypes: { botw: -1, bulletbag: 100, childchu: -2.5 },
         time: 5.25,
         types: { selfsynergy: -3, skulls: 100 },
-        weight: -0.15000000000000002,
+        weight: -0.15000000000000002
       },
       {
         difficulty: 7,
@@ -1045,7 +1045,7 @@ export var bingoList = {
         subtypes: { hovers: 1 },
         time: 5.5,
         types: { forest: 0.5, incskulls: 100, selfsynergy: 0 },
-        weight: -0.25,
+        weight: -0.25
       },
       {
         difficulty: 7,
@@ -1056,7 +1056,7 @@ export var bingoList = {
         skill: 0.5,
         time: 5,
         types: { incskulls: 100, selfsynergy: -2, skulls: 8 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 7,
@@ -1068,7 +1068,7 @@ export var bingoList = {
         subtypes: { skulls: 2, songs5: 1 },
         time: 5.25,
         types: { childreset: 1.25, forest: 1, saria: 0.25, selfsynergy: 0 },
-        weight: -0.3,
+        weight: -0.3
       },
       {
         difficulty: 7,
@@ -1080,7 +1080,7 @@ export var bingoList = {
         subtypes: { bottleslot: 2, child2: 2, skulls: 1.5 },
         time: 5,
         types: { inclhskull: 100, selfsynergy: 0 },
-        weight: -0.35000000000000003,
+        weight: -0.35000000000000003
       },
       {
         difficulty: 7,
@@ -1094,7 +1094,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 0.75,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 5,
         types: {
@@ -1102,9 +1102,9 @@ export var bingoList = {
           fortress: 3,
           gtg: 2,
           incgtgkey: 100,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.30000000000000004,
+        weight: 0.30000000000000004
       },
       {
         difficulty: 7,
@@ -1119,11 +1119,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 0.25,
           map: 1,
-          skulls: 2.5,
+          skulls: 2.5
         },
         time: 5.25,
         types: { dc: 4, selfsynergy: 0 },
-        weight: -0.3,
+        weight: -0.3
       },
       {
         difficulty: 7,
@@ -1141,7 +1141,7 @@ export var bingoList = {
           incminuet: 100,
           map: 2,
           skulls: 0.75,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 5,
         types: {
@@ -1150,9 +1150,9 @@ export var bingoList = {
           forest: 3,
           incfboss: 100,
           pg: 2.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.15000000000000002,
+        weight: 0.15000000000000002
       },
       {
         difficulty: 7,
@@ -1171,7 +1171,7 @@ export var bingoList = {
           hovers: 0.25,
           map: 3,
           skulls: 0.75,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 5.5,
         types: {
@@ -1183,9 +1183,9 @@ export var bingoList = {
           inclacs: 100,
           pg: 4,
           poachers: 3.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.7499999999999999,
+        weight: 0.7499999999999999
       },
       {
         difficulty: 7,
@@ -1201,11 +1201,11 @@ export var bingoList = {
           hovers: 0.75,
           incarrows: 100,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 5.5,
         types: { fortress: 3, gtg: 1, selfsynergy: 0, water: 1 },
-        weight: 0.30000000000000004,
+        weight: 0.30000000000000004
       },
       {
         difficulty: 7,
@@ -1223,10 +1223,10 @@ export var bingoList = {
           endon: -0.5,
           incshtrial: 100,
           selfsynergy: 0,
-          strength: 100,
+          strength: 100
         },
-        weight: -0.1,
-      },
+        weight: -0.1
+      }
     ],
     8: [
       {
@@ -1239,7 +1239,7 @@ export var bingoList = {
         subtypes: { bosskey2: 2, ganonchu: -0.5, hearts4: 1, map: 7 },
         time: 6,
         types: { botw: 0, compass: 7, hovers: 2, incmc: 100, selfsynergy: -3 },
-        weight: 0.85,
+        weight: 0.85
       },
       {
         difficulty: 8,
@@ -1250,7 +1250,7 @@ export var bingoList = {
         skill: 0.25,
         time: 6.25,
         types: { hearts3: 7, inchearts: 100, selfsynergy: -1 },
-        weight: 0.15000000000000002,
+        weight: 0.15000000000000002
       },
       {
         difficulty: 8,
@@ -1262,7 +1262,7 @@ export var bingoList = {
         subtypes: { jabu: 0.5, skulls: 4 },
         time: 6.25,
         types: { childchu: 0, selfsynergy: 0 },
-        weight: -0.49999999999999994,
+        weight: -0.49999999999999994
       },
       {
         difficulty: 8,
@@ -1277,9 +1277,9 @@ export var bingoList = {
           childchu: 0,
           incranchskulls: 100,
           lonlon: 1.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.5,
+        weight: -0.5
       },
       {
         difficulty: 8,
@@ -1296,11 +1296,11 @@ export var bingoList = {
           poachers: -100,
           skulls: 0.5,
           songs4: 1.75,
-          songs5: -3,
+          songs5: -3
         },
         time: 6.25,
         types: { lonlon: 3.5, selfsynergy: 0 },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 8,
@@ -1312,7 +1312,7 @@ export var bingoList = {
         subtypes: { child2: 3, skulls: 0.25 },
         time: 6,
         types: { beans: 5.75, childreset: 0.5, incbeans: 100, selfsynergy: 0 },
-        weight: -0.39999999999999997,
+        weight: -0.39999999999999997
       },
       {
         difficulty: 8,
@@ -1329,11 +1329,11 @@ export var bingoList = {
           kd: 2,
           map: 2,
           poachers: 2.5,
-          songs10: -2.5,
+          songs10: -2.5
         },
         time: 6,
         types: { childreset: 1.25, fortress: 2.5, selfsynergy: 0 },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 8,
@@ -1350,11 +1350,11 @@ export var bingoList = {
           kd: 2,
           map: 2,
           skulls: 0.5,
-          songs10: -3.5,
+          songs10: -3.5
         },
         time: 6.25,
         types: { dins: 3, fortress: 2.5, selfsynergy: 0, spirit: 1 },
-        weight: 0.05000000000000002,
+        weight: 0.05000000000000002
       },
       {
         difficulty: 8,
@@ -1368,7 +1368,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 0.5,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 5.75,
         types: {
@@ -1377,9 +1377,9 @@ export var bingoList = {
           gtg: 3,
           incgtgkey: 100,
           longshot: 0.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.25,
+        weight: 0.25
       },
       {
         difficulty: 8,
@@ -1391,7 +1391,7 @@ export var bingoList = {
         subtypes: { compass: 2, hearts3: 3, hearts4: 1, map: 2, skulls: 0.5 },
         time: 5.75,
         types: { dc: 3, fortress: 2, incdodongo: 100, kd: 2, selfsynergy: 0 },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 8,
@@ -1403,7 +1403,7 @@ export var bingoList = {
         subtypes: { compass: 1.5, hearts3: 0.5, skulls: 0.75 },
         time: 5.75,
         types: { fountain: 2, jabu: 1.5, selfsynergy: 0 },
-        weight: -0.25,
+        weight: -0.25
       },
       {
         difficulty: 8,
@@ -1415,7 +1415,7 @@ export var bingoList = {
         subtypes: { compass: 2, hearts3: 1, hearts4: 1, map: 2, skulls: 1 },
         time: 6.25,
         types: { fountain: 2, incbarinade: 100, jabu: 3.75, selfsynergy: 0 },
-        weight: -0.25000000000000006,
+        weight: -0.25000000000000006
       },
       {
         difficulty: 8,
@@ -1432,11 +1432,11 @@ export var bingoList = {
           irons: 0.75,
           map: 3,
           skulls: 1.5,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 6.25,
         types: { forest: 3, incforest: 100, selfsynergy: 0 },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 8,
@@ -1451,11 +1451,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 1,
           map: 2.5,
-          poachers: 0.75,
+          poachers: 0.75
         },
         time: 5.75,
         types: { endon: -0.5, incwboss: 100, selfsynergy: 0, water: 7 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 8,
@@ -1467,7 +1467,7 @@ export var bingoList = {
         subtypes: { compass: 3, hearts4: 1, map: 3, poachers: 0.75 },
         time: 6,
         types: { gtg: 1, selfsynergy: 0, water: 3 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 8,
@@ -1481,7 +1481,7 @@ export var bingoList = {
           hearts3: 3,
           hearts4: 1,
           poachers: 0.25,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 6,
         types: {
@@ -1490,9 +1490,9 @@ export var bingoList = {
           incshboss: 100,
           legitlacs: 100,
           selfsynergy: 0,
-          shadow: 5,
+          shadow: 5
         },
-        weight: 0.15000000000000002,
+        weight: 0.15000000000000002
       },
       {
         difficulty: 8,
@@ -1509,12 +1509,12 @@ export var bingoList = {
           map: 2,
           poachers: -0.25,
           skulls: 0.75,
-          songs5: 2.75,
+          songs5: 2.75
         },
         time: 6,
         types: { endon: -0.25, fortress: 2.5, selfsynergy: 0, spirit: 2.5 },
-        weight: 0.25,
-      },
+        weight: 0.25
+      }
     ],
     9: [
       {
@@ -1531,11 +1531,11 @@ export var bingoList = {
           child2: 2,
           childchu: -2.5,
           hearts3: 0.5,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 6.5,
         types: { incsongs: 100, poachers: 3.5, selfsynergy: 0, songs5: 3.25 },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 9,
@@ -1549,11 +1549,11 @@ export var bingoList = {
           compass: 9,
           hearts3: 1,
           hearts4: 1,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 7,
         types: { childchu: 0, hovers: 2, incmc: 100, map: 9, selfsynergy: -3 },
-        weight: 1.6000000000000003,
+        weight: 1.6000000000000003
       },
       {
         difficulty: 9,
@@ -1565,7 +1565,7 @@ export var bingoList = {
         subtypes: { child2: 1, skulls: 1 },
         time: 6.75,
         types: { beans: 4.75, childreset: 1.25, incbeans: 100, selfsynergy: 0 },
-        weight: -0.44999999999999996,
+        weight: -0.44999999999999996
       },
       {
         difficulty: 9,
@@ -1579,11 +1579,11 @@ export var bingoList = {
           froghp: 1,
           hearts3: 0.25,
           jabu: 0.5,
-          skulls: 2,
+          skulls: 2
         },
         time: 6.5,
         types: { childchu: 0, fountain: 2, inczoraskull: 100, selfsynergy: 0 },
-        weight: -0.4,
+        weight: -0.4
       },
       {
         difficulty: 9,
@@ -1600,11 +1600,11 @@ export var bingoList = {
           hovers: 0.25,
           jabu: 0.5,
           map: 1.5,
-          skulls: 2,
+          skulls: 2
         },
         time: 7,
         types: { childchu: 0, fortress: 2, selfsynergy: 0 },
-        weight: -0.45000000000000007,
+        weight: -0.45000000000000007
       },
       {
         difficulty: 9,
@@ -1619,7 +1619,7 @@ export var bingoList = {
           hearts3: 3,
           hearts4: 1,
           map: 2,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 7,
         types: {
@@ -1630,9 +1630,9 @@ export var bingoList = {
           gtg: 1,
           incdodongo: 100,
           kd: 3,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.30000000000000004,
+        weight: -0.30000000000000004
       },
       {
         difficulty: 9,
@@ -1649,11 +1649,11 @@ export var bingoList = {
           incminuet: 100,
           map: 2.75,
           skulls: 2.5,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 6.75,
         types: { forest: 3, meg: 1, selfsynergy: 0 },
-        weight: -0.10000000000000002,
+        weight: -0.10000000000000002
       },
       {
         difficulty: 9,
@@ -1668,7 +1668,7 @@ export var bingoList = {
           hearts3: 3,
           hearts4: 1,
           hovers: 0.5,
-          map: 2.5,
+          map: 2.5
         },
         time: 6.5,
         types: {
@@ -1676,9 +1676,9 @@ export var bingoList = {
           inclacs: 100,
           poachers: 3.5,
           selfsynergy: 0,
-          water: 6.5,
+          water: 6.5
         },
-        weight: 0.39999999999999997,
+        weight: 0.39999999999999997
       },
       {
         difficulty: 9,
@@ -1693,11 +1693,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 1,
           map: 2.5,
-          poachers: 0.75,
+          poachers: 0.75
         },
         time: 6.5,
         types: { endon: -1, incwboss: 100, selfsynergy: 0, water: 7 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 9,
@@ -1715,11 +1715,11 @@ export var bingoList = {
           hovers: 0.5,
           map: 3.5,
           poachers: 0.75,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 6.75,
         types: { dc: 2, inclong: 100, longshot: 4, selfsynergy: 0, water: 3 },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 9,
@@ -1737,12 +1737,12 @@ export var bingoList = {
           hovers: 0.25,
           map: 3.5,
           poachers: 0.75,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 6.75,
         types: { dc: 2, inclong: 100, longshot: 5, selfsynergy: 0, water: 3 },
-        weight: -0.25,
-      },
+        weight: -0.25
+      }
     ],
     10: [
       {
@@ -1758,11 +1758,11 @@ export var bingoList = {
           hearts4: 1.5,
           jabu: 2,
           map: 4,
-          skulls: 2,
+          skulls: 2
         },
         time: 7.25,
         types: { dc: 1, deku: 2, fountain: 2, selfsynergy: 0 },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 10,
@@ -1777,11 +1777,11 @@ export var bingoList = {
           botw: -1,
           childchu: -2.5,
           hearts3: 1.5,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 7.75,
         types: { incsongs: 100, poachers: 3.5, selfsynergy: 0, songs5: 5.5 },
-        weight: 0.10000000000000002,
+        weight: 0.10000000000000002
       },
       {
         difficulty: 10,
@@ -1798,9 +1798,9 @@ export var bingoList = {
           bosskey: 12,
           cganon: 2.75,
           incbk: 100,
-          selfsynergy: -2,
+          selfsynergy: -2
         },
-        weight: 1.4500000000000002,
+        weight: 1.4500000000000002
       },
       {
         difficulty: 10,
@@ -1816,7 +1816,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 1,
-          songs4: 1.5,
+          songs4: 1.5
         },
         time: 7.25,
         types: {
@@ -1826,9 +1826,9 @@ export var bingoList = {
           ice: 1.5,
           incboot: 100,
           irons: 2,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 10,
@@ -1842,7 +1842,7 @@ export var bingoList = {
           hearts3: 3,
           hearts4: 1,
           marketgs: 2,
-          songs4: 1.75,
+          songs4: 1.75
         },
         time: 7.75,
         types: {
@@ -1850,9 +1850,9 @@ export var bingoList = {
           chuczl: 2,
           czl: 5.75,
           incctrade: 100,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.35,
+        weight: -0.35
       },
       {
         difficulty: 10,
@@ -1868,11 +1868,11 @@ export var bingoList = {
           hovers: 0.5,
           map: 2.5,
           marketgs: 4,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 7.75,
         types: { fortress: 2.5, incgcard: 100, selfsynergy: 0, spirit: 0.5 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 10,
@@ -1886,7 +1886,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 1.75,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 7.25,
         types: {
@@ -1895,9 +1895,9 @@ export var bingoList = {
           gtg: 4,
           incgtgkey: 100,
           longshot: 1.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 10,
@@ -1912,11 +1912,11 @@ export var bingoList = {
           hearts4: 1,
           hovers: 1,
           map: 2,
-          skulls: 2,
+          skulls: 2
         },
         time: 7.25,
         types: { deku: 3, quiver: 1.75, selfsynergy: 0 },
-        weight: -0.30000000000000004,
+        weight: -0.30000000000000004
       },
       {
         difficulty: 10,
@@ -1928,7 +1928,7 @@ export var bingoList = {
         subtypes: { compass: 4, hearts3: 1, hearts4: 1, map: 3, skulls: 0.75 },
         time: 7.75,
         types: { fountain: 2, incbarinade: 100, jabu: 3.75, selfsynergy: 0 },
-        weight: -0.39999999999999997,
+        weight: -0.39999999999999997
       },
       {
         difficulty: 10,
@@ -1940,7 +1940,7 @@ export var bingoList = {
         subtypes: { child2: 3, childreset: 1.25, hearts3: 0.5, skulls: 4 },
         time: 7.5,
         types: { childchu: 0, dmc: 0.25, dmcchild: 1.25, selfsynergy: 0 },
-        weight: -1.05,
+        weight: -1.05
       },
       {
         difficulty: 10,
@@ -1956,11 +1956,11 @@ export var bingoList = {
           hovers: 1,
           map: 2,
           poachers: 0.25,
-          skulls: 0.75,
+          skulls: 0.75
         },
         time: 7.25,
         types: { fortress: 2.5, selfsynergy: 0, spirit: 5 },
-        weight: 0.49999999999999994,
+        weight: 0.49999999999999994
       },
       {
         difficulty: 10,
@@ -1974,11 +1974,11 @@ export var bingoList = {
           gtunic: 0.25,
           hearts4: 1.5,
           poachers: 0.25,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 7.5,
         types: { aganon: 3, endon: -0.5, hovers: 2.5, selfsynergy: 0 },
-        weight: -0.05,
+        weight: -0.05
       },
       {
         difficulty: 10,
@@ -1993,7 +1993,7 @@ export var bingoList = {
           childchu: -2.5,
           chuczl: 2,
           hearts3: 1,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 7.5,
         types: {
@@ -2004,10 +2004,10 @@ export var bingoList = {
           czl: 3.5,
           endon: -0.5,
           poachers: 3.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.05,
-      },
+        weight: -0.05
+      }
     ],
     11: [
       {
@@ -2020,7 +2020,7 @@ export var bingoList = {
         subtypes: { child2: 0.5, childreset: 0.5 },
         time: 8.5,
         types: { incskulls: 100, selfsynergy: -2, skulls: 8 },
-        weight: -0.6,
+        weight: -0.6
       },
       {
         difficulty: 11,
@@ -2039,9 +2039,9 @@ export var bingoList = {
           cganon: 2.75,
           gtg: 0.5,
           incbkdoor: 100,
-          selfsynergy: -2,
+          selfsynergy: -2
         },
-        weight: 1.8000000000000005,
+        weight: 1.8000000000000005
       },
       {
         difficulty: 11,
@@ -2059,7 +2059,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 1,
-          songs4: 1.5,
+          songs4: 1.5
         },
         time: 8.5,
         types: {
@@ -2071,9 +2071,9 @@ export var bingoList = {
           incsword: 100,
           irons: 2,
           selfsynergy: 0,
-          swords: 3,
+          swords: 3
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 11,
@@ -2084,7 +2084,7 @@ export var bingoList = {
         skill: 0.5,
         time: 8.5,
         types: { hearts3: 10, hearts4: 0.5, inchearts: 100, selfsynergy: -3 },
-        weight: -0.15000000000000002,
+        weight: -0.15000000000000002
       },
       {
         difficulty: 11,
@@ -2100,7 +2100,7 @@ export var bingoList = {
           incarrows: 100,
           map: 3,
           poachers: 1,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 8.25,
         types: {
@@ -2109,9 +2109,9 @@ export var bingoList = {
           gtg: 1,
           quiver: 4.5,
           selfsynergy: 0,
-          water: 1.5,
+          water: 1.5
         },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 11,
@@ -2127,9 +2127,9 @@ export var bingoList = {
           fountain: 2,
           incbarinade: 100,
           jabu: 6.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.65,
+        weight: -0.65
       },
       {
         difficulty: 11,
@@ -2145,9 +2145,9 @@ export var bingoList = {
           fountain: 2,
           incbarinade: 100,
           jabu: 5.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.55,
+        weight: -0.55
       },
       {
         difficulty: 11,
@@ -2166,7 +2166,7 @@ export var bingoList = {
           map: 2.5,
           quiver: 4.5,
           skulls: 1,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 8,
         types: {
@@ -2174,9 +2174,9 @@ export var bingoList = {
           hovers: 2.5,
           incforest: 100,
           meg: 4.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 11,
@@ -2195,7 +2195,7 @@ export var bingoList = {
           chuczl: 2,
           compass: 1,
           hearts3: 2.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 8.5,
         types: {
@@ -2204,9 +2204,9 @@ export var bingoList = {
           hovers: 1.5,
           poachers: 3.5,
           selfsynergy: 0,
-          shadow: 6,
+          shadow: 6
         },
-        weight: 0.25,
+        weight: 0.25
       },
       {
         difficulty: 11,
@@ -2224,10 +2224,10 @@ export var bingoList = {
           endon: -0.5,
           incshtrial: 100,
           selfsynergy: 0,
-          strength: 100,
+          strength: 100
         },
-        weight: -0.4,
-      },
+        weight: -0.4
+      }
     ],
     12: [
       {
@@ -2246,7 +2246,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 1,
-          songs4: 1.5,
+          songs4: 1.5
         },
         time: 8.75,
         types: {
@@ -2258,9 +2258,9 @@ export var bingoList = {
           incboot: 100,
           inctunic: 100,
           irons: 2,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 12,
@@ -2275,11 +2275,11 @@ export var bingoList = {
           hearts3: 1.5,
           hearts4: 1,
           map: 10,
-          skulls: 1,
+          skulls: 1
         },
         time: 9.25,
         types: { botw: 0, compass: 10, hovers: 2, incmc: 100, selfsynergy: -3 },
-        weight: 0.8,
+        weight: 0.8
       },
       {
         difficulty: 12,
@@ -2296,7 +2296,7 @@ export var bingoList = {
           chuczl: 2,
           gtunic: 0.25,
           hearts3: 1.5,
-          songs5: 1,
+          songs5: 1
         },
         time: 8.75,
         types: {
@@ -2305,9 +2305,9 @@ export var bingoList = {
           dmc: 1,
           magic: 1.75,
           poachers: 3.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.15000000000000002,
+        weight: -0.15000000000000002
       },
       {
         difficulty: 12,
@@ -2323,7 +2323,7 @@ export var bingoList = {
           chuczl: 2,
           gtunic: 0.25,
           hearts3: 1.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 9.25,
         types: {
@@ -2332,9 +2332,9 @@ export var bingoList = {
           dmc: 1,
           magic: 1.75,
           poachers: 3.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.25,
+        weight: -0.25
       },
       {
         difficulty: 12,
@@ -2348,7 +2348,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 0.75,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 9,
         types: {
@@ -2357,9 +2357,9 @@ export var bingoList = {
           gtg: 5,
           incgtgkey: 100,
           quiver: 0.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 12,
@@ -2379,7 +2379,7 @@ export var bingoList = {
           incminuet: 100,
           map: 4,
           skulls: 0.5,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 9.25,
         types: {
@@ -2389,9 +2389,9 @@ export var bingoList = {
           incforest: 100,
           meg: 4.25,
           quiver: 4.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.25,
+        weight: 0.25
       },
       {
         difficulty: 12,
@@ -2408,11 +2408,11 @@ export var bingoList = {
           hovers: 0.25,
           map: 3,
           skulls: 0.25,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 8.75,
         types: { dmc: 1, fire: 5, selfsynergy: 0 },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 12,
@@ -2428,11 +2428,11 @@ export var bingoList = {
           hearts4: 0.5,
           map: 3,
           skulls: 0.75,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 8.75,
         types: { fortress: 2.5, selfsynergy: 0, spirit: 3 },
-        weight: 0.25,
+        weight: 0.25
       },
       {
         difficulty: 12,
@@ -2450,7 +2450,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 0.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 9,
         types: {
@@ -2458,9 +2458,9 @@ export var bingoList = {
           fortress: 2.5,
           incspboss: 100,
           selfsynergy: 0,
-          spirit: 8,
+          spirit: 8
         },
-        weight: 0.5499999999999999,
+        weight: 0.5499999999999999
       },
       {
         difficulty: 12,
@@ -2476,7 +2476,7 @@ export var bingoList = {
           hearts3: 3,
           hearts4: 1,
           magic: 1.75,
-          marketgs: 2,
+          marketgs: 2
         },
         time: 8.75,
         types: {
@@ -2490,10 +2490,10 @@ export var bingoList = {
           dmcchild: 0.75,
           endon: -0.5,
           ganonchu: 0,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -1.4000000000000004,
-      },
+        weight: -1.4000000000000004
+      }
     ],
     13: [
       {
@@ -2510,11 +2510,11 @@ export var bingoList = {
           hearts3: 1,
           jabu: 0.5,
           map: 2,
-          skulls: 4,
+          skulls: 4
         },
         time: 9.75,
         types: { childchu: 0, fountain: 2, inczoraskull: 100, selfsynergy: 0 },
-        weight: -1.7000000000000004,
+        weight: -1.7000000000000004
       },
       {
         difficulty: 13,
@@ -2532,11 +2532,11 @@ export var bingoList = {
           map: 1.5,
           skulls: 2,
           songs10: -5,
-          songs5: 3,
+          songs5: 3
         },
         time: 9.75,
         types: { fortress: 2.5, selfsynergy: 0, spirit: 2.5 },
-        weight: 0.15000000000000002,
+        weight: 0.15000000000000002
       },
       {
         difficulty: 13,
@@ -2550,7 +2550,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 0.75,
           map: 3,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 9.5,
         types: {
@@ -2559,9 +2559,9 @@ export var bingoList = {
           gtg: 3,
           incgtgkey: 100,
           quiver: 2.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 13,
@@ -2581,7 +2581,7 @@ export var bingoList = {
           map: 2.5,
           quiver: 4.5,
           skulls: 1,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 9.75,
         types: {
@@ -2591,9 +2591,9 @@ export var bingoList = {
           gtg: 1,
           incforest: 100,
           meg: 4.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.2,
+        weight: 0.2
       },
       {
         difficulty: 13,
@@ -2612,11 +2612,11 @@ export var bingoList = {
           map: 3,
           quiver: 4.5,
           skulls: 1,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 9.75,
         types: { forest: 3, incforest: 100, meg: 5, selfsynergy: 0 },
-        weight: -0.25,
+        weight: -0.25
       },
       {
         difficulty: 13,
@@ -2634,7 +2634,7 @@ export var bingoList = {
           map: 3,
           quiver: 4.5,
           skulls: 1,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 10,
         types: {
@@ -2642,9 +2642,9 @@ export var bingoList = {
           hovers: 2.5,
           incforest: 100,
           meg: 5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 13,
@@ -2661,11 +2661,11 @@ export var bingoList = {
           hovers: 0.25,
           map: 2,
           skulls: 0.5,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 10,
         types: { dmc: 1, fire: 5, selfsynergy: 0 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 13,
@@ -2684,11 +2684,11 @@ export var bingoList = {
           incgorons: 100,
           map: 2,
           skulls: 0.25,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 10,
         types: { dmc: 1, fire: 7, selfsynergy: 0 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 13,
@@ -2708,7 +2708,7 @@ export var bingoList = {
           hovers: 0.5,
           irons: 2,
           map: 2.5,
-          skulls: 1.5,
+          skulls: 1.5
         },
         time: 9.5,
         types: {
@@ -2717,9 +2717,9 @@ export var bingoList = {
           incwskull: 100,
           longshot: 2,
           selfsynergy: 0,
-          water: 3,
+          water: 3
         },
-        weight: -0.4,
+        weight: -0.4
       },
       {
         difficulty: 13,
@@ -2731,7 +2731,7 @@ export var bingoList = {
         subtypes: { bosskey2: 2, compass: 1, poachers: 0.25, skulls: 2 },
         time: 9.5,
         types: { hovers: 2.5, selfsynergy: 0, shadow: 6 },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 13,
@@ -2749,7 +2749,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 0.75,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 10,
         types: {
@@ -2760,9 +2760,9 @@ export var bingoList = {
           incshield: 100,
           incspboss: 100,
           selfsynergy: 0,
-          spirit: 3.5,
+          spirit: 3.5
         },
-        weight: 1.1500000000000001,
+        weight: 1.1500000000000001
       },
       {
         difficulty: 13,
@@ -2781,7 +2781,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 0.75,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 9.75,
         types: {
@@ -2790,10 +2790,10 @@ export var bingoList = {
           hovers: 2.5,
           selfsynergy: 0,
           spirit: 3.25,
-          strength: 100,
+          strength: 100
         },
-        weight: 0.9500000000000002,
-      },
+        weight: 0.9500000000000002
+      }
     ],
     14: [
       {
@@ -2809,11 +2809,11 @@ export var bingoList = {
           botw: -1,
           childchu: -2.5,
           hearts3: 1.5,
-          skulls: 0.75,
+          skulls: 0.75
         },
         time: 10.75,
         types: { incsongs: 100, poachers: 3.5, selfsynergy: 0, songs5: 8.75 },
-        weight: -0.2,
+        weight: -0.2
       },
       {
         difficulty: 14,
@@ -2831,7 +2831,7 @@ export var bingoList = {
           map: 3,
           skulls: 0.25,
           songs5: 1,
-          strength: 1.5,
+          strength: 1.5
         },
         time: 10.5,
         types: {
@@ -2841,9 +2841,9 @@ export var bingoList = {
           goldrupee: 15,
           gtg: 3,
           incgolds: 100,
-          selfsynergy: -2,
+          selfsynergy: -2
         },
-        weight: -0.49999999999999994,
+        weight: -0.49999999999999994
       },
       {
         difficulty: 14,
@@ -2860,7 +2860,7 @@ export var bingoList = {
           hearts4: 0.5,
           map: 3,
           poachers: 0.25,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 10.5,
         types: {
@@ -2869,9 +2869,9 @@ export var bingoList = {
           hovers: 2.5,
           incshield: 100,
           selfsynergy: 0,
-          spirit: 3.5,
+          spirit: 3.5
         },
-        weight: 1.0000000000000002,
+        weight: 1.0000000000000002
       },
       {
         difficulty: 14,
@@ -2889,7 +2889,7 @@ export var bingoList = {
           hearts4: 1.5,
           poachers: 0.75,
           skulls: 0.75,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 10.5,
         types: {
@@ -2897,9 +2897,9 @@ export var bingoList = {
           hovers: 2.5,
           incmc: 100,
           map: 15,
-          selfsynergy: -3,
+          selfsynergy: -3
         },
-        weight: 1.5000000000000004,
+        weight: 1.5000000000000004
       },
       {
         difficulty: 14,
@@ -2920,7 +2920,7 @@ export var bingoList = {
           incarrows: 100,
           map: 3,
           quiver: 4.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 10.5,
         types: {
@@ -2930,9 +2930,9 @@ export var bingoList = {
           legitlacs: 100,
           lightarrow: 5,
           poachers: 3.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.15000000000000002,
+        weight: 0.15000000000000002
       },
       {
         difficulty: 14,
@@ -2951,7 +2951,7 @@ export var bingoList = {
           hearts3: 2.5,
           incfairy: 100,
           map: 2,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 10.5,
         types: {
@@ -2961,9 +2961,9 @@ export var bingoList = {
           fountain: 2,
           magic: 1.75,
           poachers: 3.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 14,
@@ -2980,7 +2980,7 @@ export var bingoList = {
           marketgs: 2,
           skulls: 0.25,
           songs4: 3,
-          songs5: -3,
+          songs5: -3
         },
         time: 10.5,
         types: {
@@ -2990,9 +2990,9 @@ export var bingoList = {
           czl: 5.75,
           incsaria: 100,
           saria: 2.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -1.2500000000000002,
+        weight: -1.2500000000000002
       },
       {
         difficulty: 14,
@@ -3010,11 +3010,11 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 0.75,
           incirons: 100,
-          map: 3,
+          map: 3
         },
         time: 10.5,
         types: { fountain: 2, ice: 1.5, irons: 2, selfsynergy: 0 },
-        weight: -0.6500000000000002,
+        weight: -0.6500000000000002
       },
       {
         difficulty: 14,
@@ -3031,7 +3031,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 0.75,
           map: 3,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 10.25,
         types: {
@@ -3040,10 +3040,10 @@ export var bingoList = {
           gtg: 5,
           incgtgkey: 100,
           quiver: 4.5,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.05,
-      },
+        weight: 0.05
+      }
     ],
     15: [
       {
@@ -3063,7 +3063,7 @@ export var bingoList = {
           poachers: 0.25,
           skulls: 1,
           songs4: 1.5,
-          songs5: 2,
+          songs5: 2
         },
         time: 11.5,
         types: {
@@ -3074,9 +3074,9 @@ export var bingoList = {
           hovers: 2.5,
           incfboss: 100,
           pg: 2.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.44999999999999996,
+        weight: -0.44999999999999996
       },
       {
         difficulty: 15,
@@ -3093,11 +3093,11 @@ export var bingoList = {
           incgorons: 100,
           map: 2.5,
           skulls: 0.5,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 11.5,
         types: { dmc: 1, fire: 8, incflare: 100, selfsynergy: 0 },
-        weight: -1.35,
+        weight: -1.35
       },
       {
         difficulty: 15,
@@ -3118,7 +3118,7 @@ export var bingoList = {
           poachers: 0.25,
           skulls: 0.75,
           songs10: -0.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 11.25,
         types: {
@@ -3127,9 +3127,9 @@ export var bingoList = {
           hovers: 2.5,
           selfsynergy: 0,
           spirit: 3.25,
-          strength: 100,
+          strength: 100
         },
-        weight: 0.9,
+        weight: 0.9
       },
       {
         difficulty: 15,
@@ -3150,7 +3150,7 @@ export var bingoList = {
           hearts4: 0.75,
           hovers: 0.25,
           map: 4.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 11.5,
         types: {
@@ -3162,10 +3162,10 @@ export var bingoList = {
           lightarrow: 5,
           poachers: 3.5,
           selfsynergy: 0,
-          spirit: 5,
+          spirit: 5
         },
-        weight: 0.8999999999999999,
-      },
+        weight: 0.8999999999999999
+      }
     ],
     16: [
       {
@@ -3186,7 +3186,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 0.75,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 11.75,
         types: {
@@ -3197,9 +3197,9 @@ export var bingoList = {
           incsword: 100,
           selfsynergy: 0,
           spirit: 3.5,
-          swords: 3,
+          swords: 3
         },
-        weight: 1.2500000000000002,
+        weight: 1.2500000000000002
       },
       {
         difficulty: 16,
@@ -3221,7 +3221,7 @@ export var bingoList = {
           hovers: 0.25,
           incfairy: 100,
           map: 2,
-          skulls: 0.5,
+          skulls: 0.5
         },
         time: 11.75,
         types: {
@@ -3233,9 +3233,9 @@ export var bingoList = {
           magic: 1.75,
           poachers: 3.5,
           selfsynergy: 0,
-          spirit: 2,
+          spirit: 2
         },
-        weight: 0.4500000000000002,
+        weight: 0.4500000000000002
       },
       {
         difficulty: 16,
@@ -3253,7 +3253,7 @@ export var bingoList = {
           hovers: 0.25,
           incirons: 100,
           map: 4,
-          skulls: 2.5,
+          skulls: 2.5
         },
         time: 12,
         types: {
@@ -3262,9 +3262,9 @@ export var bingoList = {
           inclhskull: 100,
           irons: 2,
           selfsynergy: 0,
-          water: 1,
+          water: 1
         },
-        weight: -0.9,
+        weight: -0.9
       },
       {
         difficulty: 16,
@@ -3287,7 +3287,7 @@ export var bingoList = {
           map: 2.5,
           pg: 1,
           skulls: 0.25,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 12,
         types: {
@@ -3295,9 +3295,9 @@ export var bingoList = {
           endon: -0.5,
           fire: 9,
           incvolvagia: 100,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.05000000000000002,
+        weight: -0.05000000000000002
       },
       {
         difficulty: 16,
@@ -3316,12 +3316,12 @@ export var bingoList = {
           longshot: 1,
           map: 3,
           skulls: 2.5,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 12,
         types: { dmc: 1, fire: 4.75, selfsynergy: 0 },
-        weight: -0.75,
-      },
+        weight: -0.75
+      }
     ],
     17: [
       {
@@ -3341,7 +3341,7 @@ export var bingoList = {
           map: 4.5,
           poachers: 0.25,
           skulls: 1,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 13,
         types: {
@@ -3353,9 +3353,9 @@ export var bingoList = {
           incshield: 100,
           inctunic: 100,
           selfsynergy: 0,
-          spirit: 3.5,
+          spirit: 3.5
         },
-        weight: 1.8000000000000005,
+        weight: 1.8000000000000005
       },
       {
         difficulty: 17,
@@ -3371,7 +3371,7 @@ export var bingoList = {
           hearts4: 1,
           map: 15,
           poachers: 0.75,
-          skulls: 1,
+          skulls: 1
         },
         time: 13,
         types: {
@@ -3379,9 +3379,9 @@ export var bingoList = {
           compass: 15,
           hovers: 2.5,
           incmc: 100,
-          selfsynergy: -3,
+          selfsynergy: -3
         },
-        weight: 0.49999999999999994,
+        weight: 0.49999999999999994
       },
       {
         difficulty: 17,
@@ -3393,7 +3393,7 @@ export var bingoList = {
         subtypes: { skulls: 0.75 },
         time: 12.75,
         types: { hearts3: 13, hearts4: 2, inchearts: 100, selfsynergy: -3 },
-        weight: -0.7000000000000001,
+        weight: -0.7000000000000001
       },
       {
         difficulty: 17,
@@ -3413,7 +3413,7 @@ export var bingoList = {
           map: 2,
           marketgs: 4,
           skulls: 0.5,
-          songs4: 1.75,
+          songs4: 1.75
         },
         time: 12.75,
         types: {
@@ -3423,9 +3423,9 @@ export var bingoList = {
           dins: 3,
           dmcchild: 1.25,
           magic: 1.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -1,
+        weight: -1
       },
       {
         difficulty: 17,
@@ -3444,7 +3444,7 @@ export var bingoList = {
           marketgs: 2,
           skulls: 100,
           songs4: 3,
-          strength: 100,
+          strength: 100
         },
         time: 13,
         types: {
@@ -3454,9 +3454,9 @@ export var bingoList = {
           czl: 5.75,
           dmcchild: 1,
           saria: 4.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.7999999999999999,
+        weight: -0.7999999999999999
       },
       {
         difficulty: 17,
@@ -3472,7 +3472,7 @@ export var bingoList = {
           hearts4: 0.5,
           map: 2,
           marketgs: 4,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 12.5,
         types: {
@@ -3483,9 +3483,9 @@ export var bingoList = {
           incgcard: 100,
           quiver: 1,
           selfsynergy: 0,
-          spirit: 0.5,
+          spirit: 0.5
         },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 17,
@@ -3503,7 +3503,7 @@ export var bingoList = {
           map: 2.5,
           quiver: 4.5,
           skulls: 1.75,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 13,
         types: {
@@ -3511,9 +3511,9 @@ export var bingoList = {
           hovers: 2.5,
           incforest: 100,
           meg: 8.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -0.1,
+        weight: -0.1
       },
       {
         difficulty: 17,
@@ -3536,7 +3536,7 @@ export var bingoList = {
           map: 2.5,
           pg: 1,
           skulls: 0.25,
-          songs5: 2,
+          songs5: 2
         },
         time: 12.5,
         types: {
@@ -3544,9 +3544,9 @@ export var bingoList = {
           endon: -1,
           fire: 10,
           incvolvagia: 100,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 17,
@@ -3565,7 +3565,7 @@ export var bingoList = {
           compass: 1,
           hearts3: 2,
           hearts4: 1,
-          skulls: 1.5,
+          skulls: 1.5
         },
         time: 12.75,
         types: {
@@ -3574,9 +3574,9 @@ export var bingoList = {
           hovers: 2.5,
           poachers: 3.5,
           selfsynergy: 0,
-          shadow: 8,
+          shadow: 8
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 17,
@@ -3597,7 +3597,7 @@ export var bingoList = {
           pg: 2,
           poachers: 2.5,
           skulls: 0.5,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 13,
         types: {
@@ -3606,10 +3606,10 @@ export var bingoList = {
           endon: -0.5,
           fire: 7,
           lightarrow: 8,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.3,
-      },
+        weight: 0.3
+      }
     ],
     18: [
       {
@@ -3627,7 +3627,7 @@ export var bingoList = {
           hearts4: 0.25,
           map: 6,
           skulls: 2.25,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 13.5,
         types: {
@@ -3644,9 +3644,9 @@ export var bingoList = {
           selfsynergy: -3,
           shadow: 5,
           silverrupee: 14,
-          spirit: 2,
+          spirit: 2
         },
-        weight: 0.1,
+        weight: 0.1
       },
       {
         difficulty: 18,
@@ -3669,11 +3669,11 @@ export var bingoList = {
           map: 2,
           pg: 1,
           skulls: 0.25,
-          songs5: 2,
+          songs5: 2
         },
         time: 13.5,
         types: { dmc: 1, fire: 10, incvolvagia: 100, selfsynergy: 0 },
-        weight: -0.30000000000000004,
+        weight: -0.30000000000000004
       },
       {
         difficulty: 18,
@@ -3691,7 +3691,7 @@ export var bingoList = {
           hovers: 0.25,
           map: 2,
           skulls: 0.5,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 13.5,
         types: {
@@ -3700,9 +3700,9 @@ export var bingoList = {
           incfirebk: 100,
           incflare: 100,
           incgorons: 100,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -1.3000000000000003,
+        weight: -1.3000000000000003
       },
       {
         difficulty: 18,
@@ -3722,7 +3722,7 @@ export var bingoList = {
           compass: 1,
           hearts3: 2,
           hearts4: 1,
-          skulls: 2.5,
+          skulls: 2.5
         },
         time: 13.25,
         types: {
@@ -3731,9 +3731,9 @@ export var bingoList = {
           hovers: 2.5,
           poachers: 3.5,
           selfsynergy: 0,
-          shadow: 8,
+          shadow: 8
         },
-        weight: -0.39999999999999997,
+        weight: -0.39999999999999997
       },
       {
         difficulty: 18,
@@ -3750,11 +3750,11 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 2.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 13.75,
         types: { fortress: 2.5, hovers: 2.5, selfsynergy: 0, spirit: 5 },
-        weight: 0.7499999999999999,
+        weight: 0.7499999999999999
       },
       {
         difficulty: 18,
@@ -3772,7 +3772,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 1,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 13.75,
         types: {
@@ -3784,9 +3784,9 @@ export var bingoList = {
           incmirror: 100,
           quiver: 1.5,
           selfsynergy: 0,
-          spirit: 3.5,
+          spirit: 3.5
         },
-        weight: 1.1,
+        weight: 1.1
       },
       {
         difficulty: 18,
@@ -3807,7 +3807,7 @@ export var bingoList = {
           pg: 2,
           poachers: 2.5,
           skulls: 0.5,
-          songs5: 1.25,
+          songs5: 1.25
         },
         time: 13.75,
         types: {
@@ -3817,10 +3817,10 @@ export var bingoList = {
           fire: 7,
           incshtrial: 100,
           lightarrow: 8,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: 0.05,
-      },
+        weight: 0.05
+      }
     ],
     19: [
       {
@@ -3840,9 +3840,9 @@ export var bingoList = {
           cganon: 2.75,
           gtg: 1,
           incbkdoor: 100,
-          selfsynergy: -2,
+          selfsynergy: -2
         },
-        weight: 0.9500000000000003,
+        weight: 0.9500000000000003
       },
       {
         difficulty: 19,
@@ -3860,7 +3860,7 @@ export var bingoList = {
           hearts4: 2.5,
           poachers: 1.5,
           skulls: 0.75,
-          songs5: 1.5,
+          songs5: 1.5
         },
         time: 14.5,
         types: {
@@ -3868,9 +3868,9 @@ export var bingoList = {
           hovers: 2.5,
           incmc: 100,
           map: 20,
-          selfsynergy: -3,
+          selfsynergy: -3
         },
-        weight: 1.7500000000000007,
+        weight: 1.7500000000000007
       },
       {
         difficulty: 19,
@@ -3887,7 +3887,7 @@ export var bingoList = {
           incsaria: 100,
           marketgs: 2,
           skulls: 0.25,
-          songs4: 3,
+          songs4: 3
         },
         time: 14.5,
         types: {
@@ -3896,9 +3896,9 @@ export var bingoList = {
           chuczl: 2,
           czl: 5.75,
           saria: 2.75,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -1.7500000000000004,
+        weight: -1.7500000000000004
       },
       {
         difficulty: 19,
@@ -3922,7 +3922,7 @@ export var bingoList = {
           irons: 2,
           map: 3.5,
           skulls: 2.5,
-          spirit: -1,
+          spirit: -1
         },
         time: 14.25,
         types: {
@@ -3935,10 +3935,10 @@ export var bingoList = {
           longshot: 4,
           poachers: 3.5,
           selfsynergy: 0,
-          water: 4,
+          water: 4
         },
-        weight: -0.9500000000000002,
-      },
+        weight: -0.9500000000000002
+      }
     ],
     20: [
       {
@@ -3958,7 +3958,7 @@ export var bingoList = {
           poachers: 0.25,
           skulls: 1.5,
           songs4: 1.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 15,
         types: {
@@ -3972,9 +3972,9 @@ export var bingoList = {
           incshield: 100,
           irons: 2,
           selfsynergy: 0,
-          spirit: 3.5,
+          spirit: 3.5
         },
-        weight: 1.2,
+        weight: 1.2
       },
       {
         difficulty: 20,
@@ -3997,7 +3997,7 @@ export var bingoList = {
           hearts4: 0.5,
           hovers: 0.25,
           map: 4,
-          skulls: 0.75,
+          skulls: 0.75
         },
         time: 15.25,
         types: {
@@ -4012,9 +4012,9 @@ export var bingoList = {
           magic: 1.75,
           poachers: 3.5,
           selfsynergy: -0.5,
-          spirit: 2,
+          spirit: 2
         },
-        weight: 0.5,
+        weight: 0.5
       },
       {
         difficulty: 20,
@@ -4031,7 +4031,7 @@ export var bingoList = {
           hearts4: 1,
           incsaria: 100,
           skulls: 0.5,
-          songs4: 3,
+          songs4: 3
         },
         time: 15,
         types: {
@@ -4042,10 +4042,10 @@ export var bingoList = {
           dmcchild: 1,
           saria: 4.75,
           selfsynergy: 0,
-          strength: 100,
+          strength: 100
         },
-        weight: -1.7000000000000004,
-      },
+        weight: -1.7000000000000004
+      }
     ],
     21: [
       {
@@ -4065,7 +4065,7 @@ export var bingoList = {
           map: 6,
           poachers: 1,
           skulls: 4.5,
-          songs5: 4.5,
+          songs5: 4.5
         },
         time: 16,
         types: {
@@ -4079,9 +4079,9 @@ export var bingoList = {
           selfsynergy: -3,
           shadow: 2,
           spirit: 3,
-          water: 2,
+          water: 2
         },
-        weight: 0.4,
+        weight: 0.4
       },
       {
         difficulty: 21,
@@ -4100,7 +4100,7 @@ export var bingoList = {
           poachers: 0.25,
           skulls: 2,
           songs4: 1.5,
-          songs5: 2,
+          songs5: 2
         },
         time: 16,
         types: {
@@ -4112,9 +4112,9 @@ export var bingoList = {
           incfboss: 100,
           marketgs: 4,
           pg: 2.25,
-          selfsynergy: 0,
+          selfsynergy: 0
         },
-        weight: -1.2500000000000002,
+        weight: -1.2500000000000002
       },
       {
         difficulty: 21,
@@ -4136,7 +4136,7 @@ export var bingoList = {
           hovers: 1,
           map: 6,
           skulls: 1,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 15.75,
         types: {
@@ -4147,9 +4147,9 @@ export var bingoList = {
           poachers: 3.5,
           quiver: 1.5,
           selfsynergy: 0,
-          spirit: 5,
+          spirit: 5
         },
-        weight: 0.7000000000000002,
+        weight: 0.7000000000000002
       },
       {
         difficulty: 21,
@@ -4167,7 +4167,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 1,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 16,
         types: {
@@ -4178,10 +4178,10 @@ export var bingoList = {
           gtg: 1.5,
           hovers: 2.5,
           selfsynergy: 0,
-          spirit: 4,
+          spirit: 4
         },
-        weight: 0.15,
-      },
+        weight: 0.15
+      }
     ],
     22: [
       {
@@ -4194,7 +4194,7 @@ export var bingoList = {
         subtypes: { child2: 1, childreset: 1.25 },
         time: 16.5,
         types: { incskulls: 100, selfsynergy: -2, skulls: 15 },
-        weight: -0.6000000000000001,
+        weight: -0.6000000000000001
       },
       {
         difficulty: 22,
@@ -4215,7 +4215,7 @@ export var bingoList = {
           kd: 2,
           map: 8,
           quiver: 4.5,
-          skulls: 0.25,
+          skulls: 0.25
         },
         time: 16.25,
         types: {
@@ -4228,10 +4228,10 @@ export var bingoList = {
           legitlacs: 100,
           lightarrow: 5,
           poachers: 3.5,
-          selfsynergy: -0.5,
+          selfsynergy: -0.5
         },
-        weight: 0.6000000000000002,
-      },
+        weight: 0.6000000000000002
+      }
     ],
     23: [
       {
@@ -4252,7 +4252,7 @@ export var bingoList = {
           hearts4: 0.25,
           hovers: 1,
           map: 2,
-          skulls: 1.5,
+          skulls: 1.5
         },
         time: 17.25,
         types: {
@@ -4263,9 +4263,9 @@ export var bingoList = {
           selfsynergy: 0,
           songs10: 10,
           songs5: 15,
-          spirit: 2.5,
+          spirit: 2.5
         },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 23,
@@ -4282,7 +4282,7 @@ export var bingoList = {
           hearts4: 0.25,
           map: 9,
           skulls: 3.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 17.5,
         types: {
@@ -4299,9 +4299,9 @@ export var bingoList = {
           selfsynergy: -3,
           shadow: 5,
           silverrupee: 15,
-          spirit: 2,
+          spirit: 2
         },
-        weight: 0.05000000000000002,
+        weight: 0.05000000000000002
       },
       {
         difficulty: 23,
@@ -4317,7 +4317,7 @@ export var bingoList = {
           hearts4: 2,
           map: 22,
           poachers: 1.5,
-          skulls: 1,
+          skulls: 1
         },
         time: 17,
         types: {
@@ -4325,9 +4325,9 @@ export var bingoList = {
           compass: 22,
           hovers: 2.5,
           incmc: 100,
-          selfsynergy: -3,
+          selfsynergy: -3
         },
-        weight: 0.15,
+        weight: 0.15
       },
       {
         difficulty: 23,
@@ -4339,7 +4339,7 @@ export var bingoList = {
         subtypes: { skulls: 1 },
         time: 17,
         types: { hearts3: 16, hearts4: 3, inchearts: 100, selfsynergy: -3 },
-        weight: -0.3500000000000001,
+        weight: -0.3500000000000001
       },
       {
         difficulty: 23,
@@ -4357,7 +4357,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 0.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 17,
         types: {
@@ -4368,10 +4368,10 @@ export var bingoList = {
           incspboss: 100,
           legitlacs: 100,
           selfsynergy: 0,
-          spirit: 8,
+          spirit: 8
         },
-        weight: 0.1,
-      },
+        weight: 0.1
+      }
     ],
     24: [
       {
@@ -4393,7 +4393,7 @@ export var bingoList = {
           map: 6,
           poachers: 1,
           skulls: 4.5,
-          songs5: 4.5,
+          songs5: 4.5
         },
         time: 17.75,
         types: {
@@ -4406,9 +4406,9 @@ export var bingoList = {
           selfsynergy: -3,
           shadow: 2,
           spirit: 3,
-          water: 3,
+          water: 3
         },
-        weight: 0.05,
+        weight: 0.05
       },
       {
         difficulty: 24,
@@ -4428,7 +4428,7 @@ export var bingoList = {
           map: 6,
           skulls: 2,
           songs5: 2.25,
-          strength: 1.5,
+          strength: 1.5
         },
         time: 18.25,
         types: {
@@ -4439,9 +4439,9 @@ export var bingoList = {
           goldrupee: 15,
           gtg: 3,
           incgolds: 100,
-          selfsynergy: -2,
+          selfsynergy: -2
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 24,
@@ -4462,7 +4462,7 @@ export var bingoList = {
           poachers: 0.25,
           skulls: 1.5,
           songs4: 1.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 17.75,
         types: {
@@ -4480,9 +4480,9 @@ export var bingoList = {
           irons: 2,
           selfsynergy: -1,
           spirit: 3.5,
-          swords: 3,
+          swords: 3
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 24,
@@ -4503,7 +4503,7 @@ export var bingoList = {
           map: 4,
           poachers: 1.5,
           skulls: 1,
-          songs5: 2,
+          songs5: 2
         },
         time: 18.25,
         types: {
@@ -4512,9 +4512,9 @@ export var bingoList = {
           fortress: 2.5,
           lightarrow: 8,
           selfsynergy: 0,
-          spirit: 5,
+          spirit: 5
         },
-        weight: 0,
+        weight: 0
       },
       {
         difficulty: 24,
@@ -4532,7 +4532,7 @@ export var bingoList = {
           map: 3,
           poachers: 0.25,
           skulls: 0.5,
-          songs5: 0.75,
+          songs5: 0.75
         },
         time: 18.25,
         types: {
@@ -4543,10 +4543,10 @@ export var bingoList = {
           incspboss: 100,
           legitlacs: 100,
           selfsynergy: 0,
-          spirit: 8,
+          spirit: 8
         },
-        weight: -0.05,
-      },
+        weight: -0.05
+      }
     ],
     25: [],
     26: [],
@@ -4581,9 +4581,9 @@ export var bingoList = {
       childchu: "min 1",
       endon: "max -1",
       ganonchu: "min 1",
-      legitlacs: "min -2",
+      legitlacs: "min -2"
     },
-    averageStandardDeviation: 55.1477249974077,
+    averageStandardDeviation: 55.1477249974077
   },
   short: {
     0: [
@@ -4594,7 +4594,7 @@ export var bingoList = {
         name: "2 Shields",
         skill: 0,
         time: 0.25,
-        types: { selfsynergy: 0 },
+        types: { selfsynergy: 0 }
       },
       {
         difficulty: 0,
@@ -4603,9 +4603,9 @@ export var bingoList = {
         name: "Lens of Truth",
         skill: 0,
         time: 0.25,
-        types: { selfsynergy: 0 },
+        types: { selfsynergy: 0 }
       },
-      { difficulty: 0, id: "", jp: "", name: "", skill: 0, time: 0, types: {} },
+      { difficulty: 0, id: "", jp: "", name: "", skill: 0, time: 0, types: {} }
     ],
     1: [
       {
@@ -4616,7 +4616,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { incrupees: 100 },
         time: 0.5,
-        types: { selfsynergy: 0 },
+        types: { selfsynergy: 0 }
       },
       {
         difficulty: 1,
@@ -4626,8 +4626,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { bottle: 1, songs: 0.25 },
         time: 0.5,
-        types: { field: 0.75, incocarina: 100, selfsynergy: 0 },
-      },
+        types: { field: 0.75, incocarina: 100, selfsynergy: 0 }
+      }
     ],
     2: [
       {
@@ -4637,7 +4637,7 @@ export var bingoList = {
         name: "20 Deku Sticks",
         skill: 0,
         time: 1,
-        types: { selfsynergy: 0, sticks: 100 },
+        types: { selfsynergy: 0, sticks: 100 }
       },
       {
         difficulty: 2,
@@ -4647,7 +4647,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 0.5, songs: 0.5, wallet: 0.25 },
         time: 1,
-        types: { selfsynergy: 0 },
+        types: { selfsynergy: 0 }
       },
       {
         difficulty: 2,
@@ -4657,7 +4657,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 0.25 },
         time: 1.25,
-        types: { bulletbag: 100, selfsynergy: 0 },
+        types: { bulletbag: 100, selfsynergy: 0 }
       },
       {
         difficulty: 2,
@@ -4667,7 +4667,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { hearts: 1 },
         time: 1.25,
-        types: { field: 0.75, selfsynergy: 0 },
+        types: { field: 0.75, selfsynergy: 0 }
       },
       {
         difficulty: 2,
@@ -4677,8 +4677,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { compass: 0.5, map: 0.5 },
         time: 1,
-        types: { selfsynergy: 0 },
-      },
+        types: { selfsynergy: 0 }
+      }
     ],
     3: [],
     4: [
@@ -4689,7 +4689,7 @@ export var bingoList = {
         name: "Plant 3 Magic Beans",
         skill: 0,
         time: 2,
-        types: { beans: 10, incbeans: 100, plant: 2, selfsynergy: -0.5 },
+        types: { beans: 10, incbeans: 100, plant: 2, selfsynergy: -0.5 }
       },
       {
         difficulty: 4,
@@ -4699,8 +4699,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { hearts: 0.25, wallet: 1.25 },
         time: 2,
-        types: { field: 0.75, incranchskulls: 100, lonlon: 1.5 },
-      },
+        types: { field: 0.75, incranchskulls: 100, lonlon: 1.5 }
+      }
     ],
     5: [
       {
@@ -4710,7 +4710,7 @@ export var bingoList = {
         name: "Bottled Fairy",
         skill: 0,
         time: 2.5,
-        types: { bottle: 1.75, selfsynergy: 0 },
+        types: { bottle: 1.75, selfsynergy: 0 }
       },
       {
         difficulty: 5,
@@ -4719,7 +4719,7 @@ export var bingoList = {
         name: "Green Potion",
         skill: 0,
         time: 2.5,
-        types: { bottle: 1.75, endbottle: -2.5, selfsynergy: 0 },
+        types: { bottle: 1.75, endbottle: -2.5, selfsynergy: 0 }
       },
       {
         difficulty: 5,
@@ -4728,7 +4728,7 @@ export var bingoList = {
         name: "Plant 4 Magic Beans",
         skill: 0,
         time: 2.75,
-        types: { beans: 10, incbeans: 100, plant: 2.75, selfsynergy: -0.5 },
+        types: { beans: 10, incbeans: 100, plant: 2.75, selfsynergy: -0.5 }
       },
       {
         difficulty: 5,
@@ -4737,8 +4737,8 @@ export var bingoList = {
         name: "Red Potion",
         skill: 0,
         time: 2.5,
-        types: { bottle: 1.75, endbottle: -2.5, selfsynergy: 0 },
-      },
+        types: { bottle: 1.75, endbottle: -2.5, selfsynergy: 0 }
+      }
     ],
     6: [
       {
@@ -4749,7 +4749,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 1.75 },
         time: 3.25,
-        types: { selfsynergy: 0 },
+        types: { selfsynergy: 0 }
       },
       {
         difficulty: 6,
@@ -4759,7 +4759,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 0.5 },
         time: 3,
-        types: { bottle: 1.75, endbottle: -2.5, selfsynergy: 0 },
+        types: { bottle: 1.75, endbottle: -2.5, selfsynergy: 0 }
       },
       {
         difficulty: 6,
@@ -4769,7 +4769,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { hearts: 1, wallet: 0.5 },
         time: 3,
-        types: { field: 0.75, lonlon: 1.75, selfsynergy: 0 },
+        types: { field: 0.75, lonlon: 1.75, selfsynergy: 0 }
       },
       {
         difficulty: 6,
@@ -4778,8 +4778,8 @@ export var bingoList = {
         name: "Open 3 gold rupee chests",
         skill: 0,
         time: 3,
-        types: { dmc: 1 },
-      },
+        types: { dmc: 1 }
+      }
     ],
     7: [
       {
@@ -4790,7 +4790,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 0.25 },
         time: 3.5,
-        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 },
+        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 }
       },
       {
         difficulty: 7,
@@ -4800,7 +4800,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 1.25, songs: 1, wallet: 1 },
         time: 3.5,
-        types: { bottle: 1.75, saria: 0.25, selfsynergy: 0 },
+        types: { bottle: 1.75, saria: 0.25, selfsynergy: 0 }
       },
       {
         difficulty: 7,
@@ -4816,10 +4816,10 @@ export var bingoList = {
           plant: 0.5,
           plant2: 1.5,
           songs: 1.5,
-          wallet: 1,
+          wallet: 1
         },
         time: 3.5,
-        types: { dmc: 3, selfsynergy: 0 },
+        types: { dmc: 3, selfsynergy: 0 }
       },
       {
         difficulty: 7,
@@ -4834,10 +4834,10 @@ export var bingoList = {
           hearts: 2.5,
           map: 3,
           plant: 0.25,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 3.5,
-        types: { deku: 2.25, selfsynergy: 0 },
+        types: { deku: 2.25, selfsynergy: 0 }
       },
       {
         difficulty: 7,
@@ -4851,11 +4851,11 @@ export var bingoList = {
           map: 1,
           plant: 0.75,
           plant2: 1.5,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 3.5,
-        types: { beans: -1, dmc: 3, selfsynergy: 0 },
-      },
+        types: { beans: -1, dmc: 3, selfsynergy: 0 }
+      }
     ],
     8: [
       {
@@ -4866,7 +4866,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 0.5, wallet: 1 },
         time: 4,
-        types: { bottle: 1.75, selfsynergy: 0 },
+        types: { bottle: 1.75, selfsynergy: 0 }
       },
       {
         difficulty: 8,
@@ -4879,10 +4879,10 @@ export var bingoList = {
           hearts: 2,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 4.25,
-        types: { field: 0.75, fortress: 1.5, selfsynergy: 0 },
+        types: { field: 0.75, fortress: 1.5, selfsynergy: 0 }
       },
       {
         difficulty: 8,
@@ -4896,10 +4896,10 @@ export var bingoList = {
           hearts: 2.5,
           map: 3,
           plant: 0.25,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 4,
-        types: { bulletbag: 100, deku: 2.75, selfsynergy: 0 },
+        types: { bulletbag: 100, deku: 2.75, selfsynergy: 0 }
       },
       {
         difficulty: 8,
@@ -4909,7 +4909,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 0.25, plant2: 1.5 },
         time: 4,
-        types: { fountain: 1, scale: 100, selfsynergy: 0 },
+        types: { fountain: 1, scale: 100, selfsynergy: 0 }
       },
       {
         difficulty: 8,
@@ -4923,10 +4923,10 @@ export var bingoList = {
           hearts: 3,
           map: 3.25,
           plant: 0.25,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 4.25,
-        types: { deku: 2.75, selfsynergy: 0 },
+        types: { deku: 2.75, selfsynergy: 0 }
       },
       {
         difficulty: 8,
@@ -4940,10 +4940,10 @@ export var bingoList = {
           map: 3,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 4,
-        types: { dc: 3, dmc: 1, selfsynergy: 0 },
+        types: { dc: 3, dmc: 1, selfsynergy: 0 }
       },
       {
         difficulty: 8,
@@ -4958,9 +4958,9 @@ export var bingoList = {
           fountain: 1,
           ruto: 4,
           scale: 100,
-          selfsynergy: 0,
-        },
-      },
+          selfsynergy: 0
+        }
+      }
     ],
     9: [
       {
@@ -4971,7 +4971,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { bosskey: 3.5, hearts: 0.75, kd: 2.5, plant2: 0.5 },
         time: 4.75,
-        types: { field: 0.75, fortress: 3, gtg: 2.5, selfsynergy: 0 },
+        types: { field: 0.75, fortress: 3, gtg: 2.5, selfsynergy: 0 }
       },
       {
         difficulty: 9,
@@ -4981,7 +4981,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { bottle: 1.75, wallet: 0.5, zl: 1 },
         time: 4.75,
-        types: { endbottle: -2.5, field: 0.75, lonlon: 3.5, selfsynergy: 0 },
+        types: { endbottle: -2.5, field: 0.75, lonlon: 3.5, selfsynergy: 0 }
       },
       {
         difficulty: 9,
@@ -4991,8 +4991,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant2: 1.25 },
         time: 4.5,
-        types: { ruto: 4.5, selfsynergy: 0 },
-      },
+        types: { ruto: 4.5, selfsynergy: 0 }
+      }
     ],
     10: [
       {
@@ -5009,8 +5009,8 @@ export var bingoList = {
           fortress: 3,
           gtg: 2,
           incgtgkey: 100,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 10,
@@ -5026,8 +5026,8 @@ export var bingoList = {
           fortress: 3,
           gtg: 2,
           incgtgkey: 100,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 10,
@@ -5037,7 +5037,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { bottle: 1, incrupees: 100, plant: 4 },
         time: 5,
-        types: { selfsynergy: -2, wallet: 6 },
+        types: { selfsynergy: -2, wallet: 6 }
       },
       {
         difficulty: 10,
@@ -5051,10 +5051,10 @@ export var bingoList = {
           jabu: 0.25,
           plant: 1,
           plant2: 1.5,
-          wallet: 1.25,
+          wallet: 1.25
         },
         time: 5,
-        types: { field: 0.75, fortress: 2, gtg: 1, selfsynergy: 0 },
+        types: { field: 0.75, fortress: 2, gtg: 1, selfsynergy: 0 }
       },
       {
         difficulty: 10,
@@ -5069,10 +5069,10 @@ export var bingoList = {
           hearts2: 2,
           map: 3,
           plant: 0.25,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 5,
-        types: { deku: 4.75, endon: -0.5, incgohma: 100, selfsynergy: 0 },
+        types: { deku: 4.75, endon: -0.5, incgohma: 100, selfsynergy: 0 }
       },
       {
         difficulty: 10,
@@ -5081,8 +5081,8 @@ export var bingoList = {
         name: "Plant 5 Magic Beans",
         skill: 0,
         time: 5.25,
-        types: { beans: 10, incbeans: 100, plant: 3.5, selfsynergy: -0.5 },
-      },
+        types: { beans: 10, incbeans: 100, plant: 3.5, selfsynergy: -0.5 }
+      }
     ],
     11: [
       {
@@ -5093,7 +5093,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { bottle: 1, plant: 4 },
         time: 5.5,
-        types: { incrupees: 100, selfsynergy: -2, wallet: 6 },
+        types: { incrupees: 100, selfsynergy: -2, wallet: 6 }
       },
       {
         difficulty: 11,
@@ -5102,7 +5102,7 @@ export var bingoList = {
         name: "30 Deku Sticks",
         skill: 0,
         time: 5.5,
-        types: { dc: 3, selfsynergy: 0, sticks: 100 },
+        types: { dc: 3, selfsynergy: 0, sticks: 100 }
       },
       {
         difficulty: 11,
@@ -5118,8 +5118,8 @@ export var bingoList = {
           gtg: 1.5,
           ice: 1.5,
           irons: 1.5,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 11,
@@ -5133,11 +5133,11 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 5.5,
-        types: { dc: 4, dmc: 1, endon: -0.5, selfsynergy: 0 },
-      },
+        types: { dc: 4, dmc: 1, endon: -0.5, selfsynergy: 0 }
+      }
     ],
     12: [
       {
@@ -5148,7 +5148,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { bosskey: 2, hearts: 1.75, kd: 2.5, plant2: 0.5 },
         time: 6.25,
-        types: { fortress: 2.5, selfsynergy: 0 },
+        types: { fortress: 2.5, selfsynergy: 0 }
       },
       {
         difficulty: 12,
@@ -5164,8 +5164,8 @@ export var bingoList = {
           fortress: 3,
           gtg: 3,
           incgtgkey: 100,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 12,
@@ -5175,7 +5175,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 1, plant2: 1, wallet: 1 },
         time: 6,
-        types: { hearts: 5, hearts2: 1, selfsynergy: -2 },
+        types: { hearts: 5, hearts2: 1, selfsynergy: -2 }
       },
       {
         difficulty: 12,
@@ -5189,10 +5189,10 @@ export var bingoList = {
           jabu: 0.25,
           map: 2,
           ruto: 1,
-          wallet: 2.5,
+          wallet: 2.5
         },
         time: 6,
-        types: { fountain: 2, selfsynergy: 0 },
+        types: { fountain: 2, selfsynergy: 0 }
       },
       {
         difficulty: 12,
@@ -5202,7 +5202,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 0.25 },
         time: 6,
-        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 },
+        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 }
       },
       {
         difficulty: 12,
@@ -5218,7 +5218,7 @@ export var bingoList = {
           map: 3,
           plant: 0.25,
           wallet: 0.75,
-          zl: 2,
+          zl: 2
         },
         time: 6,
         types: {
@@ -5226,8 +5226,8 @@ export var bingoList = {
           fountain: 2,
           ganon: 4.75,
           ice: 1.5,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 12,
@@ -5241,10 +5241,10 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 1,
+          wallet: 1
         },
         time: 6.25,
-        types: { dc: 4, dmc: 1, selfsynergy: 0 },
+        types: { dc: 4, dmc: 1, selfsynergy: 0 }
       },
       {
         difficulty: 12,
@@ -5254,7 +5254,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { compass: 5, map: 5, ruto: 1, wallet: 0.75 },
         time: 6.25,
-        types: { fountain: 2, gtg: 1, jabu: 2.5, selfsynergy: 0 },
+        types: { fountain: 2, gtg: 1, jabu: 2.5, selfsynergy: 0 }
       },
       {
         difficulty: 12,
@@ -5264,8 +5264,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { bosskey: 2, hearts: 1.75, kd: 2.5, plant2: 0.5 },
         time: 6,
-        types: { dins: 3, fortress: 2.5, spirit: 1 },
-      },
+        types: { dins: 3, fortress: 2.5, spirit: 1 }
+      }
     ],
     13: [
       {
@@ -5281,10 +5281,10 @@ export var bingoList = {
           hearts2: 1.5,
           plant: 1,
           plant2: 1,
-          wallet: 0.75,
+          wallet: 0.75
         },
         time: 6.75,
-        types: { incmap: 100, map: 6, selfsynergy: 0 },
+        types: { incmap: 100, map: 6, selfsynergy: 0 }
       },
       {
         difficulty: 13,
@@ -5294,7 +5294,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 0.5, plant2: 1.5, ruto: 2, wallet: 1.75 },
         time: 6.75,
-        types: { bottle: 1.75, field: 0.75, fountain: 0.5, selfsynergy: 0 },
+        types: { bottle: 1.75, field: 0.75, fountain: 0.5, selfsynergy: 0 }
       },
       {
         difficulty: 13,
@@ -5308,10 +5308,10 @@ export var bingoList = {
           hearts2: 2,
           map: 6,
           ruto: 1,
-          wallet: 1.5,
+          wallet: 1.5
         },
         time: 6.75,
-        types: { fountain: 2, incbarinade: 100, jabu: 4.75, selfsynergy: 0 },
+        types: { fountain: 2, incbarinade: 100, jabu: 4.75, selfsynergy: 0 }
       },
       {
         difficulty: 13,
@@ -5324,7 +5324,7 @@ export var bingoList = {
           hearts: 3,
           hearts2: 2,
           plant: 0.25,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 6.75,
         types: {
@@ -5332,9 +5332,9 @@ export var bingoList = {
           endon: -0.5,
           ganon: 4.75,
           incgohma: 100,
-          selfsynergy: 0,
-        },
-      },
+          selfsynergy: 0
+        }
+      }
     ],
     14: [
       {
@@ -5351,8 +5351,8 @@ export var bingoList = {
           fortress: 3,
           gtg: 4,
           incgtgkey: 100,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 14,
@@ -5362,7 +5362,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 0.5, zl: 1 },
         time: 7.25,
-        types: { bottle: 1.5, field: 0.75, lonlon: 3.5, selfsynergy: 0 },
+        types: { bottle: 1.5, field: 0.75, lonlon: 3.5, selfsynergy: 0 }
       },
       {
         difficulty: 14,
@@ -5377,7 +5377,7 @@ export var bingoList = {
           plant: 0.5,
           plant2: 1.5,
           songs: 3,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 7.25,
         types: {
@@ -5385,9 +5385,9 @@ export var bingoList = {
           field: 0.75,
           fortress: 2.5,
           selfsynergy: 0,
-          spirit: 2.5,
-        },
-      },
+          spirit: 2.5
+        }
+      }
     ],
     15: [
       {
@@ -5398,7 +5398,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { compass: 5, hearts: 2, map: 5, ruto: 1, wallet: 2.5 },
         time: 7.75,
-        types: { endon: -0.5, fountain: 2, gtg: 1, jabu: 2.75, selfsynergy: 0 },
+        types: { endon: -0.5, fountain: 2, gtg: 1, jabu: 2.75, selfsynergy: 0 }
       },
       {
         difficulty: 15,
@@ -5408,7 +5408,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 0.25 },
         time: 7.75,
-        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 },
+        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 }
       },
       {
         difficulty: 15,
@@ -5418,7 +5418,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { compass: 1, jabu: 1, map: 1, plant2: 0.5, wallet: 1.25 },
         time: 7.5,
-        types: { bottle: 1.75, field: 0.75, fortress: 1, selfsynergy: 0 },
+        types: { bottle: 1.75, field: 0.75, fortress: 1, selfsynergy: 0 }
       },
       {
         difficulty: 15,
@@ -5428,8 +5428,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant2: 1.25 },
         time: 7.75,
-        types: { bottle: 100, ruto: 4.5, selfsynergy: 0 },
-      },
+        types: { bottle: 100, ruto: 4.5, selfsynergy: 0 }
+      }
     ],
     16: [
       {
@@ -5440,7 +5440,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 4.5, plant2: 2 },
         time: 8,
-        types: { bottle: 1.75, selfsynergy: -2, wallet: 8 },
+        types: { bottle: 1.75, selfsynergy: -2, wallet: 8 }
       },
       {
         difficulty: 16,
@@ -5455,10 +5455,10 @@ export var bingoList = {
           map: 8,
           plant: 1,
           plant2: 1,
-          wallet: 0.75,
+          wallet: 0.75
         },
         time: 8,
-        types: { compass: 8, inccomp: 100, selfsynergy: 0 },
+        types: { compass: 8, inccomp: 100, selfsynergy: 0 }
       },
       {
         difficulty: 16,
@@ -5474,8 +5474,8 @@ export var bingoList = {
           fortress: 3,
           gtg: 5,
           incgtgkey: 100,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 16,
@@ -5489,8 +5489,8 @@ export var bingoList = {
           field: 0.75,
           incranchskulls: 100,
           lonlon: 1.5,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 16,
@@ -5505,10 +5505,10 @@ export var bingoList = {
           jabu: 0.75,
           map: 3,
           plant: 0.25,
-          wallet: 2.5,
+          wallet: 2.5
         },
         time: 8.25,
-        types: { deku: 2.75, endon: -0.5, selfsynergy: 0 },
+        types: { deku: 2.75, endon: -0.5, selfsynergy: 0 }
       },
       {
         difficulty: 16,
@@ -5524,10 +5524,10 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 3.25,
+          wallet: 3.25
         },
         time: 8.25,
-        types: { dc: 3, dmc: 1, endon: -0.5, selfsynergy: 0 },
+        types: { dc: 3, dmc: 1, endon: -0.5, selfsynergy: 0 }
       },
       {
         difficulty: 16,
@@ -5543,7 +5543,7 @@ export var bingoList = {
           map: 3,
           plant: 0.25,
           wallet: 0.5,
-          zl: 2.25,
+          zl: 2.25
         },
         time: 8.25,
         types: {
@@ -5551,8 +5551,8 @@ export var bingoList = {
           deku: 4.75,
           endon: -1,
           incgohma: 100,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 16,
@@ -5567,7 +5567,7 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 1,
+          wallet: 1
         },
         time: 8.25,
         types: {
@@ -5577,8 +5577,8 @@ export var bingoList = {
           fortress: 2,
           inckd: 100,
           kd: 3,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 16,
@@ -5593,8 +5593,8 @@ export var bingoList = {
           dmc: 0.5,
           field: 0.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
+          zl: 5.5
+        }
       },
       {
         difficulty: 16,
@@ -5610,7 +5610,7 @@ export var bingoList = {
           map: 3,
           plant: 0.25,
           wallet: 0.5,
-          zl: 2.25,
+          zl: 2.25
         },
         time: 8.25,
         types: {
@@ -5618,8 +5618,8 @@ export var bingoList = {
           deku: 4.75,
           incgohma: 100,
           rbastones: 8.25,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 16,
@@ -5629,8 +5629,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant2: 1.25 },
         time: 8,
-        types: { bottle: 100, endbottle: -2.5, ruto: 4.5 },
-      },
+        types: { bottle: 100, endbottle: -2.5, ruto: 4.5 }
+      }
     ],
     17: [
       {
@@ -5646,10 +5646,10 @@ export var bingoList = {
           map: 1,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 3.25,
+          wallet: 3.25
         },
         time: 8.5,
-        types: { bottle: 1.75, dmc: 3, selfsynergy: 0 },
+        types: { bottle: 1.75, dmc: 3, selfsynergy: 0 }
       },
       {
         difficulty: 17,
@@ -5659,8 +5659,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { compass: 8.5, hearts: 0.5, map: 7.5, ruto: 1, wallet: 1 },
         time: 8.5,
-        types: { fountain: 2, jabu: 4.75, selfsynergy: 0 },
-      },
+        types: { fountain: 2, jabu: 4.75, selfsynergy: 0 }
+      }
     ],
     18: [
       {
@@ -5671,7 +5671,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { jabu: 0.75, plant: 0.5, wallet: 4.5 },
         time: 9,
-        types: { bottle: 1.75, selfsynergy: 0 },
+        types: { bottle: 1.75, selfsynergy: 0 }
       },
       {
         difficulty: 18,
@@ -5685,7 +5685,7 @@ export var bingoList = {
           hearts2: 2,
           map: 6,
           ruto: 1,
-          wallet: 1,
+          wallet: 1
         },
         time: 9.25,
         types: {
@@ -5693,8 +5693,8 @@ export var bingoList = {
           fountain: 2,
           incbarinade: 100,
           jabu: 7.25,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 18,
@@ -5710,7 +5710,7 @@ export var bingoList = {
           plant: 0.5,
           plant2: 1.5,
           songs: 3,
-          wallet: 1.25,
+          wallet: 1.25
         },
         time: 9,
         types: {
@@ -5718,8 +5718,8 @@ export var bingoList = {
           field: 0.75,
           fortress: 2.5,
           selfsynergy: 0,
-          spirit: 2.5,
-        },
+          spirit: 2.5
+        }
       },
       {
         difficulty: 18,
@@ -5733,7 +5733,7 @@ export var bingoList = {
           hearts2: 2,
           map: 6,
           ruto: 1,
-          wallet: 1,
+          wallet: 1
         },
         time: 9.25,
         types: {
@@ -5741,8 +5741,8 @@ export var bingoList = {
           fountain: 2,
           incbarinade: 100,
           jabu: 7.75,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 18,
@@ -5757,9 +5757,9 @@ export var bingoList = {
           incsaria: 100,
           saria: 2.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     19: [
       {
@@ -5775,7 +5775,7 @@ export var bingoList = {
           plant: 0.5,
           plant2: 1.5,
           ruto: 1,
-          wallet: 3,
+          wallet: 3
         },
         time: 9.5,
         types: {
@@ -5784,8 +5784,8 @@ export var bingoList = {
           dmc: 1,
           fountain: 2,
           jabu: 2.75,
-          selfsynergy: -3.5,
-        },
+          selfsynergy: -3.5
+        }
       },
       {
         difficulty: 19,
@@ -5800,7 +5800,7 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 1,
+          wallet: 1
         },
         time: 9.5,
         types: {
@@ -5810,8 +5810,8 @@ export var bingoList = {
           inckd: 100,
           kd: 3,
           rbastones: 9.5,
-          selfsynergy: 0,
-        },
+          selfsynergy: 0
+        }
       },
       {
         difficulty: 19,
@@ -5820,8 +5820,8 @@ export var bingoList = {
         name: "Plant 6 Magic Beans",
         skill: 0,
         time: 9.75,
-        types: { beans: 10, incbeans: 100, plant: 4.5, selfsynergy: -0.5 },
-      },
+        types: { beans: 10, incbeans: 100, plant: 4.5, selfsynergy: -0.5 }
+      }
     ],
     20: [
       {
@@ -5838,10 +5838,10 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 1,
+          wallet: 1
         },
         time: 10,
-        types: { dc: 4, dmc: 1, endon: -1, inckd: 100, kd: 3, selfsynergy: 0 },
+        types: { dc: 4, dmc: 1, endon: -1, inckd: 100, kd: 3, selfsynergy: 0 }
       },
       {
         difficulty: 20,
@@ -5856,8 +5856,8 @@ export var bingoList = {
           incsaria: 100,
           saria: 2.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
+          zl: 5.5
+        }
       },
       {
         difficulty: 20,
@@ -5867,7 +5867,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { bosskey: 2.5, hearts: 0.75, plant2: 0.5 },
         time: 10,
-        types: { field: 0.75, fortress: 2.5, selfsynergy: 0 },
+        types: { field: 0.75, fortress: 2.5, selfsynergy: 0 }
       },
       {
         difficulty: 20,
@@ -5882,8 +5882,8 @@ export var bingoList = {
           field: 0.75,
           saria: 2.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
+          zl: 5.5
+        }
       },
       {
         difficulty: 20,
@@ -5897,7 +5897,7 @@ export var bingoList = {
           hearts2: 2,
           map: 6,
           ruto: 1,
-          wallet: 1,
+          wallet: 1
         },
         time: 10.25,
         types: {
@@ -5905,9 +5905,9 @@ export var bingoList = {
           incbarinade: 100,
           jabu: 7.25,
           rbastones: 10.25,
-          selfsynergy: 0,
-        },
-      },
+          selfsynergy: 0
+        }
+      }
     ],
     21: [
       {
@@ -5918,8 +5918,8 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 0.5 },
         time: 10.5,
-        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 },
-      },
+        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 }
+      }
     ],
     22: [
       {
@@ -5936,7 +5936,7 @@ export var bingoList = {
           hearts2: 3,
           plant: 1,
           plant2: 1,
-          wallet: 1,
+          wallet: 1
         },
         time: 11.25,
         types: {
@@ -5944,8 +5944,8 @@ export var bingoList = {
           incmap: 100,
           jabu: 4.75,
           map: 14,
-          selfsynergy: -3,
-        },
+          selfsynergy: -3
+        }
       },
       {
         difficulty: 22,
@@ -5955,7 +5955,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { plant: 1, plant2: 1, wallet: 1 },
         time: 11,
-        types: { hearts: 8, hearts2: 4, selfsynergy: -2 },
+        types: { hearts: 8, hearts2: 4, selfsynergy: -2 }
       },
       {
         difficulty: 22,
@@ -5965,7 +5965,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { hearts: 2, hearts2: 2 },
         time: 11,
-        types: { bottle: 1.75, dmc: 2.5, incmagic: 100, magic: 1.75, zl: 5.5 },
+        types: { bottle: 1.75, dmc: 2.5, incmagic: 100, magic: 1.75, zl: 5.5 }
       },
       {
         difficulty: 22,
@@ -5983,8 +5983,8 @@ export var bingoList = {
           incocarina: 100,
           rbastones: 100,
           selfsynergy: 0,
-          spirit: -2.5,
-        },
+          spirit: -2.5
+        }
       },
       {
         difficulty: 22,
@@ -6000,11 +6000,11 @@ export var bingoList = {
           map: 2.75,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 1,
+          wallet: 1
         },
         time: 11,
-        types: { dc: 4, inckd: 100, kd: 3, selfsynergy: 0 },
-      },
+        types: { dc: 4, inckd: 100, kd: 3, selfsynergy: 0 }
+      }
     ],
     23: [
       {
@@ -6020,11 +6020,11 @@ export var bingoList = {
           map: 2,
           plant: 0.5,
           plant2: 1.5,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 11.5,
-        types: { field: 0.75, fortress: 2.5, selfsynergy: 0, spirit: 6 },
-      },
+        types: { field: 0.75, fortress: 2.5, selfsynergy: 0, spirit: 6 }
+      }
     ],
     24: [
       {
@@ -6040,9 +6040,9 @@ export var bingoList = {
           incbeans: 100,
           plant: 4.5,
           plant2: 2,
-          selfsynergy: -2,
-        },
-      },
+          selfsynergy: -2
+        }
+      }
     ],
     25: [
       {
@@ -6059,7 +6059,7 @@ export var bingoList = {
           map: 16,
           plant: 1,
           plant2: 1,
-          wallet: 1,
+          wallet: 1
         },
         time: 12.5,
         types: {
@@ -6067,8 +6067,8 @@ export var bingoList = {
           fountain: 2,
           inccomp: 100,
           jabu: 4.75,
-          selfsynergy: -4,
-        },
+          selfsynergy: -4
+        }
       },
       {
         difficulty: 25,
@@ -6084,7 +6084,7 @@ export var bingoList = {
           map: 1,
           plant: 0.5,
           songs: 1,
-          wallet: 0.5,
+          wallet: 0.5
         },
         time: 12.75,
         types: {
@@ -6094,9 +6094,9 @@ export var bingoList = {
           incmagic: 100,
           magic: 1.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     26: [
       {
@@ -6107,7 +6107,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { wallet: 0.5 },
         time: 13,
-        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 },
+        types: { beans: 9.75, incbeans: 100, selfsynergy: 0 }
       },
       {
         difficulty: 26,
@@ -6123,9 +6123,9 @@ export var bingoList = {
           saria: 4.75,
           selfsynergy: 0,
           strength: 100,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     27: [
       {
@@ -6141,8 +6141,8 @@ export var bingoList = {
           incsong: 100,
           selfsynergy: 0,
           songs: 2,
-          zl: 5.5,
-        },
+          zl: 5.5
+        }
       },
       {
         difficulty: 27,
@@ -6158,7 +6158,7 @@ export var bingoList = {
           plant: 0.5,
           plant2: 1.5,
           songs: 1,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 13.75,
         types: {
@@ -6167,9 +6167,9 @@ export var bingoList = {
           fortress: 2.5,
           selfsynergy: 0,
           spirit: 6,
-          strength: 100,
-        },
-      },
+          strength: 100
+        }
+      }
     ],
     28: [],
     29: [],
@@ -6184,7 +6184,7 @@ export var bingoList = {
         skill: 0,
         subtypes: { hearts: 2, hearts2: 2, plant: 1, wallet: 0.5 },
         time: 16.25,
-        types: { bottle: 1.75, incsong: 100, selfsynergy: 0, zl: 5.5 },
+        types: { bottle: 1.75, incsong: 100, selfsynergy: 0, zl: 5.5 }
       },
       {
         difficulty: 32,
@@ -6200,9 +6200,9 @@ export var bingoList = {
           field: 0.75,
           saria: 2.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     33: [],
     34: [
@@ -6221,9 +6221,9 @@ export var bingoList = {
           fountain: 2,
           magic: 1.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     35: [
       {
@@ -6241,9 +6241,9 @@ export var bingoList = {
           field: 0.75,
           magic: 1.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     36: [],
     37: [],
@@ -6262,7 +6262,7 @@ export var bingoList = {
           hearts: 1.5,
           map: 1,
           plant2: 1,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 20,
         types: {
@@ -6274,9 +6274,9 @@ export var bingoList = {
           magic: 1.75,
           selfsynergy: 0,
           spirit: 2,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     41: [],
     42: [
@@ -6295,7 +6295,7 @@ export var bingoList = {
           plant: 0.5,
           plant2: 1.25,
           ruto: 1,
-          wallet: 1,
+          wallet: 1
         },
         time: 21.25,
         types: {
@@ -6308,9 +6308,9 @@ export var bingoList = {
           magic: 1.75,
           selfsynergy: 0,
           spirit: 2,
-          zl: 3,
-        },
-      },
+          zl: 3
+        }
+      }
     ],
     43: [],
     44: [],
@@ -6326,7 +6326,7 @@ export var bingoList = {
           hearts: 2,
           hearts2: 2,
           plant: 0.5,
-          wallet: 0.25,
+          wallet: 0.25
         },
         time: 22.5,
         types: {
@@ -6335,9 +6335,9 @@ export var bingoList = {
           fortress: 3,
           saria: 2.75,
           selfsynergy: 0,
-          zl: 5.5,
-        },
-      },
+          zl: 5.5
+        }
+      }
     ],
     46: [],
     47: [],
@@ -6346,6 +6346,6 @@ export var bingoList = {
     50: [],
     info: { version: "v10.1" },
     rowtypes: {},
-    synfilters: { endon: "max -1" },
-  },
+    synfilters: { endon: "max -1" }
+  }
 };

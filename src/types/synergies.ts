@@ -1,11 +1,11 @@
 export type SynergyType = "types" | "subtypes" | "rowtypes";
 
 export type Synergies = {
-  [key in string]: number;
+  [key: string]: number;
 };
 
 export type CombinedSynergies = {
-  [key in string]: number[];
+  [key: string]: number[];
 };
 
 export type SynergyFilters = {

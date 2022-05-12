@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./src/index.ts",
+  entry: ["./src/index.ts", "./src/types/*", "./src/analysis/frequencyAnalysis.ts"],
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "generator.js",

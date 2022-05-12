@@ -1,6 +1,6 @@
-import { bingoList } from "./example-goal-list";
 import { DEFAULT_PROFILES } from "../definitions";
 import { generateBoard } from "../index";
+import { exampleBingoList } from "./exampleBingoList";
 
 // this file shows a few examples of how to use the generator (generate a board, run a frequency analysis)
 // run this file with `npm start`
@@ -10,7 +10,7 @@ import { generateBoard } from "../index";
 const mode = "normal";
 const seed = 112233;
 
-const board = generateBoard(bingoList, mode, seed);
+const board = generateBoard(exampleBingoList, mode, seed);
 console.log(`Generated after ${board.meta.iterations} iteration(s):`);
 console.log(board.goals.map((goal) => goal.name));
 
@@ -23,7 +23,7 @@ const customProfile = {
   useFrequencyBalancing: false
 };
 
-const boardCustomProfile = generateBoard(bingoList, mode, seed, customProfile);
+const boardCustomProfile = generateBoard(exampleBingoList, mode, seed, customProfile);
 console.log(`Generated after ${board.meta.iterations} iteration(s):`);
 console.log(boardCustomProfile.goals.map((goal) => goal.name));
 
