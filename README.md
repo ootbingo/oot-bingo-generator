@@ -74,7 +74,39 @@ versions on [Github](https://github.com/ootbingo/bingo). The `bingoGenerator()` 
 same thing, but this is the name that is being used by [BingoSync](https://bingosync.com).
 
 It's recommended to use the `generateBoard()` function when generating boards yourself. If you want to try it out, you
-can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)).
+can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)). To generate boards in your own
+project, use the [NPM package](#npm-package),
+
+## NPM package
+
+To install the [NPM package](https://www.npmjs.com/package/oot-bingo-generator):
+
+```bash
+npm install oot-bingo-generator
+```
+
+To generate boards in your own project, it's recommended to use
+the [OoT Bingo Lists package](https://www.npmjs.com/package/oot-bingo-lists):
+
+```bash
+npm install oot-bingo-lists
+```
+
+### Usage
+
+```ts
+import { generateBoard } from "oot-bingo-generator";
+import { getBingoList } from "oot-bingo-lists";
+
+const bingoList = getBingoList("v10.1");
+
+// Generating a board
+const board = generateBoard(bingoList, "blackout", 654321);
+
+// Performing a frequency analysis on a 1000 boards
+const frequencies = frequencyAnalysis(1000, bingoList, "normal");
+console.log(frequencies);
+```
 
 ## Help wanted
 
