@@ -51,7 +51,7 @@
     "webpack-cli": "^4.9.2"
   },
   "prettier": {
-    "printWidth": 90,
+    "printWidth": 100,
     "tabWidth": 2
   }
 }

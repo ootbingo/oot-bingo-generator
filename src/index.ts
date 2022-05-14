@@ -13,18 +13,10 @@ import { Board } from "./types/board";
  * @param options Object containing mode and seed
  * @returns A bingo board in the legacy format (list with goals and metadata, starting at index 1)
  */
-export function ootBingoGenerator(
-  bingoList: BingoList,
-  options: { mode: Mode; seed: number }
-) {
+export function ootBingoGenerator(bingoList: BingoList, options: { mode: Mode; seed: number }) {
   const goalList = extractGoalList(bingoList, options.mode);
   const profile = DEFAULT_PROFILES[options.mode];
-  const bingoGenerator = new BingoGenerator(
-    goalList,
-    options.seed,
-    options.mode,
-    profile
-  );
+  const bingoGenerator = new BingoGenerator(goalList, options.seed, options.mode, profile);
   const { goals, meta } = bingoGenerator.generateBoard();
 
   // make goals start from position 1 in the list (as expected by bingosetup.js)
@@ -38,10 +30,7 @@ export function ootBingoGenerator(
 /**
  * Wrapper for BingoSync
  */
-export function bingoGenerator(
-  bingoList: BingoList,
-  options: { mode: Mode; seed: number }
-) {
+export function bingoGenerator(bingoList: BingoList, options: { mode: Mode; seed: number }) {
   return ootBingoGenerator(bingoList, options);
 }
 

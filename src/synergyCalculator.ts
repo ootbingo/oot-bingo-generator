@@ -1,10 +1,5 @@
 import { Square } from "./types/board";
-import {
-  CombinedSynergies,
-  Synergies,
-  SynergyFilters,
-  SynergyType,
-} from "./types/synergies";
+import { CombinedSynergies, Synergies, SynergyFilters, SynergyType } from "./types/synergies";
 import { Profile } from "./types/settings";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
 import { SQUARES_PER_ROW } from "./definitions";
@@ -14,11 +9,7 @@ export class SynergyCalculator {
   rowtypeTimeSave: Synergies;
   synergyFilters: SynergyFilters;
 
-  constructor(
-    profile: Profile,
-    rowtypeTimeSave: Synergies,
-    synergyFilters: SynergyFilters
-  ) {
+  constructor(profile: Profile, rowtypeTimeSave: Synergies, synergyFilters: SynergyFilters) {
     this.profile = profile;
     this.rowtypeTimeSave = rowtypeTimeSave;
     this.synergyFilters = synergyFilters;
@@ -34,33 +25,23 @@ export class SynergyCalculator {
     // merging (sub)type and rowtype synergies
 
     const typeSynergiesOfSquares = this.mergeSynergiesOfSquares(squaresWithGoal, "types");
-    const subtypeSynergiesOfSquares = this.mergeSynergiesOfSquares(
-      squaresWithGoal,
-      "subtypes"
-    );
+    const subtypeSynergiesOfSquares = this.mergeSynergiesOfSquares(squaresWithGoal, "subtypes");
     const unifiedTypeSynergies = this.unifyTypeSynergies(
       typeSynergiesOfSquares,
       subtypeSynergiesOfSquares
     );
 
-    const rowtypeSynergiesOfSquares = this.mergeSynergiesOfSquares(
-      squaresWithGoal,
-      "rowtypes"
-    );
+    const rowtypeSynergiesOfSquares = this.mergeSynergiesOfSquares(squaresWithGoal, "rowtypes");
 
     // filtering (sub)type and rowtype synergies
 
     const filteredTypeSynergies = this.filterTypeSynergies(unifiedTypeSynergies);
 
-    const filteredRowtypeSynergies = this.filterRowtypeSynergies(
-      rowtypeSynergiesOfSquares
-    );
+    const filteredRowtypeSynergies = this.filterRowtypeSynergies(rowtypeSynergiesOfSquares);
 
     // calculating time differences
 
-    const timeDifferences = squaresWithGoal.map(
-      (square) => square.desiredTime - square.goal.time
-    );
+    const timeDifferences = squaresWithGoal.map((square) => square.desiredTime - square.goal.time);
 
     // total synergy
 
@@ -136,9 +117,7 @@ export class SynergyCalculator {
     return unifiedTypeSynergies;
   }
 
-  protected filterTypeSynergies(
-    unifiedTypeSynergies: CombinedSynergies
-  ): CombinedSynergies {
+  protected filterTypeSynergies(unifiedTypeSynergies: CombinedSynergies): CombinedSynergies {
     const effectiveTypeSynergies: CombinedSynergies = {};
 
     for (const typeCategory in unifiedTypeSynergies) {
@@ -178,10 +157,7 @@ export class SynergyCalculator {
         return filteredRowtypeSynergies;
       }
 
-      const filteredRowtypeSynergy = this.filterForRowtypeCategory(
-        rowtypeCategory,
-        rowtypeSynergy
-      );
+      const filteredRowtypeSynergy = this.filterForRowtypeCategory(rowtypeCategory, rowtypeSynergy);
       if (filteredRowtypeSynergy !== undefined) {
         filteredRowtypeSynergies[rowtypeCategory] = filteredRowtypeSynergy;
       }

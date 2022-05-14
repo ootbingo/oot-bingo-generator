@@ -47,9 +47,7 @@ export function flattenGoalList(goalList: GoalList): Goal[] {
  * @param rawFilters Object containing raw synergy filter strings for synergy types (e.g. {childchu : 'min 1', endon : 'max -1'})
  * @returns Object with parsed SynergyFilters (e.g. {childchu: {filterType: 'min', filterValue: 1}, endon: {'filterType': max}, filterValue: -1})
  */
-export function parseSynergyFilters(rawFilters: {
-  [key: string]: string;
-}): SynergyFilters {
+export function parseSynergyFilters(rawFilters: { [key: string]: string }): SynergyFilters {
   const parsedFilters: SynergyFilters = {};
   for (const filterType in rawFilters) {
     const rawFilterString = rawFilters[filterType];

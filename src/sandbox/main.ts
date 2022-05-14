@@ -20,7 +20,7 @@ const customProfile = {
   minimumSynergy: -5,
   maximumSynergy: 9,
   maximumIndividualSynergy: 4,
-  useFrequencyBalancing: false
+  useFrequencyBalancing: false,
 };
 
 const boardCustomProfile = generateBoard(exampleBingoList, mode, seed, customProfile);

@@ -35,7 +35,7 @@ describe("ootBingoGenerator", () => {
       "All 3 Elemental Arrows",
       "7 Magic Beans",
       "Blue Potion",
-      "20 Different Skulltulas"
+      "20 Different Skulltulas",
     ]);
   });
 
@@ -71,7 +71,7 @@ describe("ootBingoGenerator", () => {
       "Map & Compass in Spirit Temple",
       "All 4 Gerudo Valley area Skulltulas",
       "Ruto's Letter",
-      "Open the Final Door of Light Trial"
+      "Open the Final Door of Light Trial",
     ]);
   });
 
@@ -107,7 +107,7 @@ describe("ootBingoGenerator", () => {
       "Plant 7 Magic Beans",
       "3 unused keys in Gerudo Training Grounds",
       "Bottled Fairy",
-      "30 Deku Sticks"
+      "30 Deku Sticks",
     ]);
   });
 
@@ -143,7 +143,7 @@ describe("ootBingoGenerator", () => {
       "Zora's Sapphire",
       "Both Child Gerudo Valley area Skulltulas",
       "Open 3 gold rupee chests",
-      "30 Deku Sticks"
+      "30 Deku Sticks",
     ]);
   });
 });

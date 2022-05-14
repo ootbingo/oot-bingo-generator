@@ -33,7 +33,7 @@ describe("generator", () => {
         "All 3 Elemental Arrows",
         "7 Magic Beans",
         "Blue Potion",
-        "20 Different Skulltulas"
+        "20 Different Skulltulas",
       ]);
     });
 
@@ -66,7 +66,7 @@ describe("generator", () => {
         "Map & Compass in Spirit Temple",
         "All 4 Gerudo Valley area Skulltulas",
         "Ruto's Letter",
-        "Open the Final Door of Light Trial"
+        "Open the Final Door of Light Trial",
       ]);
     });
 
@@ -99,7 +99,7 @@ describe("generator", () => {
         "Plant 7 Magic Beans",
         "3 unused keys in Gerudo Training Grounds",
         "Bottled Fairy",
-        "30 Deku Sticks"
+        "30 Deku Sticks",
       ]);
     });
 
@@ -132,7 +132,7 @@ describe("generator", () => {
         "Zora's Sapphire",
         "Both Child Gerudo Valley area Skulltulas",
         "Open 3 gold rupee chests",
-        "30 Deku Sticks"
+        "30 Deku Sticks",
       ]);
     });
 
@@ -146,7 +146,7 @@ describe("generator", () => {
         baselineTime: 24.75,
         timePerDifficulty: 0.75,
         tooMuchSynergy: 100,
-        useFrequencyBalancing: false
+        useFrequencyBalancing: false,
       };
       const board = generateBoard(bingoList, "normal", 142536, customProfile);
 
@@ -176,7 +176,7 @@ describe("generator", () => {
         "Both Rusty Switches in Spirit Temple",
         "7 Magic Beans",
         "All 3 Skulltulas in Ice Cavern",
-        "Silver Gauntlets"
+        "Silver Gauntlets",
       ]);
     });
   });
@@ -187,7 +187,7 @@ describe("generator", () => {
       [816607, 5],
       [289166, 2],
       [849242, 1],
-      [822884, 10]
+      [822884, 10],
     ])(
       "v10.1 board with seed %s has correct metadata with %s iterations",
       (seed: number, expectedIterations: number) => {
