@@ -27,35 +27,32 @@ export class SynergyCalculator {
   calculateSynergyOfSquares(squares: Square[]): number {
     const squaresWithGoal = squares.filter((square) => square.goal !== undefined);
 
-    if (this.#containsDuplicateGoals(squaresWithGoal)) {
+    if (this.containsDuplicateGoals(squaresWithGoal)) {
       return this.profile.tooMuchSynergy;
     }
 
     // merging (sub)type and rowtype synergies
 
-    const typeSynergiesOfSquares = this.#mergeSynergiesOfSquares(
-      squaresWithGoal,
-      "types"
-    );
-    const subtypeSynergiesOfSquares = this.#mergeSynergiesOfSquares(
+    const typeSynergiesOfSquares = this.mergeSynergiesOfSquares(squaresWithGoal, "types");
+    const subtypeSynergiesOfSquares = this.mergeSynergiesOfSquares(
       squaresWithGoal,
       "subtypes"
     );
-    const unifiedTypeSynergies = this.#unifyTypeSynergies(
+    const unifiedTypeSynergies = this.unifyTypeSynergies(
       typeSynergiesOfSquares,
       subtypeSynergiesOfSquares
     );
 
-    const rowtypeSynergiesOfSquares = this.#mergeSynergiesOfSquares(
+    const rowtypeSynergiesOfSquares = this.mergeSynergiesOfSquares(
       squaresWithGoal,
       "rowtypes"
     );
 
     // filtering (sub)type and rowtype synergies
 
-    const filteredTypeSynergies = this.#filterTypeSynergies(unifiedTypeSynergies);
+    const filteredTypeSynergies = this.filterTypeSynergies(unifiedTypeSynergies);
 
-    const filteredRowtypeSynergies = this.#filterRowtypeSynergies(
+    const filteredRowtypeSynergies = this.filterRowtypeSynergies(
       rowtypeSynergiesOfSquares
     );
 
@@ -67,7 +64,7 @@ export class SynergyCalculator {
 
     // total synergy
 
-    return this.#calculateTotalSynergy(
+    return this.calculateTotalSynergy(
       filteredTypeSynergies,
       filteredRowtypeSynergies,
       timeDifferences
@@ -79,7 +76,7 @@ export class SynergyCalculator {
    * @param squares Array of squares (can be goal or empty)
    * @returns boolean
    */
-  #containsDuplicateGoals(squares: Square[]): boolean {
+  protected containsDuplicateGoals(squares: Square[]): boolean {
     const squaresWithGoal = squares.filter((square) => square.goal);
     const goalIds = squaresWithGoal.map((square) => square.goal.id);
     return new Set(goalIds).size !== goalIds.length;
@@ -95,7 +92,7 @@ export class SynergyCalculator {
    * @param synergyType Name of the synergy type ('type', 'rowtype' or 'subtype')
    * @returns Object with synergies for all the squares
    */
-  #mergeSynergiesOfSquares(
+  protected mergeSynergiesOfSquares(
     squaresWithGoal: Square[],
     synergyType: SynergyType
   ): CombinedSynergies {
@@ -122,7 +119,7 @@ export class SynergyCalculator {
    * @param subtypeSynergies Combined subtype synergies of multiple squares
    * @returns Object with unified type and subtype synergies
    */
-  #unifyTypeSynergies(
+  protected unifyTypeSynergies(
     typeSynergies: CombinedSynergies,
     subtypeSynergies: CombinedSynergies
   ): CombinedSynergies {
@@ -139,13 +136,15 @@ export class SynergyCalculator {
     return unifiedTypeSynergies;
   }
 
-  #filterTypeSynergies(unifiedTypeSynergies: CombinedSynergies): CombinedSynergies {
+  protected filterTypeSynergies(
+    unifiedTypeSynergies: CombinedSynergies
+  ): CombinedSynergies {
     const effectiveTypeSynergies: CombinedSynergies = {};
 
     for (const typeCategory in unifiedTypeSynergies) {
       const synergies = unifiedTypeSynergies[typeCategory];
 
-      const effectiveSynergies = this.#filterForTypeCategory(typeCategory, synergies);
+      const effectiveSynergies = this.filterForTypeCategory(typeCategory, synergies);
 
       if (effectiveSynergies.length > 0) {
         effectiveTypeSynergies[typeCategory] = effectiveSynergies;
@@ -155,7 +154,7 @@ export class SynergyCalculator {
     return effectiveTypeSynergies;
   }
 
-  #filterForTypeCategory(typeCategory: string, synergies: number[]): number[] {
+  protected filterForTypeCategory(typeCategory: string, synergies: number[]): number[] {
     // in most cases, remove the highest value
     if (!(typeCategory in this.synergyFilters)) {
       return removeHighestNumber(synergies);
@@ -168,7 +167,7 @@ export class SynergyCalculator {
     return sortedSynergies.slice(0, filter.filterValue);
   }
 
-  #filterRowtypeSynergies(rowtypeSynergies: CombinedSynergies): Synergies {
+  protected filterRowtypeSynergies(rowtypeSynergies: CombinedSynergies): Synergies {
     const filteredRowtypeSynergies: Synergies = {};
 
     for (const rowtypeCategory in rowtypeSynergies) {
@@ -179,7 +178,7 @@ export class SynergyCalculator {
         return filteredRowtypeSynergies;
       }
 
-      const filteredRowtypeSynergy = this.#filterForRowtypeCategory(
+      const filteredRowtypeSynergy = this.filterForRowtypeCategory(
         rowtypeCategory,
         rowtypeSynergy
       );
@@ -202,7 +201,7 @@ export class SynergyCalculator {
    * @param synergies Array of rowtype synergies of different squares
    * @returns Amount of time you save by skipping doing 'rowtype', or undefined if not worth
    */
-  #filterForRowtypeCategory(
+  protected filterForRowtypeCategory(
     rowtypeCategory: string,
     synergies: number[]
   ): number | undefined {
@@ -233,7 +232,7 @@ export class SynergyCalculator {
    * @param timeDifferences Array of differences between desired time and time of each goal, e.g. [1, -0.5, 0, 1, -1]. Positive value means goal is faster than desired.
    * @returns Total synergy
    */
-  #calculateTotalSynergy(
+  protected calculateTotalSynergy(
     filteredTypeSynergies: CombinedSynergies,
     filteredRowtypeSynergies: Synergies,
     timeDifferences: number[]
