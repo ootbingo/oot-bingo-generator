@@ -5,31 +5,25 @@ import { Mode, Profile } from "./types/settings";
 import { generateMagicSquare } from "./magicSquare";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";
-import {
-  flattenGoalList,
-  parseSynergyFilters,
-  sortAscending,
-  sortDescending,
-} from "./util";
+import { flattenGoalList, parseSynergyFilters, sortAscending, sortDescending } from "./util";
 import { INDICES_PER_ROW, ROWS_PER_INDEX, SQUARE_POSITIONS } from "./definitions";
 
 export default class BingoGenerator {
-  readonly isBlackout: boolean;
-  readonly profile: Profile;
-  readonly rng: RNG;
-  readonly magicSquare: number[];
+  private readonly isBlackout: boolean;
+  private readonly profile: Profile;
 
-  readonly allGoals: Goal[];
-  readonly rowtypeTimeSave: Synergies;
-  readonly synergyFilters: SynergyFilters;
+  private readonly allGoals: Goal[];
+  private readonly rowtypeTimeSave: Synergies;
+  private readonly synergyFilters: SynergyFilters;
 
-  readonly synergyCalculator: SynergyCalculator;
+  private readonly synergyCalculator: SynergyCalculator;
 
-  constructor(goalList: GoalList, seed: number, mode: Mode, profile: Profile) {
+  private rng: RNG;
+  private magicSquare: number[];
+
+  constructor(goalList: GoalList, mode: Mode, profile: Profile) {
     this.isBlackout = mode === "blackout" || mode === "shortBlackout";
     this.profile = profile;
-    this.rng = new RNG(seed);
-    this.magicSquare = generateMagicSquare(seed);
 
     this.allGoals = flattenGoalList(goalList);
     this.rowtypeTimeSave = goalList.rowtypes;
@@ -44,10 +38,14 @@ export default class BingoGenerator {
 
   /**
    * Generates a bingo board.
+   * @param seed Rng seed
    * @param maxIterations The max amount of times the generator will try to generate a board.
    * @returns An object with metadata and an array of squares if generation was successful
    */
-  generateBoard(maxIterations = 100): Board {
+  generateBoard(seed: number, maxIterations = 100): Board {
+    this.rng = new RNG(seed);
+    this.magicSquare = generateMagicSquare(seed);
+
     let board: Square[] | undefined = undefined;
     let iteration = 0;
 
@@ -56,8 +54,7 @@ export default class BingoGenerator {
       board = this.generate();
     }
 
-    // all squares should have been filled with a goal at this point
-    const goals = board.map((square) => square.goal);
+    const goals = board ? board.map((square) => square.goal) : [];
 
     return {
       goals: goals,
@@ -106,11 +103,7 @@ export default class BingoGenerator {
     const squareToFill = bingoBoard[position];
     const desiredTime = squareToFill.desiredTime;
 
-    for (
-      let offset = this.profile.initialOffset;
-      offset <= this.profile.maximumOffset;
-      offset++
-    ) {
+    for (let offset = this.profile.initialOffset; offset <= this.profile.maximumOffset; offset++) {
       const goalsInTimeRange = this.getShuffledGoalsInTimeRange(
         desiredTime - offset,
         desiredTime + offset
@@ -126,16 +119,11 @@ export default class BingoGenerator {
           goal: goal,
         };
 
-        if (
-          this.isBlackout &&
-          this.hasConflictsOnBoard(squareWithPotentialGoal, bingoBoard)
-        ) {
+        if (this.isBlackout && this.hasConflictsOnBoard(squareWithPotentialGoal, bingoBoard)) {
           continue;
         }
 
-        if (
-          !this.causesTooMuchSynergyInRow(squareWithPotentialGoal, position, bingoBoard)
-        ) {
+        if (!this.causesTooMuchSynergyInRow(squareWithPotentialGoal, position, bingoBoard)) {
           return goal;
         }
       }
@@ -158,19 +146,14 @@ export default class BingoGenerator {
     return bingoBoard.some((square) => square.goal && square.goal.id === goal.id);
   }
 
-  private hasConflictsOnBoard(
-    squareWithPotentialGoal: Square,
-    bingoBoard: Square[]
-  ): boolean {
+  private hasConflictsOnBoard(squareWithPotentialGoal: Square, bingoBoard: Square[]): boolean {
     for (const square of bingoBoard) {
       if (!square.goal) {
         continue;
       }
       if (
-        this.synergyCalculator.calculateSynergyOfSquares([
-          squareWithPotentialGoal,
-          square,
-        ]) >= this.profile.tooMuchSynergy
+        this.synergyCalculator.calculateSynergyOfSquares([squareWithPotentialGoal, square]) >=
+        this.profile.tooMuchSynergy
       ) {
         return true;
       }
@@ -225,8 +208,7 @@ export default class BingoGenerator {
     for (const row of rowsOfSquare) {
       const potentialRow = this.getOtherSquares(row, positionOfSquare, bingoBoard);
       potentialRow.push(potentialSquareWithGoal);
-      const effectiveRowSynergy =
-        this.synergyCalculator.calculateSynergyOfSquares(potentialRow);
+      const effectiveRowSynergy = this.synergyCalculator.calculateSynergyOfSquares(potentialRow);
 
       maximumSynergy = Math.max(maximumSynergy, effectiveRowSynergy);
       minimumSynergy = Math.min(minimumSynergy, effectiveRowSynergy);
@@ -238,11 +220,7 @@ export default class BingoGenerator {
     };
   }
 
-  private getOtherSquares(
-    row: RowName,
-    positionOfSquare: number,
-    bingoBoard: Square[]
-  ): Square[] {
+  private getOtherSquares(row: RowName, positionOfSquare: number, bingoBoard: Square[]): Square[] {
     return INDICES_PER_ROW[row]
       .filter((index) => index != positionOfSquare)
       .map((index) => bingoBoard[index]);
@@ -270,9 +248,7 @@ export default class BingoGenerator {
     const diagonals = this.shuffled([0, 6, 18, 24, 4, 8, 16, 20]);
     populationOrder = populationOrder.concat(diagonals);
 
-    const nonDiagonals = this.shuffled([
-      1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23,
-    ]);
+    const nonDiagonals = this.shuffled([1, 2, 3, 5, 7, 9, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23]);
     populationOrder = populationOrder.concat(nonDiagonals);
 
     this.movePositionsWithHighestDifficultyToFront(3, populationOrder, bingoBoard);
@@ -313,9 +289,7 @@ export default class BingoGenerator {
     populationOrder: number[],
     bingoBoard: Square[]
   ) {
-    const currentSquare = bingoBoard.findIndex(
-      (square) => square.difficulty == difficulty
-    );
+    const currentSquare = bingoBoard.findIndex((square) => square.difficulty == difficulty);
 
     if (currentSquare === -1) {
       // This should never happen

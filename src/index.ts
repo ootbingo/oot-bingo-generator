@@ -16,8 +16,8 @@ import { Board } from "./types/board";
 export function ootBingoGenerator(bingoList: BingoList, options: { mode: Mode; seed: number }) {
   const goalList = extractGoalList(bingoList, options.mode);
   const profile = DEFAULT_PROFILES[options.mode];
-  const bingoGenerator = new BingoGenerator(goalList, options.seed, options.mode, profile);
-  const { goals, meta } = bingoGenerator.generateBoard();
+  const bingoGenerator = new BingoGenerator(goalList, options.mode, profile);
+  const { goals, meta } = bingoGenerator.generateBoard(options.seed);
 
   // make goals start from position 1 in the list (as expected by bingosetup.js)
   const shiftedGoals = [];
@@ -49,11 +49,6 @@ export function generateBoard(
   profile?: Profile
 ): Board {
   const goalList = extractGoalList(bingoList, mode);
-  const bingoGenerator = new BingoGenerator(
-    goalList,
-    seed,
-    mode,
-    profile ?? DEFAULT_PROFILES[mode]
-  );
-  return bingoGenerator.generateBoard();
+  const bingoGenerator = new BingoGenerator(goalList, mode, profile ?? DEFAULT_PROFILES[mode]);
+  return bingoGenerator.generateBoard(seed);
 }

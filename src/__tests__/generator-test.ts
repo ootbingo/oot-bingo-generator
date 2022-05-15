@@ -1,4 +1,7 @@
 import { generateBoard } from "../index";
+import { extractGoalList } from "../util";
+import BingoGenerator from "../generator";
+import { Profile } from "../types/settings";
 
 describe("generator", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
@@ -178,6 +181,48 @@ describe("generator", () => {
         "All 3 Skulltulas in Ice Cavern",
         "Silver Gauntlets",
       ]);
+    });
+
+    it("it generates two identical boards in a row when using the same seed", () => {
+      const profile: Profile = {
+        minimumSynergy: -3,
+        maximumSynergy: 7,
+        maximumIndividualSynergy: 3.75,
+        initialOffset: 1,
+        maximumOffset: 2,
+        baselineTime: 24.75,
+        timePerDifficulty: 0.75,
+        tooMuchSynergy: 100,
+        useFrequencyBalancing: true,
+      };
+      const goalList = extractGoalList(bingoList, "normal");
+      const bingoGenerator = new BingoGenerator(goalList, "normal", profile);
+      const board1 = bingoGenerator.generateBoard(121212);
+      const board2 = bingoGenerator.generateBoard(121212);
+
+      const goalNames1 = board1.goals.map((goal) => goal.name);
+      const goalNames2 = board2.goals.map((goal) => goal.name);
+
+      expect(goalNames1).toStrictEqual(goalNames2);
+    });
+
+    it("it can fail to generate a board", () => {
+      const profile: Profile = {
+        // impossible min / max synergy bounds
+        minimumSynergy: 2,
+        maximumSynergy: 1.5,
+        maximumIndividualSynergy: 3.75,
+        initialOffset: 1,
+        maximumOffset: 2,
+        baselineTime: 24.75,
+        timePerDifficulty: 0.75,
+        tooMuchSynergy: 100,
+        useFrequencyBalancing: true,
+      };
+      const board = generateBoard(bingoList, "normal", 142536, profile);
+
+      expect(board.goals).toHaveLength(0);
+      expect(board.meta.iterations).toBe(100);
     });
   });
 
