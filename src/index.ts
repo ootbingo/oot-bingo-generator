@@ -3,7 +3,7 @@ import { BingoList } from "./types/goalList";
 import { extractGoalList } from "./util";
 import { Mode, Profile } from "./types/settings";
 import { DEFAULT_PROFILES } from "./definitions";
-import { Board } from "./types/board";
+import { BingoBoard } from "./bingoBoard";
 
 /**
  * Main function for generating bingo boards (used in live versions)
@@ -17,13 +17,13 @@ export function ootBingoGenerator(bingoList: BingoList, options: { mode: Mode; s
   const goalList = extractGoalList(bingoList, options.mode);
   const profile = DEFAULT_PROFILES[options.mode];
   const bingoGenerator = new BingoGenerator(goalList, options.mode, profile);
-  const { goals, meta } = bingoGenerator.generateBoard(options.seed);
+  const board = bingoGenerator.generateBoard(options.seed);
 
   // make goals start from position 1 in the list (as expected by bingosetup.js)
   const shiftedGoals = [];
-  goals.forEach((goal, index) => (shiftedGoals[index + 1] = goal));
+  board.goals.forEach((goal, index) => (shiftedGoals[index + 1] = goal));
 
-  shiftedGoals["meta"] = meta;
+  shiftedGoals["meta"] = { iterations: board.iterations };
   return shiftedGoals;
 }
 
@@ -40,14 +40,14 @@ export function bingoGenerator(bingoList: BingoList, options: { mode: Mode; seed
  * @param mode Mode (normal, short, blackout, etc.)
  * @param seed Rng seed
  * @param profile Optional, the generator uses a standard profile fitting the mode if not provided. Note that in previous generators the profiles were always built in.
- * @returns A bingo board
+ * @returns A bingo board object
  */
-export function generateBoard(
+export function generateBingoBoard(
   bingoList: BingoList,
   mode: Mode,
   seed: number,
   profile?: Profile
-): Board {
+): BingoBoard {
   const goalList = extractGoalList(bingoList, mode);
   const bingoGenerator = new BingoGenerator(goalList, mode, profile ?? DEFAULT_PROFILES[mode]);
   return bingoGenerator.generateBoard(seed);

@@ -1,6 +1,6 @@
 import { BingoList } from "../types/goalList";
 import { Mode, Profile } from "../types/settings";
-import { generateBoard } from "../index";
+import { generateBingoBoard } from "../index";
 
 export function frequencyAnalysis(
   numberOfBoards: number,
@@ -19,7 +19,7 @@ export function frequencyAnalysis(
       console.log(`Processed ${seed - startSeed} boards... (seed ${seed})`);
     }
 
-    const board = generateBoard(bingoList, mode, seed, profile);
+    const board = generateBingoBoard(bingoList, mode, seed, profile);
     for (const goal of board.goals) {
       if (!Object.keys(frequencies).includes(goal.name)) {
         frequencies[goal.name] = 0;

@@ -6,14 +6,15 @@ export type Square = {
   goal?: Goal;
 };
 
-export type Board = {
-  goals: Goal[];
-  meta: Meta;
+export type SquareWithGoal = {
+  difficulty: number;
+  desiredTime: number;
+  goal: Goal;
 };
 
-type Meta = {
-  iterations: number;
-};
+export function hasGoal(square: Square): square is SquareWithGoal {
+  return square.goal !== undefined;
+}
 
 export type RowName =
   | "row1"

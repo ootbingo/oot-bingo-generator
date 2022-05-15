@@ -1,4 +1,4 @@
-import { generateBoard } from "../index";
+import { generateBingoBoard } from "../index";
 import { extractGoalList } from "../util";
 import BingoGenerator from "../generator";
 import { Profile } from "../types/settings";
@@ -8,10 +8,9 @@ describe("generator", () => {
 
   describe("generating goals", () => {
     it("generates a normal v10.1 board with correct goals", () => {
-      const board = generateBoard(bingoList, "normal", 142536);
+      const board = generateBingoBoard(bingoList, "normal", 142536);
 
-      const goalNames = board.goals.map((goal) => goal.name);
-      expect(goalNames).toEqual([
+      expect(board.goalNames).toEqual([
         "4 Maps",
         "Saria's Song",
         "Free all 9 Gorons in Fire Temple",
@@ -41,10 +40,9 @@ describe("generator", () => {
     });
 
     it("generates a blackout v10.1 board with correct goals", () => {
-      const board = generateBoard(bingoList, "blackout", 142536);
+      const board = generateBingoBoard(bingoList, "blackout", 142536);
 
-      const goalNames = board.goals.map((goal) => goal.name);
-      expect(goalNames).toEqual([
+      expect(board.goalNames).toEqual([
         "All 4 Skulltulas in Jabu-Jabu",
         "All 5 Lake Hylia Skulltulas",
         "Nayru's Love",
@@ -74,10 +72,9 @@ describe("generator", () => {
     });
 
     it("generates a short v10.1 board with correct goals", () => {
-      const board = generateBoard(bingoList, "short", 142536);
+      const board = generateBingoBoard(bingoList, "short", 142536);
 
-      const goalNames = board.goals.map((goal) => goal.name);
-      expect(goalNames).toEqual([
+      expect(board.goalNames).toEqual([
         "Map & Compass in Bottom of the Well",
         "5 unused keys in Gerudo Training Grounds",
         "7 Different Bottled Contents",
@@ -107,10 +104,9 @@ describe("generator", () => {
     });
 
     it("generates a short blackout v10.1 board with correct goals", () => {
-      const board = generateBoard(bingoList, "shortBlackout", 142536);
+      const board = generateBingoBoard(bingoList, "shortBlackout", 142536);
 
-      const goalNames = board.goals.map((goal) => goal.name);
-      expect(goalNames).toEqual([
+      expect(board.goalNames).toEqual([
         "All 3 Skulltulas in Bottom of the Well",
         "Defeat a White Wolfos",
         "Both Hyrule Field area Skulltulas",
@@ -151,10 +147,9 @@ describe("generator", () => {
         tooMuchSynergy: 100,
         useFrequencyBalancing: false,
       };
-      const board = generateBoard(bingoList, "normal", 142536, customProfile);
+      const board = generateBingoBoard(bingoList, "normal", 142536, customProfile);
 
-      const goalNames = board.goals.map((goal) => goal.name);
-      expect(goalNames).toEqual([
+      expect(board.goalNames).toEqual([
         "Ganon's Castle Boss Key",
         "Farore's Wind",
         "All 5 Skulltulas in Spirit Temple",
@@ -219,10 +214,9 @@ describe("generator", () => {
         tooMuchSynergy: 100,
         useFrequencyBalancing: true,
       };
-      const board = generateBoard(bingoList, "normal", 142536, profile);
+      const board = generateBingoBoard(bingoList, "normal", 142536, profile);
 
-      expect(board.goals).toHaveLength(0);
-      expect(board.meta.iterations).toBe(100);
+      expect(board).toBeUndefined();
     });
   });
 
@@ -236,9 +230,9 @@ describe("generator", () => {
     ])(
       "v10.1 board with seed %s has correct metadata with %s iterations",
       (seed: number, expectedIterations: number) => {
-        const board = generateBoard(bingoList, "normal", seed);
+        const board = generateBingoBoard(bingoList, "normal", seed);
 
-        expect(board.meta.iterations).toBe(expectedIterations);
+        expect(board.iterations).toBe(expectedIterations);
       }
     );
   });

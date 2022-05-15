@@ -1,4 +1,4 @@
-import { Square } from "./types/board";
+import { hasGoal, Square } from "./types/board";
 import { CombinedSynergies, Synergies, SynergyFilters, SynergyType } from "./types/synergies";
 import { Profile } from "./types/settings";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
@@ -16,7 +16,7 @@ export class SynergyCalculator {
   }
 
   calculateSynergyOfSquares(squares: Square[]): number {
-    const squaresWithGoal = squares.filter((square) => square.goal !== undefined);
+    const squaresWithGoal = squares.filter(hasGoal);
 
     if (this.containsDuplicateGoals(squaresWithGoal)) {
       return this.profile.tooMuchSynergy;
@@ -54,11 +54,11 @@ export class SynergyCalculator {
 
   /**
    * Checks whether an array of squares contains any duplicate goals
-   * @param squares Array of squares (can be goal or empty)
+   * @param squares Array of squares (can be with goal or empty)
    * @returns boolean
    */
   protected containsDuplicateGoals(squares: Square[]): boolean {
-    const squaresWithGoal = squares.filter((square) => square.goal);
+    const squaresWithGoal = squares.filter(hasGoal);
     const goalIds = squaresWithGoal.map((square) => square.goal.id);
     return new Set(goalIds).size !== goalIds.length;
   }

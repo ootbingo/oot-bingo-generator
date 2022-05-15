@@ -32,6 +32,8 @@ generator document.
 npm install
 ```
 
+See [NPM package](https://www.npmjs.com/package/oot-bingo-generator) for installation in a separate project.
+
 ## Run
 
 To run the sandbox code which generates boards using an example goal list (v10.1), run:
@@ -73,9 +75,9 @@ The `ootBingoGenerator()` function returns boards in the exact same legacy forma
 versions on [Github](https://github.com/ootbingo/bingo). The `bingoGenerator()` function is a wrapper and returns the
 same thing, but this is the name that is being used by [BingoSync](https://bingosync.com).
 
-It's recommended to use the `generateBoard()` function when generating boards yourself. If you want to try it out, you
-can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts) (see [Run](#run)). To generate boards in your own
-project, use the [NPM package](#npm-package),
+It's recommended to use the `generateBoard()` function when generating boards yourself, since it returns a bingo board
+object. If you want to try it out, you can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts)
+(see [Run](#run)). To generate boards in your own project, use the [NPM package](#npm-package),
 
 ## NPM package
 
@@ -95,13 +97,13 @@ npm install oot-bingo-lists
 ### Usage
 
 ```ts
-import { generateBoard } from "oot-bingo-generator";
+import { generateBingoBoard } from "oot-bingo-generator";
 import { getBingoList } from "oot-bingo-lists";
 
 const bingoList = getBingoList("v10.1");
 
 // Generating a board
-const board = generateBoard(bingoList, "blackout", 654321);
+const board = generateBingoBoard(bingoList, "blackout", 654321);
 
 // Performing a frequency analysis on a 1000 boards
 const frequencies = frequencyAnalysis(1000, bingoList, "normal");

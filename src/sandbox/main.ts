@@ -1,5 +1,5 @@
 import { DEFAULT_PROFILES } from "../definitions";
-import { generateBoard } from "../index";
+import { generateBingoBoard } from "../index";
 import { exampleBingoList } from "./exampleBingoList";
 
 // this file shows a few examples of how to use the generator (generate a board, run a frequency analysis)
@@ -10,9 +10,9 @@ import { exampleBingoList } from "./exampleBingoList";
 const mode = "normal";
 const seed = 112233;
 
-const board = generateBoard(exampleBingoList, mode, seed);
-console.log(`Generated after ${board.meta.iterations} iteration(s):`);
-console.log(board.goals.map((goal) => goal.name));
+const board = generateBingoBoard(exampleBingoList, mode, seed);
+console.log(`Generated after ${board.iterations} iteration(s):`);
+console.log(board.goalNames);
 
 // overwrite some of the generator settings of the default normal profile and generate another board
 const customProfile = {
@@ -23,9 +23,9 @@ const customProfile = {
   useFrequencyBalancing: false,
 };
 
-const boardCustomProfile = generateBoard(exampleBingoList, mode, seed, customProfile);
-console.log(`Generated after ${board.meta.iterations} iteration(s):`);
-console.log(boardCustomProfile.goals.map((goal) => goal.name));
+const boardCustomProfile = generateBingoBoard(exampleBingoList, mode, seed, customProfile);
+console.log(`Generated after ${board.iterations} iteration(s):`);
+console.log(boardCustomProfile.goalNames);
 
 // run a goal frequency analysis on 100 boards (uncomment next 3 lines)
 // import { frequencyAnalysis } from "./frequencyAnalysis";

@@ -18,8 +18,8 @@ the [Synergy Calculation doc](/doc/SYNERGY_CALCULATION.md).
 
 You can use this document to help guide you through the code of the generator, but it was also written to be
 understood **without any prior programming knowledge**! So if you're not into coding but still want to know what steps
-the generator takes, you're in the right place. Sometimes there's a reference to a function in the code, but you don't
-need to read along with the code to follow this document.
+the generator takes, you're in the right place. There are a few references to the code here and there, but those are not
+essential to understand the generation process.
 
 At the end of each section, you will find an example illustrating has just been explained with actual numbers. The
 examples are consistent between sections and are all based on the same seed.
@@ -35,9 +35,10 @@ The first step to generating a board is calculating a **5x5** [magic square](htt
 **1** to **25** are used to fill each position of the square, all only appearing once. The sum of each possible row,
 column, or diagonal is equal to **65**.
 
-The code to generate a magic square can be found in [magicSquare.ts](/src/magicSquare.ts). Based on the seed, the
-function `magicSquareNumber()` calculates what number should go in a given position of the square. It gets called
-by `generateMagicSquare()`, which loops over positions **1** to **24** to calculate each magic square number.
+In the code, this step is taken when the [`PotentialBingoBoard`](/src/potentialBingoBoard.ts) class is created.
+In [magicSquare.ts](/src/magicSquare.ts) you can find the calculations for generating the magic square. Based on the
+seed, the function `magicSquareNumber()` calculates what number should go in a given position of the square. It gets
+called by `generateMagicSquare()`, which loops over positions **1** to **24** to calculate each magic square number.
 
 ### Example
 
@@ -84,8 +85,8 @@ Each difficulty gets multiplied by the timePerDifficulty to get the **desired ti
 the ideal amount of time a goal on that square should take to complete. The generator is allowed to deviate from it a
 little; the `offset` constants define how much. More on that later.
 
-The function `mapDifficultyToSquare()` in [generator.ts](/src/generator.ts) maps a difficulty to a `Square` object
-containing the calculated `desiredTime` and the unchanged `difficulty` for reference.
+When the magic square has been computed, each difficulty gets mapped to a `Square` object containing the
+calculated `desiredTime` and the unchanged `difficulty` for reference.
 
 ### Example
 
