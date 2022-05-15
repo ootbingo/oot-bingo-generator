@@ -213,9 +213,27 @@ export class SynergyCalculator {
     filteredRowtypeSynergies: Synergies,
     timeDifferences: number[]
   ): number {
-    let totalSynergyOfSquares = 0;
+    let totalSynergy = 0;
 
     // add type synergies to total sum
+    totalSynergy += this.calculateTotalTypeSynergy(filteredTypeSynergies);
+
+    if (totalSynergy >= this.profile.tooMuchSynergy) {
+      return this.profile.tooMuchSynergy;
+    }
+
+    // add rowtype synergies to total sum
+    totalSynergy += this.calculateTotalRowtypeSynergy(filteredRowtypeSynergies);
+
+    // add time differences to total sum
+    totalSynergy += this.calculateTotalTimeDifference(timeDifferences);
+
+    return totalSynergy;
+  }
+
+  protected calculateTotalTypeSynergy(filteredTypeSynergies: CombinedSynergies): number {
+    let totalTypeSynergy = 0;
+
     for (const typeCategory in filteredTypeSynergies) {
       const synergies = filteredTypeSynergies[typeCategory];
 
@@ -223,20 +241,25 @@ export class SynergyCalculator {
         if (synergy > this.profile.maximumIndividualSynergy) {
           return this.profile.tooMuchSynergy;
         }
-        totalSynergyOfSquares += synergy;
+        totalTypeSynergy += synergy;
       }
     }
+    return totalTypeSynergy;
+  }
 
-    // add rowtype synergies to total sum
+  protected calculateTotalRowtypeSynergy(filteredRowtypeSynergies: Synergies): number {
+    let totalRowtypeSynergy = 0;
     for (const rowtypeCategory in filteredRowtypeSynergies) {
-      totalSynergyOfSquares += filteredRowtypeSynergies[rowtypeCategory];
+      totalRowtypeSynergy += filteredRowtypeSynergies[rowtypeCategory];
     }
+    return totalRowtypeSynergy;
+  }
 
-    // add time differences to total sum
+  protected calculateTotalTimeDifference(timeDifferences: number[]): number {
+    let totalTimeDifference = 0;
     for (const timeDifference of timeDifferences) {
-      totalSynergyOfSquares += timeDifference;
+      totalTimeDifference += timeDifference;
     }
-
-    return totalSynergyOfSquares;
+    return totalTimeDifference;
   }
 }
