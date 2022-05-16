@@ -342,7 +342,7 @@ export var bingoList = {
 }
 ```
 
-Take a look at the [example goal list](/src/sandbox/exampleBingoList.js) to see what an actual list looks like. You'll
+Take a look at the [example goal list](/src/sandbox/exampleBingoList.ts) to see what an actual list looks like. You'll
 see that each goal also has a `weight` property. The weights are for the **frequency balancing**, and they are added by
 the [balancer script](https://github.com/srmcconomy/balanced-bingo/blob/master/auto-balancer.js). Read more on frequency
 balancing in the [generator doc](/doc/GENERATOR.md).

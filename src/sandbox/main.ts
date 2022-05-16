@@ -11,8 +11,8 @@ const mode = "normal";
 const seed = 112233;
 
 const board = generateBingoBoard(exampleBingoList, mode, seed);
-console.log(`Generated after ${board.iterations} iteration(s):`);
-console.log(board.goalNames);
+console.log(`Generated after ${board?.iterations} iteration(s):`);
+console.log(board?.goalNames);
 
 // overwrite some of the generator settings of the default normal profile and generate another board
 const customProfile = {
@@ -24,10 +24,10 @@ const customProfile = {
 };
 
 const boardCustomProfile = generateBingoBoard(exampleBingoList, mode, seed, customProfile);
-console.log(`Generated after ${board.iterations} iteration(s):`);
-console.log(boardCustomProfile.goalNames);
+console.log(`Generated after ${board?.iterations} iteration(s):`);
+console.log(boardCustomProfile?.goalNames);
 
 // run a goal frequency analysis on 100 boards (uncomment next 3 lines)
-// import { frequencyAnalysis } from "./frequencyAnalysis";
-// const frequencies = frequencyAnalysis(200, bingoList, "normal");
+// import { frequencyAnalysis } from "../analysis/frequencyAnalysis";
+// const frequencies = frequencyAnalysis(200, exampleBingoList, "normal");
 // console.log(frequencies);

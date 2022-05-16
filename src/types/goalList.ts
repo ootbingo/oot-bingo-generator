@@ -86,3 +86,9 @@ export type GoalList = {
   "49"?: Goal[];
   "50"?: Goal[];
 };
+
+export function isCombinedGoalList(
+  bingoList: CombinedGoalList | GoalList
+): bingoList is CombinedGoalList {
+  return bingoList.info.combined === "true";
+}

@@ -20,6 +20,9 @@ export function frequencyAnalysis(
     }
 
     const board = generateBingoBoard(bingoList, mode, seed, profile);
+    if (!board) {
+      continue;
+    }
     for (const goal of board.goals) {
       if (!Object.keys(frequencies).includes(goal.name)) {
         frequencies[goal.name] = 0;

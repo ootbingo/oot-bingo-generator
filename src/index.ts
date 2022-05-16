@@ -1,5 +1,5 @@
 import BingoGenerator from "./generator";
-import { BingoList } from "./types/goalList";
+import { BingoList, Goal } from "./types/goalList";
 import { extractGoalList } from "./util";
 import { Mode, Profile } from "./types/settings";
 import { DEFAULT_PROFILES } from "./definitions";
@@ -11,18 +11,26 @@ import { BingoBoard } from "./bingoBoard";
  * Returns board in the right (legacy) format for the bingo setup
  * @param bingoList Object with the goal list
  * @param options Object containing mode and seed
- * @returns A bingo board in the legacy format (list with goals and metadata, starting at index 1)
+ * @returns A bingo board in the legacy format (array with goals starting from index 1, and metadata in the array object)
  */
 export function ootBingoGenerator(bingoList: BingoList, options: { mode: Mode; seed: number }) {
   const goalList = extractGoalList(bingoList, options.mode);
+  if (!goalList) {
+    return;
+  }
   const profile = DEFAULT_PROFILES[options.mode];
   const bingoGenerator = new BingoGenerator(goalList, options.mode, profile);
   const board = bingoGenerator.generateBoard(options.seed);
 
+  if (!board) {
+    return;
+  }
+
   // make goals start from position 1 in the list (as expected by bingosetup.js)
-  const shiftedGoals = [];
+  const shiftedGoals: Goal[] = [];
   board.goals.forEach((goal, index) => (shiftedGoals[index + 1] = goal));
 
+  // @ts-ignore Typescript does not like the legacy format where a string key is used to store the meta information in the array object
   shiftedGoals["meta"] = { iterations: board.iterations };
   return shiftedGoals;
 }
@@ -47,8 +55,11 @@ export function generateBingoBoard(
   mode: Mode,
   seed: number,
   profile?: Profile
-): BingoBoard {
+): BingoBoard | undefined {
   const goalList = extractGoalList(bingoList, mode);
+  if (!goalList) {
+    return;
+  }
   const bingoGenerator = new BingoGenerator(goalList, mode, profile ?? DEFAULT_PROFILES[mode]);
   return bingoGenerator.generateBoard(seed);
 }

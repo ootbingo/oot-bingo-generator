@@ -5,6 +5,9 @@ describe("ootBingoGenerator", () => {
 
   it("generates a normal v10.1 board with correct goals", () => {
     const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "normal" });
+    if (!board) {
+      throw Error("Failed to generate board");
+    }
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
@@ -41,6 +44,9 @@ describe("ootBingoGenerator", () => {
 
   it("generates a blackout v10.1 board with correct goals", () => {
     const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "blackout" });
+    if (!board) {
+      throw Error("Failed to generate board");
+    }
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
@@ -77,6 +83,9 @@ describe("ootBingoGenerator", () => {
 
   it("generates a short v10.1 board with correct goals", () => {
     const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "short" });
+    if (!board) {
+      throw Error("Failed to generate board");
+    }
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {
@@ -113,6 +122,9 @@ describe("ootBingoGenerator", () => {
 
   it("generates a short blackout v10.1 board with correct goals", () => {
     const board = ootBingoGenerator(bingoList, { seed: 142536, mode: "shortBlackout" });
+    if (!board) {
+      throw Error("Failed to generate board");
+    }
 
     const goalNames = [];
     for (let position = 1; position <= 25; position++) {

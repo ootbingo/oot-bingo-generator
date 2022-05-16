@@ -1,5 +1,7 @@
 // example goal list (v10.1)
-export const exampleBingoList = {
+import { BingoList } from "../types/goalList";
+
+export const exampleBingoList: BingoList = {
   info: { combined: "true", version: "v10.1" },
   normal: {
     0: [],

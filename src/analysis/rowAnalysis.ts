@@ -13,6 +13,9 @@ export class RowAnalyzer {
 
   constructor(bingoList: BingoList, mode: Mode, profile?: Profile) {
     const goalList = extractGoalList(bingoList, mode);
+    if (!goalList) {
+      throw Error("Could not extract goal list");
+    }
     profile = profile ?? DEFAULT_PROFILES[mode];
     this.generator = new BingoGenerator(goalList, mode, profile);
     this.synergyCalculator = new SynergyCalculatorAnalysis(
@@ -68,26 +71,32 @@ class SynergyCalculatorAnalysis extends SynergyCalculator {
   }
 
   public printSynergyReport(squares: Square[]) {
+    const squaresWithGoal = squares.filter(hasGoal);
     const report = this.getSynergyReport(squares);
 
-    for (let i = 0; i < squares.length; i++) {
-      const square = squares[i];
+    for (let i = 0; i < squaresWithGoal.length; i++) {
+      const square = squaresWithGoal[i];
       console.log(`Goal ${i + 1}: ${square.goal.name}`);
       console.log(
         `  types: ${Object.keys(square.goal.types)
           .map((category) => `${category}: ${square.goal.types[category]}`)
           .join(", ")}`
       );
-      console.log(
-        `  subtypes: ${Object.keys(square.goal.subtypes)
-          .map((category) => `${category}: ${square.goal.subtypes[category]}`)
-          .join(", ")}`
-      );
-      console.log(
-        `  rowtypes: ${Object.keys(square.goal.rowtypes)
-          .map((category) => `${category}: ${square.goal.rowtypes[category]}`)
-          .join(", ")}\n`
-      );
+      if (square.goal.subtypes) {
+        console.log(
+          `  subtypes: ${Object.keys(square.goal.subtypes)
+            .map((category) => `${category}: ${square.goal.subtypes![category]}`)
+            .join(", ")}`
+        );
+      }
+
+      if (square.goal.rowtypes) {
+        console.log(
+          `  rowtypes: ${Object.keys(square.goal.rowtypes)
+            .map((category) => `${category}: ${square.goal.rowtypes![category]}`)
+            .join(", ")}\n`
+        );
+      }
     }
 
     console.log("Unified type synergies:");

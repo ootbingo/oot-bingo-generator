@@ -1,4 +1,4 @@
-import { hasGoal, Square } from "./types/board";
+import { hasGoal, Square, SquareWithGoal } from "./types/board";
 import { CombinedSynergies, Synergies, SynergyFilters, SynergyType } from "./types/synergies";
 import { Profile } from "./types/settings";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
@@ -74,7 +74,7 @@ export class SynergyCalculator {
    * @returns Object with synergies for all the squares
    */
   protected mergeSynergiesOfSquares(
-    squaresWithGoal: Square[],
+    squaresWithGoal: SquareWithGoal[],
     synergyType: SynergyType
   ): CombinedSynergies {
     const mergedSynergies: CombinedSynergies = {};
@@ -83,7 +83,7 @@ export class SynergyCalculator {
         if (!mergedSynergies[category]) {
           mergedSynergies[category] = [];
         }
-        mergedSynergies[category].push(square.goal[synergyType][category]);
+        mergedSynergies[category].push(square.goal[synergyType]![category]);
       }
     }
     return mergedSynergies;

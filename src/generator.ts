@@ -28,6 +28,10 @@ export default class BingoGenerator {
       goalList.rowtypes,
       parseSynergyFilters(goalList.synfilters)
     );
+
+    // temporary, will be overwritten in generate() and generateBoard() respectively
+    this.board = new PotentialBingoBoard(0, profile);
+    this.rng = new RNG(0);
   }
 
   /**
@@ -270,10 +274,10 @@ export default class BingoGenerator {
   }
 
   /**
-   * Shuffles list of goals, but makes it more likely for goals with higher weights to appear earlier in the list (for frequency balancing).
+   * Shuffles array of goals, but makes it more likely for goals with higher weights to appear earlier in the list (for frequency balancing).
    * Goal weights should be numbers between -2 and 2.
    *
-   * @param goals list of goals
+   * @param goals array of goals
    */
   private weightedShuffle(goals: Goal[]): Goal[] {
     return goals

@@ -10,7 +10,7 @@ describe("generator", () => {
     it("generates a normal v10.1 board with correct goals", () => {
       const board = generateBingoBoard(bingoList, "normal", 142536);
 
-      expect(board.goalNames).toEqual([
+      expect(board?.goalNames).toEqual([
         "4 Maps",
         "Saria's Song",
         "Free all 9 Gorons in Fire Temple",
@@ -42,7 +42,7 @@ describe("generator", () => {
     it("generates a blackout v10.1 board with correct goals", () => {
       const board = generateBingoBoard(bingoList, "blackout", 142536);
 
-      expect(board.goalNames).toEqual([
+      expect(board?.goalNames).toEqual([
         "All 4 Skulltulas in Jabu-Jabu",
         "All 5 Lake Hylia Skulltulas",
         "Nayru's Love",
@@ -74,7 +74,7 @@ describe("generator", () => {
     it("generates a short v10.1 board with correct goals", () => {
       const board = generateBingoBoard(bingoList, "short", 142536);
 
-      expect(board.goalNames).toEqual([
+      expect(board?.goalNames).toEqual([
         "Map & Compass in Bottom of the Well",
         "5 unused keys in Gerudo Training Grounds",
         "7 Different Bottled Contents",
@@ -106,7 +106,7 @@ describe("generator", () => {
     it("generates a short blackout v10.1 board with correct goals", () => {
       const board = generateBingoBoard(bingoList, "shortBlackout", 142536);
 
-      expect(board.goalNames).toEqual([
+      expect(board?.goalNames).toEqual([
         "All 3 Skulltulas in Bottom of the Well",
         "Defeat a White Wolfos",
         "Both Hyrule Field area Skulltulas",
@@ -149,7 +149,7 @@ describe("generator", () => {
       };
       const board = generateBingoBoard(bingoList, "normal", 142536, customProfile);
 
-      expect(board.goalNames).toEqual([
+      expect(board?.goalNames).toEqual([
         "Ganon's Castle Boss Key",
         "Farore's Wind",
         "All 5 Skulltulas in Spirit Temple",
@@ -191,12 +191,15 @@ describe("generator", () => {
         useFrequencyBalancing: true,
       };
       const goalList = extractGoalList(bingoList, "normal");
+      if (!goalList) {
+        throw Error("Could not extract goal list");
+      }
       const bingoGenerator = new BingoGenerator(goalList, "normal", profile);
       const board1 = bingoGenerator.generateBoard(121212);
       const board2 = bingoGenerator.generateBoard(121212);
 
-      const goalNames1 = board1.goals.map((goal) => goal.name);
-      const goalNames2 = board2.goals.map((goal) => goal.name);
+      const goalNames1 = board1?.goals.map((goal) => goal.name);
+      const goalNames2 = board2?.goals.map((goal) => goal.name);
 
       expect(goalNames1).toStrictEqual(goalNames2);
     });
@@ -232,7 +235,7 @@ describe("generator", () => {
       (seed: number, expectedIterations: number) => {
         const board = generateBingoBoard(bingoList, "normal", seed);
 
-        expect(board.iterations).toBe(expectedIterations);
+        expect(board?.iterations).toBe(expectedIterations);
       }
     );
   });

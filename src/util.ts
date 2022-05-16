@@ -1,4 +1,4 @@
-import { BingoList, Goal, GoalList } from "./types/goalList";
+import { BingoList, Goal, GoalList, isCombinedGoalList } from "./types/goalList";
 import { SynergyFilters } from "./types/synergies";
 import { Mode } from "./types/settings";
 
@@ -28,10 +28,11 @@ export function sortByTimeAndId(goalA: Goal, goalB: Goal): number {
  * @param goalList The original goal list object
  */
 export function flattenGoalList(goalList: GoalList): Goal[] {
-  let allGoals = [];
+  let allGoals: Goal[] = [];
 
-  for (let i = 1; i <= 25; i++) {
-    allGoals = allGoals.concat(goalList[i]) as Goal[];
+  for (let difficulty = 1; difficulty <= 25; difficulty++) {
+    // @ts-ignore Difficulty 1 - 25 is always present in GoalList type
+    allGoals = allGoals.concat(goalList[difficulty]) as Goal[];
   }
 
   allGoals.sort(sortByTimeAndId);
@@ -90,17 +91,16 @@ function toSynergyFilterValue(rawFilterString: string): number | undefined {
  * @param bingoList The goal list object (generated from the Bingo sheet)
  * @param mode The requested bingo mode
  */
-export function extractGoalList(bingoList: BingoList, mode: Mode): GoalList | undefined {
-  if (bingoList.info.combined && bingoList.info.combined === "true") {
-    const combinedBingoList = bingoList;
-    if (combinedBingoList[mode]) {
-      return combinedBingoList[mode];
+export function extractGoalList(bingoList: BingoList | GoalList, mode: Mode): GoalList | undefined {
+  if (isCombinedGoalList(bingoList)) {
+    if ((mode === "normal" || mode === "short") && mode in bingoList) {
+      return bingoList[mode];
     }
-    if (mode === "shortBlackout" && combinedBingoList["short"]) {
-      return combinedBingoList["short"];
+    if (mode === "shortBlackout" && bingoList["short"]) {
+      return bingoList["short"];
     }
-    if (combinedBingoList["normal"]) {
-      return combinedBingoList["normal"];
+    if (bingoList["normal"]) {
+      return bingoList["normal"];
     } else {
       throw Error(`Goal list doesn't contain a valid sub goal list for mode: "${mode}"`);
     }
