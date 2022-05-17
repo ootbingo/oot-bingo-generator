@@ -35,14 +35,14 @@ the generator doc first.
 Install the [npm package](https://www.npmjs.com/package/oot-bingo-generator) to generate boards in a project:
 
 ```bash
-npm install oot-bingo-generator
+npm install --save oot-bingo-generator
 ```
 
 You'll probably want to install the [OoT Bingo Lists package](https://www.npmjs.com/package/oot-bingo-lists) as well, so
 that you don't have to provide your own goal lists to the generator:
 
 ```bash
-npm install oot-bingo-lists
+npm install --save oot-bingo-lists
 ```
 
 ### Usage
