@@ -1,6 +1,6 @@
 import { hasGoal, RowName, Square, SquareWithGoal } from "./types/board";
-import { INDICES_PER_ROW } from "./definitions";
 import { Goal } from "./types/goalList";
+import { INDICES_PER_ROW } from "./constants/board";
 
 /**
  * Successfully generated bingo board. All the squares have a goal assigned to it.

@@ -1,4 +1,4 @@
-import { SQUARE_POSITIONS } from "./definitions";
+import { SQUARE_POSITIONS } from "./constants/board";
 
 /**
  * Calculate the magic square numbers of all positions on the board, given a seed

@@ -4,9 +4,9 @@ import { Mode, Profile } from "./types/settings";
 import { RNG } from "./rng";
 import { SynergyCalculator } from "./synergyCalculator";
 import { flattenGoalList, parseSynergyFilters, sortAscending, sortDescending } from "./util";
-import { ROWS_PER_INDEX, SQUARE_POSITIONS } from "./definitions";
 import { BingoBoard } from "./bingoBoard";
 import { PotentialBingoBoard } from "./potentialBingoBoard";
+import { ROWS_PER_INDEX, SQUARE_POSITIONS } from "./constants/board";
 
 export default class BingoGenerator {
   private readonly isBlackout: boolean;

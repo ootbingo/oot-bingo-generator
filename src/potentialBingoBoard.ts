@@ -1,8 +1,8 @@
 import { RowName, Square } from "./types/board";
 import { Profile } from "./types/settings";
 import { generateMagicSquare } from "./magicSquare";
-import { INDICES_PER_ROW, SQUARE_POSITIONS } from "./definitions";
 import { Goal } from "./types/goalList";
+import { INDICES_PER_ROW, SQUARE_POSITIONS } from "./constants/board";
 
 /**
  * Bingo board class used only during generation.

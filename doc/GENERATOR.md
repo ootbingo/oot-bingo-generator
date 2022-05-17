@@ -76,8 +76,8 @@ Note that from now on, the term 'square' will indicate one tile of the board.
 
 Now, to know what goals can go in what squares, we need to convert the difficulty of each square to an actual time in
 minutes. That is accomplished by multiplying by the `timePerDifficulty` constant. All constants that the generator uses
-are defined in [definitions.ts](/src/definitions.ts). There are profiles with different constants for each type of bingo
-board. In [types/settings.ts](/src/types/settings.ts) you can find a short explanation on each parameter.
+are defined in [profiles.ts](/src/constants/profiles.ts). There are profiles with different constants for each type of
+bingo board. In [types/settings.ts](/src/types/settings.ts) you can find a short explanation on each parameter.
 
 ### Desired time
 
@@ -228,8 +228,8 @@ row.
 theoretical row length = baselineTime + timePerDifficulty * 65
 ```
 
-The values of parameters can be found in [definitions.ts](/src/definitions.ts). The `baselineTime` defines how long the
-preparation setup of a row is expected to take. This includes things that are not included in the goal timings
+The values of parameters can be found in [profiles.ts](/src/constants/profiles.ts). The `baselineTime` defines how long
+the preparation setup of a row is expected to take. This includes things that are not included in the goal timings
 themselves, like watching the intro, collecting items to escape, watching master sword cutscene, grabbing hookshot, et
 cetera. The `baselineTime` is not actually used in the generator since it's the same for each row.
 

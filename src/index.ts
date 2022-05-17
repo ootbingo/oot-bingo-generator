@@ -2,8 +2,8 @@ import BingoGenerator from "./generator";
 import { BingoList, Goal } from "./types/goalList";
 import { extractGoalList } from "./util";
 import { Mode, Profile } from "./types/settings";
-import { DEFAULT_PROFILES } from "./definitions";
 import { BingoBoard } from "./bingoBoard";
+import { DEFAULT_PROFILES } from "./constants/profiles";
 
 /**
  * Main function for generating bingo boards (used in live versions)

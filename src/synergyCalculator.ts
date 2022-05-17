@@ -2,7 +2,7 @@ import { hasGoal, Square, SquareWithGoal } from "./types/board";
 import { CombinedSynergies, Synergies, SynergyFilters, SynergyType } from "./types/synergies";
 import { Profile } from "./types/settings";
 import { removeHighestNumber, sortAscending, sortDescending } from "./util";
-import { SQUARES_PER_ROW } from "./definitions";
+import { SQUARES_PER_ROW } from "./constants/board";
 
 export class SynergyCalculator {
   profile: Profile;

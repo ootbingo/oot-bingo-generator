@@ -217,7 +217,7 @@ The term 'difficulty' in bingo lingo is pretty confusing. It has nothing to do w
 is [skill](#skill). Difficulty is solely linked to duration. There are **25** difficulty 'buckets', one for each square
 on a bingo board. The shortest goals go in bucket **1**, and the longest in bucket **25**. To convert regular goal
 durations to their difficulty, you divide the duration by the `timePerDifficulty` constant defined in
-[definitions.ts](/src/definitions.ts), and round the result. More information on how this all works can be found in
+[profiles.ts](/src/constants/profiles.ts), and round the result. More information on how this all works can be found in
 the [Generator doc](/doc/GENERATOR.md).
 
 The difficulties defined on the sheet are not directly used by the generator; it actually converts the difficulties of

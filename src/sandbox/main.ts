@@ -1,6 +1,8 @@
-import { DEFAULT_PROFILES } from "../definitions";
 import { generateBingoBoard } from "../index";
 import { exampleBingoList } from "./exampleBingoList";
+import { frequencyAnalysis } from "../analysis/frequencyAnalysis";
+import { RowAnalyzer } from "../analysis/rowAnalysis";
+import { DEFAULT_PROFILES } from "../constants/profiles";
 
 // this file shows a few examples of how to use the generator (generate a board, run a frequency analysis)
 // run this file with `npm start`
@@ -27,7 +29,10 @@ const boardCustomProfile = generateBingoBoard(exampleBingoList, mode, seed, cust
 console.log(`Generated after ${board?.iterations} iteration(s):`);
 console.log(boardCustomProfile?.goalNames);
 
-// run a goal frequency analysis on 100 boards (uncomment next 3 lines)
-// import { frequencyAnalysis } from "../analysis/frequencyAnalysis";
-// const frequencies = frequencyAnalysis(200, exampleBingoList, "normal");
-// console.log(frequencies);
+// run a goal frequency analysis on 100 boards
+const frequencies = frequencyAnalysis(100, exampleBingoList, "normal");
+console.log(frequencies);
+
+// print the synergy analysis of a row (obviously banned to use for races)
+const rowAnalyzer = new RowAnalyzer(exampleBingoList, "normal");
+rowAnalyzer.analyzeRow(seed, "col4");
