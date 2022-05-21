@@ -1,5 +1,7 @@
 # oot-bingo-generator
 
+![image](https://img.shields.io/npm/v/oot-bingo-generator)
+
 Generator for OoT Bingo, written in TypeScript. Based on the original bingo generator by saltor et al. It generates the
 exact same boards as the previous generator did, but should be easier to read and extend. The npm package can be used to
 easily generate boards in projects.
