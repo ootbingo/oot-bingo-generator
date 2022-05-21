@@ -65,6 +65,7 @@ Generate a board with custom settings and run analyses:
 ```ts
 import { generateBingoBoard, RowAnalyzer, DEFAULT_PROFILES } from "oot-bingo-generator";
 import { getBingoList } from "oot-bingo-lists";
+import { analyzeFrequencies, printFrequencies } from "./frequencyAnalysis";
 
 const bingoList = getBingoList("v10.1");
 
@@ -81,8 +82,8 @@ const board = generateBingoBoard(bingoList, "normal", 654321, customProfile);
 console.log(board.goalNames);
 
 // run a frequency analysis on a 1000 boards
-const frequencies = frequencyAnalysis(1000, bingoList, "normal", customProfile);
-console.log(frequencies);
+const frequencies = analyzeFrequencies(1000, bingoList, "normal", customProfile);
+printFrequencies(frequencies);
 
 // print the synergy analysis of a row (obviously banned to use for races)
 const rowAnalyzer = new RowAnalyzer(bingoList, "normal", customProfile);

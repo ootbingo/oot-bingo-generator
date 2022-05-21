@@ -2,7 +2,7 @@ import { BingoList } from "../types/goalList";
 import { Mode, Profile } from "../types/settings";
 import { generateBingoBoard } from "../index";
 
-export function frequencyAnalysis(
+export function analyzeFrequencies(
   numberOfBoards: number,
   bingoList: BingoList,
   mode: Mode,
@@ -13,12 +13,13 @@ export function frequencyAnalysis(
 
   const frequencies: { [key: string]: number } = {};
 
-  console.log(`Analyzing goal frequency of ${numberOfBoards} boards...`);
+  console.log(
+    `Analyzing goal frequency of ${numberOfBoards} boards, starting at seed ${startSeed}...`
+  );
   for (let seed = startSeed; seed < startSeed + numberOfBoards; seed++) {
-    if (seed % 100 === 0) {
+    if (seed - startSeed !== 0 && (seed - startSeed) % 100 === 0) {
       console.log(`Processed ${seed - startSeed} boards... (seed ${seed})`);
     }
-
     const board = generateBingoBoard(bingoList, mode, seed, profile);
     if (!board) {
       continue;
@@ -30,9 +31,17 @@ export function frequencyAnalysis(
       frequencies[goal.name] = frequencies[goal.name] += 1;
     }
   }
-  const sortedFrequencies = Object.entries(frequencies)
-    .sort(([, a], [, b]) => b - a)
-    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+  console.log(`Finished (processed ${numberOfBoards} boards total)`);
+  return frequencies;
+}
 
-  return sortedFrequencies;
+export function printFrequencies(frequencies: { [key: string]: number }) {
+  const sortedGoalNames = Object.keys(frequencies).sort(function (a, b) {
+    return frequencies[b] - frequencies[a];
+  });
+  let str = "";
+  for (const name of sortedGoalNames) {
+    str += `${name}: ${frequencies[name]}\n`;
+  }
+  console.log(str);
 }

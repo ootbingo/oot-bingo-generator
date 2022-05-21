@@ -1,6 +1,6 @@
 import { generateBingoBoard } from "../index";
 import { exampleBingoList } from "./exampleBingoList";
-import { frequencyAnalysis } from "../analysis/frequencyAnalysis";
+import { analyzeFrequencies, printFrequencies } from "../analysis/frequencyAnalysis";
 import { RowAnalyzer } from "../analysis/rowAnalysis";
 import { DEFAULT_PROFILES } from "../constants/profiles";
 
@@ -30,8 +30,8 @@ console.log(`Generated after ${board?.iterations} iteration(s):`);
 console.log(boardCustomProfile?.goalNames);
 
 // run a goal frequency analysis on 100 boards
-const frequencies = frequencyAnalysis(100, exampleBingoList, "normal");
-console.log(frequencies);
+const frequencies = analyzeFrequencies(100, exampleBingoList, "normal");
+printFrequencies(frequencies);
 
 // print the synergy analysis of a row (obviously banned to use for races)
 const rowAnalyzer = new RowAnalyzer(exampleBingoList, "normal");
