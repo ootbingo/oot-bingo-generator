@@ -30,6 +30,12 @@ Learn how the total synergy of a row is calculated. The document follows the cal
 examples. Having coding knowledge helps, but it shouldn't be too hard to understand without. It's recommended to read
 the generator doc first.
 
+### :stopwatch: [Timing goals](/doc/TIMING.md)
+
+How is the duration of a goal determined? This document explains the considerations that go into timing a goal and
+determining its synergies. A few concepts are explained in more detail in the Balancing doc, so it's recommended to read
+that one first.
+
 ## Npm package
 
 ### Install
