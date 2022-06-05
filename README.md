@@ -32,9 +32,9 @@ the generator doc first.
 
 ### :stopwatch: [Timing goals](/doc/TIMING.md)
 
-How is the duration of a goal determined? This document explains the considerations that go into timing a goal and
-determining its synergies. A few concepts are explained in more detail in the Balancing doc, so it's recommended to read
-that one first.
+How is the duration of a goal determined? This document explains the considerations and steps that go into timing a goal
+and determining its synergies. A few concepts used are explained in more detail in the Balancing doc, so it's
+recommended to read that one first.
 
 ## Npm package
 
@@ -157,12 +157,7 @@ It's recommended to use the `generateBingoBoard()` function when generating boar
 board object. If you want to try it out, you can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts)
 (see [Run](#run)). To generate boards in your own project, use the [npm package](#npm-package).
 
-## To do
+## Issues
 
 If anything is missing, wrong, or incomplete, feel free to let someone in the Bingo community know! You could also open
-an issue. A few things that would be nice to add to this project are:
-
-* [BALANCING.md](/doc/BALANCING.md): add explanations on what the less obvious synergy columns are for (`childchu`
-  , `chuczl`, `ganonchu`, `aganon`, `bganon`, `cganon`, `childreset`, `bosskey`, `bosskey2`, `inc`, maybe more)
-* Add a new doc about **timing goals**. What do we generally include and exclude in the timing of a goal? How would one
-  go about (re-)timing a goal?
+an issue.

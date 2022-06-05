@@ -3,7 +3,7 @@
 ## Contents
 
 1. [Introduction](#introduction)
-2. [Bingo sheet](#bingo-sheet)
+2. [Bingo spreadsheet](#bingo-spreadsheet)
 3. [Synergies](#synergies)
     1. [Type synergies](#type-synergies)
     2. [Subtype synergies](#subtype-synergies)
@@ -11,7 +11,6 @@
 4. [Synergy filters](#synergy-filters)
     1. [Combining synergies in a row](#combining-synergies-in-a-row)
     2. [Filters](#filters)
-    3. [Rowtype synergies](#rowtype-synergies)
     4. [Filter example](#filter-example)
 5. [Goal information](#goal-information)
     1. [timey](#timey)
@@ -23,24 +22,36 @@
     2. [endon](#endon)
 7. [True goal duration](#true-goal-duration)
 8. [The goal list](#the-goal-list)
+9. [Special synergy categories](#special-synergy-categories)
+10. [selfsynergy](#selfsynergy)
+11. [More synergy categories](#more-synergy-categories)
+    1. [childchu](#childchu)
+    2. [czl, poachers, bothzl](#czl-poachers-bothzl)
+    3. [chuzl](#chuczl)
+    4. [aganon, bganon, cganon](#aganon-bganon-cganon)
+    5. [ganonchu](#ganonchu)
+    6. [hearts3, hearts4](#hearts3-hearts4)
+    7. [bosskey, bosskey2](#bosskey-bosskey2)
+    8. [inc goals](#inc-goals)
 
 ## Introduction
 
 This document explains the concepts that have to do with balancing OoT Bingo goals. The lengths and synergies of goals
 are determined completely separate from the generator, and can be found on
-the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit?usp=sharing).
-It gets updated before every bingo version release. There is a [converter](https://bingosync.com/convert)
+the [Bingo spreadsheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit?usp=sharing)
+. It gets updated before every bingo version release. There is a [converter](https://bingosync.com/convert)
 (which uses [this script](https://github.com/kbuzsaki/bingosync/blob/master/bingosync-app/bingosync/goals_converter.py))
 that transforms the bingo sheet into a [goal list](#the-goal-list). Each bingo version has a unique goal list.
 
 There are a lot of different numbers on the Bingo sheet linked above, and this document aims to explain what they all
 mean. Note that the synergy amounts mentioned in the examples may have been adjusted since.
 
-## Bingo sheet
+## Bingo spreadsheet
 
-The bingo sheet contains all the information about the bingo goals that the generator needs to generate boards. This
-includes goal names (in English and Japanese), lengths, skill bonus, and all the synergies. What these all mean will be
-explained in detail later, but the structure of the sheet is as follows:
+The [Bingo spreadsheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit?usp=sharing)
+contains all the information about the bingo goals that the generator needs to generate boards. This includes goal
+names (in English and Japanese), lengths, skill bonus, and all the synergies. What these all mean will be explained in
+detail later, but the structure of the sheet is as follows:
 
 * The first few columns contain general information on the goals.
 * The columns `*ms`, `*bottle`, `*hookshot`, and `*gclw` contain **rowtype synergies**. These have a `*` at the start of
@@ -352,3 +363,113 @@ Unfortunately, a bingo version is currently not solely defined by the goal list.
 versions. These settings are defined in the generator code itself, so we bundle every bingo version with its own
 generator file. In the future, we may move those settings to the goal list, making it easier to adjust generator
 settings between versions.
+
+## More synergy categories
+
+The Bingo sheet contains many synergy categories. For most, it's clear what they do from their name, but there are a few
+columns that are a bit more complex. Many of them are used to compensate for double-counted synergies.
+
+### childchu
+
+Generally, the **baseline** time of a row (see the [Timing doc](TIMING.md)) considers that the player must get
+explosives by one of two methods. They must either RBA Cojiro or grab chus as a child. These methods tend to be roughly
+equivalent in terms of time spent. However, it is anti-synergy to be forced to obtain explosives both ways since this
+increases the length of the base time. An example would be *Death Mountain Area Skulltulas* appearing with *Quiver 40*
+(which is definitely faster to get by obtaining Quiver 30 from Cojiro RBA).
+
+This anti-synergy is implemented using a subtype synergy on every item requiring child explosives, and a regular type
+synergy of **0** on any RBA-happy goal in order to activate the subtype. This has a synergy filter of `min 1` applied so
+that only the biggest negative number is considered. If there are multiple child explosive goals together with an RBA
+goal, the penalty should only be applied once.
+
+### czl, poachers, bothzl
+
+`czl` (child ZL) synergy is applied to any goal that can be done by getting Zelda's Lullaby as child. `poachers` is
+applied to any goal that can be done by following the adult trade quest and using RBA. Both have access to ZL, but these
+categories have to exist separately. For example, *Keaton Mask* should have no `poachers` synergy and *10 Songs* should
+have no `czl` synergy.
+
+However, any generic goal that requires playing Zelda's Lullaby does not care which method is used, so it gets both
+synergies. If two such goals appear in a row together, both `czl` and `poachers` will activate, counting the ZL synergy
+double. To compensate for this, all goals with both `czl` and `poachers` synergy also have `bothzl`, which is a negative
+synergy to negate the `poachers` synergy.
+
+### chuczl
+
+The purpose of `chuczl` is to account for a corner case involving `childchu`, `czl`, and `poachers`. This synergy is
+activated only with goals that require child ZL. These are generally child trade quest goals and Saria's Song goals.
+Imagine that *Saria's Song* appears in a row together with *Double Defense*. Usually, `childchu` would apply a negative
+synergy for needing to get both child explosives and Poacher's Saw (since normally RBA is used to get ZL). However, that
+anti-synergy was incorrectly applied since we would not actually get Poacher's Saw in a row with Saria's Song.
+So `chuczl` attempts to fix this and negate the `childchu` anti-synergy with a corresponding synergy.
+
+### aganon, bganon, cganon
+
+The adult Ganon, child Ganon, and Both Ganon synergies account for the time needed to get to Ganon's Castle. It is more
+complicated than that though, since it takes different amounts of time to get there as child or adult. Also, depending
+on whether the player is child or adult, there are different goals possible to do at Ganon's Castle. Similar to the
+`czl`/`poachers`/`bothzl` situation, `bganon` exists to eliminate double counted synergies when multiple goals appear
+together which all can be accessed by either child or adult.
+
+### ganonchu
+
+`ganonchu` is an anti-synergy which is only applied in a very rare situation - when *Open the Final Door of Forest
+Trial* appears in a row with goals which want the player to go to Bottom of the Well. The reason this is an anti-synergy
+is that it is natural to pick up chus in Ganon's Castle as child, making the trip to Bottom of the Well slightly
+redundant. Because of glitched damage, there is an extreme incentive to do this goal as child instead of adult.
+The `ganonchu` synergy is only applied to this specific goal because other Ganon's Castle goals will generally be just
+as fast as adult.
+
+### childreset
+
+With some child goals, part of the time required for the goal includes having to reset to Link's house and working your
+way back to the Temple of Time from there. If multiple goals require a child reset to Link's house, they synergize
+because you only need to get back to the Temple of Time once, not twice. Examples are *Kokiri Forest Skulls*
+and *Lost Woods Skulls*.
+
+### hearts3, hearts4
+
+This is an explanation of the numbers and the need for multiple hearts synergies. When collecting a small number of
+hearts, all the typical hearts one gets are very fast. Roughly the 16 quickest Pieces of Heart can be collected in 45
+seconds per piece, or 3 minutes per full Heart Container. After that, there are a lot of Heart Containers obtainable in
+about 4 minutes each. So for goals of 8 hearts or above, typically some of the 4-minute Heart Containers will be
+necessary to get.
+
+Consider the Gerudo Training Grounds goals. They have `hearts4` synergy but not `hearts3` synergy. This is because the
+Gerudo Valley Heart Pieces are on the way. But they take longer than 45 seconds each to get, so they will not usually be
+a good option for hearts goals with fewer hearts since you just have better options. But if you have a longer hearts
+goal with 8+ hearts, very often it suddenly becomes worth it to grab those on the way to GTG.
+
+Blue Fire only gets `hearts3` synergy and not `hearts4`. This is because all hearts goals (even the long ones) have
+`hearts3` synergy, so we don't want to double count the synergy.
+
+Some goals get both synergies. Take *Defeat Gohma* as an example. This goal is timed at 4.25 minutes, so usually it is
+not ideal to use this Heart Container when doing shorter hearts goals. However, if *Defeat Gohma* is in a row with 6
+hearts, it can fully count as replacing the longest HC you would otherwise have to get (about 3 minutes). So it gets 3
+minutes of `hearts3` synergy. If *Defeat Gohma* is in a row with 9 hearts, it can fully count as replacing the longest
+HC you'd have to get (about 4 minutes this time), but 3 of the minutes were already accounted for with `hearts3`
+synergy, so you get 1 additional minute of synergy from `hearts4`.
+
+### bosskey, bosskey2
+
+The `bosskey` and `bosskey2` synergies work in a similar fashion to `hearts3` and `hearts4`. The first 2 boss keys a
+player would normally get are very fast (Fire, and Water through Ice Arrow RBA). Any boss keys past the second one start
+to take some effort.
+
+`bosskey2` actually does not currently have any goals with a regular type synergy, so it will never activate and does
+not need to exist. I believe when we had *4 Boss Keys* as a goal it had `bosskey2` type, but we've since removed that
+goal since it was problematic to balance.
+
+(**Note**: the boss key synergies needs to be looked at carefully and likely require some fixing)
+
+### inc goals
+
+The Bingo sheet ends with a number of **inclusion synergies**, which are meant to make sure goals that are strictly
+included inside each other never appear together in a row, even if they are both short and would have little synergy. A
+good example are *3 Songs* and *4 Songs*. Both are usually acquired by just doing RBA. These goals only take 4 minutes
+each, so they don't represent a huge amount of synergy, but we still don't want them to appear together.
+
+All the `inc` synergies have a value of **100** to make sure they always exceed the maximum allowed. `inc` also accounts
+for mutually exclusive goals, like *Bronze Gauntlets* and *Green Gauntlets*. In particular, blackout cards are generally
+allowed to include just about anything in different rows, but no two goals with the same `inc` synergy can appear
+together anywhere on the card since it may make the blackout impossible to complete.
