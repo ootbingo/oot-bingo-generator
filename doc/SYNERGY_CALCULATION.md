@@ -232,7 +232,7 @@ that have a non-standard filter:
 If any of the [`unifiedTypeSynergies`](#unifying-subtype-synergies) appear in `synergyFilters`, the generator applies
 that filter to its synergy values. The standard filter `min -1`, which removes the highest number from the synergies, is
 applied to categories that don't appear in `synergyFilters`. In `filterForTypeCategory()` you see that for 'max' filters
-the values get sorted ascending, and for `min` filters descending. Then it takes the first **n** values for filters
+the values get sorted descending, and for `min` filters ascending. Then it takes the first **n** values for filters
 with `filterValue` **n**. It removes **n** values from the end for filters with `filterValue` **-n**.
 
 The only category from the example that appears in `synergyFilters` is `botw`, so the `min 1` filter is applied to its
