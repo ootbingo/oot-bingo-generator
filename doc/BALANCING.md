@@ -355,8 +355,8 @@ export var bingoList = {
 
 Take a look at the [example goal list](/src/sandbox/exampleBingoList.ts) to see what an actual list looks like. You'll
 see that each goal also has a `weight` property. The weights are for the **frequency balancing**, and they are added by
-the [balancer script](https://github.com/srmcconomy/balanced-bingo/blob/master/auto-balancer.js). Read more on frequency
-balancing in the [generator doc](/doc/GENERATOR.md).
+the [balancer script](https://github.com/scaramangado/balanced-bingo/blob/master/auto-balancer.js). Read more on
+frequency balancing in the [generator doc](/doc/GENERATOR.md).
 
 Blackout bingo uses the same goal list as normal bingo, but has a different settings profile in the generator.
 Unfortunately, a bingo version is currently not solely defined by the goal list. The generator settings can vary between
