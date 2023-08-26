@@ -205,6 +205,7 @@ describe("generator", () => {
     });
 
     it("it can fail to generate a board", () => {
+      const consoleSpy = jest.spyOn(console, "error");
       const profile: Profile = {
         // impossible min / max synergy bounds
         minimumSynergy: 2,
@@ -220,6 +221,7 @@ describe("generator", () => {
       const board = generateBingoBoard(bingoList, "normal", 142536, profile);
 
       expect(board).toBeUndefined();
+      expect(consoleSpy).toHaveBeenCalledWith("Failed to generate board after 100 iterations");
     });
   });
 

@@ -52,7 +52,8 @@ export default class BingoGenerator {
     }
 
     if (!potentialBoard) {
-      return undefined;
+      console.error(`Failed to generate board after ${iterations} iterations`);
+      return;
     }
 
     return new BingoBoard(potentialBoard.squares, iterations);
