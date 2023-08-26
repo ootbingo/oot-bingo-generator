@@ -48,18 +48,20 @@ export function bingoGenerator(bingoList: BingoList, options: { mode: Mode; seed
  * @param mode Mode (normal, short, blackout, etc.)
  * @param seed Rng seed
  * @param profile Optional, the generator uses a standard profile fitting the mode if not provided. Note that in previous generators the profiles were always built in.
+ * @param maxIterations Optional, the maximum amount of attempts to successfully generate a board.
  * @returns A bingo board object
  */
 export function generateBingoBoard(
   bingoList: BingoList,
   mode: Mode,
   seed: number,
-  profile?: Profile
+  profile?: Profile,
+  maxIterations?: number
 ): BingoBoard | undefined {
   const goalList = extractGoalList(bingoList, mode);
   if (!goalList) {
     return;
   }
   const bingoGenerator = new BingoGenerator(goalList, mode, profile ?? DEFAULT_PROFILES[mode]);
-  return bingoGenerator.generateBoard(seed);
+  return bingoGenerator.generateBoard(seed, maxIterations);
 }
