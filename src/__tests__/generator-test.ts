@@ -221,7 +221,9 @@ describe("generator", () => {
       const board = generateBingoBoard(bingoList, "normal", 142536, profile);
 
       expect(board).toBeUndefined();
-      expect(consoleSpy).toHaveBeenCalledWith("Failed to generate board after 100 iterations");
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Failed to generate board after 100 iterations (seed: 142536)"
+      );
     });
   });
 

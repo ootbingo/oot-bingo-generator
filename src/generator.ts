@@ -52,7 +52,7 @@ export default class BingoGenerator {
     }
 
     if (!potentialBoard) {
-      console.error(`Failed to generate board after ${iterations} iterations`);
+      console.error(`Failed to generate board after ${iterations} iterations (seed: ${seed})`);
       return;
     }
 
