@@ -16,6 +16,7 @@ export function analyzeFrequencies(
   console.log(
     `Analyzing goal frequency of ${numberOfBoards} boards, starting at seed ${startSeed}...`
   );
+  let i = 0;
   for (let seed = startSeed; seed < startSeed + numberOfBoards; seed++) {
     if (seed - startSeed !== 0 && (seed - startSeed) % 100 === 0) {
       console.log(`Processed ${seed - startSeed} boards... (seed ${seed})`);
@@ -30,8 +31,9 @@ export function analyzeFrequencies(
       }
       frequencies[goal.name] = frequencies[goal.name] += 1;
     }
+    i++;
   }
-  console.log(`Finished (processed ${numberOfBoards} boards total)`);
+  console.log(`Finished (processed ${i} boards total)\n`);
   return frequencies;
 }
 

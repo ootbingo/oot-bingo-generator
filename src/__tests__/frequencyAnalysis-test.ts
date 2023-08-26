@@ -1,4 +1,5 @@
 import { analyzeFrequencies, printFrequencies } from "../analysis/frequencyAnalysis";
+import { DEFAULT_PROFILES } from "../constants/profiles";
 
 describe("frequencyAnalysis", () => {
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
@@ -442,7 +443,30 @@ describe("frequencyAnalysis", () => {
     );
     expect(consoleSpy).toHaveBeenNthCalledWith(2, "Processed 100 boards... (seed 123556)");
     expect(consoleSpy).toHaveBeenNthCalledWith(3, "Processed 200 boards... (seed 123656)");
-    expect(consoleSpy).toHaveBeenNthCalledWith(4, "Finished (processed 250 boards total)");
+    expect(consoleSpy).toHaveBeenNthCalledWith(4, "Finished (processed 250 boards total)\n");
+  });
+
+  it("does not include failed boards in the final count", () => {
+    const consoleSpy = jest.spyOn(console, "log");
+
+    analyzeFrequencies(
+      2,
+      bingoList,
+      "normal",
+      123456,
+      // impossible to generate
+      {
+        ...DEFAULT_PROFILES.normal,
+        minimumSynergy: 4,
+        maximumSynergy: 3,
+      }
+    );
+
+    expect(consoleSpy).toHaveBeenNthCalledWith(
+      1,
+      "Analyzing goal frequency of 2 boards, starting at seed 123456..."
+    );
+    expect(consoleSpy).toHaveBeenNthCalledWith(2, "Finished (processed 0 boards total)\n");
   });
 
   it("pretty prints the frequencies", () => {
