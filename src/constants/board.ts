@@ -1,5 +1,7 @@
 import { RowName } from "../types/board";
 
+export const MAX_ITERATIONS = 100;
+
 export const SQUARES_PER_ROW = 5;
 
 export const SQUARE_POSITIONS = [

@@ -48,7 +48,7 @@ export function bingoGenerator(bingoList: BingoList, options: { mode: Mode; seed
  * @param mode Mode (normal, short, blackout, etc.)
  * @param seed Rng seed
  * @param profile Optional, the generator uses a standard profile fitting the mode if not provided. Note that in previous generators the profiles were always built in.
- * @param maxIterations Optional, the maximum amount of attempts to successfully generate a board.
+ * @param maxIterations Optional, the maximum amount of attempts to successfully generate a board. Defaults to 100.
  * @returns A bingo board object
  */
 export function generateBingoBoard(

@@ -6,7 +6,7 @@ import { SynergyCalculator } from "./synergyCalculator";
 import { flattenGoalList, parseSynergyFilters, sortAscending, sortDescending } from "./util";
 import { BingoBoard } from "./bingoBoard";
 import { PotentialBingoBoard } from "./potentialBingoBoard";
-import { ROWS_PER_INDEX, SQUARE_POSITIONS } from "./constants/board";
+import { MAX_ITERATIONS, ROWS_PER_INDEX, SQUARE_POSITIONS } from "./constants/board";
 
 export default class BingoGenerator {
   private readonly isBlackout: boolean;
@@ -37,10 +37,10 @@ export default class BingoGenerator {
   /**
    * Generates a bingo board.
    * @param seed Rng seed
-   * @param maxIterations The max amount of times the generator will try to generate a board.
+   * @param maxIterations Oprional, the max amount of times the generator will try to generate a board. Defaults to 100.
    * @returns An object with metadata and an array of squares if generation was successful
    */
-  generateBoard(seed: number, maxIterations = 100): BingoBoard | undefined {
+  generateBoard(seed: number, maxIterations = MAX_ITERATIONS): BingoBoard | undefined {
     this.rng = new RNG(seed);
 
     let potentialBoard: PotentialBingoBoard | undefined = undefined;
