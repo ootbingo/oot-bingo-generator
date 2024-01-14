@@ -1,6 +1,12 @@
 import { RowAnalyzer } from "../analysis/rowAnalysis";
 
 describe("rowAnalysis", () => {
+  const consoleSpy = jest.spyOn(console, "log");
+
+  beforeEach(() => {
+    consoleSpy.mockReset();
+  });
+
   const bingoList = require("./test-bingo-lists/combined-bingo-list-v10_1.json");
 
   it("correctly analyzes the synergies of a row", () => {
