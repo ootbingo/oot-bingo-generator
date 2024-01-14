@@ -149,7 +149,7 @@ To bundle the generator code into a single, minified JS file (to be used for bin
 npm run bundle
 ```
 
-The generated file can be found in `dist/generator.js`.
+The generated file can be found in `bundle/generator.js`.
 After putting this script in the html, the main generator functions in [src/index.ts](/src/index.ts) can be accessed
 from the `BingoLibrary` (e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
 You have to add `export` followed by a space to the start of the file.

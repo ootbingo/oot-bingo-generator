@@ -3,7 +3,7 @@ import { exampleBingoList } from "./exampleBingoList";
 import { RowAnalyzer } from "../analysis/rowAnalysis";
 import { DEFAULT_PROFILES } from "../constants/profiles";
 
-// this file shows a few examples of how to use the generator (generate a board, run a frequency analysis)
+// this file shows a few examples of how to use the generator
 // run this file with `npm start`
 // edit this code or add your own to experiment with the generator!
 
