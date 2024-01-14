@@ -3,24 +3,23 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: ["./src/index.ts"],
+  entry: ["./src/index.ts", "./src/analysis/rowAnalysis.ts"],
+  target: "node",
   output: {
-    path: path.resolve(__dirname, "./bundle"),
-    filename: "generator.js",
-    clean: true,
-    library: "BingoLibrary",
+    path: path.resolve(__dirname, "./build"),
+    filename: "index.js",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
+  },
+  optimization: {
+    minimize: false,
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: "ts-loader",
-        options: {
-          configFile: "tsconfig.bundle.json",
-        },
       },
     ],
   },

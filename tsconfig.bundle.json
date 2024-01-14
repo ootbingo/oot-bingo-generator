@@ -2,15 +2,14 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "declaration": true,
-    "declarationDir": "build/types",
+    "declaration": false,
     "allowJs": true,
     "sourceMap": false,
     "moduleResolution": "node",
-    "outDir": "build",
+    "outDir": "dist",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "removeComments": false,
+    "removeComments": true,
     "strict": true
   },
   "include": [
