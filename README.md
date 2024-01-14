@@ -2,9 +2,10 @@
 
 ![image](https://img.shields.io/npm/v/oot-bingo-generator)
 
-Generator for OoT Bingo, written in TypeScript. Based on the original bingo generator by saltor et al. It generates the
-exact same boards as the previous generator did, but should be easier to read and extend. The npm package can be used to
-easily generate boards in projects.
+Generator for OoT Bingo, written in TypeScript.
+Based on the original bingo generator by saltor et al.
+It generates the exact same boards as the previous generator did, but should be easier to read and extend.
+The npm package can be used to easily generate boards in projects.
 
 ## Documentation
 
@@ -12,29 +13,30 @@ Click on these links for in-depth explanations about the workings of bingo board
 
 ### :gear: [The Generator](/doc/GENERATOR.md)
 
-Explains how bingo boards are generated, with examples. The text points to the source code a few times, but can be read
-without having any programming knowledge. It's a *strongly recommended* read if you want to learn about bingo
-generation!
+Explains how bingo boards are generated, with examples.
+The text points to the source code a few times, but can be read without having any programming knowledge.
+It's a *strongly recommended* read if you want to learn about bingo generation!
 Includes topics like the *magic square*, *desired goal times*, *difficulty* and *picking goals*.
 
 ### :balance_scale: [Balancing (bingo sheet)](/doc/BALANCING.md)
 
-Everything you need to know about the
-[Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247).
+Everything you need to know about
+the [Bingo sheet](https://docs.google.com/spreadsheets/d/1-mD-OTM0Re7PyNf224MAsRuqQ0umI0E_Qq6nr1vA1aE/edit#gid=166040247).
 Goes in detail over the different synergy types, synergy filters, the columns on the sheet, and the goal list format.
 Recommended if you're interested in balancing!
 
 ### :abacus: [Synergy Calculation](/doc/SYNERGY_CALCULATION.md)
 
-Learn how the total synergy of a row is calculated. The document follows the calculation code step-by-step with
-examples. Having coding knowledge helps, but it shouldn't be too hard to understand without. It's recommended to read
-the generator doc first.
+Learn how the total synergy of a row is calculated.
+The document follows the calculation code step-by-step with examples.
+Having coding knowledge helps, but it shouldn't be too hard to understand without.
+It's recommended to read the generator doc first.
 
 ### :stopwatch: [Timing goals](/doc/TIMING.md)
 
-How is the duration of a goal determined? This document explains the considerations and steps that go into timing a goal
-and determining its synergies. A few concepts used are explained in more detail in the Balancing doc, so it's
-recommended to read that one first.
+How is the duration of a goal determined?
+This document explains the considerations and steps that go into timing a goal and determining its synergies.
+A few concepts used are explained in more detail in the Balancing doc, so it's recommended to read that one first.
 
 ## Npm package
 
@@ -104,8 +106,8 @@ Note that using a bingo list of a specific version (like `v9.2`) with the latest
 *not* necessarily guarantee that the resulting boards
 will be identical to the boards of that version.
 The `profile` settings also need to match.
-The [oot-bingo-lists](https://www.npmjs.com/package/oot-bingo-lists) package contains a function to generate a boards
-for a specific version.
+The [oot-bingo-lists](https://www.npmjs.com/package/oot-bingo-lists) package contains a function to generate a board for
+a specific version, using the correct generator version.
 
 ## Run source code directly
 
@@ -147,17 +149,19 @@ To bundle the generator code into a single, minified JS file (to be used for bin
 npm run bundle
 ```
 
-The generated file can be found in `dist/generator.js`. After putting this script in the html, the main generator
-functions in [src/index.ts](/src/index.ts) can be accessed from the `BingoLibrary` (
-e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
+The generated file can be found in `dist/generator.js`.
+After putting this script in the html, the main generator functions in [src/index.ts](/src/index.ts) can be accessed
+from the `BingoLibrary` (e.g. `BingoLibrary.ootBingoGenerator(bingoList, options)`).
+You have to add `export` followed by a space to the start of the file.
 
 ### Usage
 
 The main functions for generating a board are located in [src/index.ts](/src/index.ts).
 
 The `ootBingoGenerator()` function returns boards in the exact same legacy format that is expected by the current bingo
-versions on [Github](https://github.com/ootbingo/bingo). The `bingoGenerator()` function is a wrapper and returns the
-same thing, but this is the name that is being used by [BingoSync](https://bingosync.com).
+versions on [Github](https://github.com/ootbingo/bingo).
+The `bingoGenerator()` function is a wrapper and returns the same thing, but this is the name that is being used
+by [BingoSync](https://bingosync.com).
 
 It's recommended to use the `generateBingoBoard()` function when generating boards yourself, since it returns a bingo
 board class instance. If you want to try it out, you can easily do so in [src/sandbox/main.ts](/src/sandbox/main.ts)
